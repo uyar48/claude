@@ -9,9 +9,18 @@ Aşama 1 canlıda: https://okuma-iota.vercel.app
   - yalnızca `ALLOWED_EMAIL` ile giriş
   - cihaz kodu: tek kullanım, 5 yanlış denemede iptal
   - iki tarayıcı arasında senkron
-- **Kalan işler:**
-  - gerçek cihazda bildirim testi
-  - gerçek görsel ve ses üretimi (anahtarlar henüz yok)
+- **Kullanıcı doğruladı:** iPhone'da test bildirimi geldi.
+- **Ses:** ElevenLabs anahtarı var. `/admin/review` sayfasında 4 sütunluk karşılaştırma yayında: v3/v4 × (Matilda/Eric, Bella/Chris). Kullanıcının seçimi bekleniyor. Seçimden sonra çalıştırılacak komut (sütundaki ses ve model):
+  ```bash
+  TTS_PROVIDER=elevenlabs TTS_MODEL_ELEVENLABS=eleven_v3 \
+    ELEVENLABS_VOICE_FEMALE=<id> ELEVENLABS_VOICE_MALE=<id> npm run media -- --only audio
+  ```
+  Ses kimlikleri: Matilda `XrExE9yKIg1WjnnlVkGX`, Eric `cjVigY5qzO86Huf0OWal`, Bella `hpp4J3VqNfWAUOO0d1Us`, Chris `iP95p4xoKVk53GoZ742B`.
+- **Görsel:** `IMAGE_API_KEY_GOOGLE` / `IMAGE_API_KEY_OPENAI` geldiğinde:
+  1. `npm run media -- --compare-images google,openai --words 10`
+  2. Commit, ardından `npm run deploy -- --app-only`.
+  3. Kullanıcıya `/admin/review` adresini gönder ve seçtir.
+  4. `IMAGE_PROVIDER=<seçim> npm run media -- --only images`, ardından yeniden dağıt.
 
 ## Ortamda olması gerekenler
 
