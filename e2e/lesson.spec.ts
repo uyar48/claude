@@ -192,7 +192,7 @@ test('settings, notifications and media review render', async ({ page }) => {
   await page.goto('/admin/review');
   await expect(page.getByRole('heading', { name: 'Medya inceleme' })).toBeVisible();
   await expect(page.locator('.review-card')).toHaveCount(20);
-  await page.locator('.review-card').first().getByRole('button', { name: 'Yeniden üret' }).click();
+  await page.locator('.review-card').first().getByRole('button', { name: 'Görseli yeniden üret' }).click();
   await expect(page.locator('textarea')).toContainText('"regenerate"');
   await shot(page, '14-admin-review');
 });

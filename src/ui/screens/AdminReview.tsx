@@ -161,12 +161,13 @@ export function AdminReview() {
                 {!fa && !ma && <span className="tiny muted">ses: tarayıcı</span>}
               </div>
               <div className="row gap-s wrap">
-                <VerdictButtons value={state.images[w.id]} onChange={(v) => setVerdict('images', w.id, v)} label="Görsel" />
+                <VerdictButtons value={state.images[w.id]} onChange={(v) => setVerdict('images', w.id, v)} label="Görsel" subject="Görseli" />
                 {fa && (
                   <VerdictButtons
                     value={state.audio[wordAudioKey(w.id, 'female')]}
                     onChange={(v) => setVerdict('audio', wordAudioKey(w.id, 'female'), v)}
                     label="Ses"
+                    subject="Sesi"
                   />
                 )}
               </div>
@@ -194,7 +195,7 @@ export function AdminReview() {
                   )}
                   <span lang="en" className="grow">{s.en}</span>
                   {a && <span className="tiny muted">{a.timingSource ?? ''}</span>}
-                  {a && <VerdictButtons value={state.audio[key]} onChange={(v) => setVerdict('audio', key, v)} label="" />}
+                  {a && <VerdictButtons value={state.audio[key]} onChange={(v) => setVerdict('audio', key, v)} label="" subject="Cümle sesini" />}
                 </div>
               );
             })}
@@ -217,14 +218,35 @@ export function AdminReview() {
   );
 }
 
-function VerdictButtons({ value, onChange, label }: { value?: Verdict; onChange: (v: Verdict) => void; label: string }) {
+function VerdictButtons({
+  value,
+  onChange,
+  label,
+  subject,
+}: {
+  value?: Verdict;
+  onChange: (v: Verdict) => void;
+  label: string;
+  /** Accusative noun for the accessible name, e.g. "Görseli", "Sesi". */
+  subject: string;
+}) {
   return (
     <span className="verdict">
       {label && <span className="tiny muted">{label}</span>}
-      <button className={`chip ${value === 'approved' ? 'on ok' : ''}`} onClick={() => onChange('approved')}>
+      <button
+        className={`chip ${value === 'approved' ? 'on ok' : ''}`}
+        aria-label={`${subject} onayla`}
+        aria-pressed={value === 'approved'}
+        onClick={() => onChange('approved')}
+      >
         Onayla
       </button>
-      <button className={`chip ${value === 'regenerate' ? 'on no' : ''}`} onClick={() => onChange('regenerate')}>
+      <button
+        className={`chip ${value === 'regenerate' ? 'on no' : ''}`}
+        aria-label={`${subject} yeniden üret`}
+        aria-pressed={value === 'regenerate'}
+        onClick={() => onChange('regenerate')}
+      >
         Yeniden üret
       </button>
     </span>
