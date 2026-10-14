@@ -179,7 +179,9 @@ async function makeClip(p: TtsProvider, c: Clip, variant: number): Promise<Audio
   for (const ext of ['mp3', 'wav']) {
     if (fs.existsSync(path.join(AUDIO_DIR, `${h}.${ext}`))) {
       const meta = fs.existsSync(metaFile) ? JSON.parse(fs.readFileSync(metaFile, 'utf8')) : {};
-      return { file: `${h}.${ext}`, ...base, ...meta };
+      // The same text can be both an example (no timings needed) and a text
+      // sentence (timings needed). Reuse the file only if it has what we need.
+      if (!c.timings || meta.timings?.length) return { file: `${h}.${ext}`, ...base, ...meta };
     }
   }
   if (dry) return { file: `${h}.(dry)`, ...base };
@@ -188,7 +190,8 @@ async function makeClip(p: TtsProvider, c: Clip, variant: number): Promise<Audio
   if (c.timings) r = ensureTimings(c.text, r);
   const file = `${h}.${r.ext}`;
   fs.writeFileSync(path.join(AUDIO_DIR, file), r.data);
-  const meta = { duration: r.duration, timings: c.timings ? r.timings ?? undefined : undefined, timingSource: c.timings ? r.timingSource : undefined };
+  // Keep timings whenever the provider gave them, so later reuse has them too.
+  const meta = { duration: r.duration, timings: r.timings?.length ? r.timings : undefined, timingSource: r.timings?.length ? r.timingSource : undefined };
   fs.writeFileSync(metaFile, JSON.stringify(meta));
   return { file, ...base, ...meta };
 }

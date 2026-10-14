@@ -1,7 +1,7 @@
 // Adapter request/response handling with a stubbed fetch (no network, no keys).
 import sharp from 'sharp';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { elevenlabs, googleImagen, googleTts, makeImageProvider, makeTtsProvider, openaiImage, openaiTts, placeholderImage } from './providers';
+import { elevenlabs, geminiImage, googleImagen, googleTts, makeImageProvider, makeTtsProvider, openaiImage, openaiTts, placeholderImage } from './providers';
 
 type Call = { url: string; init: RequestInit };
 
@@ -40,6 +40,22 @@ describe('image adapters', () => {
     expect([out.ext, meta.format, meta.width, meta.height]).toEqual(['webp', 'webp', 1200, 900]);
   });
 
+  it('Gemini image: 4:3 image config, inline image → WebP 1200×900', async () => {
+    const img = (await png(1184, 864)).toString('base64');
+    const calls = stubFetch([() => json({ candidates: [{ content: { parts: [{ text: 'ok' }, { inlineData: { mimeType: 'image/png', data: img } }] } }] })]);
+    const out = await geminiImage('KEY', 'gemini-3-pro-image', 'gemini-pro').generate('a cup of coffee', 'coffee');
+    expect(calls[0].url).toContain('gemini-3-pro-image:generateContent');
+    const body = JSON.parse(String(calls[0].init.body));
+    expect(body.generationConfig).toEqual({ responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '4:3' } });
+    const meta = await sharp(out.data).metadata();
+    expect([meta.format, meta.width, meta.height]).toEqual(['webp', 1200, 900]);
+  });
+
+  it('Gemini image: a refusal is reported, not saved', async () => {
+    stubFetch([() => json({ candidates: [{ finishReason: 'IMAGE_SAFETY', content: { parts: [] } }] })]);
+    await expect(geminiImage('KEY', 'm', 'gemini-pro').generate('x', 'x')).rejects.toThrow(/IMAGE_SAFETY/);
+  });
+
   it('GPT Image: bearer auth, landscape output cropped to 4:3', async () => {
     const img = (await png(1536, 1024)).toString('base64');
     const calls = stubFetch([() => json({ data: [{ b64_json: img }] })]);
@@ -67,9 +83,11 @@ describe('image adapters', () => {
   });
 
   it('provider selection follows the env keys', () => {
+    for (const k of ['IMAGE_API_KEY', 'IMAGE_API_KEY_GOOGLE', 'IMAGE_API_KEY_OPENAI']) vi.stubEnv(k, '');
     expect(makeImageProvider('google')).toBeNull();
     vi.stubEnv('IMAGE_API_KEY', 'k');
     expect(makeImageProvider('google')?.id).toBe('google');
+    expect(makeImageProvider('gemini-pro')?.model).toBe('gemini-3-pro-image');
     vi.stubEnv('IMAGE_API_KEY_OPENAI', 'k2');
     expect(makeImageProvider('openai')?.model).toBe('gpt-image-2');
     expect(makeTtsProvider('browser')).toBeNull();
@@ -77,7 +95,7 @@ describe('image adapters', () => {
 });
 
 describe('speech adapters', () => {
-  it('ElevenLabs: timestamps endpoint, character alignment → word timings', async () => {
+  it('ElevenLabs: timestamps endpoint, chosen model, character alignment → word timings', async () => {
     const text = 'I am home.';
     const starts = [...text].map((_, i) => i * 0.1);
     const calls = stubFetch([
@@ -93,7 +111,7 @@ describe('speech adapters', () => {
     ]);
     const r = await elevenlabs('KEY').synthesize(text, 'male', true);
     expect(calls[0].url).toContain('/with-timestamps');
-    expect(JSON.parse(String(calls[0].init.body)).model_id).toBe('eleven_v3');
+    expect(JSON.parse(String(calls[0].init.body)).model_id).toBe('eleven_v4');
     expect(r.timingSource).toBe('provider');
     expect(r.timings?.map((t) => t.i)).toEqual([0, 1, 2]);
   });

@@ -71,6 +71,37 @@ export function googleImagen(apiKey: string, model = process.env.IMAGE_MODEL_GOO
   };
 }
 
+/**
+ * Google Gemini image models ("Nano Banana"): gemini-3-pro-image (Pro) and
+ * gemini-3.1-flash-image (Flash). Imagen 4 is no longer served by the Gemini API.
+ */
+export function geminiImage(apiKey: string, model: string, id: string): ImageProvider {
+  return {
+    id,
+    model,
+    async generate(prompt) {
+      const res = await fetchRetry(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '4:3' } },
+        }),
+      });
+      const json = (await res.json()) as {
+        candidates?: Array<{ finishReason?: string; content?: { parts?: Array<{ inlineData?: { data: string } }> } }>;
+        promptFeedback?: unknown;
+      };
+      const data = json.candidates?.[0]?.content?.parts?.find((p) => p.inlineData)?.inlineData?.data;
+      if (!data) {
+        const why = json.candidates?.[0]?.finishReason ?? JSON.stringify(json.promptFeedback ?? json).slice(0, 200);
+        throw new Error(`${model} returned no image (${why})`);
+      }
+      return { data: await toWebp(Buffer.from(data, 'base64')), ext: 'webp' };
+    },
+  };
+}
+
 /** OpenAI GPT Image. 1536×1024 output is centre-cropped to 4:3. */
 export function openaiImage(apiKey: string, model = process.env.IMAGE_MODEL_OPENAI || 'gpt-image-2'): ImageProvider {
   return {
@@ -113,11 +144,11 @@ export function placeholderImage(): ImageProvider {
 const LEARNER_STYLE = 'Clear, calm, natural American English for a beginner learner. Moderate pace, no extra words.';
 
 /** ElevenLabs (default Eleven v3) with character timestamps → word timings. */
-export function elevenlabs(apiKey: string, model = process.env.TTS_MODEL_ELEVENLABS || 'eleven_v3'): TtsProvider {
+export function elevenlabs(apiKey: string, model = process.env.TTS_MODEL_ELEVENLABS || 'eleven_v4'): TtsProvider {
   const voices = {
-    // Premade American voices (Matilda, Eric); override with any voice ID.
-    female: process.env.ELEVENLABS_VOICE_FEMALE || 'XrExE9yKIg1WjnnlVkGX',
-    male: process.env.ELEVENLABS_VOICE_MALE || 'cjVigY5qzO86Huf0OWal',
+    // Chosen on /admin/review (v4 · Bella / Chris); override with any voice ID.
+    female: process.env.ELEVENLABS_VOICE_FEMALE || 'hpp4J3VqNfWAUOO0d1Us',
+    male: process.env.ELEVENLABS_VOICE_MALE || 'iP95p4xoKVk53GoZ742B',
   };
   return {
     id: 'elevenlabs',
@@ -257,13 +288,14 @@ export function ensureTimings(text: string, r: SpeechResult): SpeechResult {
 
 // ---------- selection from env ----------
 
-export type ImageProviderId = 'google' | 'openai' | 'placeholder';
+export type ImageProviderId = 'gemini-pro' | 'gemini-flash' | 'google' | 'openai' | 'placeholder';
 export type TtsProviderId = 'elevenlabs' | 'openai' | 'google' | 'browser';
 
 const env = (k: string) => process.env[k]?.trim() || undefined;
 
 export function imageKey(id: ImageProviderId): string | undefined {
-  return env(`IMAGE_API_KEY_${id.toUpperCase()}`) ?? env('IMAGE_API_KEY');
+  const vendor = id.startsWith('gemini') ? 'GOOGLE' : id.toUpperCase();
+  return env(`IMAGE_API_KEY_${vendor}`) ?? env('IMAGE_API_KEY');
 }
 export function ttsKey(id: TtsProviderId): string | undefined {
   return env(`TTS_API_KEY_${id.toUpperCase()}`) ?? env('TTS_API_KEY');
@@ -273,6 +305,8 @@ export function makeImageProvider(id: ImageProviderId): ImageProvider | null {
   if (id === 'placeholder') return placeholderImage();
   const key = imageKey(id);
   if (!key) return null;
+  if (id === 'gemini-pro') return geminiImage(key, process.env.IMAGE_MODEL_GEMINI_PRO || 'gemini-3-pro-image', id);
+  if (id === 'gemini-flash') return geminiImage(key, process.env.IMAGE_MODEL_GEMINI_FLASH || 'gemini-3.1-flash-image', id);
   return id === 'google' ? googleImagen(key) : openaiImage(key);
 }
 
