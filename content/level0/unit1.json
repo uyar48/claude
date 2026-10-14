@@ -1,0 +1,229 @@
+{
+  "level": { "id": "L0", "order": 0, "title": "Seviye 0", "description": "Hiç bilmeyenler için başlangıç" },
+  "unit": {
+    "id": "L0U1",
+    "levelId": "L0",
+    "order": 1,
+    "title": "Sabah",
+    "titleEn": "Morning",
+    "imageStyle": "Photorealistic photograph, natural daylight, one clear subject, simple uncluttered background, real everyday adult setting, no text, no letters, no numbers, no logos, no brand names, no watermark, no recognizable real person, 4:3 aspect ratio."
+  },
+  "functionWords": [
+    { "en": "I", "tr": "ben" },
+    { "en": "am", "tr": "-ım / -im (olmak; 'I' ile)" },
+    { "en": "is", "tr": "-dır / -dir (olmak; o, bu ile)" },
+    { "en": "a", "tr": "bir" },
+    { "en": "an", "tr": "bir (sesli harften önce)" },
+    { "en": "the", "tr": "belirli tanımlık (bilinen o şey)" },
+    { "en": "my", "tr": "benim" },
+    { "en": "in", "tr": "içinde, -de / -da" },
+    { "en": "on", "tr": "üstünde" },
+    { "en": "at", "tr": "-de / -da (bir yerde)" },
+    { "en": "to", "tr": "-e / -a (bir yere)" },
+    { "en": "and", "tr": "ve" },
+    { "en": "have", "tr": "(bende) var; sahip olmak" },
+    { "en": "has", "tr": "(onda) var; sahip olmak" },
+    { "en": "go", "tr": "gitmek" },
+    { "en": "good", "tr": "iyi" }
+  ],
+  "words": [
+    {
+      "id": "house", "en": "house", "tr": "ev (bina)", "pos": "noun", "day": 1,
+      "example": "I am in the house.", "exampleTr": "Evin içindeyim.",
+      "imagePrompt": "The exterior of a single modest two-story family house with a front door and windows, seen from the front on a quiet morning."
+    },
+    {
+      "id": "door", "en": "door", "tr": "kapı", "pos": "noun", "day": 1,
+      "example": "The house has a door.", "exampleTr": "Evin bir kapısı var.",
+      "imagePrompt": "A closed wooden front door of a home with a metal handle, seen straight on, plain wall around it."
+    },
+    {
+      "id": "window", "en": "window", "tr": "pencere", "pos": "noun", "day": 1,
+      "example": "The house has a window.", "exampleTr": "Evin bir penceresi var.",
+      "imagePrompt": "A single closed window with a white frame in a plain wall, soft morning light coming through the glass."
+    },
+    {
+      "id": "table", "en": "table", "tr": "masa", "pos": "noun", "day": 1,
+      "example": "The water is on the table.", "exampleTr": "Su masanın üstünde.",
+      "imagePrompt": "An empty wooden kitchen table standing alone in a bright room, nothing on it."
+    },
+    {
+      "id": "water", "en": "water", "tr": "su", "pos": "noun", "day": 1,
+      "example": "I have water.", "exampleTr": "Suyum var.",
+      "imagePrompt": "A clear drinking glass full of still water on a plain light surface."
+    },
+    {
+      "id": "woman", "en": "woman", "tr": "kadın", "pos": "noun", "day": 2,
+      "example": "The woman has tea.", "exampleTr": "Kadının çayı var.",
+      "imagePrompt": "A woman in her thirties in casual clothes standing in a bright apartment, calm natural expression, ordinary person, plain background."
+    },
+    {
+      "id": "man", "en": "man", "tr": "adam", "pos": "noun", "day": 2,
+      "example": "The man is at the door.", "exampleTr": "Adam kapıda.",
+      "imagePrompt": "A man in his late thirties in casual clothes standing in a bright apartment, calm natural expression, ordinary person, plain background."
+    },
+    {
+      "id": "tea", "en": "tea", "tr": "çay", "pos": "noun", "day": 2,
+      "example": "The woman has tea.", "exampleTr": "Kadının çayı var.",
+      "imagePrompt": "A clear glass of hot black tea on a small saucer on a plain table."
+    },
+    {
+      "id": "egg", "en": "egg", "tr": "yumurta", "pos": "noun", "day": 2,
+      "example": "I have an egg.", "exampleTr": "Bir yumurtam var.",
+      "imagePrompt": "A single brown chicken egg on a plain light surface."
+    },
+    {
+      "id": "bread", "en": "bread", "tr": "ekmek", "pos": "noun", "day": 2,
+      "example": "I have coffee and bread.", "exampleTr": "Kahvem ve ekmeğim var.",
+      "imagePrompt": "A fresh loaf of crusty bread on a wooden board, plain background."
+    },
+    {
+      "id": "key", "en": "key", "tr": "anahtar", "pos": "noun", "day": 3,
+      "example": "I have my key.", "exampleTr": "Anahtarım yanımda.",
+      "imagePrompt": "A single metal house key lying on a plain light surface."
+    },
+    {
+      "id": "bag", "en": "bag", "tr": "çanta", "pos": "noun", "day": 3,
+      "example": "The man has a bag.", "exampleTr": "Adamın bir çantası var.",
+      "imagePrompt": "A plain brown leather shoulder bag with no logo, standing on a plain surface."
+    },
+    {
+      "id": "car", "en": "car", "tr": "araba", "pos": "noun", "day": 3,
+      "example": "The car is in the street.", "exampleTr": "Araba sokakta.",
+      "imagePrompt": "A generic modern compact car with no badges or logos parked on a quiet street, side view, number plate not visible."
+    },
+    {
+      "id": "street", "en": "street", "tr": "sokak", "pos": "noun", "day": 3,
+      "example": "The car is in the street.", "exampleTr": "Araba sokakta.",
+      "imagePrompt": "A quiet empty residential street with sidewalks and houses in early morning light, no signs or shop names."
+    },
+    {
+      "id": "chair", "en": "chair", "tr": "sandalye", "pos": "noun", "day": 3,
+      "example": "My phone is on the chair.", "exampleTr": "Telefonum sandalyenin üstünde.",
+      "imagePrompt": "A single simple wooden chair standing alone in a bright room, plain wall behind it."
+    },
+    {
+      "id": "morning", "en": "morning", "tr": "sabah", "pos": "noun", "day": 4,
+      "example": "Good morning.", "exampleTr": "Günaydın.",
+      "imagePrompt": "Early morning sunrise light over city rooftops seen from an apartment window, calm sky."
+    },
+    {
+      "id": "home", "en": "home", "tr": "ev (yuva), evde", "pos": "noun", "day": 4,
+      "example": "I am at home.", "exampleTr": "Evdeyim.",
+      "imagePrompt": "A warm, lived-in living room interior with a sofa, a lamp and a blanket, cozy morning light, nobody in the room."
+    },
+    {
+      "id": "coffee", "en": "coffee", "tr": "kahve", "pos": "noun", "day": 4,
+      "example": "The coffee is on the table.", "exampleTr": "Kahve masanın üstünde.",
+      "imagePrompt": "A plain white cup of black coffee on a wooden table, light steam, no logo."
+    },
+    {
+      "id": "phone", "en": "phone", "tr": "telefon", "pos": "noun", "day": 4,
+      "example": "My phone is on the chair.", "exampleTr": "Telefonum sandalyenin üstünde.",
+      "imagePrompt": "A generic black smartphone with a dark blank screen lying on a plain surface, no logo, no visible brand."
+    },
+    {
+      "id": "work", "en": "work", "tr": "iş", "pos": "noun", "day": 4,
+      "example": "I go to work.", "exampleTr": "İşe gidiyorum.",
+      "imagePrompt": "A tidy office desk with a closed laptop without logo, a notebook and a pen, bright workplace, nobody in the frame."
+    }
+  ],
+  "texts": [
+    {
+      "id": "t1", "order": 1, "main": true, "title": "Good Morning", "titleTr": "Günaydın", "voice": "male",
+      "sentences": [
+        { "en": "Good morning.", "tr": "Günaydın." },
+        { "en": "I am at home.", "tr": "Evdeyim." },
+        { "en": "I am a man.", "tr": "Ben bir adamım." },
+        { "en": "I have coffee and bread.", "tr": "Kahvem ve ekmeğim var." },
+        { "en": "The coffee is on the table.", "tr": "Kahve masanın üstünde." },
+        { "en": "My phone is on the chair.", "tr": "Telefonum sandalyenin üstünde." },
+        { "en": "I have my key and my bag.", "tr": "Anahtarım ve çantam yanımda." },
+        { "en": "I go to work.", "tr": "İşe gidiyorum." },
+        { "en": "The car is in the street.", "tr": "Araba sokakta." }
+      ],
+      "questions": [
+        { "id": "t1q1", "prompt": "Adam şu an nerede?", "options": [{ "en": "at home" }, { "en": "at work" }, { "en": "in the street" }], "answer": 0 },
+        { "id": "t1q2", "prompt": "Kahve nerede?", "options": [{ "image": "chair" }, { "image": "table" }, { "image": "car" }], "answer": 1 },
+        { "id": "t1q3", "prompt": "Telefon nerede?", "options": [{ "en": "on the table" }, { "en": "in the bag" }, { "en": "on the chair" }], "answer": 2 }
+      ],
+      "blanks": [
+        { "id": "t1b1", "sentence": "I have coffee and ___.", "options": ["bread", "tea", "water"], "answer": 0 },
+        { "id": "t1b2", "sentence": "My phone is on the ___.", "options": ["table", "chair", "street"], "answer": 1 },
+        { "id": "t1b3", "sentence": "The car is in the ___.", "options": ["house", "bag", "street"], "answer": 2 }
+      ]
+    },
+    {
+      "id": "t2", "order": 2, "title": "The Woman", "titleTr": "Kadın", "voice": "female",
+      "sentences": [
+        { "en": "The woman is at the table.", "tr": "Kadın masada." },
+        { "en": "The woman has tea.", "tr": "Kadının çayı var." },
+        { "en": "The woman has water.", "tr": "Kadının suyu var." }
+      ],
+      "questions": [
+        { "id": "t2q1", "prompt": "Kadın nerede?", "options": [{ "en": "at the door" }, { "en": "at the table" }, { "en": "in the house" }], "answer": 1 },
+        { "id": "t2q2", "prompt": "Kadının içeceği hangisi?", "options": [{ "image": "tea" }, { "image": "bread" }, { "image": "egg" }], "answer": 0 },
+        { "id": "t2q3", "prompt": "Metinde kim var?", "options": [{ "image": "man" }, { "image": "house" }, { "image": "woman" }], "answer": 2 }
+      ],
+      "blanks": [
+        { "id": "t2b1", "sentence": "The woman is at the ___.", "options": ["table", "door", "window"], "answer": 0 },
+        { "id": "t2b2", "sentence": "The woman has ___.", "options": ["bread", "tea", "an egg"], "answer": 1 },
+        { "id": "t2b3", "sentence": "The ___ has water.", "options": ["man", "house", "woman"], "answer": 2 }
+      ]
+    },
+    {
+      "id": "t3", "order": 3, "title": "Water and Bread", "titleTr": "Su ve ekmek", "voice": "female",
+      "sentences": [
+        { "en": "I have an egg and bread.", "tr": "Bir yumurtam ve ekmeğim var." },
+        { "en": "I have water.", "tr": "Suyum var." },
+        { "en": "The water is on the table.", "tr": "Su masanın üstünde." }
+      ],
+      "questions": [
+        { "id": "t3q1", "prompt": "Konuşan kişide ne var?", "options": [{ "image": "tea" }, { "image": "egg" }, { "image": "door" }], "answer": 1 },
+        { "id": "t3q2", "prompt": "Masanın üstünde ne var?", "options": [{ "image": "house" }, { "image": "tea" }, { "image": "water" }], "answer": 2 },
+        { "id": "t3q3", "prompt": "Konuşan kişinin içeceği ne?", "options": [{ "en": "water" }, { "en": "tea" }, { "en": "bread" }], "answer": 0 }
+      ],
+      "blanks": [
+        { "id": "t3b1", "sentence": "I have an egg and ___.", "options": ["tea", "bread", "a door"], "answer": 1 },
+        { "id": "t3b2", "sentence": "I have ___.", "options": ["water", "tea", "a table"], "answer": 0 },
+        { "id": "t3b3", "sentence": "The water is on the ___.", "options": ["door", "bread", "table"], "answer": 2 }
+      ]
+    },
+    {
+      "id": "t4", "order": 4, "title": "The Man", "titleTr": "Adam", "voice": "male",
+      "sentences": [
+        { "en": "The man is at the door.", "tr": "Adam kapıda." },
+        { "en": "The man has a bag.", "tr": "Adamın bir çantası var." },
+        { "en": "The man has a key.", "tr": "Adamın bir anahtarı var." },
+        { "en": "The car is in the street.", "tr": "Araba sokakta." }
+      ],
+      "questions": [
+        { "id": "t4q1", "prompt": "Adam nerede?", "options": [{ "en": "at the door" }, { "en": "at the table" }, { "en": "in the car" }], "answer": 0 },
+        { "id": "t4q2", "prompt": "Adamda ne var?", "options": [{ "image": "chair" }, { "image": "bag" }, { "image": "egg" }], "answer": 1 },
+        { "id": "t4q3", "prompt": "Araba nerede?", "options": [{ "en": "in the house" }, { "en": "on the table" }, { "en": "in the street" }], "answer": 2 }
+      ],
+      "blanks": [
+        { "id": "t4b1", "sentence": "The man is at the ___.", "options": ["door", "table", "window"], "answer": 0 },
+        { "id": "t4b2", "sentence": "The man has a ___.", "options": ["chair", "key", "car"], "answer": 1 },
+        { "id": "t4b3", "sentence": "The ___ is in the street.", "options": ["table", "chair", "car"], "answer": 2 }
+      ]
+    },
+    {
+      "id": "t5", "order": 5, "title": "The House", "titleTr": "Ev", "voice": "female",
+      "sentences": [
+        { "en": "The house has a door and a window.", "tr": "Evin bir kapısı ve bir penceresi var." },
+        { "en": "I am in the house.", "tr": "Evin içindeyim." }
+      ],
+      "questions": [
+        { "id": "t5q1", "prompt": "Evde ne var?", "options": [{ "image": "door" }, { "image": "table" }, { "image": "water" }], "answer": 0 },
+        { "id": "t5q2", "prompt": "Konuşan kişi nerede?", "options": [{ "en": "at the table" }, { "en": "in the house" }, { "en": "at the door" }], "answer": 1 },
+        { "id": "t5q3", "prompt": "Evin nesi var?", "options": [{ "en": "a table" }, { "en": "water" }, { "en": "a window" }], "answer": 2 }
+      ],
+      "blanks": [
+        { "id": "t5b1", "sentence": "The house has a ___ and a window.", "options": ["door", "table", "house"], "answer": 0 },
+        { "id": "t5b2", "sentence": "The house has a door and a ___.", "options": ["table", "window", "house"], "answer": 1 },
+        { "id": "t5b3", "sentence": "I am in the ___.", "options": ["window", "door", "house"], "answer": 2 }
+      ]
+    }
+  ]
+}

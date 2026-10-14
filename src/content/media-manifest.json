@@ -1,0 +1,151 @@
+{
+  "audio": {},
+  "generatedAt": "2026-10-14T09:10:50.925Z",
+  "imageProvider": "placeholder",
+  "images": {
+    "bag": {
+      "file": "e58bec313081f16e2883.svg",
+      "hash": "e58bec313081f16e2883",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "bread": {
+      "file": "79d06287c6dda00b9f50.svg",
+      "hash": "79d06287c6dda00b9f50",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "car": {
+      "file": "0f23e61d8392091b2bca.svg",
+      "hash": "0f23e61d8392091b2bca",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "chair": {
+      "file": "13b06dbd9ef25ffea944.svg",
+      "hash": "13b06dbd9ef25ffea944",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "coffee": {
+      "file": "11401a84514082a68d39.svg",
+      "hash": "11401a84514082a68d39",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "door": {
+      "file": "47dff77803eebec71026.svg",
+      "hash": "47dff77803eebec71026",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "egg": {
+      "file": "95c40d904d3968ed064d.svg",
+      "hash": "95c40d904d3968ed064d",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "home": {
+      "file": "62c6344fcdaeaaf89c29.svg",
+      "hash": "62c6344fcdaeaaf89c29",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "house": {
+      "file": "f703ee31a3c7493846e0.svg",
+      "hash": "f703ee31a3c7493846e0",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "key": {
+      "file": "db4e065c70ced48db444.svg",
+      "hash": "db4e065c70ced48db444",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "man": {
+      "file": "557d45595e73c89da789.svg",
+      "hash": "557d45595e73c89da789",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "morning": {
+      "file": "03c183f85a5246a2b87f.svg",
+      "hash": "03c183f85a5246a2b87f",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "phone": {
+      "file": "7705c174e849b1d6b7db.svg",
+      "hash": "7705c174e849b1d6b7db",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "street": {
+      "file": "5ca1ad41415e8a6e192b.svg",
+      "hash": "5ca1ad41415e8a6e192b",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "table": {
+      "file": "2e487913b106b247bef5.svg",
+      "hash": "2e487913b106b247bef5",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "tea": {
+      "file": "4b078b464065917fe08d.svg",
+      "hash": "4b078b464065917fe08d",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "water": {
+      "file": "2c068112b78e2d25d62d.svg",
+      "hash": "2c068112b78e2d25d62d",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "window": {
+      "file": "c82c05aae82bf09b23e1.svg",
+      "hash": "c82c05aae82bf09b23e1",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "woman": {
+      "file": "2e2527162d45597adbff.svg",
+      "hash": "2e2527162d45597adbff",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    },
+    "work": {
+      "file": "ba18c82896516deeb0f4.svg",
+      "hash": "ba18c82896516deeb0f4",
+      "model": "flat-v1",
+      "placeholder": true,
+      "provider": "placeholder"
+    }
+  },
+  "missingKeys": [
+    "IMAGE_API_KEY",
+    "TTS_API_KEY"
+  ]
+}

@@ -1,0 +1,72 @@
+# Generates pictures and audio with the provider APIs and commits them.
+# Repository → Settings → Secrets and variables → Actions: add IMAGE_API_KEY /
+# TTS_API_KEY (or the provider-specific IMAGE_API_KEY_GOOGLE, IMAGE_API_KEY_OPENAI,
+# TTS_API_KEY_ELEVENLABS, TTS_API_KEY_OPENAI, TTS_API_KEY_GOOGLE).
+name: Medya üret
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'all = tüm medya · compare-images = ilk 10 kelimede görsel karşılaştırma · compare-tts = ses karşılaştırma'
+        type: choice
+        options: [all, compare-images, compare-tts]
+        default: all
+      image_provider:
+        description: 'Görsel sağlayıcı (google = Imagen 4 Ultra, openai = GPT Image)'
+        type: choice
+        options: [google, openai, placeholder]
+        default: google
+      tts_provider:
+        description: 'Ses sağlayıcı'
+        type: choice
+        options: [elevenlabs, openai, google, browser]
+        default: elevenlabs
+      review:
+        description: '/admin/review sayfasından kopyalanan JSON (isteğe bağlı)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  media:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Save review JSON
+        if: ${{ inputs.review != '' }}
+        env:
+          REVIEW: ${{ inputs.review }}
+        run: printf '%s' "$REVIEW" > content/media-review.json
+      - name: Generate
+        env:
+          IMAGE_PROVIDER: ${{ inputs.image_provider }}
+          TTS_PROVIDER: ${{ inputs.tts_provider }}
+          IMAGE_API_KEY: ${{ secrets.IMAGE_API_KEY }}
+          IMAGE_API_KEY_GOOGLE: ${{ secrets.IMAGE_API_KEY_GOOGLE }}
+          IMAGE_API_KEY_OPENAI: ${{ secrets.IMAGE_API_KEY_OPENAI }}
+          TTS_API_KEY: ${{ secrets.TTS_API_KEY }}
+          TTS_API_KEY_ELEVENLABS: ${{ secrets.TTS_API_KEY_ELEVENLABS }}
+          TTS_API_KEY_OPENAI: ${{ secrets.TTS_API_KEY_OPENAI }}
+          TTS_API_KEY_GOOGLE: ${{ secrets.TTS_API_KEY_GOOGLE }}
+        run: |
+          case "${{ inputs.mode }}" in
+            compare-images) npm run media -- --compare-images google,openai --words 10 ;;
+            compare-tts)    npm run media -- --compare-tts elevenlabs,openai,google --words 3 ;;
+            *)              npm run media ;;
+          esac
+      - name: Commit
+        run: |
+          git config user.name "media-bot"
+          git config user.email "media-bot@users.noreply.github.com"
+          git add public/media src/content/media-manifest.json content/media-review.json 2>/dev/null || true
+          git diff --cached --quiet && echo "Değişiklik yok" && exit 0
+          git commit -m "media: ${{ inputs.mode }} (${{ inputs.image_provider }}, ${{ inputs.tts_provider }})"
+          git push
