@@ -83,7 +83,7 @@ Giriş yapılmış herhangi bir cihazda **Ayarlar → Başka cihazı bağla** da
 **Seçenek A — GitHub'dan (bilgisayar gerekmez):**
 
 1. Depo → **Settings → Secrets and variables → Actions** bölümüne anahtarları ekle:
-   - `IMAGE_API_KEY_GOOGLE`: Google AI Studio anahtarı, Imagen 4 Ultra için
+   - `IMAGE_API_KEY_GOOGLE`: Google AI Studio anahtarı, Nano Banana Pro (Gemini 3 Pro Image) için; ücretli katman gerekir
    - `IMAGE_API_KEY_OPENAI`: OpenAI anahtarı, GPT Image için
    - `TTS_API_KEY_ELEVENLABS`, `TTS_API_KEY_OPENAI`, `TTS_API_KEY_GOOGLE`: hangileri varsa
 2. **Actions → Medya üret → Run workflow**:
@@ -108,7 +108,7 @@ Model adları ortam değişkeniyle değiştirilebilir:
 
 | Sağlayıcı | Değişken | Varsayılan |
 | --- | --- | --- |
-| Google görsel | `IMAGE_MODEL_GOOGLE` | `imagen-4.0-ultra-generate-001` |
+| Google görsel | `IMAGE_MODEL_GOOGLE` | `gemini-3-pro-image` |
 | OpenAI görsel | `IMAGE_MODEL_OPENAI` | `gpt-image-2` |
 | ElevenLabs ses | `TTS_MODEL_ELEVENLABS` | `eleven_v3` |
 | OpenAI ses | `TTS_MODEL_OPENAI` | `gpt-4o-mini-tts` |

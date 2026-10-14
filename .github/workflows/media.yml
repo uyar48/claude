@@ -13,7 +13,7 @@ on:
         options: [all, compare-images, compare-tts]
         default: all
       image_provider:
-        description: 'Görsel sağlayıcı (google = Imagen 4 Ultra, openai = GPT Image)'
+        description: 'Görsel sağlayıcı (google = Nano Banana Pro, openai = GPT Image)'
         type: choice
         options: [google, openai, placeholder]
         default: google

@@ -49,23 +49,29 @@ async function toWebp(input: Buffer): Promise<Buffer> {
 
 // ---------- images ----------
 
-/** Google Imagen 4 (Gemini API). Default model: Imagen 4 Ultra. */
-export function googleImagen(apiKey: string, model = process.env.IMAGE_MODEL_GOOGLE || 'imagen-4.0-ultra-generate-001'): ImageProvider {
+/**
+ * Google Gemini image models (Gemini API). Default model: Nano Banana Pro.
+ * Imagen 4 was shut down on the Gemini API in August 2026; these replace it.
+ */
+export function googleImage(apiKey: string, model = process.env.IMAGE_MODEL_GOOGLE || 'gemini-3-pro-image'): ImageProvider {
   return {
     id: 'google',
     model,
     async generate(prompt) {
-      const res = await fetchRetry(`https://generativelanguage.googleapis.com/v1beta/models/${model}:predict`, {
+      const res = await fetchRetry(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
         body: JSON.stringify({
-          instances: [{ prompt }],
-          parameters: { sampleCount: 1, aspectRatio: '4:3', personGeneration: 'allow_adult' },
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '4:3', imageSize: '2K' } },
         }),
       });
-      const json = (await res.json()) as { predictions?: Array<{ bytesBase64Encoded?: string }> };
-      const b64 = json.predictions?.[0]?.bytesBase64Encoded;
-      if (!b64) throw new Error(`Imagen returned no image (maybe filtered): ${JSON.stringify(json).slice(0, 300)}`);
+      const json = (await res.json()) as {
+        candidates?: Array<{ content?: { parts?: Array<{ inlineData?: { data: string }; thought?: boolean }> } }>;
+      };
+      // Pro models may return draft "thought" images first; the final one comes last.
+      const b64 = json.candidates?.[0]?.content?.parts?.filter((p) => p.inlineData && !p.thought).at(-1)?.inlineData?.data;
+      if (!b64) throw new Error(`Gemini returned no image (maybe filtered): ${JSON.stringify(json).slice(0, 300)}`);
       return { data: await toWebp(Buffer.from(b64, 'base64')), ext: 'webp' };
     },
   };
@@ -273,7 +279,7 @@ export function makeImageProvider(id: ImageProviderId): ImageProvider | null {
   if (id === 'placeholder') return placeholderImage();
   const key = imageKey(id);
   if (!key) return null;
-  return id === 'google' ? googleImagen(key) : openaiImage(key);
+  return id === 'google' ? googleImage(key) : openaiImage(key);
 }
 
 export function makeTtsProvider(id: TtsProviderId): TtsProvider | null {

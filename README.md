@@ -20,7 +20,7 @@ Canlı adres: **https://okuma-iota.vercel.app** · Kurulum: **[docs/KURULUM.md](
 | İki cihaz senkronu: cihazda IndexedDB, Supabase'de "son yazan kazanır" | `src/data/`, `supabase/migrations/0001_init.sql` |
 | Tek e-postayla giriş (bağlantı); iPhone ana ekran uygulaması için 6 haneli cihaz kodu | `api/login.ts`, `api/link/*`, `src/ui/screens/Login.tsx`, `src/ui/screens/DeviceLink.tsx` |
 | Çevrimdışı mod: uygulama kabuğu ve bir sonraki dersin medyası önbellekte | `src/sw/sw.js`, `src/push/precache.ts` |
-| Medya hattı: Imagen 4 Ultra / GPT Image, ElevenLabs v3 / gpt-4o-mini-tts / Gemini TTS; hash önbelleği; yer tutucu | `scripts/generate-media.ts`, `scripts/media/providers.ts` |
+| Medya hattı: Nano Banana Pro (Gemini) / GPT Image, ElevenLabs v3 / gpt-4o-mini-tts / Gemini TTS; hash önbelleği; yer tutucu | `scripts/generate-media.ts`, `scripts/media/providers.ts` |
 | İnceleme sayfası: görsel ve ses ızgarası, onayla / yeniden üret, sağlayıcı karşılaştırma | `/admin/review` → `src/ui/screens/AdminReview.tsx` |
 
 ## Mimari

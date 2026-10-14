@@ -1,7 +1,7 @@
 // Adapter request/response handling with a stubbed fetch (no network, no keys).
 import sharp from 'sharp';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { elevenlabs, googleImagen, googleTts, makeImageProvider, makeTtsProvider, openaiImage, openaiTts, placeholderImage } from './providers';
+import { elevenlabs, googleImage, googleTts, makeImageProvider, makeTtsProvider, openaiImage, openaiTts, placeholderImage } from './providers';
 
 type Call = { url: string; init: RequestInit };
 
@@ -29,13 +29,31 @@ afterEach(() => {
 });
 
 describe('image adapters', () => {
-  it('Imagen: 4:3 request with the key in a header, WebP 1200×900 out', async () => {
-    const img = (await png(1408, 1056)).toString('base64');
-    const calls = stubFetch([() => json({ predictions: [{ bytesBase64Encoded: img, mimeType: 'image/png' }] })]);
-    const out = await googleImagen('KEY').generate('a cup of coffee', 'coffee');
-    expect(calls[0].url).toContain('imagen-4.0-ultra-generate-001:predict');
+  it('Gemini image: 4:3 request with the key in a header, final (non-draft) image → WebP 1200×900', async () => {
+    const draft = (await png(800, 600)).toString('base64');
+    const img = (await png(2400, 1792)).toString('base64');
+    const calls = stubFetch([
+      () =>
+        json({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  { inlineData: { data: draft, mimeType: 'image/png' }, thought: true },
+                  { text: 'Here is the image.' },
+                  { inlineData: { data: img, mimeType: 'image/png' } },
+                ],
+              },
+            },
+          ],
+        }),
+    ]);
+    const out = await googleImage('KEY').generate('a cup of coffee', 'coffee');
+    expect(calls[0].url).toContain('gemini-3-pro-image:generateContent');
     expect((calls[0].init.headers as Record<string, string>)['x-goog-api-key']).toBe('KEY');
-    expect(JSON.parse(String(calls[0].init.body)).parameters.aspectRatio).toBe('4:3');
+    const body = JSON.parse(String(calls[0].init.body));
+    expect(body.generationConfig).toEqual({ responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '4:3', imageSize: '2K' } });
+    expect(body.contents[0].parts[0].text).toBe('a cup of coffee');
     const meta = await sharp(out.data).metadata();
     expect([out.ext, meta.format, meta.width, meta.height]).toEqual(['webp', 'webp', 1200, 900]);
   });
@@ -51,9 +69,9 @@ describe('image adapters', () => {
   });
 
   it('retries on 429 and reports filtered results clearly', async () => {
-    stubFetch([() => new Response('slow down', { status: 429 }), () => json({ predictions: [] })]);
+    stubFetch([() => new Response('slow down', { status: 429 }), () => json({ candidates: [{ content: { parts: [{ text: 'no' }] } }] })]);
     vi.useFakeTimers({ toFake: ['setTimeout'] });
-    const p = googleImagen('KEY').generate('x', 'x');
+    const p = googleImage('KEY').generate('x', 'x');
     const assertion = expect(p).rejects.toThrow(/no image/);
     await vi.runAllTimersAsync();
     await assertion;

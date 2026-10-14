@@ -16,11 +16,13 @@ Aşama 1 canlıda: https://okuma-iota.vercel.app
     ELEVENLABS_VOICE_FEMALE=<id> ELEVENLABS_VOICE_MALE=<id> npm run media -- --only audio
   ```
   Ses kimlikleri: Matilda `XrExE9yKIg1WjnnlVkGX`, Eric `cjVigY5qzO86Huf0OWal`, Bella `hpp4J3VqNfWAUOO0d1Us`, Chris `iP95p4xoKVk53GoZ742B`.
-- **Görsel:** `IMAGE_API_KEY_GOOGLE` / `IMAGE_API_KEY_OPENAI` geldiğinde:
-  1. `npm run media -- --compare-images google,openai --words 10`
-  2. Commit, ardından `npm run deploy -- --app-only`.
-  3. Kullanıcıya `/admin/review` adresini gönder ve seçtir.
-  4. `IMAGE_PROVIDER=<seçim> npm run media -- --only images`, ardından yeniden dağıt.
+- **Görsel:** `IMAGE_API_KEY_GOOGLE` tanımlı ama projesi **ücretsiz katmanda**: görsel modellerinin kotası 0, her istek 429 dönüyor. Google AI Studio'da bu anahtarın projesine faturalandırma açılmalı (aistudio.google.com/apikey → anahtarın satırında "Set up billing"). `IMAGE_API_KEY_OPENAI` yok.
+  - Imagen 4, 17 Ağustos 2026'da Gemini API'den kaldırıldı (404). Google sağlayıcısı artık `gemini-3-pro-image` (Nano Banana Pro) kullanıyor; istek biçimi API doğrulamasından geçiyor, yalnızca kotaya takılıyor.
+  - Faturalandırma açılınca (veya OpenAI anahtarı gelince):
+    1. `npm run media -- --compare-images google,openai --words 10`
+    2. Commit, ardından `npm run deploy -- --app-only`.
+    3. Kullanıcıya `/admin/review` adresini gönder ve seçtir.
+    4. `IMAGE_PROVIDER=<seçim> npm run media -- --only images`, ardından yeniden dağıt.
 
 ## Ortamda olması gerekenler
 
@@ -34,7 +36,7 @@ Bulut ortamı ayarları → Edit:
 | `VERCEL_TOKEN` | vercel.com/account/tokens |
 | `SUPABASE_ACCESS_TOKEN` | supabase.com/dashboard/account/tokens |
 | `ALLOWED_EMAIL` | uygulamaya giriş yapacak e-posta |
-| `IMAGE_API_KEY_GOOGLE` | aistudio.google.com/apikey (Imagen ücretli katmanda çalışır) |
+| `IMAGE_API_KEY_GOOGLE` | aistudio.google.com/apikey (görsel modelleri yalnızca ücretli katmanda çalışır) |
 | `IMAGE_API_KEY_OPENAI`, `TTS_API_KEY_OPENAI` | platform.openai.com/api-keys (aynı anahtar olabilir) |
 | `TTS_API_KEY_ELEVENLABS` | elevenlabs.io → Developers → API keys |
 
