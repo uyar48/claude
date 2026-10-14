@@ -16,7 +16,8 @@
     "e2e": "playwright test",
     "media": "tsx scripts/generate-media.ts",
     "icons": "tsx scripts/make-icons.ts",
-    "vapid": "tsx scripts/vapid.ts"
+    "vapid": "tsx scripts/vapid.ts",
+    "deploy": "tsx scripts/deploy.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",

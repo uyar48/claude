@@ -4,6 +4,7 @@ dist/
 .env.*
 !.env.example
 .vercel/
+.deploy/
 test-results/
 playwright-report/
 .media-cache/
