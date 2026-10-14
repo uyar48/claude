@@ -155,7 +155,9 @@ test('four daily lessons from start to finish; all 20 words enter the review que
   for (const d of [2, 3, 4]) {
     await page.clock.setFixedTime(day(d));
     await page.reload();
-    await expect(page.getByText('kelime tekrarı')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Bugün' })).toBeVisible();
+    const card = page.locator('.lesson-card');
+    await expect(card, `day ${d}: ${await card.textContent()}`).toContainText('kelime tekrarı');
     if (d === 2) await shot(page, '12-today-day2');
     await completeLesson(page, false);
   }
