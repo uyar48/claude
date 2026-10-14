@@ -125,11 +125,13 @@ async function completeLesson(page: Page, shots = false) {
     else if (seg === 'Özet') {
       if (shots) await shot(page, '10-summary');
       await page.getByRole('button', { name: 'Bitir' }).click();
+      // Saving finishes before the app navigates home; wait for that.
+      await page.waitForURL((u) => u.pathname === '/');
       break;
     }
     await expect(page.locator('.seg-title h1')).not.toHaveText(seg);
   }
-  await expect(page.getByRole('heading', { name: 'Bugün' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Bugün', exact: true })).toBeVisible();
 }
 
 test('four daily lessons from start to finish; all 20 words enter the review queue', async ({ page }) => {
@@ -138,7 +140,7 @@ test('four daily lessons from start to finish; all 20 words enter the review que
 
   await page.clock.setFixedTime(day(1));
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Bugün' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Bugün', exact: true })).toBeVisible();
   await expect(page.getByText('Günün dersi')).toBeVisible();
   await expect(page.getByText('5 yeni kelime')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Başla' })).toBeVisible();
@@ -155,7 +157,7 @@ test('four daily lessons from start to finish; all 20 words enter the review que
   for (const d of [2, 3, 4]) {
     await page.clock.setFixedTime(day(d));
     await page.reload();
-    await expect(page.getByRole('heading', { name: 'Bugün' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Bugün', exact: true })).toBeVisible();
     const card = page.locator('.lesson-card');
     await expect(card, `day ${d}: ${await card.textContent()}`).toContainText('kelime tekrarı');
     if (d === 2) await shot(page, '12-today-day2');
@@ -197,12 +199,12 @@ test('settings, notifications and media review render', async ({ page }) => {
 
 test('works offline after the first visit (app shell + lesson media cached)', async ({ page, context }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Bugün' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Bugün', exact: true })).toBeVisible();
   await page.evaluate(() => navigator.serviceWorker.ready);
   await expect(page.getByText('Sonraki ders çevrimdışı hazır')).toBeVisible({ timeout: 15_000 });
   await context.setOffline(true);
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'Bugün' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Bugün', exact: true })).toBeVisible();
   await expect(page.getByText(/^Çevrimdışı/)).toBeVisible();
   // the next lesson's pictures come from the cache
   const loaded = await page.locator('.preview img').first().evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0);
