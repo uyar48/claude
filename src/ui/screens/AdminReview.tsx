@@ -115,7 +115,7 @@ export function AdminReview() {
           <h2>Ses karşılaştırma</h2>
           {Object.entries(compareAudio).map(([sample, byProvider]) => (
             <div key={sample} className="compare-row">
-              <h3 className="small">{sample}</h3>
+              <h3 className="small" lang="en">{describeSample(sample)}</h3>
               <div className="row gap wrap">
                 {Object.entries(byProvider).map(([provider, asset]) => (
                   <span key={provider} className={`chip ${state.audioPick[sample] === provider ? 'on' : ''}`}>
@@ -131,6 +131,7 @@ export function AdminReview() {
             </div>
           ))}
           <p className="small">Seçimler: {tally(state.audioPick)}</p>
+          <p className="muted small">Hangi sütunu beğendiğini bana yazman yeterli; tüm sesleri o sesle üretirim.</p>
         </section>
       )}
 
@@ -228,6 +229,18 @@ function VerdictButtons({ value, onChange, label }: { value?: Verdict; onChange:
       </button>
     </span>
   );
+}
+
+/** "word:house:female" → "house (kadın sesi)", "sent:t5:0" → the sentence. */
+function describeSample(key: string): string {
+  const [kind, id, extra] = key.split(':');
+  if (kind === 'word') return `${content.words.find((w) => w.id === id)?.en ?? id} (${extra === 'male' ? 'erkek' : 'kadın'} sesi)`;
+  if (kind === 'sent') {
+    const t = content.texts.find((x) => x.id === id);
+    const s = t?.sentences[Number(extra)];
+    return s ? `${s.en} (${t!.voice === 'male' ? 'erkek' : 'kadın'} sesi)` : key;
+  }
+  return key;
 }
 
 function majority(picks: Record<string, string>): string | null {

@@ -115,9 +115,9 @@ const LEARNER_STYLE = 'Clear, calm, natural American English for a beginner lear
 /** ElevenLabs (default Eleven v3) with character timestamps → word timings. */
 export function elevenlabs(apiKey: string, model = process.env.TTS_MODEL_ELEVENLABS || 'eleven_v3'): TtsProvider {
   const voices = {
-    // Premade American voices; override with your own voice IDs.
-    female: process.env.ELEVENLABS_VOICE_FEMALE || '21m00Tcm4TlvDq8ikWAM',
-    male: process.env.ELEVENLABS_VOICE_MALE || 'pNInz6obpgDQGcFmaJgB',
+    // Premade American voices (Matilda, Eric); override with any voice ID.
+    female: process.env.ELEVENLABS_VOICE_FEMALE || 'XrExE9yKIg1WjnnlVkGX',
+    male: process.env.ELEVENLABS_VOICE_MALE || 'cjVigY5qzO86Huf0OWal',
   };
   return {
     id: 'elevenlabs',

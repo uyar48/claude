@@ -1,6 +1,398 @@
 {
   "audio": {},
-  "generatedAt": "2026-10-14T09:10:50.925Z",
+  "compare": {
+    "audio": {
+      "sent:t1:0": {
+        "v3 · Bella / Chris": {
+          "duration": 0.72,
+          "file": "8e9dd154a0448097caa2.mp3",
+          "hash": "8e9dd154a0448097caa2",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "timings": [
+            {
+              "end": 0.08,
+              "i": 0,
+              "start": 0
+            },
+            {
+              "end": 0.4,
+              "i": 1,
+              "start": 0.12
+            }
+          ],
+          "timingSource": "provider",
+          "voice": "iP95p4xoKVk53GoZ742B"
+        },
+        "v3 · Matilda / Eric": {
+          "duration": 0.56,
+          "file": "deab53be2ed42d90b89e.mp3",
+          "hash": "deab53be2ed42d90b89e",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "timings": [
+            {
+              "end": 0.08,
+              "i": 0,
+              "start": 0
+            },
+            {
+              "end": 0.48,
+              "i": 1,
+              "start": 0.13
+            }
+          ],
+          "timingSource": "provider",
+          "voice": "cjVigY5qzO86Huf0OWal"
+        },
+        "v4 · Bella / Chris": {
+          "duration": 0.88,
+          "file": "490334ff68b01de819b9.mp3",
+          "hash": "490334ff68b01de819b9",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "timings": [
+            {
+              "end": 0.16,
+              "i": 0,
+              "start": 0
+            },
+            {
+              "end": 0.56,
+              "i": 1,
+              "start": 0.24
+            }
+          ],
+          "timingSource": "provider",
+          "voice": "iP95p4xoKVk53GoZ742B"
+        },
+        "v4 · Matilda / Eric": {
+          "duration": 1.04,
+          "file": "1bcb88f6ec0ee29d1720.mp3",
+          "hash": "1bcb88f6ec0ee29d1720",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "timings": [
+            {
+              "end": 0.24,
+              "i": 0,
+              "start": 0
+            },
+            {
+              "end": 0.64,
+              "i": 1,
+              "start": 0.32
+            }
+          ],
+          "timingSource": "provider",
+          "voice": "cjVigY5qzO86Huf0OWal"
+        }
+      },
+      "sent:t2:0": {
+        "v3 · Bella / Chris": {
+          "duration": 1.36,
+          "file": "141e3867f3203881d22a.mp3",
+          "hash": "141e3867f3203881d22a",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "timings": [
+            {
+              "end": 0.08,
+              "i": 0,
+              "start": 0
+            },
+            {
+              "end": 0.4,
+              "i": 1,
+              "start": 0.133
+            },
+            {
+              "end": 0.56,
+              "i": 2,
+              "start": 0.453
+            },
+            {
+              "end": 0.64,
+              "i": 3,
+              "start": 0.587
+            },
+            {
+              "end": 0.72,
+              "i": 4,
+              "start": 0.66
+            },
+            {
+              "end": 1.28,
+              "i": 5,
+              "start": 0.813
+            }
+          ],
+          "timingSource": "provider",
+          "voice": "hpp4J3VqNfWAUOO0d1Us"
+        },
+        "v3 · Matilda / Eric": {
+          "duration": 1.44,
+          "file": "90783143f31ee24f1a91.mp3",
+          "hash": "90783143f31ee24f1a91",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "timings": [
+            {
+              "end": 0.08,
+              "i": 0,
+              "start": 0
+            },
+            {
+              "end": 0.4,
+              "i": 1,
+              "start": 0.133
+            },
+            {
+              "end": 0.56,
+              "i": 2,
+              "start": 0.453
+            },
+            {
+              "end": 0.64,
+              "i": 3,
+              "start": 0.587
+            },
+            {
+              "end": 0.8,
+              "i": 4,
+              "start": 0.68
+            },
+            {
+              "end": 1.28,
+              "i": 5,
+              "start": 0.88
+            }
+          ],
+          "timingSource": "provider",
+          "voice": "XrExE9yKIg1WjnnlVkGX"
+        },
+        "v4 · Bella / Chris": {
+          "duration": 1.76,
+          "file": "0ed830671dc3feb99bfa.mp3",
+          "hash": "0ed830671dc3feb99bfa",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "timings": [
+            {
+              "end": 0.16,
+              "i": 0,
+              "start": 0
+            },
+            {
+              "end": 0.56,
+              "i": 1,
+              "start": 0.24
+            },
+            {
+              "end": 0.72,
+              "i": 2,
+              "start": 0.64
+            },
+            {
+              "end": 0.88,
+              "i": 3,
+              "start": 0.8
+            },
+            {
+              "end": 1,
+              "i": 4,
+              "start": 0.96
+            },
+            {
+              "end": 1.52,
+              "i": 5,
+              "start": 1.04
+            }
+          ],
+          "timingSource": "provider",
+          "voice": "hpp4J3VqNfWAUOO0d1Us"
+        },
+        "v4 · Matilda / Eric": {
+          "duration": 2,
+          "file": "0a19eb2c0b021ac4c7e9.mp3",
+          "hash": "0a19eb2c0b021ac4c7e9",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "timings": [
+            {
+              "end": 0.16,
+              "i": 0,
+              "start": 0
+            },
+            {
+              "end": 0.64,
+              "i": 1,
+              "start": 0.24
+            },
+            {
+              "end": 0.8,
+              "i": 2,
+              "start": 0.72
+            },
+            {
+              "end": 1.04,
+              "i": 3,
+              "start": 0.88
+            },
+            {
+              "end": 1.16,
+              "i": 4,
+              "start": 1.12
+            },
+            {
+              "end": 1.68,
+              "i": 5,
+              "start": 1.2
+            }
+          ],
+          "timingSource": "provider",
+          "voice": "XrExE9yKIg1WjnnlVkGX"
+        }
+      },
+      "word:door:female": {
+        "v3 · Bella / Chris": {
+          "duration": 0.48,
+          "file": "4ba054bdc247c885c775.mp3",
+          "hash": "4ba054bdc247c885c775",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "voice": "hpp4J3VqNfWAUOO0d1Us"
+        },
+        "v3 · Matilda / Eric": {
+          "duration": 0.4,
+          "file": "6996357e4503e0d2e2d6.mp3",
+          "hash": "6996357e4503e0d2e2d6",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "voice": "XrExE9yKIg1WjnnlVkGX"
+        },
+        "v4 · Bella / Chris": {
+          "duration": 0.88,
+          "file": "f8e62284c60f283871aa.mp3",
+          "hash": "f8e62284c60f283871aa",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "voice": "hpp4J3VqNfWAUOO0d1Us"
+        },
+        "v4 · Matilda / Eric": {
+          "duration": 0.88,
+          "file": "be777a8acf86d88c0162.mp3",
+          "hash": "be777a8acf86d88c0162",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "voice": "XrExE9yKIg1WjnnlVkGX"
+        }
+      },
+      "word:door:male": {
+        "v3 · Bella / Chris": {
+          "duration": 1.04,
+          "file": "c8cf2ffeaed89dd5bd47.mp3",
+          "hash": "c8cf2ffeaed89dd5bd47",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "voice": "iP95p4xoKVk53GoZ742B"
+        },
+        "v3 · Matilda / Eric": {
+          "duration": 0.48,
+          "file": "c71286e30af9e410f0b2.mp3",
+          "hash": "c71286e30af9e410f0b2",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "voice": "cjVigY5qzO86Huf0OWal"
+        },
+        "v4 · Bella / Chris": {
+          "duration": 0.88,
+          "file": "eb35dd6073a3e852ddd7.mp3",
+          "hash": "eb35dd6073a3e852ddd7",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "voice": "iP95p4xoKVk53GoZ742B"
+        },
+        "v4 · Matilda / Eric": {
+          "duration": 0.88,
+          "file": "2ff56ee7e89010697c42.mp3",
+          "hash": "2ff56ee7e89010697c42",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "voice": "cjVigY5qzO86Huf0OWal"
+        }
+      },
+      "word:house:female": {
+        "v3 · Bella / Chris": {
+          "duration": 0.48,
+          "file": "e705ffcecd3a5198e596.mp3",
+          "hash": "e705ffcecd3a5198e596",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "voice": "hpp4J3VqNfWAUOO0d1Us"
+        },
+        "v3 · Matilda / Eric": {
+          "duration": 0.48,
+          "file": "7ac4627e6d3d8af029be.mp3",
+          "hash": "7ac4627e6d3d8af029be",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "voice": "XrExE9yKIg1WjnnlVkGX"
+        },
+        "v4 · Bella / Chris": {
+          "duration": 0.88,
+          "file": "3c043b95df9c44940366.mp3",
+          "hash": "3c043b95df9c44940366",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "voice": "hpp4J3VqNfWAUOO0d1Us"
+        },
+        "v4 · Matilda / Eric": {
+          "duration": 0.96,
+          "file": "44445a60fdcd519273ed.mp3",
+          "hash": "44445a60fdcd519273ed",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "voice": "XrExE9yKIg1WjnnlVkGX"
+        }
+      },
+      "word:house:male": {
+        "v3 · Bella / Chris": {
+          "duration": 1.12,
+          "file": "d1788a4596fabc878f48.mp3",
+          "hash": "d1788a4596fabc878f48",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "voice": "iP95p4xoKVk53GoZ742B"
+        },
+        "v3 · Matilda / Eric": {
+          "duration": 0.48,
+          "file": "396f2928807511b97506.mp3",
+          "hash": "396f2928807511b97506",
+          "model": "eleven_v3",
+          "provider": "elevenlabs",
+          "voice": "cjVigY5qzO86Huf0OWal"
+        },
+        "v4 · Bella / Chris": {
+          "duration": 0.8,
+          "file": "aa76caf93776e0428d8f.mp3",
+          "hash": "aa76caf93776e0428d8f",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "voice": "iP95p4xoKVk53GoZ742B"
+        },
+        "v4 · Matilda / Eric": {
+          "duration": 0.96,
+          "file": "6e68611a0aee77a5e898.mp3",
+          "hash": "6e68611a0aee77a5e898",
+          "model": "eleven_v4",
+          "provider": "elevenlabs",
+          "voice": "cjVigY5qzO86Huf0OWal"
+        }
+      }
+    }
+  },
+  "generatedAt": "2026-10-14T11:56:38.461Z",
   "imageProvider": "placeholder",
   "images": {
     "bag": {
@@ -145,7 +537,6 @@
     }
   },
   "missingKeys": [
-    "IMAGE_API_KEY",
-    "TTS_API_KEY"
+    "IMAGE_API_KEY"
   ]
 }

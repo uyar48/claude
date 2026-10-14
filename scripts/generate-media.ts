@@ -54,6 +54,8 @@ const { values: args } = parseArgs({
     'compare-images': { type: 'string' },
     'compare-tts': { type: 'string' },
     words: { type: 'string' },
+    /** Column name for a comparison run, e.g. "v3 · Matilda/Eric" (default: provider id). */
+    label: { type: 'string' },
     review: { type: 'string' },
   },
 });
@@ -224,8 +226,11 @@ async function compareTts(ids: TtsProviderId[], n: number, missing: Set<string>)
   for (const w of orderedWords.slice(0, n)) {
     for (const v of ['female', 'male'] as const) samples.push({ key: wordAudioKey(w.id, v), text: w.en, voice: v, timings: false });
   }
-  const t1 = unit.texts.find((t) => t.main) ?? unit.texts[0];
-  samples.push({ key: sentenceAudioKey(t1.id, 3), text: t1.sentences[3].en, voice: 'male', timings: true });
+  // One sentence per voice, read with timings like in the lesson.
+  for (const voice of ['female', 'male'] as const) {
+    const t = unit.texts.find((x) => x.voice === voice);
+    if (t) samples.push({ key: sentenceAudioKey(t.id, 0), text: t.sentences[0].en, voice, timings: true });
+  }
   for (const id of ids) {
     const p = makeTtsProvider(id);
     if (!p) {
@@ -235,7 +240,7 @@ async function compareTts(ids: TtsProviderId[], n: number, missing: Set<string>)
     }
     for (const c of samples) {
       try {
-        (manifest.compare.audio[c.key] ??= {})[id] = await makeClip(p, c, 0);
+        (manifest.compare.audio[c.key] ??= {})[args.label ?? id] = await makeClip(p, c, 0);
       } catch (err) {
         console.error(`  ✗ ${id} ${c.key}: ${(err as Error).message}`);
       }

@@ -7,7 +7,8 @@
 // Secrets created here (DB password, VAPID keys, CRON_SECRET) are kept in
 // .deploy/state.json, which is git-ignored. Nothing secret is printed.
 //
-//   npm run deploy
+//   npm run deploy                 # full setup (idempotent)
+//   npm run deploy -- --app-only   # only redeploy the app
 
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -180,7 +181,17 @@ function vercelDeploy(token: string, projectId: string, orgId: string) {
 
 // ---------- main ----------
 
+/** `npm run deploy -- --app-only`: redeploy the app (e.g. after new media), skip all setup. */
+async function appOnly() {
+  const vcToken = need('VERCEL_TOKEN');
+  if (!state.vercel?.projectId || !state.vercel.orgId) throw new Error('Önce tam kurulum gerekli (npm run deploy)');
+  step('Dağıtım (Vercel, üretim)');
+  vercelDeploy(vcToken, state.vercel.projectId, state.vercel.orgId);
+  console.log(`\n✓ Hazır: ${state.vercel.url ?? ''}`);
+}
+
 async function main() {
+  if (process.argv.includes('--app-only')) return appOnly();
   const sbToken = need('SUPABASE_ACCESS_TOKEN');
   const vcToken = need('VERCEL_TOKEN');
   const allowedEmail = need('ALLOWED_EMAIL').toLowerCase();
