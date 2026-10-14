@@ -41,11 +41,20 @@ function need(name: string): string {
 }
 
 async function api<T>(base: string, token: string, method: string, url: string, body?: unknown): Promise<T> {
-  const res = await fetch(base + url, {
-    method,
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
+  let res: Response | null = null;
+  for (let attempt = 0; !res; attempt++) {
+    try {
+      res = await fetch(base + url, {
+        method,
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: body === undefined ? undefined : JSON.stringify(body),
+      });
+    } catch (err) {
+      // Dropped connections happen; every call here is safe to repeat.
+      if (attempt >= 3) throw err;
+      await sleep(2000 * 2 ** attempt);
+    }
+  }
   const text = await res.text();
   if (!res.ok) throw new Error(`${method} ${url} → ${res.status}: ${text.slice(0, 400)}`);
   return (text ? JSON.parse(text) : null) as T;
@@ -60,21 +69,25 @@ async function supabaseProject(token: string): Promise<string> {
   const sb = <T>(m: string, u: string, b?: unknown) => api<T>(SB, token, m, u, b);
   let ref = process.env.SUPABASE_PROJECT_REF || state.supabase?.ref;
   if (!ref) {
-    const projects = await sb<Array<{ id: string; name: string }>>('GET', '/projects');
-    ref = projects.find((p) => p.name === NAME)?.id;
+    const projects = await sb<Array<{ id: string; ref?: string; name: string }>>('GET', '/projects');
+    const found = projects.find((p) => p.name === NAME);
+    ref = found ? (found.ref ?? found.id) : undefined;
   }
   if (!ref) {
-    const orgs = await sb<Array<{ id: string; name: string }>>('GET', '/organizations');
-    if (!orgs.length) throw new Error('Supabase hesabında organizasyon yok');
+    let orgs = await sb<Array<{ id: string; slug: string; name: string }>>('GET', '/organizations');
+    if (!orgs.length) {
+      console.log(`  organizasyon yok, oluşturuluyor: ${NAME}`);
+      orgs = [await sb<{ id: string; slug: string; name: string }>('POST', '/organizations', { name: NAME })];
+    }
     const dbPass = crypto.randomBytes(24).toString('base64url');
     console.log(`  yeni proje: ${NAME} (${REGION}, organizasyon ${orgs[0].name})`);
-    const p = await sb<{ id: string }>('POST', '/projects', {
+    const p = await sb<{ id: string; ref?: string }>('POST', '/projects', {
       name: NAME,
-      organization_id: orgs[0].id,
+      organization_slug: orgs[0].slug,
       region: REGION,
       db_pass: dbPass,
     });
-    ref = p.id;
+    ref = p.ref ?? p.id;
     state.supabase = { ref, dbPass };
     save();
   } else {
@@ -102,18 +115,17 @@ async function supabaseKeys(token: string, ref: string) {
   return { url: `https://${ref}.supabase.co`, anon, service };
 }
 
-const MAGIC_LINK_TEMPLATE = `<h2>Okuma'ya giriş</h2>
-<p>Giriş kodun: <strong style="font-size:24px;letter-spacing:2px">{{ .Token }}</strong></p>
-<p>Ya da bu cihazda: <a href="{{ .ConfirmationURL }}">giriş yap</a></p>`;
-
+/**
+ * Free-tier projects on Supabase's built-in mailer cannot change e-mail
+ * templates, so the default "Sign in" link e-mail is used. The iPhone
+ * home-screen app signs in with a device code instead (see /baglan).
+ */
 async function supabaseAuth(token: string, ref: string, appUrl: string) {
   await api(SB, token, 'PATCH', `/projects/${ref}/config/auth`, {
     site_url: appUrl,
     uri_allow_list: `${appUrl}/**`,
     disable_signup: true,
     external_email_enabled: true,
-    mailer_subjects_magic_link: 'Okuma giriş kodun',
-    mailer_templates_magic_link_content: MAGIC_LINK_TEMPLATE,
   });
 }
 
@@ -132,7 +144,7 @@ async function vercelProject(token: string) {
   }
   if (!project) {
     console.log(`  yeni Vercel projesi: ${NAME}`);
-    project = await vc<{ id: string }>('POST', `/v10/projects${team}`, { name: NAME, framework: 'vite' });
+    project = await vc<{ id: string }>('POST', `/v11/projects${team}`, { name: NAME, framework: 'vite' });
   }
   state.vercel = { ...state.vercel, projectId: project.id, orgId };
   save();
@@ -182,8 +194,10 @@ async function main() {
   console.log(`  hazır: ${ref}`);
 
   step('Veritabanı şeması');
-  await sql(sbToken, ref, fs.readFileSync('supabase/migrations/0001_init.sql', 'utf8'));
-  console.log('  0001_init.sql ✓');
+  for (const f of fs.readdirSync('supabase/migrations').filter((x) => x.endsWith('.sql')).sort()) {
+    await sql(sbToken, ref, fs.readFileSync(path.join('supabase/migrations', f), 'utf8'));
+    console.log(`  ${f} ✓`);
+  }
 
   const keys = await supabaseKeys(sbToken, ref);
 
@@ -212,7 +226,7 @@ async function main() {
 
   step('Supabase giriş ayarları');
   await supabaseAuth(sbToken, ref, appUrl);
-  console.log('  kayıt kapalı, e-posta şablonu (kod + bağlantı), yönlendirme adresi ✓');
+  console.log('  kayıt kapalı, yönlendirme adresi ✓');
 
   step('Bildirim zamanlayıcısı (pg_cron, 10 dakikada bir)');
   await sql(sbToken, ref, 'create extension if not exists pg_cron; create extension if not exists pg_net with schema extensions;');
@@ -224,10 +238,14 @@ async function main() {
   console.log('  okuma-notify ✓');
 
   step('Kontrol');
-  const cfg = (await (await fetch(`${appUrl}/api/config`)).json()) as { missing: string[] };
-  console.log(cfg.missing.length ? `  eksik: ${cfg.missing.join(', ')}` : '  /api/config: tüm sunucu değişkenleri tanımlı ✓');
-  const cronRes = await fetch(`${appUrl}/api/cron/notify`, { headers: { Authorization: `Bearer ${state.cronSecret}` } });
-  console.log(`  /api/cron/notify → ${cronRes.status}`);
+  try {
+    const cfg = (await (await fetch(`${appUrl}/api/config`)).json()) as { missing: string[] };
+    console.log(cfg.missing.length ? `  eksik: ${cfg.missing.join(', ')}` : '  /api/config: tüm sunucu değişkenleri tanımlı ✓');
+    const cronRes = await fetch(`${appUrl}/api/cron/notify`, { headers: { Authorization: `Bearer ${state.cronSecret}` } });
+    console.log(`  /api/cron/notify → ${cronRes.status}`);
+  } catch (err) {
+    console.log(`  kontrol isteği tamamlanamadı (${(err as Error).message}); ${appUrl}/api/config adresini elle açabilirsin`);
+  }
 
   console.log(`\n✓ Hazır: ${appUrl}`);
 }

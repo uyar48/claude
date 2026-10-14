@@ -2,7 +2,7 @@
 
 Tek kullanıcılı, mobil öncelikli bir PWA. Hedef, günde 30 dakikayla kolaylaştırılmış İngilizce metinleri sözlüksüz okuyabilmek. Arayüz Türkçe, içerik İngilizce. Bu aşama **Seviye 0, Ünite 1 (Sabah)** için uçtan uca çalışan bir dilimdir: 20 kelime ve 5 metin; her metinde 3 anlama ve 3 boşluk doldurma sorusu var.
 
-Kurulum adımları için: **[docs/KURULUM.md](docs/KURULUM.md)**
+Canlı adres: **https://okuma-iota.vercel.app** · Kurulum: **[docs/KURULUM.md](docs/KURULUM.md)**
 
 ## Neler var
 
@@ -18,7 +18,7 @@ Kurulum adımları için: **[docs/KURULUM.md](docs/KURULUM.md)**
 | Bildirim zamanlayıcı: seçilen saat, günde en fazla 1, sessiz saatler (Europe/Istanbul), tür bazlı açma/kapatma, 3 yok sayılan bildirimden sonra seyrekleşme | `src/core/scheduler.ts`, `server/notify.ts`, `api/cron/notify.ts` |
 | Web push (VAPID), iPhone ana ekran izni, test bildirimi | `src/push/push.ts`, `src/sw/sw.js`, `api/push/test.ts` |
 | İki cihaz senkronu: cihazda IndexedDB, Supabase'de "son yazan kazanır" | `src/data/`, `supabase/migrations/0001_init.sql` |
-| Tek e-postayla giriş (magic link ve 6 haneli kod) | `api/login.ts`, `src/ui/screens/Login.tsx` |
+| Tek e-postayla giriş (bağlantı); iPhone ana ekran uygulaması için 6 haneli cihaz kodu | `api/login.ts`, `api/link/*`, `src/ui/screens/Login.tsx`, `src/ui/screens/DeviceLink.tsx` |
 | Çevrimdışı mod: uygulama kabuğu ve bir sonraki dersin medyası önbellekte | `src/sw/sw.js`, `src/push/precache.ts` |
 | Medya hattı: Imagen 4 Ultra / GPT Image, ElevenLabs v3 / gpt-4o-mini-tts / Gemini TTS; hash önbelleği; yer tutucu | `scripts/generate-media.ts`, `scripts/media/providers.ts` |
 | İnceleme sayfası: görsel ve ses ızgarası, onayla / yeniden üret, sağlayıcı karşılaştırma | `/admin/review` → `src/ui/screens/AdminReview.tsx` |

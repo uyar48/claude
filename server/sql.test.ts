@@ -46,8 +46,10 @@ const card = (word: string, updated: number, state = 'learning') => ({
 beforeAll(async () => {
   db = new PGlite();
   await db.exec(AUTH_STUB);
-  const sql = fs.readFileSync(path.join(__dirname, '../supabase/migrations/0001_init.sql'), 'utf8');
-  await db.exec(sql);
+  const dir = path.join(__dirname, '../supabase/migrations');
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.sql')).sort()) {
+    await db.exec(fs.readFileSync(path.join(dir, f), 'utf8'));
+  }
   await db.exec('grant select, insert, update, delete on all tables in schema public to authenticated;');
 });
 
@@ -96,6 +98,12 @@ describe('migration', () => {
     );
     expect(p.rows[0].settings.lessonMinutes).toBe(20);
     expect(p.rows[0].last_active_at).not.toBeNull();
+  });
+
+  it('device link codes are invisible to app users (server only)', async () => {
+    await db.query(`insert into device_links (code_hash, user_id, expires_at) values ('h1', '${ME}', now() + interval '10 minutes')`);
+    const r = await as(ME, () => db.query('select * from device_links'));
+    expect(r.rows).toEqual([]);
   });
 
   it('the app cannot create notification log rows, only read/mark them', async () => {

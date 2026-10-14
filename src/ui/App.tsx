@@ -4,6 +4,7 @@ import type { Runtime } from '../data/runtime';
 import { ensureSubscription, permission } from '../push/push';
 import { RuntimeContext } from './hooks';
 import { AdminReview } from './screens/AdminReview';
+import { DeviceLinkScreen } from './screens/DeviceLink';
 import { LessonScreen } from './screens/Lesson';
 import { Login } from './screens/Login';
 import { SettingsScreen } from './screens/Settings';
@@ -25,6 +26,7 @@ export function App({ runtime }: { runtime: Runtime }) {
                   <Route path="/" element={<Today />} />
                   <Route path="/lesson" element={<LessonScreen />} />
                   <Route path="/settings" element={<SettingsScreen />} />
+                  <Route path="/baglan" element={<DeviceLinkScreen />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </AuthGate>

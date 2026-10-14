@@ -1,5 +1,8 @@
 # Kurulum (yaklaşık 20 dakika)
 
+> **Otomatik kurulum:** Ortamda `VERCEL_TOKEN`, `SUPABASE_ACCESS_TOKEN` ve `ALLOWED_EMAIL` tanımlıysa `npm run deploy`, aşağıdaki 1–3. adımların hepsini tek seferde yapar (tekrar çalıştırılabilir). Bu proje bu yolla kuruldu: https://okuma-iota.vercel.app
+
+
 Uygulama anahtar olmadan da çalışır: ilerleme yalnızca o cihazda tutulur, görseller yer tutucudur, sesler tarayıcının sesiyle okunur. Senkron, giriş ve bildirimler için aşağıdaki üç hesap gerekir.
 
 | Ne | Nerede | Neden |
@@ -13,16 +16,10 @@ Uygulama anahtar olmadan da çalışır: ilerleme yalnızca o cihazda tutulur, g
 1. supabase.com → **New project**. Bölge olarak **Frankfurt (eu-central-1)** seç; İstanbul'a en yakın bölge bu.
 2. **SQL Editor** → `supabase/migrations/0001_init.sql` dosyasının içeriğini yapıştır → **Run**.
 3. **Authentication → Sign In / Providers → Email**: açık kalsın. **Allow new users to sign up** seçeneğini **kapat**. Kullanıcıyı uygulama kendisi oluşturur; yalnızca `ALLOWED_EMAIL` adresine izin verilir.
-4. **Authentication → Emails → Magic Link** şablonunu şununla değiştir. Kod satırı önemli: iPhone ana ekran uygulaması e-postadaki bağlantıyı açamaz, 6 haneli kodla girer.
-   ```html
-   <h2>Okuma'ya giriş</h2>
-   <p>Giriş kodun: <strong style="font-size:24px">{{ .Token }}</strong></p>
-   <p>Ya da bu cihazda: <a href="{{ .ConfirmationURL }}">giriş yap</a></p>
-   ```
-5. **Authentication → URL Configuration**:
+4. **Authentication → URL Configuration**:
    - **Site URL**: Vercel adresin, örneğin `https://okuma.vercel.app`.
    - **Redirect URLs**: `https://okuma.vercel.app/**` ekle.
-6. **Project Settings → API**: `Project URL`, `anon` anahtarı ve `service_role` anahtarını not al. `service_role` anahtarı gizlidir; yalnızca Vercel'e girilir.
+5. **Project Settings → API**: `Project URL`, `anon` anahtarı ve `service_role` anahtarını not al. `service_role` anahtarı gizlidir; yalnızca Vercel'e girilir.
 
 ## 2. Vercel
 
@@ -54,15 +51,23 @@ Vercel'in ücretsiz cron'u günde yalnızca bir kez çalışır. Bu yüzden zama
    - Sessiz saatlerde göndermez.
    - Üst üste 3 bildirim açılmazsa sıklığı düşürür.
 
-## 4. iPhone'a ekleme ve bildirim izni (iOS 18)
+## 4. iPhone'a ekleme, giriş ve bildirim izni (iOS 18)
 
-1. iPhone'da **Safari** ile `https://<proje>.vercel.app` adresini aç.
+iPhone'da ana ekrana eklenen uygulamanın depolaması Safari'den ayrıdır. E-postadaki bağlantı her zaman Safari'de açılır. Bu yüzden ana ekran uygulaması **6 haneli cihaz koduyla** girer.
+
+1. iPhone'da **Safari** ile uygulama adresini aç (ör. `https://okuma-iota.vercel.app`).
 2. Alttaki **Paylaş** düğmesine (kare ve yukarı ok) dokun → **Ana Ekrana Ekle** → **Ekle**.
-3. Ana ekrandaki **Okuma** simgesinden aç. Safari sekmesinden değil; iPhone bildirimleri yalnızca ana ekran uygulamasında çalışır.
-4. E-postanı yaz → **Giriş bağlantısı gönder** → e-postadaki **6 haneli kodu** uygulamaya yaz.
-5. **Ayarlar** (sağ üstteki dişli) → **Bildirimlere izin ver** → iOS penceresinde **İzin Ver**.
-6. **Test bildirimi gönder**: bildirim birkaç saniye içinde gelir; ekran kilitliyken de gelir.
-7. Sonradan değiştirmek için: iPhone **Ayarlar → Bildirimler → Okuma**.
+3. Ana ekrandaki **Okuma** simgesinden aç. Safari sekmesinden açma; iPhone bildirimleri yalnızca ana ekran uygulamasında çalışır.
+4. E-postanı yaz → **Giriş bağlantısı gönder**.
+5. Mail'de gelen e-postadaki **Sign in** bağlantısına dokun. Safari açılır, giriş yapar ve **6 haneli bir kod** gösterir.
+6. Ana ekrandaki Okuma'ya dön → **Cihaz kodu** alanına kodu yaz → **Kodla giriş yap**. Kod 10 dakika geçerlidir ve tek kullanımlıktır.
+7. **Ayarlar** (sağ üstteki dişli) → **Bildirimlere izin ver** → iOS penceresinde **İzin Ver**.
+8. **Test bildirimi gönder**: bildirim birkaç saniye içinde gelir; ekran kilitliyken de gelir.
+9. Sonradan değiştirmek için: iPhone **Ayarlar → Bildirimler → Okuma**.
+
+Giriş yapılmış herhangi bir cihazda **Ayarlar → Başka cihazı bağla** da bir kod verir. Örneğin bilgisayardan telefona bu yolla geçebilirsin.
+
+> Supabase'in ücretsiz planı, varsayılan e-posta sağlayıcısıyla e-posta şablonunun değiştirilmesine izin vermez. Bu yüzden giriş e-postası İngilizce ("Your sign-in link") gelir ve saatte en fazla 2 e-posta gönderilebilir. Kendi SMTP sağlayıcını (ör. Resend) tanımlarsan ikisi de değiştirilebilir.
 
 ## 5. Bilgisayar (masaüstü tarayıcı)
 

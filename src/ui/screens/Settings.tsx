@@ -254,6 +254,9 @@ function AccountSection({ syncStatus, lastSyncAt }: { syncStatus: string; lastSy
         <button className="btn btn-secondary" onClick={() => rt.sync?.sync()}>
           Şimdi senkronla
         </button>
+        <Link to="/baglan" className="btn btn-secondary">
+          Başka cihazı bağla
+        </Link>
         <button
           className="btn btn-ghost"
           onClick={async () => {

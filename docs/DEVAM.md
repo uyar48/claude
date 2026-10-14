@@ -1,6 +1,17 @@
 # Devam: canlıya alma (yeni oturum için not)
 
-Aşama 1 kodu bu dalda hazır ve testleri geçiyor. Geriye canlıya alma ve gerçek medya üretimi kaldı.
+Aşama 1 canlıda: https://okuma-iota.vercel.app
+
+- **Supabase:** proje `okuma` (Frankfurt), şema 0001 + 0002, kayıt kapalı, pg_cron her 10 dakikada bir.
+- **Vercel:** proje `okuma`, tüm sunucu değişkenleri tanımlı.
+- **Canlıda doğrulandı:**
+  - `/api/config`, cron (gizli anahtarla 200, anahtarsız 401)
+  - yalnızca `ALLOWED_EMAIL` ile giriş
+  - cihaz kodu: tek kullanım, 5 yanlış denemede iptal
+  - iki tarayıcı arasında senkron
+- **Kalan işler:**
+  - gerçek cihazda bildirim testi
+  - gerçek görsel ve ses üretimi (anahtarlar henüz yok)
 
 ## Ortamda olması gerekenler
 
