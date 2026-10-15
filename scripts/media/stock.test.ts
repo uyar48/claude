@@ -97,3 +97,19 @@ describe('choosing candidates', () => {
     expect(pickCandidates([px], 'tea', 2)).toHaveLength(2);
   });
 });
+
+describe('AI pictures', () => {
+  it('are never candidates', () => {
+    expect(score(found({ title: 'a loaf of bread on a café terrace - fusion style-tpz ai hd' }), 'bread')).toBeLessThan(0);
+    expect(score(found({ title: 'Bread, Midjourney render' }), 'bread')).toBeLessThan(0);
+  });
+});
+
+describe('loose matches in open collections', () => {
+  it('need the word or a search word in the title', () => {
+    expect(score(found({ source: 'wikimedia', title: 'Carina Nebula' }), 'car')).toBeLessThan(0);
+    expect(score(found({ source: 'openverse', title: 'Portrait of a lady' }), 'woman', 'woman portrait')).toBeGreaterThanOrEqual(0);
+    // Pexels/Pixabay results are tagged by people: no title rule.
+    expect(score(found({ source: 'pexels', title: 'Sunset drive' }), 'car')).toBeGreaterThanOrEqual(0);
+  });
+});

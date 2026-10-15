@@ -1,6 +1,6 @@
 {
   "note": "Written by scripts/fetch-images.ts. Candidates per word with source, author and license.",
-  "generatedAt": "2026-10-15T21:26:05.028Z",
+  "generatedAt": "2026-10-15T21:28:18.261Z",
   "missingKeys": [
     "PEXELS_API_KEY",
     "PIXABAY_API_KEY"
@@ -1075,6 +1075,71 @@
         }
       ],
       "query": "morning sunrise"
+    },
+    "home": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "home-wikimedia-187101720.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Modern_living_room_with_stylish_furniture_and_a_view_of_the_outdoors_in_a_cozy_apartment_setting.jpg",
+          "title": "Modern living room with stylish furniture and a view of the outdoors in a cozy apartment setting",
+          "author": "Shixart1985",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+          "width": 7360,
+          "height": 4912
+        },
+        {
+          "file": "home-wikimedia-187811625.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Relaxing_afternoon_with_a_woman_reading_an_old_book_in_a_cozy_living_room_setting.jpg",
+          "title": "Relaxing afternoon with a woman reading an old book in a cozy living room setting",
+          "author": "Shixart1985",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+          "width": 6048,
+          "height": 4024
+        },
+        {
+          "file": "home-openverse-cd645d0a826f47b3ac800ce9.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/194475708@N05/51820906164",
+          "title": "Cozy Living Room 22",
+          "author": "yennifer8",
+          "authorUrl": "https://www.flickr.com/photos/194475708@N05",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 899,
+          "provider": "flickr"
+        },
+        {
+          "file": "home-wikimedia-193969711.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Cozy_cabin_living_room_with_wooden_interior.jpg",
+          "title": "Cozy cabin living room with wooden interior",
+          "author": "Shixart1985",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+          "width": 6016,
+          "height": 4016
+        },
+        {
+          "file": "home-openverse-ea2ae9bcfd8a4acabb6ade72.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/194475708@N05/51820520711",
+          "title": "Cozy Living Room 7",
+          "author": "yennifer8",
+          "authorUrl": "https://www.flickr.com/photos/194475708@N05",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 645,
+          "provider": "flickr"
+        }
+      ],
+      "query": "cozy living room"
     }
   }
 }

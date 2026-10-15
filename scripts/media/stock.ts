@@ -295,17 +295,28 @@ export function wikimedia(f: Fetcher = fetch): StockSource {
  */
 /** Titles that should never reach a learner's lesson. */
 export const BLOCKED_TITLE =
-  /\b(nude|naked|nsfw|sexy|erotic|lingerie|topless|bikini|porn|sex|fetish|grave|cemetery|funeral|corpse|dead|death|blood|gun|rifle|weapon|war|drunk|cigarette|smok\w*|drugs?|skull|kill\w*|protest|riot|crash|accident)\b/i;
+  /\b(nude|naked|nsfw|sexy|erotic|lingerie|topless|bikini|porn|sex|fetish|grave|cemetery|funeral|corpse|dead|death|blood|gun|rifle|weapon|war|drunk|cigarette|smok\w*|drugs?|skull|kill\w*|protest|riot|crash|accident|handcuffs?|police|prison)\b/i;
+/** AI-generated pictures are not photos of the real thing. */
+const AI_TITLE = /\b(ai[ -]?(hd|generated|art|image)|tpz|midjourney|stable diffusion|dall-?e|generative)\b/i;
 
-export function score(c: Found, word: string): number {
-  if (BLOCKED_TITLE.test(`${c.title ?? ''} ${c.url}`)) return -100;
+/** "car" matches "car", "cars", "Car's" — not "Carina". */
+const mentions = (title: string, w: string) => new RegExp(`\\b${w}(s|es)?\\b`).test(title);
+
+export function score(c: Found, word: string, query = word): number {
+  if (BLOCKED_TITLE.test(`${c.title ?? ''} ${c.url}`) || AI_TITLE.test(c.title ?? '')) return -100;
   const ratio = c.width && c.height ? c.width / c.height : 4 / 3;
   let s = 0;
   if (ratio >= 1.1 && ratio <= 1.9) s += 2;
   else if (ratio < 0.9) s -= 2;
   if (c.width >= 800) s += 1;
   const title = (c.title ?? '').toLowerCase();
-  if (new RegExp(`\\b${word}`).test(title)) s += 2;
+  if (mentions(title, word)) s += 2;
+  else if (c.source === 'openverse' || c.source === 'wikimedia') {
+    // Open collections match loosely ("car" → "Carina Nebula"): the title has
+    // to name the word or one of the search words.
+    const keys = query.toLowerCase().split(/\s+/).filter((k) => k.length >= 4);
+    if (!keys.some((k) => mentions(title, k))) s -= 10;
+  }
   // Drawings, stamps, logos, maps … are rarely good word pictures.
   if (/\b(stamp|logo|map|diagram|drawing|illustration|poster|sign|text|cartoon|icon|painting)\b/.test(title)) s -= 3;
   return s;
@@ -316,8 +327,9 @@ export function score(c: Found, word: string): number {
  * Pexels, best of Pixabay, second of Pexels …), so the default (first) comes
  * from the preferred source and the reviewer still sees variety.
  */
-export function pickCandidates(lists: Found[][], word: string, n: number): Found[] {
-  const ranked = lists.map((l) => [...l].filter((c) => score(c, word) >= 0).sort((a, b) => score(b, word) - score(a, word)));
+export function pickCandidates(lists: Found[][], word: string, n: number, query = word): Found[] {
+  const sc = (c: Found) => score(c, word, query);
+  const ranked = lists.map((l) => [...l].filter((c) => sc(c) >= 0).sort((a, b) => sc(b) - sc(a)));
   const out: Found[] = [];
   const seen = new Set<string>();
   for (let i = 0; out.length < n && ranked.some((l) => i < l.length); i++) {

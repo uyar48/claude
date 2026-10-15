@@ -90,6 +90,24 @@ export async function toJpeg(input: Buffer): Promise<Buffer> {
     .toBuffer();
 }
 
+/** 64-bit difference hash: near-identical pictures have close hashes. */
+export async function dHash(jpeg: Buffer): Promise<bigint> {
+  const px = await sharp(jpeg).grayscale().resize(9, 8, { fit: 'fill' }).raw().toBuffer();
+  let h = 0n;
+  for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) h = (h << 1n) | (px[y * 9 + x] > px[y * 9 + x + 1] ? 1n : 0n);
+  return h;
+}
+
+export function hamming(a: bigint, b: bigint): number {
+  let x = a ^ b;
+  let n = 0;
+  while (x) {
+    n += Number(x & 1n);
+    x >>= 1n;
+  }
+  return n;
+}
+
 /** Very dark or flat pictures (night shots, blank walls) are poor word pictures. */
 export async function tooDark(jpeg: Buffer): Promise<boolean> {
   const st = await sharp(jpeg).stats();
@@ -169,10 +187,11 @@ async function main() {
       }
       return lists;
     };
-    let pool = pickCandidates(await search(primary), id, PER_WORD * 2);
-    if (pool.length < PER_WORD * 2) pool = [...pool, ...pickCandidates(await search(fallback), id, PER_WORD * 2)];
+    let pool = pickCandidates(await search(primary), id, PER_WORD * 2, query);
+    if (pool.length < PER_WORD * 2) pool = [...pool, ...pickCandidates(await search(fallback), id, PER_WORD * 2, query)];
 
     const kept: ImageCandidate[] = [];
+    const hashes: bigint[] = [];
     for (const c of pool) {
       if (kept.length >= PER_WORD) break;
       const file = fileName(id, c);
@@ -189,11 +208,20 @@ async function main() {
           continue;
         }
       }
-      if (await tooDark(fs.readFileSync(dest))) {
+      const jpeg = fs.readFileSync(dest);
+      if (await tooDark(jpeg)) {
         console.warn(`  ${id}: ${c.source} ${c.id} skipped (too dark or flat)`);
         fs.unlinkSync(dest);
         continue;
       }
+      // The same photo often sits in several collections.
+      const h = await dHash(jpeg);
+      if (hashes.some((x) => hamming(x, h) <= 6)) {
+        console.warn(`  ${id}: ${c.source} ${c.id} skipped (duplicate)`);
+        fs.unlinkSync(dest);
+        continue;
+      }
+      hashes.push(h);
       const { download: _d, headers: _h, id: _id, ...meta } = c;
       kept.push({ file, ...meta });
     }
