@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { course, getText, getWord } from '../../content';
 import { addActive, goalDays, minutesOn, streakInfo } from '../../core/progress';
 import {
+  CLOSE_MS,
   distinctTypes,
   finalGrades,
   nextExercise,
@@ -149,7 +150,9 @@ export function LessonScreen() {
     answering.current = true;
     try {
       const ex = p.current;
-      const ms = Math.min(CAP_MS[ex.type] ?? DEFAULT_CAP_MS, clock.read());
+      let ms = Math.min(CAP_MS[ex.type] ?? DEFAULT_CAP_MS, clock.read());
+      // The speed round is time-boxed: finishing it means a full minute.
+      if (ex.type === 'speed-round') ms = Math.max(CLOSE_MS, ms);
       const { state: session, grades } = recordAnswer(p.session, ex, { correct: out.correct, ms, perWord: out.perWord });
       for (const g of grades) await rt.store.grade(g.wordId, g.grade, 'lesson');
       if (out.questions) {

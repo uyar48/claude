@@ -1,11 +1,14 @@
 /* eslint-disable no-restricted-globals */
-// Service worker: app-shell precache, lesson media cache, web push.
-// Built by scripts/vite-sw-plugin.ts, which injects the precache list.
+// Service worker: app-shell precache, versioned media cache, web push.
+// Built by scripts/vite-sw-plugin.ts, which injects the precache list and the
+// list of media files of this release.
 
 const PRECACHE = self.__PRECACHE__;
 const VERSION = self.__SW_VERSION__;
+const MEDIA_FILES = new Set(self.__MEDIA_FILES__);
+const MEDIA_VERSION = self.__MEDIA_VERSION__;
 const SHELL_CACHE = `okuma-shell-${VERSION}`;
-const MEDIA_CACHE = 'okuma-media-v1';
+const MEDIA_CACHE = `okuma-media-${MEDIA_VERSION}`;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -26,6 +29,7 @@ self.addEventListener('activate', (event) => {
       await Promise.all(
         keys.filter((k) => k.startsWith('okuma-shell-') && k !== SHELL_CACHE).map((k) => caches.delete(k)),
       );
+      await migrateMedia(keys);
       await self.clients.claim();
     })(),
   );
@@ -39,7 +43,8 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/api/')) return;
 
   if (url.pathname.startsWith('/media/')) {
-    event.respondWith(cacheFirst(req, MEDIA_CACHE));
+    // Only files of this release are cached; anything else goes to the network.
+    if (MEDIA_FILES.has(url.pathname)) event.respondWith(cacheFirst(req, MEDIA_CACHE));
     return;
   }
   if (req.mode === 'navigate') {
@@ -50,6 +55,25 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(cacheFirst(req, SHELL_CACHE));
   }
 });
+
+/**
+ * New media version: keep cached files that are still part of the release
+ * (no re-download), drop the rest, delete the old caches.
+ */
+async function migrateMedia(keys) {
+  const old = keys.filter((k) => k.startsWith('okuma-media-') && k !== MEDIA_CACHE);
+  if (!old.length) return;
+  const fresh = await caches.open(MEDIA_CACHE);
+  for (const name of old) {
+    const cache = await caches.open(name);
+    for (const req of await cache.keys()) {
+      if (!MEDIA_FILES.has(new URL(req.url).pathname)) continue;
+      const res = await cache.match(req);
+      if (res) await fresh.put(req, res);
+    }
+    await caches.delete(name);
+  }
+}
 
 async function cacheFirst(req, cacheName) {
   const cache = await caches.open(cacheName);

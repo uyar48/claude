@@ -23,7 +23,7 @@ export function serviceWorkerPlugin(): Plugin {
         if (req.url?.split('?')[0] !== '/sw.js') return next();
         res.setHeader('Content-Type', 'text/javascript');
         res.setHeader('Cache-Control', 'no-cache');
-        res.end(render(root, [], 'dev'));
+        res.end(render(root, [], 'dev', mediaFiles(root)));
       });
     },
     generateBundle(_options, bundle) {
@@ -31,15 +31,33 @@ export function serviceWorkerPlugin(): Plugin {
         .filter((f) => !f.endsWith('.map'))
         .map((f) => `/${f}`);
       const urls = ['/', ...assets, ...SHELL_PUBLIC];
-      const version = crypto.createHash('sha256').update(urls.join('|')).digest('hex').slice(0, 12);
-      this.emitFile({ type: 'asset', fileName: 'sw.js', source: render(root, urls, version) });
+      const media = mediaFiles(root);
+      const version = crypto.createHash('sha256').update([...urls, media.version].join('|')).digest('hex').slice(0, 12);
+      this.emitFile({ type: 'asset', fileName: 'sw.js', source: render(root, urls, version, media) });
     },
   };
 }
 
-function render(root: string, urls: string[], version: string): string {
+/**
+ * Pictures and audio of this release. Their names change when their content
+ * does, so the list (and its hash) identifies the media version.
+ */
+export function mediaFiles(root: string): { files: string[]; version: string } {
+  const files: string[] = [];
+  for (const dir of ['img', 'audio']) {
+    const abs = path.join(root, 'public/media', dir);
+    if (!fs.existsSync(abs)) continue;
+    for (const f of fs.readdirSync(abs).sort()) if (/\.(jpe?g|png|webp|mp3|m4a)$/.test(f)) files.push(`/media/${dir}/${f}`);
+  }
+  const version = crypto.createHash('sha256').update(files.join('|')).digest('hex').slice(0, 10);
+  return { files, version };
+}
+
+function render(root: string, urls: string[], version: string, media: { files: string[]; version: string }): string {
   const src = fs.readFileSync(path.join(root, SW_SOURCE), 'utf8');
   return src
     .replace('self.__PRECACHE__', JSON.stringify(urls))
-    .replace('self.__SW_VERSION__', JSON.stringify(version));
+    .replace('self.__SW_VERSION__', JSON.stringify(version))
+    .replace('self.__MEDIA_FILES__', JSON.stringify(media.files))
+    .replace('self.__MEDIA_VERSION__', JSON.stringify(media.version));
 }

@@ -56,8 +56,13 @@ export function sentenceAudio(sentenceId: string): Clip | null {
   return clip(media.audio[`s:${sentenceId}`]);
 }
 
-/** Every media URL the given words and texts need, for the offline cache. */
-export function mediaUrls(wordIds: Iterable<string>, textIds: Iterable<string> = [], choices: Choices = {}): string[] {
+/** Every media URL the given words, texts and sentences need, for the offline cache. */
+export function mediaUrls(
+  wordIds: Iterable<string>,
+  textIds: Iterable<string> = [],
+  choices: Choices = {},
+  sentenceIds: Iterable<string> = [],
+): string[] {
   const urls = new Set<string>();
   for (const id of wordIds) {
     const img = imageFor(id, choices);
@@ -72,6 +77,10 @@ export function mediaUrls(wordIds: Iterable<string>, textIds: Iterable<string> =
       const a = textSentenceAudio(t, i);
       if (a) urls.add(a.url);
     });
+  }
+  for (const id of sentenceIds) {
+    const a = sentenceAudio(id);
+    if (a) urls.add(a.url);
   }
   return [...urls];
 }

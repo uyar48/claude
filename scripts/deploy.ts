@@ -9,6 +9,7 @@
 //
 //   npm run deploy                 # full setup (idempotent)
 //   npm run deploy -- --app-only   # only redeploy the app
+//   npm run deploy -- --update     # apply migrations, then redeploy the app
 
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -190,8 +191,21 @@ async function appOnly() {
   console.log(`\n✓ Hazır: ${state.vercel.url ?? ''}`);
 }
 
+/** `npm run deploy -- --update`: apply the database migrations (idempotent), then redeploy the app. */
+async function update() {
+  const sbToken = need('SUPABASE_ACCESS_TOKEN');
+  step('Veritabanı şeması');
+  const ref = await supabaseProject(sbToken);
+  for (const f of fs.readdirSync('supabase/migrations').filter((x) => x.endsWith('.sql')).sort()) {
+    await sql(sbToken, ref, fs.readFileSync(path.join('supabase/migrations', f), 'utf8'));
+    console.log(`  ${f} ✓`);
+  }
+  await appOnly();
+}
+
 async function main() {
   if (process.argv.includes('--app-only')) return appOnly();
+  if (process.argv.includes('--update')) return update();
   const sbToken = need('SUPABASE_ACCESS_TOKEN');
   const vcToken = need('VERCEL_TOKEN');
   const allowedEmail = need('ALLOWED_EMAIL').toLowerCase();

@@ -1,0 +1,1080 @@
+{
+  "note": "Written by scripts/fetch-images.ts. Candidates per word with source, author and license.",
+  "generatedAt": "2026-10-15T21:26:05.028Z",
+  "missingKeys": [
+    "PEXELS_API_KEY",
+    "PIXABAY_API_KEY"
+  ],
+  "words": {
+    "tea": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "tea-openverse-972b613b069042dcbdc66983.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/191441905@N04/51928386219",
+          "title": "My Cup of Tea",
+          "author": "CVIja(x)",
+          "authorUrl": "https://www.flickr.com/photos/191441905@N04",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "tea-wikimedia-145751570.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Beautiful_cup_of_tea_with_flowers_01.jpg",
+          "title": "Beautiful cup of tea with flowers 01",
+          "author": "Chenspec",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 4000,
+          "height": 2248
+        },
+        {
+          "file": "tea-openverse-99544fbcac584311a6a62bea.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/49768774@N02/51622347548",
+          "title": "A Nice Cup of Tea",
+          "author": "realjv",
+          "authorUrl": "https://www.flickr.com/photos/49768774@N02",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 731,
+          "provider": "flickr"
+        },
+        {
+          "file": "tea-wikimedia-157833603.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Cup_of_tea_at_the_Gorreana_tea_factory.jpg",
+          "title": "Cup of tea at the Gorreana tea factory",
+          "author": "Kritzolina",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 5472,
+          "height": 3648
+        },
+        {
+          "file": "tea-openverse-8259866963c0497c9eae2ede.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/49503126065@N01/16363131113",
+          "title": "Day 2560: Cup of tea",
+          "author": "Manic Street Preacher",
+          "authorUrl": "https://www.flickr.com/photos/49503126065@N01",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        }
+      ],
+      "query": "cup of tea"
+    },
+    "house": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "house-openverse-84cd9173f1ff4601adb649e5.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/16564965@N04/51948511708",
+          "title": "Nymans House Exterior-7074",
+          "author": "www.mgaylard.co.uk and thanks for looking",
+          "authorUrl": "https://www.flickr.com/photos/16564965@N04",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 681,
+          "provider": "flickr"
+        },
+        {
+          "file": "house-wikimedia-24012965.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Old_house_typical_of_the_island_of_Margarita.jpg",
+          "title": "Old house typical of the island of Margarita",
+          "author": "Wilfredor",
+          "license": "CC0",
+          "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "width": 6467,
+          "height": 5796
+        },
+        {
+          "file": "house-openverse-de41acd7eabd46e584d7a8e1.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/9364326@N04/49615482887",
+          "title": "TAM house exterior.",
+          "author": "tomline43",
+          "authorUrl": "https://www.flickr.com/photos/9364326@N04",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        },
+        {
+          "file": "house-wikimedia-112471714.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Exterior_of_the_House_of_the_Epidii_(Pompeii).jpg",
+          "title": "Exterior of the House of the Epidii (Pompeii)",
+          "author": "Commonists",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 8894,
+          "height": 6126
+        },
+        {
+          "file": "house-openverse-95eeae1cdac945d9b28e669b.jpg",
+          "source": "openverse",
+          "url": "https://stocksnap.io/photo/house-exterior-N35ZUD3GPW",
+          "title": "House Exterior",
+          "author": "Kristin Hardwick",
+          "authorUrl": "https://www.kristinhardwick.com",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "width": 5016,
+          "height": 3344,
+          "provider": "stocksnap"
+        }
+      ],
+      "query": "house exterior"
+    },
+    "door": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "door-openverse-cdd27d2920e84ba8a8dc0f78.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/7156765@N05/52463788260",
+          "title": "Franklin Tennessee - Clouston Hall - 1830's - Palladian windows and an elegant fanlight over the front doors. - Historic",
+          "author": "Onasill - Bill Badzo - 149 Million Views - Thank Y",
+          "authorUrl": "https://www.flickr.com/photos/7156765@N05",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 679,
+          "provider": "flickr"
+        },
+        {
+          "file": "door-wikimedia-7758896.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:San_Alipio_facade_door_of_Saint_Mark%27s_Basilica_of_Venice.jpg",
+          "title": "San Alipio facade door of Saint Mark's Basilica of Venice",
+          "author": "This photo was taken by Roman Bonnefoy ( Romanceor [parlons-en]). Feel free to use my pictures, but please credit me as the author (as required by the license). An email or a message would be welcome. More free-licensed pictures on my french Wikipedia account. My website : www.romanceor.net.",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 2959,
+          "height": 2000
+        },
+        {
+          "file": "door-openverse-abddada98b3245dd8bc7ebdf.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/80223459@N05/51483448021",
+          "title": "Lamar Mountain Patrol Cabin: front door",
+          "author": "YellowstoneNPS",
+          "authorUrl": "https://www.flickr.com/photos/80223459@N05",
+          "license": "Public Domain Mark",
+          "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "door-wikimedia-81034482.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Open_front_door_over_Wat_Mixay_and_praying_bhikkhus,_Vientiane,_Laos.jpg",
+          "title": "Open front door over Wat Mixay and praying bhikkhus, Vientiane, Laos",
+          "author": "Basile Morin",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 6720,
+          "height": 4480
+        },
+        {
+          "file": "door-openverse-f65f2fb9d3254e9c84d9d360.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/99385068@N00/52667509626",
+          "title": "Clive the Boston Terrier Guarding the Front Door",
+          "author": "SheepGuardingLlama",
+          "authorUrl": "https://www.flickr.com/photos/99385068@N00",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        }
+      ],
+      "query": "front door"
+    },
+    "window": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "window-openverse-41fa8cadd47e4aa19766e9a6.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/77363333@N08/14375760607",
+          "title": "Asheville Window Scene, Downtown After 5 (2014)",
+          "author": "@CarShowShooter",
+          "authorUrl": "https://www.flickr.com/photos/77363333@N08",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "window-wikimedia-54819588.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Window_detail_De_Bazel_Vijzelstraat_Amsterdam_2016-09-13-6627.jpg",
+          "title": "Window detail De Bazel Vijzelstraat Amsterdam 2016-09-13-6627",
+          "author": "Slaunger",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 3768,
+          "height": 3065
+        },
+        {
+          "file": "window-openverse-ccada889aa774829a675b4bd.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/77363333@N08/23965924035",
+          "title": "Window with red frame (Fletcher, North Carolina)",
+          "author": "@CarShowShooter",
+          "authorUrl": "https://www.flickr.com/photos/77363333@N08",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "window-wikimedia-54910963.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Window_shopping_in_Mexico_City.jpg",
+          "title": "Window shopping in Mexico City",
+          "author": "Tomascastelazo",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 4414,
+          "height": 2902
+        },
+        {
+          "file": "window-openverse-e27c786672c148718812980b.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/49793991@N04/4876110295",
+          "title": "Red Dress Woman, Out the Window",
+          "author": "jazzmoon12",
+          "authorUrl": "https://www.flickr.com/photos/49793991@N04",
+          "license": "CC BY-NC 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+          "width": 1006,
+          "height": 905,
+          "provider": "flickr"
+        }
+      ],
+      "query": "window"
+    },
+    "table": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "table-openverse-c2441d8ea0984726a1af3d34.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/157635012@N07/31299830267",
+          "title": "Caesar Salad on a white wooden table in the beach cafe, Bali island.",
+          "author": "Artem Beliaikin",
+          "authorUrl": "https://www.flickr.com/photos/157635012@N07",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "table-openverse-911eb916f2bd4cd68807c31a.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/194424926@N05/54368058888",
+          "title": "DSC_9763: a woman sitting on a wooden table next to a box of candy",
+          "author": "PattayaPatrol",
+          "authorUrl": "https://www.flickr.com/photos/194424926@N05",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "table-wikimedia-82074040.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Hal_Blakeley,_Wooden_Table,_c._1953,_NGA_20059.jpg",
+          "title": "Wooden Table",
+          "author": "Hal Blakeley",
+          "license": "CC0",
+          "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "width": 4000,
+          "height": 2699
+        },
+        {
+          "file": "table-openverse-478c8878a2e14784b01b7ffa.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/26344495@N05/51340551956",
+          "title": "Reading glasses on a wooden table outside",
+          "author": "Ivan Radic",
+          "authorUrl": "https://www.flickr.com/photos/26344495@N05",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        },
+        {
+          "file": "table-openverse-d34bf14a21f04be0968bd454.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/194424926@N05/54326687078",
+          "title": "DSC_9241: a white plate topped with lots of food on top of a wooden table",
+          "author": "PattayaPatrol",
+          "authorUrl": "https://www.flickr.com/photos/194424926@N05",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        }
+      ],
+      "query": "wooden table"
+    },
+    "water": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "water-openverse-3266ab3ee3ee4bf2980fe18f.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/191441905@N04/51903566814",
+          "title": "Glass of Water 'eh",
+          "author": "CVIja(x)",
+          "authorUrl": "https://www.flickr.com/photos/191441905@N04",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 676,
+          "provider": "flickr"
+        },
+        {
+          "file": "water-openverse-08eb857d72a64528ba5f3d96.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/68644628@N00/52302187749",
+          "title": "Glass of water in the sun",
+          "author": "Constantin Tacke",
+          "authorUrl": "https://www.flickr.com/photos/68644628@N00",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 677,
+          "provider": "flickr"
+        },
+        {
+          "file": "water-wikimedia-19045643.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Fasting_4-Fasting-a-glass-of-water-on-an-empty-plate.jpg",
+          "title": "Fasting 4-Fasting-a-glass-of-water-on-an-empty-plate",
+          "author": "Dr Jean Fortunet",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+          "width": 2910,
+          "height": 2538
+        },
+        {
+          "file": "water-openverse-8de2d4386ca741b48e39238c.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/35237094214@N01/147646405",
+          "title": "Japanese architect Shigeru Ban, drinking a glass of water after his 90 minute lecture",
+          "author": "plindberg",
+          "authorUrl": "https://www.flickr.com/photos/35237094214@N01",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        },
+        {
+          "file": "water-wikimedia-105399729.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Glass_of_water_ouside.jpg",
+          "title": "Glass of water ouside",
+          "author": "Kurt Kaiser",
+          "license": "CC0",
+          "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "width": 4608,
+          "height": 3456
+        }
+      ],
+      "query": "glass of water"
+    },
+    "woman": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "woman-openverse-ac68ea6248fa428080d9ffc8.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/186236561@N02/49618048296",
+          "title": "Young woman portrait",
+          "author": "sandro349",
+          "authorUrl": "https://www.flickr.com/photos/186236561@N02",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "width": 1024,
+          "height": 577,
+          "provider": "flickr"
+        },
+        {
+          "file": "woman-wikimedia-49858555.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Tachileik_Myanmar_Kayan-People-Woman-03.jpg",
+          "title": "Tachileik Myanmar Kayan-People-Woman-03",
+          "author": "CEphoto, Uwe Aranas",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 3914,
+          "height": 2810
+        },
+        {
+          "file": "woman-openverse-53f8251c5687438dbfe7ec2f.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/186236561@N02/49618047631",
+          "title": "Young woman portrait",
+          "author": "sandro349",
+          "authorUrl": "https://www.flickr.com/photos/186236561@N02",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "width": 1024,
+          "height": 576,
+          "provider": "flickr"
+        },
+        {
+          "file": "woman-wikimedia-65309365.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Woman_of_Bolivarian_Armed_Forces_in_a_presidential_meeting.jpg",
+          "title": "Woman of Bolivarian Armed Forces in a presidential meeting",
+          "author": "Wilfredor",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 8576,
+          "height": 5696
+        },
+        {
+          "file": "woman-openverse-2262e0accb704a2ab9194cdd.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/186236561@N02/49420529622",
+          "title": "Young woman portrait",
+          "author": "sandro349",
+          "authorUrl": "https://www.flickr.com/photos/186236561@N02",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 577,
+          "provider": "flickr"
+        }
+      ],
+      "query": "woman portrait"
+    },
+    "man": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "man-openverse-23689936951a46399b5de1a0.jpg",
+          "source": "openverse",
+          "url": "https://stocksnap.io/photo/man-portrait-ZTNVVRFBWS",
+          "title": "Man Portrait",
+          "author": "Matt Moloney",
+          "authorUrl": "https://mjmolo.com",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "width": 8256,
+          "height": 5504,
+          "provider": "stocksnap"
+        },
+        {
+          "file": "man-wikimedia-19742147.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:India_-_Delhi_portrait_of_a_man_-_4780.jpg",
+          "title": "India - Delhi portrait of a man - 4780",
+          "author": "Jorge Royan",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+          "width": 3504,
+          "height": 2336
+        },
+        {
+          "file": "man-openverse-9b1774acb12b4c5590bf929e.jpg",
+          "source": "openverse",
+          "url": "https://stocksnap.io/photo/man-portrait-B4SX9OQECA",
+          "title": "Man Portrait",
+          "author": "Direct Media",
+          "authorUrl": "https://stocksnap.io/author/145556",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "width": 6720,
+          "height": 4480,
+          "provider": "stocksnap"
+        },
+        {
+          "file": "man-wikimedia-147629.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Antonello_da_Messina_-_Portrait_of_a_Man_-_National_Gallery_London.jpg",
+          "title": "Portrait of a Man label QS:Lit,\"Ritratto di un uomo\" label QS:Lhu,\"Férfi portré\" label QS:Let,\"Mehe portree\" label QS:Lca,\"Retrat d'un home\" label QS:Lcy,\"Portread o Ddyn\" label QS:Lpt,\"Retrato de um homem\" label QS:Lfa,\"چهرهٔ یک مرد\" label QS:Lda,\"Portræt af en mand\" label QS:Lro,\"Portret de bărbat\" label QS:Lja,\"男の肖像\" label QS:Les,\"Retrato de un hombre\" label QS:Lpl,\"Portret mężczyzny\" label QS:Lvec,\"Ritrato de un omo\" label QS:Lnl,\"Portret van een man\" label QS:Lsl,\"Moški portret\" label QS:Lru,\"Мужской портрет\" label QS:Lfr,\"Portrait d’homme\" label QS:Len,\"Portrait of a Man\" label QS:Lmk,\"Портрет на човек\" label QS:Lcs,\"Portrét muže\" label QS:Lde,\"Porträt eines Mannes\"",
+          "author": "Antonello da Messina",
+          "license": "Public domain",
+          "width": 4309,
+          "height": 6000
+        },
+        {
+          "file": "man-openverse-10f2d47778ec484ca448ad57.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/28826830@N00/54781687665",
+          "title": "Thinner Man Portrait - Nick",
+          "author": "exit78",
+          "authorUrl": "https://www.flickr.com/photos/28826830@N00",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        }
+      ],
+      "query": "man portrait"
+    },
+    "egg": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "egg-openverse-80f7c91397f149d6b8a01b5e.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/51035555243@N01/33375487832",
+          "title": "Enjoying the fantastic breakfast sando @grandlakekitchen w/ @mrsth eggs, rosemary ham, jack cheese, avocado on an acme roll w/ kale salad.",
+          "author": "Thomas Hawk",
+          "authorUrl": "https://www.flickr.com/photos/51035555243@N01",
+          "license": "CC BY-NC 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+          "width": 1024,
+          "height": 681,
+          "provider": "flickr"
+        },
+        {
+          "file": "egg-wikimedia-21962258.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Chicken_Egg_without_Eggshell_5859.jpg",
+          "title": "Chicken Egg without Eggshell 5859",
+          "author": "Biswarup Ganguly",
+          "license": "CC BY 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+          "width": 4288,
+          "height": 2848
+        },
+        {
+          "file": "egg-openverse-170802e52bd44947be370de3.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/33241442@N04/51558530164",
+          "title": "Sabellid egg balls - Parasabella media (?)",
+          "author": "Alexander Semenov",
+          "authorUrl": "https://www.flickr.com/photos/33241442@N04",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 682,
+          "provider": "flickr"
+        },
+        {
+          "file": "egg-wikimedia-80419018.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Gallirallus_philippensis_MHNT.ZOO.2010.11.69.7.jpg",
+          "title": "Gallirallus philippensis MHNT.ZOO.2010.11.69.7",
+          "author": "Roger Culos",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 3382,
+          "height": 2585
+        },
+        {
+          "file": "egg-openverse-06aa3589f09348ee85199a62.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/23326361@N04/18624021664",
+          "title": "Urile pelagicus Pelagic Cormorant on nest with an egg",
+          "author": "David A. Hofmann",
+          "authorUrl": "https://www.flickr.com/photos/23326361@N04",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 769,
+          "provider": "flickr"
+        }
+      ],
+      "query": "egg"
+    },
+    "bread": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "bread-openverse-55722063925d4b918cc96099.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/10559879@N00/51641264136",
+          "title": "Sourdough loaf - Bromleys Bread, Cheltenham",
+          "author": "avlxyz",
+          "authorUrl": "https://www.flickr.com/photos/10559879@N00",
+          "license": "CC BY-NC 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        },
+        {
+          "file": "bread-wikimedia-6416094.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Bread_Loaf_Campus_from_Snow_Bowl.JPG",
+          "title": "Bread Loaf Campus from Snow Bowl",
+          "author": "Chassig at English Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+          "width": 2288,
+          "height": 1712
+        },
+        {
+          "file": "bread-openverse-89323956c3aa49f9afb2e267.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/45866071@N06/52669587921",
+          "title": "16 a loaf of bread and a kougelhopf kiss and embrace in the background of a café terrace. Behind, the town hall of Paris-tpz ai hd",
+          "author": "Marc Frant",
+          "authorUrl": "https://www.flickr.com/photos/45866071@N06",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 809,
+          "provider": "flickr"
+        },
+        {
+          "file": "bread-openverse-6f5baa9cf2f044d3a31413a9.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/45866071@N06/52669875914",
+          "title": "17 a loaf of bread and a kougelhopf kiss and embrace on a table of a café terrace. - fusion sryle-tpz ai hd",
+          "author": "Marc Frant",
+          "authorUrl": "https://www.flickr.com/photos/45866071@N06",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 809,
+          "provider": "flickr"
+        },
+        {
+          "file": "bread-wikimedia-121897460.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Bread_Loaf_Writers%27_Conference,_1946.jpg",
+          "title": "Bread Loaf Writers' Conference, 1946",
+          "author": "Unknown authorUnknown author",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 2780,
+          "height": 2100
+        }
+      ],
+      "query": "loaf of bread"
+    },
+    "key": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "key-openverse-f7502dd8da134c349a5ec4d8.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/51035555243@N01/52705463745",
+          "title": "House Keys Not Handcuffs",
+          "author": "Thomas Hawk",
+          "authorUrl": "https://www.flickr.com/photos/51035555243@N01",
+          "license": "CC BY-NC 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "key-wikimedia-28231008.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Hemingway_House_Key_West_FL1.jpg",
+          "title": "Hemingway House Key West FL1",
+          "author": "Acroterion",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 5186,
+          "height": 4000
+        },
+        {
+          "file": "key-openverse-253c60823a4f4249b513f643.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/126288307@N05/51856913961",
+          "title": "The Southernmost House - Key West Florida (cell )",
+          "author": "watts_photos",
+          "authorUrl": "https://www.flickr.com/photos/126288307@N05",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        },
+        {
+          "file": "key-wikimedia-95136304.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Thoreau_lock_and_key.jpg",
+          "title": "Thoreau lock and key",
+          "author": "Station1",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 2543,
+          "height": 1526
+        },
+        {
+          "file": "key-openverse-7165c595411b4ffdb062701d.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/14136614@N03/53197369907",
+          "title": "House Keys Not",
+          "author": "wiredforlego",
+          "authorUrl": "https://www.flickr.com/photos/14136614@N03",
+          "license": "CC BY-NC 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+          "width": 1024,
+          "height": 553,
+          "provider": "flickr"
+        }
+      ],
+      "query": "house key"
+    },
+    "bag": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "bag-openverse-0d1bb278511746979b3b08b6.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/9453335@N02/51361327100",
+          "title": "I found an old leather bag in the window of a second-hand shop",
+          "author": "Billy Quinn 1954",
+          "authorUrl": "https://www.flickr.com/photos/9453335@N02",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 804,
+          "provider": "flickr"
+        },
+        {
+          "file": "bag-wikimedia-79461348.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Crocodile_leather_bag,_held_by_Polish_customs_authorities,_Warsaw_Chopin_Airport,_April,_2019.jpg",
+          "title": "Crocodile leather bag, held by Polish customs authorities, Warsaw Chopin Airport, April, 2019",
+          "author": "MichalPL",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 4032,
+          "height": 3024
+        },
+        {
+          "file": "bag-openverse-3213eb9ea74a432d9bd4bf20.jpg",
+          "source": "openverse",
+          "url": "https://stocksnap.io/photo/leather-bag-4JYA4A4D64",
+          "title": "Leather Bag",
+          "author": "Snufkin",
+          "authorUrl": "https://stocksnap.io/author/34675",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "width": 6000,
+          "height": 4000,
+          "provider": "stocksnap"
+        },
+        {
+          "file": "bag-wikimedia-133853990.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Leather_duffel_bag_on_the_ground.jpg",
+          "title": "Leather duffel bag on the ground",
+          "author": "Harsh Jadav",
+          "license": "CC0",
+          "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "width": 5472,
+          "height": 3648
+        },
+        {
+          "file": "bag-openverse-ede3f42f9af54313aac48193.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/156515782@N02/53209858505",
+          "title": "leather Bag",
+          "author": "saudekjan",
+          "authorUrl": "https://www.flickr.com/photos/156515782@N02",
+          "license": "Public Domain Mark",
+          "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+          "width": 1024,
+          "height": 702,
+          "provider": "flickr"
+        }
+      ],
+      "query": "leather bag"
+    },
+    "car": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "car-openverse-ddc58e8873004ab7b219af08.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/137864562@N06/50543057866",
+          "title": "Weedy Junked Car 3855 C (Explored)",
+          "author": "jim.choate59",
+          "authorUrl": "https://www.flickr.com/photos/137864562@N06",
+          "license": "CC BY-NC 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "car-wikimedia-5254504.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:ESO_-_The_Carina_Nebula_(by).jpg",
+          "title": "ESO - The Carina Nebula (by)",
+          "author": "ESO/IDA/Danish 1.5 m/R.Gendler, J-E. Ovaldsen, C. Thöne, and C. Feron.",
+          "license": "CC BY 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+          "width": 5828,
+          "height": 3524
+        },
+        {
+          "file": "car-openverse-55542694b756413fa10ab586.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/7156765@N05/51864868060",
+          "title": "Toronto Ontario - Canada - Cars used for a Movie shoot - King Street East - Capture in 2007",
+          "author": "Onasill - Bill Badzo - 149 Million Views - Thank Y",
+          "authorUrl": "https://www.flickr.com/photos/7156765@N05",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "car-wikimedia-17226541.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:A_Brouhot_car_in_Paris,_1910.jpg",
+          "title": "A Brouhot car in Paris, 1910",
+          "author": "Alexandre Louis",
+          "license": "Public domain",
+          "width": 1920,
+          "height": 1200
+        },
+        {
+          "file": "car-openverse-7b4d2d212a334610abe922e3.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/77363333@N08/26943311848",
+          "title": "Mercedes-Benz SLS AMG Black Series (Cars & Coffee of the Upstate)",
+          "author": "@CarShowShooter",
+          "authorUrl": "https://www.flickr.com/photos/77363333@N08",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        }
+      ],
+      "query": "car"
+    },
+    "street": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "street-openverse-1c77594f91a049e1af0247d3.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/9406236@N02/51835980180",
+          "title": "Los Baños, Philippines, city street 'Coconut Grove' near campus University of the Philippines, Laguna province, 1932-1933",
+          "author": "J. Tewell",
+          "authorUrl": "https://www.flickr.com/photos/9406236@N02",
+          "license": "CC BY-NC 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+          "width": 1024,
+          "height": 851,
+          "provider": "flickr"
+        },
+        {
+          "file": "street-wikimedia-2972458.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Mulberry_Street_NYC_c1900_LOC_3g04637u_edit.jpg",
+          "title": "Mulberry Street, New York City",
+          "author": "Detroit Publishing Co. , publisher",
+          "license": "Public domain",
+          "width": 2800,
+          "height": 2067
+        },
+        {
+          "file": "street-openverse-cf6afd4b080e47c984f7d7e0.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/137253937@N05/51395697277",
+          "title": "Zone 15 - Guatemala City street view",
+          "author": "René Hernández _ 0705",
+          "authorUrl": "https://www.flickr.com/photos/137253937@N05",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "width": 1024,
+          "height": 766,
+          "provider": "flickr"
+        },
+        {
+          "file": "street-wikimedia-4865538.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:NYC_Mulberry_Street_3g04637u.jpg",
+          "title": "Mulberry Street, New York City",
+          "author": "Detroit Publishing Co.(w), publisher.",
+          "license": "Public domain",
+          "width": 4222,
+          "height": 3073
+        },
+        {
+          "file": "street-openverse-2629d863c5cc426ea2bed66b.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/35667267@N00/51347712661",
+          "title": "city street (cannabis shop)",
+          "author": "r.a. paterson",
+          "authorUrl": "https://www.flickr.com/photos/35667267@N00",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 752,
+          "provider": "flickr"
+        }
+      ],
+      "query": "city street"
+    },
+    "chair": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "chair-openverse-a26fbd46b54043ea8b0d10a8.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/39415781@N06/52216635789",
+          "title": "American Museum and Gardens - Amphitheatre - wooden chairs",
+          "author": "ell brown",
+          "authorUrl": "https://www.flickr.com/photos/39415781@N06",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        },
+        {
+          "file": "chair-wikimedia-121048229.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Wooden_table_and_chairs_on_a_balcony_over_the_Mekong_at_sunrise_in_Don_Det_Si_Phan_Don_Laos.jpg",
+          "title": "Wooden table and chairs on a balcony over the Mekong at sunrise in Don Det Si Phan Don Laos",
+          "author": "Basile Morin",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 3791,
+          "height": 2527
+        },
+        {
+          "file": "chair-openverse-4b5a64cb88e346438d81676f.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/194424926@N05/54592323137",
+          "title": "DFC_0335: a wooden chair sitting in the sand next to a body of water",
+          "author": "PattayaPatrol",
+          "authorUrl": "https://www.flickr.com/photos/194424926@N05",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        },
+        {
+          "file": "chair-wikimedia-121048231.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Wooden_table_and_chairs_over_the_Mekong_at_sunrise_in_Don_Det_Si_Phan_Don_Laos.jpg",
+          "title": "Wooden table and chairs over the Mekong at sunrise in Don Det Si Phan Don Laos",
+          "author": "Basile Morin",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 5093,
+          "height": 3395
+        },
+        {
+          "file": "chair-openverse-93820ae9f8f248faa3ff27fe.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/10559879@N00/52255919101",
+          "title": "A wooden chair added to our hard rubbish collection",
+          "author": "avlxyz",
+          "authorUrl": "https://www.flickr.com/photos/10559879@N00",
+          "license": "CC BY-NC 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc/2.0/",
+          "width": 1024,
+          "height": 768,
+          "provider": "flickr"
+        }
+      ],
+      "query": "wooden chair"
+    },
+    "morning": {
+      "default": 0,
+      "candidates": [
+        {
+          "file": "morning-openverse-d2e4c182392640b1bd443902.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/36224384@N08/52216095767",
+          "title": "Inlet water ripples into Two Medicine Lake morning sunrise",
+          "author": "Knowles Gallery",
+          "authorUrl": "https://www.flickr.com/photos/36224384@N08",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 732,
+          "provider": "flickr"
+        },
+        {
+          "file": "morning-wikimedia-59434639.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:Morning_in_Langtang.jpg",
+          "title": "Morning in Langtang",
+          "author": "Q-lieb-in",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 2500,
+          "height": 1507
+        },
+        {
+          "file": "morning-openverse-b65394af5e5a400688cc1b27.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/56650987@N08/15225860608",
+          "title": "Morning Sunrise",
+          "author": "zephythor",
+          "authorUrl": "https://www.flickr.com/photos/56650987@N08",
+          "license": "CC BY 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+          "width": 1024,
+          "height": 705,
+          "provider": "flickr"
+        },
+        {
+          "file": "morning-wikimedia-69594651.jpg",
+          "source": "wikimedia",
+          "url": "https://commons.wikimedia.org/wiki/File:A_foggy_winter_morning.jpg",
+          "title": "A foggy winter morning",
+          "author": "Abdul Momin",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "width": 3000,
+          "height": 2000
+        },
+        {
+          "file": "morning-openverse-b57d47882aab471ba1e77b5e.jpg",
+          "source": "openverse",
+          "url": "https://www.flickr.com/photos/7702423@N04/52583581141",
+          "title": "Morning & Sunrise on the Anthem of the Seas - Saturday November 12th, 2022",
+          "author": "cseeman",
+          "authorUrl": "https://www.flickr.com/photos/7702423@N04",
+          "license": "CC BY-NC-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+          "width": 1024,
+          "height": 683,
+          "provider": "flickr"
+        }
+      ],
+      "query": "morning sunrise"
+    }
+  }
+}

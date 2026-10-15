@@ -3,13 +3,13 @@
 > **Otomatik kurulum:** Ortamda `VERCEL_TOKEN`, `SUPABASE_ACCESS_TOKEN` ve `ALLOWED_EMAIL` tanımlıysa `npm run deploy`, aşağıdaki 1–3. adımların hepsini tek seferde yapar (tekrar çalıştırılabilir). Bu proje bu yolla kuruldu: https://okuma-iota.vercel.app
 
 
-Uygulama anahtar olmadan da çalışır: ilerleme yalnızca o cihazda tutulur, görseller yer tutucudur, sesler tarayıcının sesiyle okunur. Senkron, giriş ve bildirimler için aşağıdaki üç hesap gerekir.
+Uygulama anahtar olmadan da çalışır: ilerleme yalnızca o cihazda tutulur. Senkron, giriş ve bildirimler için aşağıdaki iki ücretsiz hesap gerekir. Görseller ve sesler ücretsiz ve açık kaynaklardan gelir.
 
 | Ne | Nerede | Neden |
 | --- | --- | --- |
 | Veritabanı + giriş | Supabase (ücretsiz plan) | İki cihaz arası senkron, e-posta ile giriş |
 | Barındırma | Vercel (Hobby, ücretsiz) | Herkese açık HTTPS adresi, sunucu fonksiyonları |
-| Görsel / ses anahtarı | Google AI Studio, OpenAI, ElevenLabs | Fotoğraf gerçekliğinde görsel, doğal ses |
+| Görsel anahtarı (isteğe bağlı, ücretsiz) | Pexels, Pixabay | Daha çok ve daha iyi stok fotoğraf |
 
 ## 1. Supabase
 
@@ -76,57 +76,40 @@ Giriş yapılmış herhangi bir cihazda **Ayarlar → Başka cihazı bağla** da
 3. macOS'ta **Sistem Ayarları → Bildirimler** altında tarayıcının bildirimlerinin açık olduğundan emin ol.
 4. Aynı hesapla giriş yapıldığında iki cihazda aynı ilerleme görünür. Senkron uygulama açılınca, öne gelince ve her dakika çalışır.
 
-## 6. Görsel ve ses üretimi
+## 6. Görseller ve sesler (ücretsiz)
 
-Üretim tek seferliktir; uygulama çalışırken üretim yapılmaz. Her çıktı içerik hash'iyle kaydedilir, aynı girdi tekrar üretilmez.
+Üretim tek seferliktir; uygulama çalışırken üretim yapılmaz. Dosyalar depoya işlenir ve uygulamayla birlikte dağıtılır.
 
-**Seçenek A — GitHub'dan (bilgisayar gerekmez):**
+**Görseller — `npm run fetch-images`:**
 
-1. Depo → **Settings → Secrets and variables → Actions** bölümüne anahtarları ekle:
-   - `IMAGE_API_KEY_GOOGLE`: Google AI Studio anahtarı, Imagen 4 Ultra için
-   - `IMAGE_API_KEY_OPENAI`: OpenAI anahtarı, GPT Image için
-   - `TTS_API_KEY_ELEVENLABS`, `TTS_API_KEY_OPENAI`, `TTS_API_KEY_GOOGLE`: hangileri varsa
-2. **Actions → Medya üret → Run workflow**:
-   1. `mode = compare-images`: ilk 10 kelime iki sağlayıcıyla üretilir.
-   2. `mode = compare-tts`: 3 kelime ve 1 cümle her ses sağlayıcısıyla üretilir.
-3. Uygulamada **/admin/review** sayfasını aç. Görsel ve ses karşılaştırmasında beğendiğini seç, istemediklerini "Yeniden üret" diye işaretle, **Dışa aktar** metnini kopyala.
-4. **Medya üret** iş akışını `mode = all` ile, seçtiğin sağlayıcılarla çalıştır. Kopyaladığın metni `review` alanına yapıştır. Sonuç depoya işlenir ve Vercel yeniden dağıtır.
+- Somut kelimeler için kelime başına 5 aday fotoğraf indirir. Fotoğraflar 4:3 kırpılır, en fazla 800 px olur ve `public/media/img/` klasörüne kaydedilir. Kaynak, yazar ve lisans `content/media/credits.json` dosyasına yazılır.
+- Kaynak sırası:
+  1. Pexels (`PEXELS_API_KEY`, ücretsiz: https://www.pexels.com/api/)
+  2. Pixabay (`PIXABAY_API_KEY`, ücretsiz: https://pixabay.com/api/docs/). Fotoğraflar indirilip kendi sunucumuzda tutulur, arama sonuçları 24 saat önbellekte kalır.
+  3. Anahtar gerektirmeyen Openverse ve Wikimedia Commons. ND (türev yasak) lisanslar ve uygunsuz başlıklar elenir.
+- Anahtarlar ortam değişkeni olarak eklenir; bu ortamda **ortamı düzenle → ortam değişkenleri**, GitHub'da **Settings → Secrets and variables → Actions**. Anahtarı sohbete ya da koda yapıştırma.
+- 5 adayı zaten inmiş kelimeler atlanır. `--force` yeniden arar, `--prune` kullanılmayan dosyaları siler.
+- Sonra uygulamada **/admin/review** sayfasını aç. Her kelime için bir fotoğraf seç ya da "Görsel yok" de. Seçim hesabına kaydedilir; iki cihaz da aynı resmi gösterir.
 
-**Seçenek B — kendi bilgisayarında:**
+**Sesler — `npm run generate-audio`:**
 
-```bash
-npm install
-IMAGE_API_KEY_GOOGLE=… IMAGE_API_KEY_OPENAI=… npm run media -- --compare-images google,openai --words 10
-TTS_API_KEY_ELEVENLABS=… TTS_API_KEY_OPENAI=… npm run media -- --compare-tts elevenlabs,openai --words 3
-# seçimden sonra:
-IMAGE_PROVIDER=google IMAGE_API_KEY=… TTS_PROVIDER=elevenlabs TTS_API_KEY=… npm run media
-```
+- Kokoro-82M (Apache 2.0) modelini yerelde çalıştırır. Anahtar ya da ücret yoktur. İlk çalıştırmada model Hugging Face'ten iner (~90 MB).
+- Kelimeleri, metin cümlelerini ve ders cümlelerini MP3 olarak `public/media/audio/` klasörüne yazar. `ffmpeg` gerekir.
+- Metni değişmeyen klipler yeniden üretilmez.
+- Klibi olmayan yerde uygulama cihazın kendi sesini (speechSynthesis) kullanır.
+- Okunan kelimenin vurgusu, varsa sağlayıcının zaman damgalarıyla, yoksa kelime uzunluğuna göre tahminle yapılır.
 
-Anahtar yoksa betik hangi anahtarın eksik olduğunu yazar ve yer tutucuyla devam eder. Uygulama da **Ayarlar → Kurulum durumu** bölümünde bunu gösterir.
+**Kontrol — `npm run validate-content`:** kapsam, kelime başına cümle sayısı, lisans alanları, eksik görsel ve ses. Rapor: `content/build/validation.md`.
 
-Model adları ortam değişkeniyle değiştirilebilir:
+**GitHub'dan:** **Actions → Medya → Run workflow** üç betiği sırayla çalıştırır ve sonucu depoya işler.
 
-| Sağlayıcı | Değişken | Varsayılan |
-| --- | --- | --- |
-| Google görsel | `IMAGE_MODEL_GOOGLE` | `imagen-4.0-ultra-generate-001` |
-| OpenAI görsel | `IMAGE_MODEL_OPENAI` | `gpt-image-2` |
-| ElevenLabs ses | `TTS_MODEL_ELEVENLABS` | `eleven_v3` |
-| OpenAI ses | `TTS_MODEL_OPENAI` | `gpt-4o-mini-tts` |
-| Google ses | `TTS_MODEL_GOOGLE` | `gemini-2.5-flash-preview-tts` |
-
-Sesleri de değiştirebilirsin: `ELEVENLABS_VOICE_FEMALE/MALE`, `OPENAI_VOICE_FEMALE/MALE`, `GOOGLE_VOICE_FEMALE/MALE`.
-
-**Okunan kelime vurgusu** üç kaynaktan sırayla beslenir:
-
-1. Sağlayıcının kelime zaman damgaları (ElevenLabs).
-2. Zorlamalı hizalama: konuşmadan metne çevirinin kelime zamanları (OpenAI).
-3. O da yoksa, kelime uzunluğuna göre yaklaşık zamanlama.
+Yeni medyadan sonra: `npm run deploy -- --app-only`. Veritabanı değiştiyse: `npm run deploy -- --update`.
 
 ## Yerel geliştirme
 
 ```bash
 npm install
 npm run dev          # http://localhost:5173 (api/ fonksiyonları da çalışır; .env dosyasını okur)
-npm test             # birim testleri (tekrar motoru, zamanlayıcı, senkron, SQL, adaptörler)
-npm run e2e          # Playwright: 4 günlük ders akışı, ayarlar, çevrimdışı
+npm test             # birim testleri (ders sırası, ders motoru, tekrar, zamanlayıcı, senkron, SQL, içerik)
+npm run e2e          # Playwright: ders zinciri, gün atlama, ayarlar, kaynaklar, çevrimdışı
 ```

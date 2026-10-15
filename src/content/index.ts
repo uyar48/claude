@@ -40,12 +40,16 @@ export function lookup(form: string): { word?: CourseWord; lemma?: string } {
   return { word: course.words[lemma], lemma };
 }
 
-/** A short example sentence for a word (own sentences first, then shortest). */
-export function exampleFor(wordId: string, known?: ReadonlySet<string>): CourseSentence | null {
+/** Short example sentences for a word (own sentences first, then shortest). */
+export function examplesFor(wordId: string, known?: ReadonlySet<string>, n = 1): CourseSentence[] {
   const all = course.sentences.filter((s) => s.lemmas.includes(wordId));
   const usable = known ? all.filter((s) => s.lemmas.every((l) => l === wordId || known.has(l))) : all;
   const pool = usable.length ? usable : all;
-  return (
-    [...pool].sort((a, b) => (a.src === b.src ? 0 : a.src === 'okuma' ? -1 : 1) || a.en.length - b.en.length)[0] ?? null
-  );
+  return [...pool]
+    .sort((a, b) => (a.src === b.src ? 0 : a.src === 'okuma' ? -1 : 1) || a.en.length - b.en.length)
+    .slice(0, n);
+}
+
+export function exampleFor(wordId: string, known?: ReadonlySet<string>): CourseSentence | null {
+  return examplesFor(wordId, known, 1)[0] ?? null;
 }

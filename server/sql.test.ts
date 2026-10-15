@@ -97,6 +97,12 @@ describe('migration', () => {
       { reviewed: 0, text_ids: ['t5'], number: 1, active_ms: 1_800_000, day_ms: { '2026-10-14': 1_800_000 } },
     ]);
 
+    // An app that is not updated yet (v1) sends rows without number/active time.
+    const v1 = { ...lesson, number: undefined, active_ms: undefined, day_ms: undefined, reviewed: 3, updated_at: 20 };
+    await as(ME, () => db.query('select public.sync_lessons($1)', [JSON.stringify([v1])]));
+    const kept = await db.query<{ reviewed: number; number: number; active_ms: number }>('select reviewed, number, active_ms from lesson_log');
+    expect(kept.rows).toEqual([{ reviewed: 3, number: 1, active_ms: 1_800_000 }]);
+
     await as(ME, () => db.query('select public.sync_settings($1, $2)', [JSON.stringify({ lessonMinutes: 20 }), 10]));
     await as(ME, () => db.query('select public.sync_settings($1, $2)', [JSON.stringify({ lessonMinutes: 45 }), 5]));
     await as(ME, () => db.query('select public.touch_active()'));

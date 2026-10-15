@@ -198,6 +198,18 @@ test('settings: goal, new words per lesson, break; sources and picture review', 
   await page.goto('/admin/review');
   await expect(page.getByRole('heading', { name: 'Görsel seçimi' })).toBeVisible();
   await shot(page, '09-admin-review');
+  // Pick another candidate for "house", say "no picture" for "door"; both survive a reload.
+  const second = page.getByRole('button', { name: 'house: aday 2 seç' });
+  const file = await second.locator('img').getAttribute('src');
+  await second.click();
+  await page.getByRole('button', { name: 'door: görsel yok' }).click();
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'house: aday 2 seç' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('button', { name: 'door: görsel yok' })).toHaveAttribute('aria-pressed', 'true');
+  await page.goto('/');
+  const house = page.locator('.preview .picture[data-word="house"] img');
+  await expect(house).toHaveAttribute('src', file!);
+  await expect(page.locator('.preview .picture[data-word="door"] img')).toHaveCount(0);
 });
 
 test('works offline after the first visit (app shell + lesson media cached)', async ({ page, context }) => {

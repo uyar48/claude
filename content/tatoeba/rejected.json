@@ -6,6 +6,18 @@
     2243136,
     5598754,
     265658,
-    9441326
+    9441326,
+    1179928
+  ],
+  "checks": [
+    {
+      "date": "2026-10-15",
+      "sample": 20,
+      "ok": 19,
+      "rejected": [
+        1179928
+      ],
+      "why": "'What do I do?' → 'Ne yapıyorum?' anlamı tam karşılamıyor (doğrusu 'Ne yapayım?')."
+    }
   ]
 }

@@ -14,12 +14,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
-    "media": "NODE_USE_ENV_PROXY=1 tsx scripts/generate-media.ts",
     "icons": "tsx scripts/make-icons.ts",
     "vapid": "tsx scripts/vapid.ts",
     "deploy": "NODE_USE_ENV_PROXY=1 tsx scripts/deploy.ts",
     "build-content": "tsx scripts/build-content.ts",
-    "import-tatoeba": "tsx scripts/import-tatoeba.ts"
+    "import-tatoeba": "tsx scripts/import-tatoeba.ts",
+    "fetch-images": "NODE_USE_ENV_PROXY=1 tsx scripts/fetch-images.ts",
+    "validate-content": "tsx scripts/validate-content.ts",
+    "generate-audio": "NODE_USE_ENV_PROXY=1 tsx scripts/generate-audio.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",
@@ -38,6 +40,7 @@
     "@types/web-push": "^3.6.4",
     "@vitejs/plugin-react": "^5.2.0",
     "fake-indexeddb": "^6.2.5",
+    "kokoro-js": "^1.2.1",
     "sharp": "^0.35.5",
     "tsx": "^4.23.15",
     "typescript": "~5.9.3",

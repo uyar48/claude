@@ -1,5 +1,6 @@
 import { course } from '../../content';
 import { mediaUrls } from '../../content/media';
+import { knownLemmas, sentenceUsable } from '../../core/course';
 import { planNextLesson, type LessonLogEntry, type NextLesson } from '../../core/progress';
 import { createSession } from '../../core/session';
 import { localDate } from '../../core/time';
@@ -61,7 +62,7 @@ export async function startLesson(rt: Runtime, now = Date.now()): Promise<Lesson
   return progress;
 }
 
-/** Media of a lesson: its words, the texts it may read, recently learned words. */
+/** Media of a lesson: its words, the texts and sentences it may use, recently learned words. */
 export function lessonMedia(rt: Runtime, plan: NextLesson): string[] {
   const s = rt.store.getState();
   const recent = [...s.cards.values()]
@@ -71,5 +72,10 @@ export function lessonMedia(rt: Runtime, plan: NextLesson): string[] {
     .map((c) => c.wordId);
   const maxOrder = Math.max(0, ...plan.newWords.map((w) => course.words[w]?.order ?? 0));
   const texts = course.texts.filter((t) => t.maxOrder <= maxOrder).map((t) => t.id);
-  return mediaUrls([...plan.newWords, ...plan.reviewWords, ...recent], texts, s.mediaChoices);
+  const known = knownLemmas(course, s.cards, plan.newWords);
+  const lessonWords = new Set([...plan.newWords, ...plan.reviewWords, ...recent]);
+  const sentences = course.sentences
+    .filter((x) => x.lemmas.some((l) => lessonWords.has(l)) && sentenceUsable(course, x, known))
+    .map((x) => x.id);
+  return mediaUrls([...plan.newWords, ...plan.reviewWords, ...recent], texts, s.mediaChoices, sentences);
 }

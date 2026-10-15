@@ -11,9 +11,12 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          supabase: ['@supabase/supabase-js'],
+        // Course data and media manifests change rarely and separately from the code.
+        manualChunks(id) {
+          if (/node_modules\/(react|react-dom|react-router|react-router-dom|scheduler)\//.test(id)) return 'react';
+          if (id.includes('node_modules/@supabase/')) return 'supabase';
+          if (id.includes('/content/build/course.json')) return 'course';
+          if (id.includes('/content/media/credits.json') || id.includes('/src/content/media-manifest.json')) return 'media';
         },
       },
     },

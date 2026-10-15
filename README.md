@@ -1,6 +1,6 @@
-# Okuma — kişisel İngilizce okuma uygulaması (Aşama 1)
+# Okuma — kişisel İngilizce okuma uygulaması (v2)
 
-Tek kullanıcılı, mobil öncelikli bir PWA. Hedef, günde 30 dakikayla kolaylaştırılmış İngilizce metinleri sözlüksüz okuyabilmek. Arayüz Türkçe, içerik İngilizce. Bu aşama **Seviye 0, Ünite 1 (Sabah)** için uçtan uca çalışan bir dilimdir: 20 kelime ve 5 metin; her metinde 3 anlama ve 3 boşluk doldurma sorusu var.
+Tek kullanıcılı, mobil öncelikli bir PWA. Hedef, kolaylaştırılmış İngilizce metinleri sözlüksüz okuyabilmek. Arayüz Türkçe, içerik İngilizce. v2'de ilerleme takvime değil **bitirilen derslere** bağlıdır; içerik NGSL 1.2 kelime listesi ve Tatoeba cümleleriyle kurulur; görseller ve sesler yalnızca ücretsiz ve açık kaynaklardan gelir.
 
 Canlı adres: **https://okuma-iota.vercel.app** · Kurulum: **[docs/KURULUM.md](docs/KURULUM.md)**
 
@@ -8,20 +8,33 @@ Canlı adres: **https://okuma-iota.vercel.app** · Kurulum: **[docs/KURULUM.md](
 
 | Özellik | Nerede |
 | --- | --- |
-| "Bugün" ekranı: günün dersi, tekrar sayısı, seri, tek büyük **Başla** | `src/ui/screens/Today.tsx` |
-| 30 dk ders akışı: tekrar 8 · yeni kelime 4 · okuma/dinleme 12 · mini sınav 4 · özet 2 (süre ayarlanabilir) | `src/core/lesson.ts`, `src/ui/screens/Lesson.tsx` |
-| Resim kartı (resim → ses → Türkçe), sürükle-bırak eşleştirme (dokunmatik uyumlu) | `src/ui/lesson/NewWordsStep.tsx`, `src/ui/components/MatchGame.tsx` |
-| Dokunarak okuma (resim ve anlam; kelime tekrar listesine girer), sesli okuma ve okunan kelimenin vurgulanması | `src/ui/components/Reader.tsx`, `src/audio/speaker.ts` |
-| Boşluk doldurma, kapalı kitap mini sınav | `src/ui/components/FillBlank.tsx`, `src/ui/lesson/QuizStep.tsx` |
-| Aralıklı tekrar (yeni → öğreniliyor → bilinen; SM-2 benzeri, deterministik) | `src/core/srs.ts` |
-| Kapsam hesabı: %95'in altındaki metin önerilmez | `src/core/coverage.ts` |
-| Bildirim zamanlayıcı: seçilen saat, günde en fazla 1, sessiz saatler (Europe/Istanbul), tür bazlı açma/kapatma, 3 yok sayılan bildirimden sonra seyrekleşme | `src/core/scheduler.ts`, `server/notify.ts`, `api/cron/notify.ts` |
-| Web push (VAPID), iPhone ana ekran izni, test bildirimi | `src/push/push.ts`, `src/sw/sw.js`, `api/push/test.ts` |
-| İki cihaz senkronu: cihazda IndexedDB, Supabase'de "son yazan kazanır" | `src/data/`, `supabase/migrations/0001_init.sql` |
-| Tek e-postayla giriş (bağlantı); iPhone ana ekran uygulaması için 6 haneli cihaz kodu | `api/login.ts`, `api/link/*`, `src/ui/screens/Login.tsx`, `src/ui/screens/DeviceLink.tsx` |
-| Çevrimdışı mod: uygulama kabuğu ve bir sonraki dersin medyası önbellekte | `src/sw/sw.js`, `src/push/precache.ts` |
-| Medya hattı: Imagen 4 Ultra / GPT Image, ElevenLabs v3 / gpt-4o-mini-tts / Gemini TTS; hash önbelleği; yer tutucu | `scripts/generate-media.ts`, `scripts/media/providers.ts` |
-| İnceleme sayfası: görsel ve ses ızgarası, onayla / yeniden üret, sağlayıcı karşılaştırma | `/admin/review` → `src/ui/screens/AdminReview.tsx` |
+| Sabit ders sırası. Ders bitince sıradaki hemen açılır: **Bir ders daha** / **Bugünlük bu kadar**. Gün atlamak hiçbir şeyi kilitlemez, borç biriktirmez. | `src/core/progress.ts`, `src/ui/screens/Lesson.tsx` |
+| Günlük hedef 20/30/45 aktif dakika (gece yarısını geçen ders iki güne bölünür). Hedefe ulaşılan gün seriye sayılır. Kaçan gün seriyi sıfırlamaz, dondurur. | `src/core/progress.ts`, `src/ui/screens/Today.tsx` |
+| **Ara ver**: süre sınırı yok, bildirim gitmez. Dönüşte tekrarlar günde en fazla 40 kart. | `src/core/scheduler.ts`, `src/core/progress.ts` |
+| Ders başına 10 yeni kelime (6–15 ayarlanabilir), NGSL sırasıyla. | `src/core/course.ts` |
+| Süreye göre ders motoru: ısınma tekrarı → 4'lü yeni kelime grupları → zorlaşan alıştırmalar → 60 sn hızlı tur. Aynı tür üst üste en fazla 2 kez. | `src/core/session.ts` |
+| Alıştırmalar: resim↔kelime, sürükle-bırak eşleştirme, dinle→seç, dikte (toleranslı), boşluk doldurma, cümle kurma (Türkçesi görünür), okuma + 3 soru, İng→Tr / Tr→İng, mini sahne, 60 sn hızlı tur | `src/ui/exercises/` |
+| Dokunarak okuma, sesli okuma ve okunan kelimenin vurgulanması | `src/ui/components/Reader.tsx`, `src/audio/speaker.ts` |
+| İçerik: NGSL 1.2 Ünite 1 (100 kelime), 863 Tatoeba EN–TR çifti (anadili konuşanlar, sahip bilgisiyle), 134 özgün cümle, 8 kısa metin. Her kelimeye öğretildiği derste en az 3 cümle; cümlelerdeki kelimelerin ≥%95'i bilinir. | `content/`, `scripts/build-content.ts` |
+| Görseller: Pexels, Pixabay (ücretsiz anahtarla), anahtarsız Openverse ve Wikimedia Commons. Kelime başına 5 aday, 4:3, ≤800 px, kendi sunucumuzda. Soyut kelimeler emoji ya da cümle + sesle öğretilir. | `scripts/fetch-images.ts`, `scripts/media/stock.ts` |
+| `/admin/review`: 5 adaydan birini seç ya da "görsel yok" de. Seçim hesaba kaydedilir, iki cihazda aynı resim görünür. | `src/ui/screens/AdminReview.tsx`, `media_choices` tablosu |
+| Ayarlar → **Görsel kaynakları** ve **Kaynaklar** (NGSL, Tatoeba sahipleri, fotoğrafçılar, lisanslar) | `src/ui/screens/Sources.tsx` |
+| Ses: Kokoro-82M (Apache 2.0) yerel üretim. Klibi olmayan yerde cihazın sesi (speechSynthesis) kullanılır. | `scripts/generate-audio.ts` |
+| Aralıklı tekrar, bildirimler (sessiz saatler, seyrekleşme), web push, iki cihaz senkronu, cihaz kodu ile giriş | `src/core/srs.ts`, `server/`, `src/data/` |
+| Çevrimdışı: uygulama kabuğu ve sıradaki dersin medyası. Medya önbelleği sürümlüdür; yeni sürümde kullanılmayan dosyalar silinir. | `src/sw/sw.js`, `scripts/vite-sw-plugin.ts` |
+
+## Betikler
+
+```
+npm run import-tatoeba     # Tatoeba dökümlerinden EN–TR alt kümesi (TATOEBA_DIR)
+npm run build-content      # NGSL + cümleler + metinler → content/build/course.json
+npm run fetch-images       # ücretsiz stok fotoğraflar → public/media/img + content/media/credits.json
+npm run generate-audio     # Kokoro-82M ile sesler → public/media/audio + media-manifest.json
+npm run validate-content   # kapsam, cümle sayısı, lisans alanları, eksik medya → content/build/validation.md
+npm run deploy -- --update # veritabanı geçişleri + uygulamayı yeniden dağıt
+```
+
+`PEXELS_API_KEY` ve `PIXABAY_API_KEY` isteğe bağlıdır ve ücretsizdir. Yoksa betik ne eksik olduğunu yazar; Openverse ile Wikimedia Commons kullanılır. Başka bir ücretli servis kullanılmaz.
 
 ## Mimari
 
@@ -30,40 +43,23 @@ iPhone / masaüstü (PWA)                     Vercel                       Supab
 ┌──────────────────────────┐   /api/*   ┌───────────────────┐  SQL   ┌──────────────────────┐
 │ React + IndexedDB        │──────────▶│ config, login,    │──────▶│ Postgres + RLS        │
 │ service worker (push,    │            │ push/test,        │        │ Auth (e-posta kodu)   │
-│ önbellek)                │◀── push ───│ cron/notify (web- │        │ pg_cron → 10 dakikada │
+│ sürümlü önbellek)        │◀── push ───│ cron/notify (web- │        │ pg_cron → 10 dakikada │
 │ senkron: Supabase RPC    │──────────────────────────────────────▶│ bir /api/cron/notify  │
 └──────────────────────────┘            └───────────────────┘        └──────────────────────┘
 ```
 
-- **Yerel öncelikli:** her değişiklik önce cihaza yazılır, "kirli" işaretlenir, sonra gönderilir. Çakışmada istemci saatine göre yeni olan kazanır; sunucudaki `sync_*` fonksiyonları da bu kuralı uygular. Değişiklikler sunucu saatindeki `synced_at` imleciyle çekilir.
-- **Tek kullanıcı:** `/api/login` yalnızca `ALLOWED_EMAIL` adresine kod gönderir. Kayıt kapalı tutulur, tüm tablolarda satır güvenliği (RLS) var.
-- **Bildirim kararı saf bir fonksiyondur** (`decide`). Cron yalnızca durumu okur, karar verir ve gönderir.
+- **Yerel öncelikli:** her değişiklik önce cihaza yazılır, sonra gönderilir. Çakışmada yeni olan kazanır (`sync_cards`, `sync_lessons`, `sync_settings`, `sync_media_choices`).
+- **İlerleme sunucuda:** `lesson_log` her dersin sıra numarasını, bitiş zamanını ve gün gün aktif süresini tutar. Sıradaki ders = son bitirilen + 1 (yarım kalan varsa o).
+- **Tek kullanıcı:** `/api/login` yalnızca `ALLOWED_EMAIL` adresine kod gönderir; tüm tablolarda RLS var.
 
 ## Testler
 
 ```
-npm test      # 79 birim testi
-npm run e2e   # 3 Playwright testi (iPhone 13 görünümü)
+npm test      # birim testleri (Vitest)
+npm run e2e   # Playwright, iPhone 13 görünümü
 ```
 
-Birim testleri şunları kapsar:
-- Tekrar motoru: doğru cevapta aralık uzar, yanlışta kısalır, ease alt sınırı.
-- Zamanlayıcı: sessiz saatler, İstanbul saati, günlük sınır, 3 saat ara, seyrekleşme, uygulama açılınca sıfırlanma, mesaj tonu.
-- Ders planlayıcı (4 günde 20 kelime) ve kapsam.
-- İki cihaz senkronu.
-- Gerçek Postgres (PGlite) üzerinde SQL şeması ve RLS.
-- Medya adaptörlerinin istek ve yanıt işleme mantığı.
-
-Uçtan uca test:
-- 4 günlük dersi baştan sona tıklayarak tamamlar: sürükle-bırak, kelimeye dokunma, boşluk doldurma, sınav.
-- 20 kelimenin tekrar kuyruğuna girdiğini doğrular.
-- Ayarları, /admin/review sayfasını ve çevrimdışı açılışı dener.
-
-## Sonraki aşama önerileri
-
-1. **Ünite 2–N içerik hattı:** taslak metinleri yarı otomatik üretmek, kapsamı ve sözcük listesini otomatik doğrulamak. Hedef 3.000 sık kelime.
-2. **Medyayı depodan çıkarmak:** binlerce görsel ve ses için Supabase Storage veya bir CDN; manifest yine hash'li kalır.
-3. **FSRS'e geçiş:** `review_log` biriktikçe kişisel parametrelerle daha isabetli aralıklar.
-4. **İlerleme ekranı:** bilinen kelime sayısının 3.000 hedefine göre durumu, okunabilir metin oranı.
-5. **Okuma kütüphanesi:** kapsam ≥%95 olan metinleri sıralayan serbest okuma bölümü, daha uzun hikâyeler, yalnızca dinleme modu.
-6. **Anlık senkron:** Supabase Realtime ile iki cihaz aynı anda açıkken anında güncelleme.
+- Ders sırası: "bir ders daha" zinciri, gün atlama, yarım dersin sürdürülmesi, gece yarısı geçişi, ara verme ve dönüş, günlük 40 tekrar sınırı, seri dondurma.
+- Ders motoru: 30 dakikalık simülasyonda ≥8 alıştırma kategorisi, aynı tür en fazla 2 kez üst üste, zorluk artışı, hızlı turla bitiş; 20/45 dk ve 6/15 kelime.
+- İçerik doğrulama, stok fotoğraf adaptörleri (lisans süzme, Pixabay 24 saat önbellek), senkron, SQL geçişleri (PGlite), bildirim zamanlayıcı.
+- Uçtan uca: iki ders üst üste, gün atlayıp yarım dersi sürdürme, ayarlar, kaynak ekranları, çevrimdışı açılış.

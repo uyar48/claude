@@ -23,22 +23,30 @@ where l.id = x.id and l.number = 0;
 
 create index if not exists lesson_log_number_idx on public.lesson_log (user_id, number desc);
 
+-- Rows from an app that has not been updated yet (v1) carry no number or
+-- active time: keep what the server already has for those fields.
 create or replace function public.sync_lessons(rows jsonb) returns void
 language sql security invoker set search_path = public as $$
+  with incoming as (
+    select * from jsonb_to_recordset(rows) as r(id text, number int, date date, started_at bigint, completed_at bigint,
+                                                 active_ms bigint, day_ms jsonb, text_ids text[], new_word_ids text[],
+                                                 reviewed int, correct int, updated_at bigint)
+  ), merged as (
+    select i.id, coalesce(nullif(i.number, 0), l.number, 0) as number, i.date, i.started_at, i.completed_at,
+           coalesce(i.active_ms, l.active_ms, 0) as active_ms, coalesce(i.day_ms, l.day_ms, '{}'::jsonb) as day_ms,
+           i.text_ids, i.new_word_ids, i.reviewed, i.correct, i.updated_at
+    from incoming i left join public.lesson_log l on l.id = i.id
+  )
   insert into public.lesson_log (id, user_id, number, date, started_at, completed_at, active_ms, day_ms, text_ids,
                                  new_word_ids, reviewed, correct, updated_at)
-  select r.id, (select auth.uid()), coalesce(r.number, 0), r.date, r.started_at, r.completed_at,
-         coalesce(r.active_ms, 0), coalesce(r.day_ms, '{}'::jsonb), r.text_ids, r.new_word_ids, r.reviewed,
-         r.correct, r.updated_at
-  from jsonb_to_recordset(rows) as r(id text, number int, date date, started_at bigint, completed_at bigint,
-                                      active_ms bigint, day_ms jsonb, text_ids text[], new_word_ids text[],
-                                      reviewed int, correct int, updated_at bigint)
+  select m.id, (select auth.uid()), m.number, m.date, m.started_at, m.completed_at, m.active_ms, m.day_ms, m.text_ids,
+         m.new_word_ids, m.reviewed, m.correct, m.updated_at
+  from merged m
   on conflict (id) do update set
     number = excluded.number, date = excluded.date, started_at = excluded.started_at,
     completed_at = excluded.completed_at, active_ms = excluded.active_ms, day_ms = excluded.day_ms,
-    text_ids = excluded.text_ids,
-    new_word_ids = excluded.new_word_ids, reviewed = excluded.reviewed, correct = excluded.correct,
-    updated_at = excluded.updated_at
+    text_ids = excluded.text_ids, new_word_ids = excluded.new_word_ids, reviewed = excluded.reviewed,
+    correct = excluded.correct, updated_at = excluded.updated_at
   where public.lesson_log.updated_at < excluded.updated_at and public.lesson_log.user_id = (select auth.uid());
 $$;
 

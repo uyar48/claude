@@ -57,7 +57,8 @@ const SINGLE_WORD: ExerciseType[] = [
 ];
 const VISUAL_ONLY: ExerciseType[] = ['word-to-picture', 'picture-to-word'];
 
-export const CLOSE_MS = 75_000;
+/** The closing speed round lasts this long; it starts when this much time is left. */
+export const CLOSE_MS = 60_000;
 const WARMUP_SHARE = 0.35;
 const BATCH = 4;
 const MAX_SAME_IN_ROW = 2;

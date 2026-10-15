@@ -1,22 +1,34 @@
-# Devam: canlıya alma (yeni oturum için not)
+# Devam: durum notu (yeni oturum için)
 
-Aşama 1 canlıda: https://okuma-iota.vercel.app
+Canlı adres: https://okuma-iota.vercel.app · Dal: `claude/new-session-b5nvn7`
 
-- **Supabase:** proje `okuma` (Frankfurt), şema 0001 + 0002, kayıt kapalı, pg_cron her 10 dakikada bir.
-- **Vercel:** proje `okuma`, tüm sunucu değişkenleri tanımlı.
-- **Canlıda doğrulandı:**
-  - `/api/config`, cron (gizli anahtarla 200, anahtarsız 401)
-  - yalnızca `ALLOWED_EMAIL` ile giriş
-  - cihaz kodu: tek kullanım, 5 yanlış denemede iptal
-  - iki tarayıcı arasında senkron
-- **Kullanıcı doğruladı:** iPhone'da test bildirimi geldi.
-- **Ses: tamam.** Kullanıcı v4 · Bella / Chris seçti. 81 klip üretildi; 21 metin cümlesinin hepsinde ElevenLabs kelime zaman damgası var. Bu ses ve model artık varsayılan.
-- **Görsel: faturalandırma bekleniyor.**
-  - Imagen 4 Ultra artık Gemini API'de yok (404).
-  - Yerine `gemini-pro` (`gemini-3-pro-image`) ve `gemini-flash` (`gemini-3.1-flash-image`) sağlayıcıları eklendi.
-  - `IMAGE_API_KEY_GOOGLE` tanımlı, ama anahtarın projesi ücretsiz katmanda; görsel modellerinin kotası 0 (429).
-  - Kullanıcı AI Studio'da faturalandırmayı açınca sırasıyla:
-    1. `npm run media -- --compare-images gemini-pro,gemini-flash --words 10`
-    2. Commit, ardından `npm run deploy -- --app-only`.
-    3. Kullanıcıya `/admin/review` adresini gönder ve seçtir.
-    4. `IMAGE_PROVIDER=<seçim> npm run media -- --only images`, ardından yeniden dağıt.
+## v2 (BRIEF-v2) — yapılanlar
+
+- **İlerleme bitirilen derslere bağlı.**
+  - Kodu: `src/core/progress.ts`, `src/core/session.ts`, `src/ui/screens/Lesson.tsx`.
+  - Sunucuda `lesson_log` tablosu `number`, `active_ms` ve `day_ms` alanlarını tutuyor (migration 0003). `media_choices` tablosu `/admin/review` seçimlerini saklıyor.
+  - Eski dersler sıra numarası alır. Eski kurulumdan kalan "15 dk" ayarı 20 dk hedef olur, `newPerDay` ise ders başına 10 kelime olur. Bu dönüşüm hem SQL'de hem istemcide aynı kuralla yapılır.
+- **İçerik.**
+  - Kaynaklar `content/ngsl/` (NGSL 1.2) ve `content/tatoeba/` (EN–TR alt kümesi, reddedilenler `rejected.json`).
+  - Ünite 1 dosyaları `content/units/unit-01.*.json`; derlenmiş hali `content/build/course.json`.
+  - Yeniden üretmek için:
+    1. `npm run import-tatoeba` (`TATOEBA_DIR` ham dökümleri gösterir)
+    2. `npm run build-content`
+    3. `npm run validate-content`
+- **Görseller.**
+  - `npm run fetch-images`: önce Pexels ve Pixabay (anahtar varsa), sonra Openverse ve Wikimedia Commons.
+  - Openverse anonim sınırı dakikada 20 istek; betik buna göre bekler. Wikimedia bu ortamdan sık sık 429 döner, betik o adayı atlar.
+- **Ses.**
+  - `npm run generate-audio` sesleri Kokoro-82M ile yerelde üretir (af_heart / am_michael).
+  - İlk 20 kelimenin ve t1–t5 metinlerinin ElevenLabs klipleri metinleri değişmediği için korunur.
+- **Dağıtım.**
+  - `npm run deploy -- --update` önce geçişleri (idempotent), sonra uygulamayı dağıtır.
+  - Yalnız uygulama için: `--app-only`.
+
+## Bekleyen
+
+- `PEXELS_API_KEY` / `PIXABAY_API_KEY` henüz yok. Eklenince:
+  1. `npm run fetch-images -- --force`
+  2. Commit, ardından `npm run deploy -- --app-only`
+  3. Kullanıcıya `/admin/review` adresini gönder.
+- Ünite 2 ve sonrası: `content/units/unit-02.*.json` ekle, `build-content` ünite listesini okur (UNIT_SIZE = 100).

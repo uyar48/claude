@@ -1,89 +1,9 @@
-// Content schema: Level → Unit → Word / Text → Question.
-// Media (image/audio) is attached separately through the media manifest so the
-// content files stay hand-editable.
-
-export interface Level {
-  id: string;
-  order: number;
-  title: string;
-  description?: string;
-}
-
-export interface Unit {
-  id: string;
-  levelId: string;
-  order: number;
-  title: string;
-  titleEn: string;
-  /** Shared style suffix appended to every image prompt of the unit. */
-  imageStyle: string;
-}
-
-export interface FunctionWord {
-  en: string;
-  tr: string;
-}
-
-export interface Word {
-  id: string;
-  en: string;
-  tr: string;
-  pos: string;
-  /** Introduction group inside the unit (1 = first lesson day). */
-  day: number;
-  example: string;
-  exampleTr: string;
-  imagePrompt: string;
-}
-
-export interface Sentence {
-  en: string;
-  tr: string;
-}
-
-export interface QuestionOption {
-  en?: string;
-  /** Word id whose picture is the option. */
-  image?: string;
-}
-
-export interface Question {
-  id: string;
-  /** Turkish question text. */
-  prompt: string;
-  options: QuestionOption[];
-  answer: number;
-}
-
-export interface Blank {
-  id: string;
-  /** Sentence with a single "___" gap. */
-  sentence: string;
-  options: string[];
-  answer: number;
-}
-
-export interface Text {
-  id: string;
-  order: number;
-  main?: boolean;
-  title: string;
-  titleTr: string;
-  voice: Voice;
-  sentences: Sentence[];
-  questions: Question[];
-  blanks: Blank[];
-}
+// Media types: the audio manifest (src/content/media-manifest.json, written by
+// scripts/generate-audio.ts) and the stock-photo credits
+// (content/media/credits.json, written by scripts/fetch-images.ts).
+// The course itself is typed in courseTypes.ts.
 
 export type Voice = 'female' | 'male';
-
-export interface UnitContent {
-  level: Level;
-  unit: Unit;
-  functionWords: FunctionWord[];
-  words: Word[];
-  texts: Text[];
-}
 
 // ---------- media manifest ----------
 
@@ -108,32 +28,14 @@ export interface AudioAsset {
   variant?: number;
 }
 
-export interface ImageAsset {
-  file: string;
-  provider: string;
-  model?: string;
-  hash: string;
-  placeholder?: boolean;
-  variant?: number;
-}
-
 export interface MediaManifest {
   generatedAt?: string;
-  imageProvider?: string;
   ttsProvider?: string;
-  missingKeys?: string[];
-  images: Record<string, ImageAsset>;
-  /** Keys: `word:<id>:<voice>`, `ex:<id>` (example sentence) and `sent:<textId>:<index>`. */
+  /** Keys: `word:<id>:<voice>`, `sent:<textId>:<index>` (reading texts), `s:<sentenceId>` (course sentences). */
   audio: Record<string, AudioAsset>;
-  /** Optional side-by-side comparison sets for /admin/review. */
-  compare?: {
-    images?: Record<string, Record<string, ImageAsset>>;
-    audio?: Record<string, Record<string, AudioAsset>>;
-  };
 }
 
 export const wordAudioKey = (wordId: string, voice: Voice) => `word:${wordId}:${voice}`;
-export const exampleAudioKey = (wordId: string) => `ex:${wordId}`;
 export const sentenceAudioKey = (textId: string, index: number) => `sent:${textId}:${index}`;
 
 // ---------- stock photos (scripts/fetch-images.ts → content/media/credits.json) ----------
@@ -151,8 +53,11 @@ export interface ImageCandidate {
   authorUrl?: string;
   license: string;
   licenseUrl?: string;
+  /** Original size at the source (the saved file is 800×600). */
   width: number;
   height: number;
+  /** Where Openverse found it (flickr, wikimedia …). */
+  provider?: string;
 }
 
 export interface WordImages {

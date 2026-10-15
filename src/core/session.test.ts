@@ -114,7 +114,8 @@ describe('lesson session engine', () => {
 
   it('fills the target time and then ends', () => {
     expect(run.state.phase).toBe('done');
-    expect(run.state.activeMs).toBeGreaterThanOrEqual(28 * MINUTE);
+    // A finished lesson always reaches the daily goal it was built for.
+    expect(run.state.activeMs).toBeGreaterThanOrEqual(30 * MINUTE);
     expect(run.state.activeMs).toBeLessThanOrEqual(33 * MINUTE);
   });
 
@@ -169,7 +170,7 @@ describe('lesson session engine', () => {
   it('respects the daily goal length (20 and 45 minutes)', () => {
     for (const minutes of [20, 45]) {
       const r = simulate(startedCards(), { minutes, newWords: 10, id: `l-${minutes}` });
-      expect(r.state.activeMs).toBeGreaterThanOrEqual((minutes - 2) * MINUTE);
+      expect(r.state.activeMs).toBeGreaterThanOrEqual(minutes * MINUTE);
       expect(r.state.activeMs).toBeLessThanOrEqual((minutes + 3) * MINUTE);
       expect(maxRun(r.exercises.map((e) => e.type))).toBeLessThanOrEqual(2);
     }
