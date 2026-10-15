@@ -10,3 +10,4 @@ playwright-report/
 .media-cache/
 *.log
 .DS_Store
+scripts/_*.mjs
