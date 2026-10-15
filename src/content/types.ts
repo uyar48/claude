@@ -135,3 +135,36 @@ export interface MediaManifest {
 export const wordAudioKey = (wordId: string, voice: Voice) => `word:${wordId}:${voice}`;
 export const exampleAudioKey = (wordId: string) => `ex:${wordId}`;
 export const sentenceAudioKey = (textId: string, index: number) => `sent:${textId}:${index}`;
+
+// ---------- stock photos (scripts/fetch-images.ts → content/media/credits.json) ----------
+
+export type ImageSource = 'pexels' | 'pixabay' | 'wikimedia' | 'openverse';
+
+export interface ImageCandidate {
+  /** File in /media/img/. */
+  file: string;
+  source: ImageSource;
+  /** Page of the photo at the source. */
+  url: string;
+  title?: string;
+  author: string;
+  authorUrl?: string;
+  license: string;
+  licenseUrl?: string;
+  width: number;
+  height: number;
+}
+
+export interface WordImages {
+  /** Index of the candidate used until one is picked on /admin/review. */
+  default: number;
+  candidates: ImageCandidate[];
+  query?: string;
+}
+
+export interface ImageCredits {
+  generatedAt: string | null;
+  /** Free API keys that were not set when the script ran. */
+  missingKeys: string[];
+  words: Record<string, WordImages>;
+}

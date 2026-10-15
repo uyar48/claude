@@ -1,20 +1,31 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { getWord } from '../../content';
 import { speaker } from '../../audio/speaker';
 import { Picture } from './Picture';
 
 /**
- * Drag each English word onto its picture. Works with touch, mouse and pen
- * (Pointer Events — HTML5 drag-and-drop does not work on iPhone). Tapping a
- * word and then a picture does the same thing.
+ * Drag each English word onto its picture (or its Turkish meaning). Works with
+ * touch, mouse and pen (Pointer Events — HTML5 drag-and-drop does not work on
+ * iPhone). Tapping a word and then a target does the same thing.
+ * Reports the words that were dropped on a wrong target at least once.
  */
-export function MatchGame({ wordIds, onDone }: { wordIds: string[]; onDone: (mistakes: number) => void }) {
+export function MatchGame({
+  wordIds,
+  onDone,
+  target = (id) => <Picture wordId={id} size="sm" />,
+  hint = 'Kelimeyi sürükleyip doğru resmin üstüne bırak. İstersen önce kelimeye, sonra resme dokun.',
+}: {
+  wordIds: string[];
+  onDone: (missed: string[]) => void;
+  target?: (wordId: string) => ReactNode;
+  hint?: string;
+}) {
   const pictures = useMemo(() => shuffle(wordIds, wordIds.join().length + 7), [wordIds]);
   const chips = useMemo(() => shuffle(wordIds, wordIds.join().length + 3), [wordIds]);
   const [matched, setMatched] = useState<Set<string>>(new Set());
   const [selected, setSelected] = useState<string | null>(null);
   const [wrong, setWrong] = useState<string | null>(null);
-  const [mistakes, setMistakes] = useState(0);
+  const [missed, setMissed] = useState<Set<string>>(new Set());
   const [drag, setDrag] = useState<{ id: string; x: number; y: number; dx: number; dy: number } | null>(null);
   const [hover, setHover] = useState<string | null>(null);
   const moved = useRef(false);
@@ -25,9 +36,9 @@ export function MatchGame({ wordIds, onDone }: { wordIds: string[]; onDone: (mis
       setMatched(next);
       setSelected(null);
       void speaker.word(wordId);
-      if (next.size === wordIds.length) setTimeout(() => onDone(mistakes), 600);
+      if (next.size === wordIds.length) setTimeout(() => onDone([...missed]), 600);
     } else {
-      setMistakes((m) => m + 1);
+      setMissed((m) => new Set(m).add(wordId));
       setWrong(target);
       setTimeout(() => setWrong(null), 450);
     }
@@ -71,7 +82,7 @@ export function MatchGame({ wordIds, onDone }: { wordIds: string[]; onDone: (mis
 
   return (
     <div className="match" onPointerMove={onPointerMove}>
-      <p className="hint">Kelimeyi sürükleyip doğru resmin üstüne bırak. İstersen önce kelimeye, sonra resme dokun.</p>
+      <p className="hint">{hint}</p>
       <div className="match-chips">
         {chips.map((id) => (
           <button
@@ -94,9 +105,9 @@ export function MatchGame({ wordIds, onDone }: { wordIds: string[]; onDone: (mis
             data-target={id}
             className={`match-target ${matched.has(id) ? 'done' : ''} ${wrong === id ? 'shake' : ''} ${hover === id ? 'hover' : ''}`}
             onClick={() => selected && !matched.has(id) && attempt(selected, id)}
-            aria-label={matched.has(id) ? getWord(id).en : 'Resim'}
+            aria-label={matched.has(id) ? getWord(id).en : 'Hedef'}
           >
-            <Picture wordId={id} size="sm" />
+            {target(id)}
             {matched.has(id) && <span className="match-label">{getWord(id).en}</span>}
           </button>
         ))}

@@ -8,6 +8,7 @@ import { DeviceLinkScreen } from './screens/DeviceLink';
 import { LessonScreen } from './screens/Lesson';
 import { Login } from './screens/Login';
 import { SettingsScreen } from './screens/Settings';
+import { Credits, ImageSources } from './screens/Sources';
 import { Today } from './screens/Today';
 
 export function App({ runtime }: { runtime: Runtime }) {
@@ -26,6 +27,8 @@ export function App({ runtime }: { runtime: Runtime }) {
                   <Route path="/" element={<Today />} />
                   <Route path="/lesson" element={<LessonScreen />} />
                   <Route path="/settings" element={<SettingsScreen />} />
+                  <Route path="/settings/gorseller" element={<ImageSources />} />
+                  <Route path="/kaynaklar" element={<Credits />} />
                   <Route path="/baglan" element={<DeviceLinkScreen />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>

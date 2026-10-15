@@ -1,70 +1,75 @@
-import { content } from '../../content';
-import { planLesson } from '../../core/lesson';
+import { course } from '../../content';
+import { mediaUrls } from '../../content/media';
+import { planNextLesson, type LessonLogEntry, type NextLesson } from '../../core/progress';
+import { createSession } from '../../core/session';
 import { localDate } from '../../core/time';
 import type { Runtime } from '../../data/runtime';
 import type { LessonProgress } from '../../data/store';
+import { cacheMedia } from '../../push/precache';
 
-export function currentPlan(rt: Runtime, now: number) {
+export function nextLesson(rt: Runtime, now = Date.now()): NextLesson {
   const s = rt.store.getState();
-  return planLesson({
-    content,
+  return planNextLesson({
+    course,
     cards: s.cards,
     log: s.lessons,
     now,
     tz: s.settings.timezone,
-    durationMin: s.settings.lessonMinutes,
-    newPerDay: s.settings.newPerDay,
+    newPerLesson: s.settings.newPerLesson,
   });
 }
 
-/** Resumes today's unfinished lesson, or starts a new one. */
+/**
+ * Resumes the lesson in progress, or starts the next one in the sequence.
+ * There is no daily limit: a finished lesson is followed by the next at once.
+ * Starting a lesson also ends a break ("Ara ver").
+ */
 export async function startLesson(rt: Runtime, now = Date.now()): Promise<LessonProgress> {
   const s = rt.store.getState();
-  const today = localDate(now, s.settings.timezone);
-  if (s.progress && s.progress.plan.date === today) return s.progress;
+  if (s.progress) return s.progress;
+  if (s.settings.paused) await rt.store.updateSettings((x) => ({ ...x, paused: false, pausedAt: null }));
 
-  const plan = currentPlan(rt, now);
-  const progress: LessonProgress = {
-    lessonId: crypto.randomUUID(),
-    plan,
-    segmentIndex: 0,
-    startedAt: now,
-    reviewed: 0,
-    correct: 0,
-    tapped: [],
-  };
-  await rt.store.setProgress(progress);
-  await rt.store.putLesson({
-    id: progress.lessonId,
-    date: today,
-    startedAt: now,
-    completedAt: null,
-    textIds: [],
-    newWordIds: plan.newWordIds,
-    reviewed: 0,
-    correct: 0,
-    updatedAt: now,
+  const plan = nextLesson(rt, now);
+  const id = plan.resumeId ?? crypto.randomUUID();
+  const session = createSession({
+    id,
+    number: plan.number,
+    targetMinutes: s.settings.goalMinutes,
+    newWords: plan.newWords,
+    reviewWords: plan.reviewWords,
   });
+  const progress: LessonProgress = { lessonId: id, number: plan.number, startedAt: now, session, current: null, tapped: [] };
+  await rt.store.setProgress(progress);
+  if (!plan.resumeId) {
+    const entry: LessonLogEntry = {
+      id,
+      number: plan.number,
+      date: localDate(now, s.settings.timezone),
+      startedAt: now,
+      completedAt: null,
+      activeMs: 0,
+      dayMs: {},
+      textIds: [],
+      newWordIds: [],
+      reviewed: 0,
+      correct: 0,
+      updatedAt: now,
+    };
+    await rt.store.putLesson(entry);
+  }
+  void cacheMedia(lessonMedia(rt, plan));
   return progress;
 }
 
-/** Other unit words to use as wrong options, introduced ones first. */
-export function distractors(rt: Runtime, wordId: string, n: number, seed: number): string[] {
-  const cards = rt.store.getState().cards;
-  const others = content.words.map((w) => w.id).filter((id) => id !== wordId);
-  const score = (id: string) => ((cards.get(id)?.state ?? 'new') !== 'new' ? 0 : 1);
-  const mixed = others
-    .map((id, i) => ({ id, k: score(id) * 1000 + ((i * 7919 + seed * 104729) % 997) }))
-    .sort((a, b) => a.k - b.k)
-    .slice(0, n)
-    .map((x) => x.id);
-  return mixed;
-}
-
-/** Inserts the answer at a deterministic position among the distractors. */
-export function withAnswer(answer: string, wrong: string[], seed: number): { ids: string[]; index: number } {
-  const index = seed % (wrong.length + 1);
-  const ids = [...wrong];
-  ids.splice(index, 0, answer);
-  return { ids, index };
+/** Media of a lesson: its words, the texts it may read, recently learned words. */
+export function lessonMedia(rt: Runtime, plan: NextLesson): string[] {
+  const s = rt.store.getState();
+  const recent = [...s.cards.values()]
+    .filter((c) => c.state !== 'new')
+    .sort((a, b) => (b.introducedAt ?? 0) - (a.introducedAt ?? 0))
+    .slice(0, 30)
+    .map((c) => c.wordId);
+  const maxOrder = Math.max(0, ...plan.newWords.map((w) => course.words[w]?.order ?? 0));
+  const texts = course.texts.filter((t) => t.maxOrder <= maxOrder).map((t) => t.id);
+  return mediaUrls([...plan.newWords, ...plan.reviewWords, ...recent], texts, s.mediaChoices);
 }

@@ -1,32 +1,51 @@
-import unit1 from '../../content/level0/unit1.json';
+// Course data (NGSL words, Tatoeba + own sentences, texts) and the media
+// manifests. Everything is bundled so lessons work offline.
+
+import courseJson from '../../content/build/course.json';
+import creditsJson from '../../content/media/credits.json';
 import manifestJson from './media-manifest.json';
-import type { MediaManifest, UnitContent, Word } from './types';
+import type { Course, CourseSentence, CourseText, CourseWord } from './courseTypes';
+import type { ImageCredits, MediaManifest } from './types';
 
-export const content = unit1 as UnitContent;
+export const course = courseJson as unknown as Course;
 export const media = manifestJson as MediaManifest;
+export const credits = creditsJson as unknown as ImageCredits;
 
-const wordById = new Map(content.words.map((w) => [w.id, w]));
-const wordByForm = new Map(content.words.map((w) => [w.en.toLowerCase(), w]));
-const functionByForm = new Map(content.functionWords.map((f) => [f.en.toLowerCase(), f]));
+const sentenceById = new Map(course.sentences.map((s) => [s.id, s]));
+const textById = new Map(course.texts.map((t) => [t.id, t]));
 
-export function getWord(id: string): Word {
-  const w = wordById.get(id);
+export function getWord(id: string): CourseWord {
+  const w = course.words[id];
   if (!w) throw new Error(`Unknown word ${id}`);
   return w;
 }
 
-export function getText(id: string) {
-  const t = content.texts.find((x) => x.id === id);
+export function getText(id: string): CourseText {
+  const t = textById.get(id);
   if (!t) throw new Error(`Unknown text ${id}`);
   return t;
 }
 
-/** Looks up a running-text word form: unit word or function word. */
-export function lookup(form: string): { word?: Word; gloss?: string } {
-  const f = form.toLowerCase();
-  const word = wordByForm.get(f);
-  if (word) return { word };
-  const fn = functionByForm.get(f);
-  if (fn) return { gloss: fn.tr };
-  return {};
+export function getSentence(id: string): CourseSentence {
+  const s = sentenceById.get(id);
+  if (!s) throw new Error(`Unknown sentence ${id}`);
+  return s;
+}
+
+/** Looks up a running-text word form ("houses", "I'm") → course word, if taught. */
+export function lookup(form: string): { word?: CourseWord; lemma?: string } {
+  const head = form.split(/['’]/)[0].toLowerCase();
+  const lemma = course.forms[head];
+  if (!lemma) return {};
+  return { word: course.words[lemma], lemma };
+}
+
+/** A short example sentence for a word (own sentences first, then shortest). */
+export function exampleFor(wordId: string, known?: ReadonlySet<string>): CourseSentence | null {
+  const all = course.sentences.filter((s) => s.lemmas.includes(wordId));
+  const usable = known ? all.filter((s) => s.lemmas.every((l) => l === wordId || known.has(l))) : all;
+  const pool = usable.length ? usable : all;
+  return (
+    [...pool].sort((a, b) => (a.src === b.src ? 0 : a.src === 'okuma' ? -1 : 1) || a.en.length - b.en.length)[0] ?? null
+  );
 }

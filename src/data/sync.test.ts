@@ -16,6 +16,7 @@ function fakeSupabase() {
     lesson_log: new Map(),
     review_log: new Map(),
     profiles: new Map(),
+    media_choices: new Map(),
   };
   let clock = Date.UTC(2026, 0, 1);
   const tick = () => new Date((clock += 1)).toISOString().replace('Z', '+00:00');
@@ -69,6 +70,7 @@ function fakeSupabase() {
     rpc: async (name: string, args: Row) => {
       if (name === 'sync_cards') for (const r of args.rows as Row[]) lww('cards', String(r.word_id), r);
       if (name === 'sync_lessons') for (const r of args.rows as Row[]) lww('lesson_log', String(r.id), r);
+      if (name === 'sync_media_choices') for (const r of args.rows as Row[]) lww('media_choices', String(r.word_id), r);
       if (name === 'sync_settings') {
         const cur = tables.profiles.get('me');
         if (!cur || (cur.settings_updated_at as number) < (args.new_updated_at as number)) {
@@ -101,24 +103,31 @@ describe('sync between two devices', () => {
     await phone.store.grade('house', 'good', 'quiz');
     await phone.store.putLesson({
       id: 'L1',
+      number: 1,
       date: '2026-10-14',
       startedAt: t,
       completedAt: t + 1000,
+      activeMs: 1_200_000,
+      dayMs: { '2026-10-14': 1_200_000 },
       textIds: ['t5'],
       newWordIds: ['house', 'door'],
       reviewed: 0,
       correct: 0,
       updatedAt: t,
     });
-    await phone.store.updateSettings((s) => ({ ...s, lessonMinutes: 20 }));
+    await phone.store.updateSettings((s) => ({ ...s, goalMinutes: 20, paused: true, pausedAt: t }));
+    await phone.store.setMediaChoice({ wordId: 'house', choice: 'house-3.jpg', rejected: false });
     await phone.sync.sync();
 
     await desktop.sync.sync();
     const d = desktop.store.getState();
     expect(d.cards.get('house')).toEqual(phone.store.getState().cards.get('house'));
     expect(d.cards.get('door')?.state).toBe('learning');
-    expect(d.lessons.map((l) => l.id)).toEqual(['L1']);
-    expect(d.settings.lessonMinutes).toBe(20);
+    expect(d.lessons).toEqual(phone.store.getState().lessons);
+    expect(d.lessons[0]).toMatchObject({ id: 'L1', number: 1, activeMs: 1_200_000 });
+    expect(d.settings).toMatchObject({ goalMinutes: 20, paused: true });
+    expect(d.mediaChoices.house).toMatchObject({ choice: 'house-3.jpg', rejected: false });
+    expect(await phone.store.dirtyMediaChoices()).toEqual([]);
     expect(server.tables.review_log.size).toBe(1);
 
     // Nothing is left dirty after a successful round-trip.
@@ -148,6 +157,36 @@ describe('sync between two devices', () => {
     expect(ca).toEqual(cb);
     expect(cb.step).toBe(1);
     expect(server.tables.cards.get('tea')?.updated_at).toBe(t);
+  });
+
+  it('lessons saved by v1 get sequence numbers and active time on load', async () => {
+    const t = Date.UTC(2026, 9, 14, 16, 0);
+    const db = await openStore(`device-${n++}`);
+    const v1 = (id: string, start: number, done: number | null) => ({
+      id,
+      date: '2026-10-14',
+      startedAt: start,
+      completedAt: done,
+      textIds: [],
+      newWordIds: [],
+      reviewed: 0,
+      correct: 0,
+      updatedAt: start,
+      dirty: 0 as const,
+    });
+    await db.put('lessons', v1('b', t + 2 * 3_600_000, t + 2 * 3_600_000 + 600_000) as never);
+    await db.put('lessons', v1('a', t, t + 3 * 3_600_000) as never);
+    await db.put('kv', { lessonMinutes: 15, newPerDay: 5, updatedAt: 1 }, 'settings');
+    await db.put('kv', { lessonId: 'old', plan: {}, segmentIndex: 2 }, 'progress');
+    const store = new Store(db, () => t);
+    await store.load();
+    const s = store.getState();
+    expect(s.lessons.map((l) => [l.id, l.number, l.activeMs])).toEqual([
+      ['a', 1, 45 * 60_000],
+      ['b', 2, 600_000],
+    ]);
+    expect(s.settings).toMatchObject({ goalMinutes: 20, newPerLesson: 10, paused: false });
+    expect(s.progress).toBeNull();
   });
 
   it('offline changes are kept and pushed later', async () => {

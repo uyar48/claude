@@ -24,8 +24,10 @@ function input(over: Partial<SchedulerInput> = {}): SchedulerInput {
     now: ist('2026-10-14', '19:35'),
     timezone: TZ,
     settings: s.notifications,
-    lessonMinutes: 30,
-    lessonCompletedToday: false,
+    goalMinutes: 30,
+    goalMetToday: false,
+    paused: false,
+    nextLesson: 4,
     dueCount: 4,
     history: [],
     ...over,
@@ -57,7 +59,7 @@ describe('daily lesson reminder', () => {
   it('fires inside the window after the chosen time', () => {
     const d = decide(input());
     expect(d?.kind).toBe('lesson');
-    expect(d?.title).toBe('Bugünkü dersin hazır');
+    expect(d?.title).toBe('4. ders hazır');
     expect(d?.body).toContain('4 tekrar');
   });
 
@@ -79,8 +81,19 @@ describe('daily lesson reminder', () => {
     expect(decide(input({ now, history }))).toBeNull();
   });
 
-  it('is skipped when today’s lesson is already done', () => {
-    expect(decide(input({ lessonCompletedToday: true, dueCount: 0 }))).toBeNull();
+  it('is skipped once today’s goal is met', () => {
+    expect(decide(input({ goalMetToday: true, dueCount: 0 }))).toBeNull();
+  });
+
+  it('sends nothing at all while paused (Ara ver)', () => {
+    expect(decide(input({ paused: true }))).toBeNull();
+    expect(decide(input({ paused: true, now: ist('2026-10-14', '12:35') }))).toBeNull();
+    // Back from the break: reminders resume.
+    expect(decide(input({ paused: false }))?.kind).toBe('lesson');
+  });
+
+  it('never mentions more reviews than one day can hold', () => {
+    expect(decide(input({ dueCount: 120 }))?.body).toContain('40 tekrar');
   });
 
   it('respects the per-type switch', () => {
@@ -183,7 +196,7 @@ describe('back-off after ignored notifications', () => {
     const history = ignoredDays(3);
     const engaged = applyEngagement(history, ist('2026-10-13', '21:00'));
     expect(ignoredStreak(engaged, ist('2026-10-14', '19:35'))).toBe(0);
-    expect(decide(input({ history: engaged }))?.title).toBe('Bugünkü dersin hazır');
+    expect(decide(input({ history: engaged }))?.title).toBe('4. ders hazır');
   });
 
   it('engagement only counts activity after the notification', () => {

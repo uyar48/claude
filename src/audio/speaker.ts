@@ -4,8 +4,8 @@
 // iOS only allows audio started from a user gesture, so a single <audio>
 // element is unlocked on the first tap and reused for every clip.
 
-import { getText, getWord } from '../content';
-import { exampleAudio, sentenceAudio, wordAudio } from '../content/media';
+import { getSentence, getText, getWord } from '../content';
+import { sentenceAudio, textSentenceAudio, wordAudio } from '../content/media';
 import type { Voice } from '../content/types';
 import { estimateTimings, wordAt } from '../core/timing';
 import { tokenize } from '../core/tokenize';
@@ -58,10 +58,12 @@ class Speaker {
     return this.speak(getWord(wordId).en, voice, null);
   }
 
-  async example(wordId: string) {
-    const clip = exampleAudio(wordId);
-    if (clip) return this.playFile(clip.url, null, null);
-    return this.speak(getWord(wordId).example, 'female', null);
+  /** A course sentence (Tatoeba or own) by id. */
+  async courseSentence(sentenceId: string, onWord: OnWord | null = null) {
+    const s = getSentence(sentenceId);
+    const clip = sentenceAudio(sentenceId);
+    if (clip) return this.playFile(clip.url, clip.timings ?? null, onWord ? { text: s.en, onWord } : null);
+    return this.speak(s.en, 'female', onWord);
   }
 
   async text(text: string, voice: Voice = 'female') {
@@ -72,7 +74,7 @@ class Speaker {
   async sentence(textId: string, index: number, onWord: OnWord) {
     const t = getText(textId);
     const s = t.sentences[index].en;
-    const clip = sentenceAudio(textId, index);
+    const clip = textSentenceAudio(textId, index);
     if (clip) return this.playFile(clip.url, clip.timings ?? null, { text: s, onWord });
     return this.speak(s, t.voice, onWord);
   }

@@ -1,6 +1,6 @@
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 import type { Card } from '../core/srs';
-import type { LessonLogEntry } from '../core/lesson';
+import type { LessonLogEntry } from '../core/progress';
 
 export type Dirty = { dirty: 0 | 1 };
 

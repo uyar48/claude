@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { mediaStatus } from '../../content/media';
+import { imageStatus } from '../../content/media';
+import { NEW_WORDS_MAX, NEW_WORDS_MIN } from '../../core/progress';
 import { inQuietHours } from '../../core/scheduler';
-import { LESSON_MINUTE_OPTIONS, type NotificationTypeSetting, type Settings } from '../../core/settings';
+import { GOAL_OPTIONS, type NotificationTypeSetting, type Settings } from '../../core/settings';
 import { parseHm } from '../../core/time';
 import {
   disablePush,
@@ -45,21 +46,64 @@ export function SettingsScreen() {
       </header>
 
       <section className="panel">
-        <h2>Ders süresi</h2>
-        <div className="segmented" role="radiogroup" aria-label="Ders süresi">
-          {LESSON_MINUTE_OPTIONS.map((m) => (
+        <h2>Günlük hedef</h2>
+        <div className="segmented" role="radiogroup" aria-label="Günlük hedef">
+          {GOAL_OPTIONS.map((m) => (
             <button
               key={m}
               role="radio"
-              aria-checked={settings.lessonMinutes === m}
-              className={settings.lessonMinutes === m ? 'on' : ''}
-              onClick={() => update((s) => ({ ...s, lessonMinutes: m }))}
+              aria-checked={settings.goalMinutes === m}
+              className={settings.goalMinutes === m ? 'on' : ''}
+              onClick={() => update((s) => ({ ...s, goalMinutes: m }))}
             >
               {m} dk
             </button>
           ))}
         </div>
-        <p className="muted small">Tekrar, yeni kelimeler, okuma, sınav ve özet bu süreye göre bölünür. Günde {settings.newPerDay} yeni kelime.</p>
+        <p className="muted small">
+          Bir ders bu kadar sürer. Hedefe ulaştığın gün seriye sayılır; istersen sonra “Bir ders daha” ile devam edebilirsin.
+        </p>
+        <div className="field-row">
+          <span>Ders başına yeni kelime</span>
+          <span className="stepper">
+            <button
+              className="icon-btn alt"
+              aria-label="Azalt"
+              disabled={settings.newPerLesson <= NEW_WORDS_MIN}
+              onClick={() => update((s) => ({ ...s, newPerLesson: Math.max(NEW_WORDS_MIN, s.newPerLesson - 1) }))}
+            >
+              −
+            </button>
+            <strong aria-live="polite">{settings.newPerLesson}</strong>
+            <button
+              className="icon-btn alt"
+              aria-label="Artır"
+              disabled={settings.newPerLesson >= NEW_WORDS_MAX}
+              onClick={() => update((s) => ({ ...s, newPerLesson: Math.min(NEW_WORDS_MAX, s.newPerLesson + 1) }))}
+            >
+              +
+            </button>
+          </span>
+        </div>
+        <p className="muted small">
+          {NEW_WORDS_MIN}–{NEW_WORDS_MAX} arası. Günde bir ders, haftada 5 gün ile haftada yaklaşık {settings.newPerLesson * 5} kelime.
+        </p>
+      </section>
+
+      <section className="panel">
+        <h2>Ara ver</h2>
+        <label className="field-row">
+          <span>Ara verdim (bildirim gönderme)</span>
+          <input
+            type="checkbox"
+            className="switch"
+            checked={settings.paused}
+            onChange={(e) => update((s) => ({ ...s, paused: e.target.checked, pausedAt: e.target.checked ? Date.now() : null }))}
+          />
+        </label>
+        <p className="muted small">
+          Süre sınırı yok. Döndüğünde ilerlemen olduğu yerde durur; biriken tekrarlar günde en fazla 40 kartla gelir.
+        </p>
       </section>
 
       <section className="panel" id="bildirimler">
@@ -113,9 +157,20 @@ export function SettingsScreen() {
       <SetupSection />
       {isIOS() && !isStandalone() && <InstallHelp />}
 
-      <p className="center small">
-        <Link to="/admin/review">Medya inceleme (/admin/review)</Link>
-      </p>
+      <section className="panel links">
+        <Link to="/settings/gorseller" className="field-row">
+          <span>Görsel kaynakları</span>
+          <span aria-hidden>›</span>
+        </Link>
+        <Link to="/kaynaklar" className="field-row">
+          <span>Kaynaklar ve lisanslar</span>
+          <span aria-hidden>›</span>
+        </Link>
+        <Link to="/admin/review" className="field-row">
+          <span>Görsel seçimi (/admin/review)</span>
+          <span aria-hidden>›</span>
+        </Link>
+      </section>
     </div>
   );
 }
@@ -273,12 +328,12 @@ function AccountSection({ syncStatus, lastSyncAt }: { syncStatus: string; lastSy
 
 function SetupSection() {
   const rt = useRuntime();
-  const m = mediaStatus();
+  const { mediaChoices } = useAppState();
+  const m = imageStatus(mediaChoices);
   const items: string[] = [];
   if (rt.config.fromCache && !rt.config.supabaseUrl) items.push('Sunucuya ulaşılamadı (yerel önizleme ya da çevrimdışı).');
   for (const k of rt.config.missing) items.push(`Sunucu ortam değişkeni eksik: ${k}`);
-  for (const k of m.missingKeys) items.push(`${k} eksik: ${k.startsWith('IMAGE') ? 'görseller yer tutucu (düz renk + kelime)' : 'sesler tarayıcının sesiyle okunuyor'}`);
-  if (m.images === 0) items.push('Medya henüz üretilmedi: görseller yer tutucu, sesler tarayıcının sesi.');
+  if (m.concreteWithPhoto < m.concrete) items.push(`${m.concrete - m.concreteWithPhoto} somut kelimenin fotoğrafı yok (Görsel kaynakları).`);
   if (!items.length) return null;
   return (
     <section className="panel">

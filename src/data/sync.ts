@@ -3,7 +3,17 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { normalizeSettings } from '../core/settings';
-import { cardToRow, lessonToRow, rowToCard, rowToLesson, type CardRow, type LessonRow } from './merge';
+import {
+  cardToRow,
+  choiceToRow,
+  lessonToRow,
+  rowToCard,
+  rowToChoice,
+  rowToLesson,
+  type CardRow,
+  type LessonRow,
+  type MediaChoiceRow,
+} from './merge';
 import type { Store } from './store';
 
 const CURSOR = { cards: 'cursor:cards', lessons: 'cursor:lessons' } as const;
@@ -69,7 +79,7 @@ export class SyncEngine {
     }
     const lessons = await this.store.dirtyLessons();
     if (lessons.length) {
-      const { error } = await this.sb.rpc('sync_lessons', { rows: lessons.map(lessonToRow) });
+      const { error } = await this.sb.rpc('sync_lessons', { rows: lessons.map((l) => lessonToRow(l)) });
       if (error) throw error;
       await this.store.markClean('lessons', lessons.map((l) => ({ key: l.id, updatedAt: l.updatedAt })));
     }
@@ -86,6 +96,12 @@ export class SyncEngine {
       const { error } = await this.sb.from('review_log').upsert(rows, { onConflict: 'id', ignoreDuplicates: true });
       if (error) throw error;
       await this.store.markReviewsClean(reviews.map((r) => r.id));
+    }
+    const choices = await this.store.dirtyMediaChoices();
+    if (choices.length) {
+      const { error } = await this.sb.rpc('sync_media_choices', { rows: choices.map(choiceToRow) });
+      if (error) throw error;
+      await this.store.markMediaChoicesClean(choices);
     }
     if (await this.store.settingsDirty()) {
       const s = this.store.getState().settings;
@@ -129,6 +145,15 @@ export class SyncEngine {
     await this.store.applyRemote(cards.rows.map(rowToCard), lessons.rows.map(rowToLesson), remoteSettings);
     await cards.commit();
     await lessons.commit();
+
+    // Few rows (one per word at most): always read them all.
+    const choices = await this.sb.from('media_choices').select('word_id,choice,rejected,updated_at');
+    if (choices.error) {
+      // Older database without migration 0003: pictures fall back to defaults.
+      if (!/media_choices/.test(choices.error.message ?? '')) throw choices.error;
+    } else {
+      await this.store.applyRemoteChoices((choices.data as MediaChoiceRow[]).map(rowToChoice));
+    }
   }
 
   async touchActive() {

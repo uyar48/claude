@@ -76,6 +76,9 @@ describe('migration', () => {
   it('sync_lessons, sync_settings and touch_active', async () => {
     const lesson = {
       id: 'L1',
+      number: 1,
+      active_ms: 1_800_000,
+      day_ms: { '2026-10-14': 1_800_000 },
       date: '2026-10-14',
       started_at: 1,
       completed_at: 2,
@@ -87,8 +90,12 @@ describe('migration', () => {
     };
     await as(ME, () => db.query('select public.sync_lessons($1)', [JSON.stringify([lesson])]));
     await as(ME, () => db.query('select public.sync_lessons($1)', [JSON.stringify([{ ...lesson, reviewed: 9, updated_at: 5 }])]));
-    const l = await db.query<{ reviewed: number; text_ids: string[] }>('select reviewed, text_ids from lesson_log');
-    expect(l.rows).toEqual([{ reviewed: 0, text_ids: ['t5'] }]);
+    const l = await db.query<{ reviewed: number; text_ids: string[]; number: number; active_ms: number; day_ms: unknown }>(
+      'select reviewed, text_ids, number, active_ms, day_ms from lesson_log',
+    );
+    expect(l.rows).toEqual([
+      { reviewed: 0, text_ids: ['t5'], number: 1, active_ms: 1_800_000, day_ms: { '2026-10-14': 1_800_000 } },
+    ]);
 
     await as(ME, () => db.query('select public.sync_settings($1, $2)', [JSON.stringify({ lessonMinutes: 20 }), 10]));
     await as(ME, () => db.query('select public.sync_settings($1, $2)', [JSON.stringify({ lessonMinutes: 45 }), 5]));
@@ -98,6 +105,19 @@ describe('migration', () => {
     );
     expect(p.rows[0].settings.lessonMinutes).toBe(20);
     expect(p.rows[0].last_active_at).not.toBeNull();
+  });
+
+  it('sync_media_choices keeps the newest pick per word and hides other users’ picks', async () => {
+    const pick = (choice: string | null, rejected: boolean, updated: number) =>
+      JSON.stringify([{ word_id: 'house', choice, rejected, updated_at: updated }]);
+    await as(ME, () => db.query('select public.sync_media_choices($1)', [pick('house-2.jpg', false, 10)]));
+    await as(ME, () => db.query('select public.sync_media_choices($1)', [pick('house-4.jpg', false, 5)]));
+    await as(OTHER, () => db.query('select public.sync_media_choices($1)', [pick(null, true, 20)]));
+    const mine = await as(ME, () => db.query<{ choice: string; rejected: boolean }>('select choice, rejected from media_choices'));
+    expect(mine.rows).toEqual([{ choice: 'house-2.jpg', rejected: false }]);
+    await as(ME, () => db.query('select public.sync_media_choices($1)', [pick(null, true, 30)]));
+    const after = await as(ME, () => db.query<{ choice: string | null; rejected: boolean }>('select choice, rejected from media_choices'));
+    expect(after.rows).toEqual([{ choice: null, rejected: true }]);
   });
 
   it('device link codes are invisible to app users (server only)', async () => {
@@ -114,5 +134,32 @@ describe('migration', () => {
     await as(ME, () => db.query(`update notification_log set engaged_at = now() where id = 'n1'`));
     const r = await db.query<{ engaged_at: Date | null }>(`select engaged_at from notification_log where id = 'n1'`);
     expect(r.rows[0].engaged_at).not.toBeNull();
+  });
+});
+
+describe('migration 0003 on existing data', () => {
+  it('numbers old lessons by start time and estimates their active minutes', async () => {
+    const pg = new PGlite();
+    await pg.exec(AUTH_STUB);
+    const dir = path.join(__dirname, '../supabase/migrations');
+    const files = fs.readdirSync(dir).filter((x) => x.endsWith('.sql')).sort();
+    for (const f of files.filter((x) => x < '0003')) await pg.exec(fs.readFileSync(path.join(dir, f), 'utf8'));
+    const ins = (id: string, started: number, completed: number | null) =>
+      pg.query(
+        `insert into lesson_log (id, user_id, date, started_at, completed_at, updated_at) values ($1, '${ME}', '2026-10-14', $2, $3, 100)`,
+        [id, started, completed],
+      );
+    await ins('b', 2_000_000, 2_000_000 + 20 * 60_000);
+    await ins('a', 1_000_000, 1_000_000 + 90 * 60_000);
+    await ins('c', 3_000_000, null);
+    for (const f of files.filter((x) => x >= '0003')) await pg.exec(fs.readFileSync(path.join(dir, f), 'utf8'));
+    const r = await pg.query<{ id: string; number: number; active_ms: string; day_ms: unknown; updated_at: string }>(
+      'select id, number, active_ms, day_ms, updated_at from lesson_log order by id',
+    );
+    expect(r.rows.map((x) => [x.id, x.number, Number(x.active_ms), x.day_ms, Number(x.updated_at)])).toEqual([
+      ['a', 1, 45 * 60_000, { '2026-10-14': 45 * 60_000 }, 101],
+      ['b', 2, 20 * 60_000, { '2026-10-14': 20 * 60_000 }, 101],
+      ['c', 3, 0, {}, 101],
+    ]);
   });
 });

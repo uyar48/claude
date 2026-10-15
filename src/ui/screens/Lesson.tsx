@@ -1,194 +1,309 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getText, getWord } from '../../content';
-import { lessonMediaUrls } from '../../content/media';
-import type { SegmentKind } from '../../core/lesson';
-import { streak } from '../../core/streak';
-import { DAY, localDate } from '../../core/time';
-import type { LessonProgress } from '../../data/store';
-import { cacheMedia } from '../../push/precache';
+import { course, getText, getWord } from '../../content';
+import { addActive, goalDays, minutesOn, streakInfo } from '../../core/progress';
+import {
+  distinctTypes,
+  finalGrades,
+  nextExercise,
+  recordAnswer,
+  type ExerciseType,
+  type SessionContext,
+  type SessionState,
+} from '../../core/session';
+import { localDate } from '../../core/time';
 import { speaker } from '../../audio/speaker';
 import { IconClose } from '../components/Icons';
-import { Picture } from '../components/Picture';
-import { percent } from '../format';
+import { Picture, useHasPhoto } from '../components/Picture';
+import { EXERCISE_LABEL, ExerciseView } from '../exercises/ExerciseView';
+import type { ExerciseOutcome } from '../exercises/types';
 import { useAppState, useRuntime } from '../hooks';
-import { NewWordsStep } from '../lesson/NewWordsStep';
-import { QuizStep } from '../lesson/QuizStep';
-import { ReadingStep } from '../lesson/ReadingStep';
-import { ReviewStep } from '../lesson/ReviewStep';
-import { currentPlan } from '../lesson/start';
+import { startLesson } from '../lesson/start';
 
-export const SEGMENT_LABEL: Record<SegmentKind, string> = {
-  review: 'Tekrar',
-  new: 'Yeni kelimeler',
-  reading: 'Okuma ve dinleme',
-  quiz: 'Mini sınav',
-  summary: 'Özet',
+/** Longest time one exercise may count as active (idle time is not learning). */
+const CAP_MS: Partial<Record<ExerciseType, number>> = {
+  reading: 8 * 60_000,
+  scene: 3 * 60_000,
+  match: 3 * 60_000,
+  'build-sentence': 2 * 60_000,
+  'speed-round': 90_000,
 };
+const DEFAULT_CAP_MS = 90_000;
 
-interface Extra {
-  textIds: string[];
-  quiz: { correct: number; total: number } | null;
-  blanks: { firstTry: number; total: number } | null;
+/** Visible time since start() — the clock stops while the app is in the background. */
+function useActiveClock() {
+  const acc = useRef(0);
+  const since = useRef<number | null>(null);
+  useEffect(() => {
+    const onVis = () => {
+      if (document.visibilityState === 'hidden' && since.current !== null) {
+        acc.current += performance.now() - since.current;
+        since.current = null;
+      } else if (document.visibilityState === 'visible' && since.current === null) {
+        since.current = performance.now();
+      }
+    };
+    document.addEventListener('visibilitychange', onVis);
+    return () => document.removeEventListener('visibilitychange', onVis);
+  }, []);
+  return useMemo(
+    () => ({
+      start() {
+        acc.current = 0;
+        since.current = document.visibilityState === 'hidden' ? null : performance.now();
+      },
+      read() {
+        return acc.current + (since.current === null ? 0 : performance.now() - since.current);
+      },
+    }),
+    [],
+  );
+}
+
+interface Finished {
+  number: number;
+  session: SessionState;
+  minutes: number;
+  questions: { correct: number; total: number };
 }
 
 export function LessonScreen() {
   const rt = useRuntime();
-  const { progress } = useAppState();
+  const state = useAppState();
   const navigate = useNavigate();
-  const [extra, setExtra] = useState<Extra>({ textIds: [], quiz: null, blanks: null });
+  const hasPhoto = useHasPhoto();
+  const clock = useActiveClock();
+  const [finished, setFinished] = useState<Finished | null>(null);
+  const questions = useRef({ correct: 0, total: 0 });
+  const advancing = useRef(false);
+  const answering = useRef(false);
+  const progress = state.progress;
+
+  const ctx = useCallback(
+    (): SessionContext => ({ course, cards: rt.store.getState().cards, hasVisual: hasPhoto }),
+    [rt, hasPhoto],
+  );
+
+  const finish = useCallback(
+    async (session: SessionState) => {
+      const p = rt.store.getState().progress;
+      if (!p) return;
+      for (const g of finalGrades(session)) await rt.store.grade(g.wordId, g.grade, 'lesson');
+      const now = Date.now();
+      const entry = rt.store.getState().lessons.find((l) => l.id === p.lessonId);
+      if (entry) {
+        await rt.store.putLesson({
+          ...entry,
+          completedAt: now,
+          newWordIds: session.introduced,
+          textIds: session.usedTexts,
+          updatedAt: now,
+        });
+      }
+      setFinished({ number: p.number, session, minutes: session.activeMs / 60_000, questions: questions.current });
+      questions.current = { correct: 0, total: 0 };
+      await rt.store.setProgress(null);
+      void rt.sync?.sync();
+    },
+    [rt],
+  );
+
+  /** Shows the next exercise, or ends the lesson. */
+  const advance = useCallback(
+    async (session: SessionState) => {
+      const step = nextExercise(session, ctx());
+      const p = rt.store.getState().progress;
+      if (!p) return;
+      if (!step.exercise) return finish(step.state);
+      await rt.store.setProgress({ ...p, session: step.state, current: step.exercise });
+      if (step.exercise.type === 'intro') await rt.store.introduceWords([step.exercise.wordId!]);
+      clock.start();
+      window.scrollTo(0, 0);
+    },
+    [rt, ctx, finish, clock],
+  );
 
   useEffect(() => {
-    if (!progress) navigate('/', { replace: true });
-  }, [progress, navigate]);
+    if (finished) return;
+    if (!progress) {
+      navigate('/', { replace: true });
+      return;
+    }
+    if (!progress.current && !advancing.current) {
+      advancing.current = true;
+      void advance(progress.session).finally(() => (advancing.current = false));
+    }
+  }, [progress, finished, navigate, advance]);
+
+  // A resumed exercise starts its clock when shown.
+  const currentKey = progress?.current?.key;
+  useEffect(() => {
+    if (currentKey) clock.start();
+  }, [currentKey, clock]);
+
   useEffect(() => () => speaker.stop(), []);
-  if (!progress) return null;
 
-  const { plan } = progress;
-  const seg = plan.segments[progress.segmentIndex];
+  async function onDone(out: ExerciseOutcome) {
+    const p = rt.store.getState().progress;
+    if (!p?.current || answering.current) return;
+    answering.current = true;
+    try {
+      const ex = p.current;
+      const ms = Math.min(CAP_MS[ex.type] ?? DEFAULT_CAP_MS, clock.read());
+      const { state: session, grades } = recordAnswer(p.session, ex, { correct: out.correct, ms, perWord: out.perWord });
+      for (const g of grades) await rt.store.grade(g.wordId, g.grade, 'lesson');
+      if (out.questions) {
+        questions.current = {
+          correct: questions.current.correct + out.questions.correct,
+          total: questions.current.total + out.questions.total,
+        };
+      }
 
-  async function advance(patch: Partial<LessonProgress> = {}) {
-    const p = rt.store.getState().progress!;
-    await rt.store.setProgress({ ...p, ...patch, segmentIndex: p.segmentIndex + 1 });
-    window.scrollTo(0, 0);
+      const now = Date.now();
+      const s = rt.store.getState();
+      const entry = s.lessons.find((l) => l.id === p.lessonId);
+      if (entry) {
+        const graded = out.correct !== null ? 1 : Object.keys(out.perWord ?? {}).length;
+        const right = out.correct === true ? 1 : Object.values(out.perWord ?? {}).filter(Boolean).length;
+        await rt.store.putLesson({
+          ...addActive(entry, ms, localDate(now, s.settings.timezone)),
+          reviewed: entry.reviewed + graded,
+          correct: entry.correct + right,
+          textIds: ex.textId ? [...new Set([...entry.textIds, ex.textId])] : entry.textIds,
+          updatedAt: now,
+        });
+      }
+      await rt.store.setProgress({
+        ...p,
+        session,
+        current: null,
+        tapped: [...new Set([...p.tapped, ...(out.tapped ?? [])])],
+      });
+    } finally {
+      answering.current = false;
+    }
   }
 
+  async function oneMore() {
+    speaker.unlock();
+    // Start first, so the screen never sees "no lesson" in between.
+    await startLesson(rt);
+    setFinished(null);
+  }
+
+  if (finished) {
+    return <FinishScreen info={finished} onMore={oneMore} onEnough={() => navigate('/', { replace: true })} />;
+  }
+  if (!progress) return null;
+
+  const { session } = progress;
+  const left = Math.max(0, session.targetMs - session.activeMs);
   return (
     <div className="screen lesson">
       <header className="lesson-head">
         <button className="icon-btn" aria-label="Dersi duraklat" onClick={() => navigate('/')}>
           <IconClose />
         </button>
-        <div className="segments" aria-label="Ders bölümleri">
-          {plan.segments.map((s, i) => (
-            <span
-              key={s.kind}
-              className={`seg ${i < progress.segmentIndex ? 'done' : i === progress.segmentIndex ? 'now' : ''}`}
-              style={{ flexGrow: s.minutes }}
-              title={SEGMENT_LABEL[s.kind]}
-            />
-          ))}
+        <div className="time-bar" aria-label="Ders ilerlemesi">
+          <span style={{ width: `${Math.min(100, (session.activeMs / session.targetMs) * 100)}%` }} />
         </div>
+        <span className="muted small time-left">~{Math.max(1, Math.round(left / 60_000))} dk</span>
       </header>
-      <div className="seg-title">
-        <h1>{SEGMENT_LABEL[seg.kind]}</h1>
-        <span className="muted small">~{seg.minutes} dk</span>
-      </div>
-
-      {seg.kind === 'review' && (
-        <ReviewStep
-          wordIds={plan.reviewWordIds}
-          onDone={(s) => advance({ reviewed: progress.reviewed + s.reviewed, correct: progress.correct + s.correct })}
-        />
+      {progress.current && (
+        <>
+          <p className="ex-label muted small">
+            {progress.number}. ders · {EXERCISE_LABEL[progress.current.type]}
+          </p>
+          <ExerciseView key={progress.current.key} ex={progress.current} onDone={(o) => void onDone(o)} />
+        </>
       )}
-      {seg.kind === 'new' && <NewWordsStep wordIds={plan.newWordIds} onDone={() => advance()} />}
-      {seg.kind === 'reading' && plan.textId && (
-        <ReadingStep
-          textId={plan.textId}
-          extraTextIds={plan.extraTextIds}
-          onDone={(r) => {
-            setExtra((e) => ({ ...e, textIds: r.textIds, blanks: { firstTry: r.blanksFirstTry, total: r.blanksTotal } }));
-            void advance({ tapped: [...new Set([...progress.tapped, ...r.tapped])] });
-          }}
-        />
-      )}
-      {seg.kind === 'quiz' && plan.textId && (
-        <QuizStep
-          textId={plan.textId}
-          newWordIds={plan.newWordIds}
-          onDone={(q) => {
-            setExtra((e) => ({ ...e, quiz: q }));
-            void advance();
-          }}
-        />
-      )}
-      {seg.kind === 'summary' && <Summary progress={progress} extra={extra} />}
     </div>
   );
 }
 
-function Summary({ progress, extra }: { progress: LessonProgress; extra: Extra }) {
-  const rt = useRuntime();
+function FinishScreen({ info, onMore, onEnough }: { info: Finished; onMore: () => void; onEnough: () => void }) {
   const state = useAppState();
-  const navigate = useNavigate();
-  const [saving, setSaving] = useState(false);
-  const { plan } = progress;
+  const [starting, setStarting] = useState(false);
   const tz = state.settings.timezone;
   const today = localDate(Date.now(), tz);
-  const textIds = extra.textIds.length ? extra.textIds : plan.textId ? [plan.textId] : [];
-  const dates = state.lessons.filter((l) => l.completedAt !== null).map((l) => l.date);
-  const newStreak = streak([...dates, today], today);
-
-  async function finish() {
-    setSaving(true);
-    const now = Date.now();
-    await rt.store.putLesson({
-      id: progress.lessonId,
-      date: today,
-      startedAt: progress.startedAt,
-      completedAt: now,
-      textIds,
-      newWordIds: plan.newWordIds,
-      reviewed: progress.reviewed,
-      correct: progress.correct,
-      updatedAt: now,
-    });
-    await rt.store.setProgress(null);
-    void rt.sync?.sync();
-    // Pre-cache tomorrow's lesson media for offline use.
-    const next = currentPlan(rt, now + DAY);
-    void cacheMedia(lessonMediaUrls(next)).then((r) =>
-      rt.store.kvSet('offlineReady', { date: next.date, ...r }),
-    );
-    navigate('/', { replace: true });
-  }
+  const goal = state.settings.goalMinutes;
+  const todayMin = minutesOn(state.lessons, today);
+  const streak = streakInfo(goalDays(state.lessons, goal), today);
+  const { session } = info;
+  const graded = session.history.filter((h) => h.correct !== null);
+  const right = graded.filter((h) => h.correct).length;
+  const types = distinctTypes(session).filter((t) => t !== 'intro');
 
   return (
-    <div className="step summary">
+    <div className="screen finish">
       <div className="panel">
-        <h2>Bugünkü ders tamam.</h2>
+        <p className="eyebrow">{info.number}. ders tamam</p>
+        <h1>Güzel iş!</h1>
         <ul className="stats">
-          {plan.reviewWordIds.length > 0 && (
+          <li>
+            <strong>{Math.round(info.minutes)} dk</strong> çalıştın · {types.length} farklı alıştırma
+          </li>
+          {session.introduced.length > 0 && (
             <li>
-              <strong>{progress.reviewed}</strong> tekrar
-              {progress.reviewed > 0 && <span className="muted"> · {percent(progress.correct / progress.reviewed)} doğru</span>}
+              <strong>{session.introduced.length}</strong> yeni kelime
             </li>
           )}
-          {plan.newWordIds.length > 0 && (
+          {graded.length > 0 && (
             <li>
-              <strong>{plan.newWordIds.length}</strong> yeni kelime
+              <strong>
+                {right} / {graded.length}
+              </strong>{' '}
+              doğru cevap
             </li>
           )}
-          {textIds.map((id) => (
+          {session.usedTexts.map((id) => (
             <li key={id}>
               Okunan metin: <strong lang="en">{getText(id).title}</strong>
             </li>
           ))}
-          {extra.quiz && (
+          {info.questions.total > 0 && (
             <li>
-              Mini sınav: <strong>{extra.quiz.correct} / {extra.quiz.total}</strong>
-            </li>
-          )}
-          {progress.tapped.length > 0 && (
-            <li>
-              Dokunarak baktığın kelimeler tekrar listende: <span lang="en">{progress.tapped.map((id) => getWord(id).en).join(', ')}</span>
+              Okuma soruları: <strong>{info.questions.correct} / {info.questions.total}</strong>
             </li>
           )}
           <li>
-            Seri: <strong>{newStreak} gün</strong>
+            Bugün: <strong>{Math.round(todayMin)} / {goal} dk</strong>
+            {todayMin >= goal ? ' · günlük hedef tamam' : ''}
           </li>
+          {streak.days > 0 && (
+            <li>
+              Seri: <strong>{streak.days} gün</strong>
+              {streak.frozen > 0 && <span className="muted"> · ara verdiğin günler seriyi bozmadı</span>}
+            </li>
+          )}
         </ul>
       </div>
-      {plan.newWordIds.length > 0 && (
+      {session.introduced.length > 0 && (
         <div className="mini-grid">
-          {plan.newWordIds.map((id) => (
-            <Picture key={id} wordId={id} size="sm" label />
+          {session.introduced.map((id) => (
+            <div key={id} className="mini-word">
+              <Picture wordId={id} size="sm" />
+              <span lang="en">{getWord(id).en}</span>
+              <span className="muted tiny">{getWord(id).tr}</span>
+            </div>
           ))}
         </div>
       )}
-      <button className="btn btn-primary wide big" onClick={finish} disabled={saving}>
-        Bitir
-      </button>
+      <div className="stack">
+        <button
+          className="btn btn-primary wide big"
+          disabled={starting}
+          onClick={() => {
+            setStarting(true);
+            onMore();
+          }}
+        >
+          Bir ders daha
+        </button>
+        <button className="btn btn-secondary wide big" onClick={onEnough}>
+          Bugünlük bu kadar
+        </button>
+      </div>
     </div>
   );
 }

@@ -17,7 +17,8 @@ function fakeStore(state: Partial<UserState>) {
     settings: defaultSettings(),
     lastActiveAt: null,
     dueCount: 3,
-    lessonCompletedToday: false,
+    minutesToday: 0,
+    nextLesson: 4,
     history: [],
     subscriptions: [{ endpoint: 'https://push.example/a', p256dh: 'k', auth: 'a' }],
     ...state,
@@ -49,8 +50,24 @@ describe('notification cron', () => {
     const [out] = await runNotify({ now: AT_1935, store, send, newId: () => 'id1' });
     expect(out.sent?.kind).toBe('lesson');
     expect(out.delivered).toBe(1);
-    expect(sent[0]).toMatchObject({ id: 'id1', url: '/?from=push', title: 'Bugünkü dersin hazır' });
+    expect(sent[0]).toMatchObject({ id: 'id1', url: '/?from=push', title: '4. ders hazır' });
     expect(calls.recorded).toEqual([{ id: 'id1', kind: 'lesson', sentAt: AT_1935, delivered: 1, backoffLevel: 0 }]);
+  });
+
+  it('skips the lesson reminder once the daily goal is met', async () => {
+    const { store } = fakeStore({ minutesToday: 31, dueCount: 0 });
+    const { send, sent } = sender();
+    const [out] = await runNotify({ now: AT_1935, store, send, newId: () => 'x' });
+    expect(out.sent).toBeNull();
+    expect(sent).toHaveLength(0);
+  });
+
+  it('sends nothing while paused, from old or new settings', async () => {
+    const { store } = fakeStore({ settings: { ...defaultSettings(), paused: true, pausedAt: AT_1935 - 9 * DAY } });
+    const { send, sent } = sender();
+    const [out] = await runNotify({ now: AT_1935, store, send, newId: () => 'x' });
+    expect(out.sent).toBeNull();
+    expect(sent).toHaveLength(0);
   });
 
   it('does nothing without a push subscription', async () => {

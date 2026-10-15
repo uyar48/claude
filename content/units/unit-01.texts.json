@@ -1,0 +1,618 @@
+{
+ "note": "Reading texts for Unit 1 (own, CC0). t1–t5 come from the original Sabah unit.",
+ "texts": [
+  {
+   "id": "t1",
+   "title": "Good Morning",
+   "titleTr": "Günaydın",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "Good morning.",
+     "tr": "Günaydın."
+    },
+    {
+     "en": "I am at home.",
+     "tr": "Evdeyim."
+    },
+    {
+     "en": "I am a man.",
+     "tr": "Ben bir adamım."
+    },
+    {
+     "en": "I have coffee and bread.",
+     "tr": "Kahvem ve ekmeğim var."
+    },
+    {
+     "en": "The coffee is on the table.",
+     "tr": "Kahve masanın üstünde."
+    },
+    {
+     "en": "My phone is on the chair.",
+     "tr": "Telefonum sandalyenin üstünde."
+    },
+    {
+     "en": "I have my key and my bag.",
+     "tr": "Anahtarım ve çantam yanımda."
+    },
+    {
+     "en": "I go to work.",
+     "tr": "İşe gidiyorum."
+    },
+    {
+     "en": "The car is in the street.",
+     "tr": "Araba sokakta."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t1q1",
+     "prompt": "Adam şu an nerede?",
+     "options": [
+      {
+       "en": "at home"
+      },
+      {
+       "en": "at work"
+      },
+      {
+       "en": "in the street"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t1q2",
+     "prompt": "Kahve nerede?",
+     "options": [
+      {
+       "image": "chair"
+      },
+      {
+       "image": "table"
+      },
+      {
+       "image": "car"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t1q3",
+     "prompt": "Telefon nerede?",
+     "options": [
+      {
+       "en": "on the table"
+      },
+      {
+       "en": "in the bag"
+      },
+      {
+       "en": "on the chair"
+      }
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "t2",
+   "title": "The Woman",
+   "titleTr": "Kadın",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "The woman is at the table.",
+     "tr": "Kadın masada."
+    },
+    {
+     "en": "The woman has tea.",
+     "tr": "Kadının çayı var."
+    },
+    {
+     "en": "The woman has water.",
+     "tr": "Kadının suyu var."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t2q1",
+     "prompt": "Kadın nerede?",
+     "options": [
+      {
+       "en": "at the door"
+      },
+      {
+       "en": "at the table"
+      },
+      {
+       "en": "in the house"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t2q2",
+     "prompt": "Kadının içeceği hangisi?",
+     "options": [
+      {
+       "image": "tea"
+      },
+      {
+       "image": "bread"
+      },
+      {
+       "image": "egg"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t2q3",
+     "prompt": "Metinde kim var?",
+     "options": [
+      {
+       "image": "man"
+      },
+      {
+       "image": "house"
+      },
+      {
+       "image": "woman"
+      }
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "t3",
+   "title": "Water and Bread",
+   "titleTr": "Su ve ekmek",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "I have an egg and bread.",
+     "tr": "Bir yumurtam ve ekmeğim var."
+    },
+    {
+     "en": "I have water.",
+     "tr": "Suyum var."
+    },
+    {
+     "en": "The water is on the table.",
+     "tr": "Su masanın üstünde."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t3q1",
+     "prompt": "Konuşan kişide ne var?",
+     "options": [
+      {
+       "image": "tea"
+      },
+      {
+       "image": "egg"
+      },
+      {
+       "image": "door"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t3q2",
+     "prompt": "Masanın üstünde ne var?",
+     "options": [
+      {
+       "image": "house"
+      },
+      {
+       "image": "tea"
+      },
+      {
+       "image": "water"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "id": "t3q3",
+     "prompt": "Konuşan kişinin içeceği ne?",
+     "options": [
+      {
+       "en": "water"
+      },
+      {
+       "en": "tea"
+      },
+      {
+       "en": "bread"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t4",
+   "title": "The Man",
+   "titleTr": "Adam",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "The man is at the door.",
+     "tr": "Adam kapıda."
+    },
+    {
+     "en": "The man has a bag.",
+     "tr": "Adamın bir çantası var."
+    },
+    {
+     "en": "The man has a key.",
+     "tr": "Adamın bir anahtarı var."
+    },
+    {
+     "en": "The car is in the street.",
+     "tr": "Araba sokakta."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t4q1",
+     "prompt": "Adam nerede?",
+     "options": [
+      {
+       "en": "at the door"
+      },
+      {
+       "en": "at the table"
+      },
+      {
+       "en": "in the car"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t4q2",
+     "prompt": "Adamda ne var?",
+     "options": [
+      {
+       "image": "chair"
+      },
+      {
+       "image": "bag"
+      },
+      {
+       "image": "egg"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t4q3",
+     "prompt": "Araba nerede?",
+     "options": [
+      {
+       "en": "in the house"
+      },
+      {
+       "en": "on the table"
+      },
+      {
+       "en": "in the street"
+      }
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "t5",
+   "title": "The House",
+   "titleTr": "Ev",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "The house has a door and a window.",
+     "tr": "Evin bir kapısı ve bir penceresi var."
+    },
+    {
+     "en": "I am in the house.",
+     "tr": "Evin içindeyim."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t5q1",
+     "prompt": "Evde ne var?",
+     "options": [
+      {
+       "image": "door"
+      },
+      {
+       "image": "table"
+      },
+      {
+       "image": "water"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t5q2",
+     "prompt": "Konuşan kişi nerede?",
+     "options": [
+      {
+       "en": "at the table"
+      },
+      {
+       "en": "in the house"
+      },
+      {
+       "en": "at the door"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t5q3",
+     "prompt": "Evin nesi var?",
+     "options": [
+      {
+       "en": "a table"
+      },
+      {
+       "en": "water"
+      },
+      {
+       "en": "a window"
+      }
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "t6",
+   "title": "My Phone",
+   "titleTr": "Telefonum",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "I have a phone.",
+     "tr": "Bir telefonum var."
+    },
+    {
+     "en": "It is a good phone.",
+     "tr": "İyi bir telefon."
+    },
+    {
+     "en": "In the morning, it is on the table.",
+     "tr": "Sabahları masanın üstünde durur."
+    },
+    {
+     "en": "I go to work with my phone and my bag.",
+     "tr": "İşe telefonum ve çantamla giderim."
+    },
+    {
+     "en": "At work, the phone is in my bag.",
+     "tr": "İşte telefon çantamdadır."
+    },
+    {
+     "en": "It is not on the chair.",
+     "tr": "Sandalyenin üstünde değildir."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t6q1",
+     "prompt": "Telefon sabahları nerede?",
+     "options": [
+      {
+       "en": "in the car"
+      },
+      {
+       "en": "on the table"
+      },
+      {
+       "en": "on the chair"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t6q2",
+     "prompt": "İşte telefon nerede?",
+     "options": [
+      {
+       "en": "in my bag"
+      },
+      {
+       "en": "at the door"
+      },
+      {
+       "en": "in the street"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t6q3",
+     "prompt": "Konuşan kişi işe neyle gidiyor?",
+     "options": [
+      {
+       "image": "car"
+      },
+      {
+       "image": "tea"
+      },
+      {
+       "image": "bag"
+      }
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "t7",
+   "title": "Tea or Coffee?",
+   "titleTr": "Çay mı, kahve mi?",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "We are at home in the morning.",
+     "tr": "Sabah evdeyiz."
+    },
+    {
+     "en": "She has tea, but I have coffee.",
+     "tr": "O çay içiyor ama ben kahve içiyorum."
+    },
+    {
+     "en": "The bread and the eggs are on the table.",
+     "tr": "Ekmek ve yumurtalar masanın üstünde."
+    },
+    {
+     "en": "She will go to work by car.",
+     "tr": "O işe arabayla gidecek."
+    },
+    {
+     "en": "I will go with her.",
+     "tr": "Ben de onunla gideceğim."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t7q1",
+     "prompt": "Kadın ne içiyor?",
+     "options": [
+      {
+       "image": "coffee"
+      },
+      {
+       "image": "tea"
+      },
+      {
+       "image": "water"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t7q2",
+     "prompt": "Masanın üstünde ne var?",
+     "options": [
+      {
+       "en": "a phone and a key"
+      },
+      {
+       "en": "the bread and the eggs"
+      },
+      {
+       "en": "a bag"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t7q3",
+     "prompt": "Kadın işe nasıl gidecek?",
+     "options": [
+      {
+       "en": "by car"
+      },
+      {
+       "en": "with the man"
+      },
+      {
+       "en": "from home"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t8",
+   "title": "Where Is My Key?",
+   "titleTr": "Anahtarım nerede?",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "I want to go to work, but I can not find my key.",
+     "tr": "İşe gitmek istiyorum ama anahtarımı bulamıyorum."
+    },
+    {
+     "en": "Is it in my bag?",
+     "tr": "Çantamda mı?"
+    },
+    {
+     "en": "No, it is not.",
+     "tr": "Hayır, değil."
+    },
+    {
+     "en": "I look on the table and on the chair.",
+     "tr": "Masanın ve sandalyenin üstüne bakıyorum."
+    },
+    {
+     "en": "Then I see it.",
+     "tr": "Sonra onu görüyorum."
+    },
+    {
+     "en": "The key is in the door!",
+     "tr": "Anahtar kapının üstünde!"
+    }
+   ],
+   "questions": [
+    {
+     "id": "t8q1",
+     "prompt": "Konuşan kişi ne arıyor?",
+     "options": [
+      {
+       "image": "phone"
+      },
+      {
+       "image": "key"
+      },
+      {
+       "image": "bag"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t8q2",
+     "prompt": "Anahtar çantada mı?",
+     "options": [
+      {
+       "en": "Yes, it is in the bag."
+      },
+      {
+       "en": "No, it is not."
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "id": "t8q3",
+     "prompt": "Anahtar sonunda nerede?",
+     "options": [
+      {
+       "en": "on the chair"
+      },
+      {
+       "en": "in the car"
+      },
+      {
+       "en": "in the door"
+      }
+     ],
+     "answer": 2
+    }
+   ]
+  }
+ ]
+}

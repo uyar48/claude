@@ -33,13 +33,16 @@ export function supabaseNotifyStore(db: SupabaseClient, allowedUserIds?: string[
         .lt('due_at', endOfLocalDay(now, tz));
       if (due.error) throw due.error;
 
-      const done = await db
+      const today = await db.from('lesson_log').select('active_ms').eq('user_id', userId).eq('date', localDate(now, tz));
+      if (today.error) throw today.error;
+      const last = await db
         .from('lesson_log')
-        .select('id', { count: 'exact', head: true })
+        .select('number,completed_at')
         .eq('user_id', userId)
-        .eq('date', localDate(now, tz))
-        .not('completed_at', 'is', null);
-      if (done.error) throw done.error;
+        .order('number', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (last.error) throw last.error;
 
       const hist = await db
         .from('notification_log')
@@ -57,7 +60,8 @@ export function supabaseNotifyStore(db: SupabaseClient, allowedUserIds?: string[
         settings: profile.data?.settings ?? {},
         lastActiveAt: ms(profile.data?.last_active_at ?? null),
         dueCount: due.count ?? 0,
-        lessonCompletedToday: (done.count ?? 0) > 0,
+        minutesToday: (today.data ?? []).reduce((a, r) => a + Number(r.active_ms ?? 0), 0) / 60_000,
+        nextLesson: last.data ? Number(last.data.number) + (last.data.completed_at === null ? 0 : 1) : 1,
         history: (hist.data ?? []).map(
           (r): SentNotification => ({
             id: r.id,

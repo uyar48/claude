@@ -10,7 +10,9 @@ export interface UserState {
   settings: unknown;
   lastActiveAt: number | null;
   dueCount: number;
-  lessonCompletedToday: boolean;
+  /** Active minutes learned today (local day). */
+  minutesToday: number;
+  nextLesson: number;
   history: SentNotification[];
   subscriptions: StoredSubscription[];
 }
@@ -69,8 +71,10 @@ async function notifyUser(userId: string, deps: NotifyDeps): Promise<NotifyOutco
     now,
     timezone: settings.timezone,
     settings: settings.notifications,
-    lessonMinutes: settings.lessonMinutes,
-    lessonCompletedToday: state.lessonCompletedToday,
+    goalMinutes: settings.goalMinutes,
+    goalMetToday: state.minutesToday >= settings.goalMinutes,
+    paused: settings.paused,
+    nextLesson: state.nextLesson,
     dueCount: state.dueCount,
     history,
   });

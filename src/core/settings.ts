@@ -1,4 +1,5 @@
 import { DEFAULT_TZ } from './time.js';
+import { GOAL_OPTIONS, NEW_WORDS_DEFAULT, clampNewWords } from './progress.js';
 
 export interface NotificationTypeSetting {
   enabled: boolean;
@@ -14,19 +15,26 @@ export interface NotificationSettings {
 
 export interface Settings {
   timezone: string;
-  lessonMinutes: number;
-  newPerDay: number;
+  /** Daily goal in active minutes (20 / 30 / 45); also the length of one lesson. */
+  goalMinutes: number;
+  /** New words per lesson (6–15). */
+  newPerLesson: number;
+  /** "Ara ver": no notifications, no time limit. */
+  paused: boolean;
+  pausedAt: number | null;
   notifications: NotificationSettings;
   updatedAt: number;
 }
 
-export const LESSON_MINUTE_OPTIONS = [15, 20, 30, 45] as const;
+export { GOAL_OPTIONS };
 
 export function defaultSettings(): Settings {
   return {
     timezone: DEFAULT_TZ,
-    lessonMinutes: 30,
-    newPerDay: 5,
+    goalMinutes: 30,
+    newPerLesson: NEW_WORDS_DEFAULT,
+    paused: false,
+    pausedAt: null,
     notifications: {
       lesson: { enabled: true, time: '19:30' },
       review: { enabled: true, time: '12:30' },
@@ -36,16 +44,25 @@ export function defaultSettings(): Settings {
   };
 }
 
-/** Fills missing fields (e.g. settings saved by an older app version). */
+/** Nearest allowed goal (old 15-minute lessons become 20). */
+export function normalizeGoal(n: unknown, fallback: number): number {
+  if (typeof n !== 'number' || !Number.isFinite(n)) return fallback;
+  return GOAL_OPTIONS.reduce((best, g) => (Math.abs(g - n) < Math.abs(best - n) ? g : best), GOAL_OPTIONS[0]);
+}
+
+/** Fills missing fields and migrates settings saved by an older app version. */
 export function normalizeSettings(raw: unknown): Settings {
   const d = defaultSettings();
   if (!raw || typeof raw !== 'object') return d;
-  const r = raw as Partial<Settings>;
+  const r = raw as Partial<Settings> & { lessonMinutes?: number; newPerDay?: number };
   const n = (r.notifications ?? {}) as Partial<NotificationSettings>;
   return {
     timezone: typeof r.timezone === 'string' ? r.timezone : d.timezone,
-    lessonMinutes: typeof r.lessonMinutes === 'number' ? r.lessonMinutes : d.lessonMinutes,
-    newPerDay: typeof r.newPerDay === 'number' ? r.newPerDay : d.newPerDay,
+    goalMinutes: normalizeGoal(r.goalMinutes ?? r.lessonMinutes, d.goalMinutes),
+    // v1 stored "newPerDay" (5); v2 starts everyone on the new default.
+    newPerLesson: typeof r.newPerLesson === 'number' ? clampNewWords(r.newPerLesson) : d.newPerLesson,
+    paused: r.paused === true,
+    pausedAt: typeof r.pausedAt === 'number' ? r.pausedAt : null,
     notifications: {
       lesson: { ...d.notifications.lesson, ...(n.lesson ?? {}) },
       review: { ...d.notifications.review, ...(n.review ?? {}) },

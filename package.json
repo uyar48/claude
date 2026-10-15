@@ -17,7 +17,9 @@
     "media": "NODE_USE_ENV_PROXY=1 tsx scripts/generate-media.ts",
     "icons": "tsx scripts/make-icons.ts",
     "vapid": "tsx scripts/vapid.ts",
-    "deploy": "NODE_USE_ENV_PROXY=1 tsx scripts/deploy.ts"
+    "deploy": "NODE_USE_ENV_PROXY=1 tsx scripts/deploy.ts",
+    "build-content": "tsx scripts/build-content.ts",
+    "import-tatoeba": "tsx scripts/import-tatoeba.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",

@@ -5,8 +5,9 @@
 // Rules
 // • Each type (daily lesson, due reviews) is sent at most once per local day,
 //   inside a 2-hour window after the user's chosen time.
-// • Lesson reminder is skipped if today's lesson is done; review reminder is
-//   skipped if nothing is due today.
+// • Lesson reminder is skipped once today's goal (minutes) is met; review
+//   reminder is skipped if nothing is due today.
+// • Nothing at all while the learner has paused ("Ara ver").
 // • Never during quiet hours (default 22:00–08:00, Europe/Istanbul).
 // • At least 3 hours between two notifications.
 // • Back-off: every 3 consecutive ignored notifications lower the frequency
@@ -29,8 +30,12 @@ export interface SchedulerInput {
   now: number;
   timezone: string;
   settings: NotificationSettings;
-  lessonMinutes: number;
-  lessonCompletedToday: boolean;
+  goalMinutes: number;
+  goalMetToday: boolean;
+  /** "Ara ver" mode: no notifications. */
+  paused: boolean;
+  /** Number of the next lesson in the sequence. */
+  nextLesson: number;
   /** Cards due before the end of the local day. */
   dueCount: number;
   history: readonly SentNotification[];
@@ -94,6 +99,7 @@ export function backoffLevel(history: readonly SentNotification[], now: number):
 
 export function decide(input: SchedulerInput): PlannedNotification | null {
   const { now, timezone: tz, settings } = input;
+  if (input.paused) return null;
   const local = localParts(now, tz);
   if (inQuietHours(local.minutes, settings.quietHours)) return null;
 
@@ -116,7 +122,7 @@ export function decide(input: SchedulerInput): PlannedNotification | null {
     const at = parseHm(setting.time);
     if (local.minutes < at || local.minutes >= at + SEND_WINDOW_MINUTES) continue;
     if (sentToday.some((n) => n.kind === kind)) continue;
-    if (kind === 'lesson' && input.lessonCompletedToday) continue;
+    if (kind === 'lesson' && input.goalMetToday) continue;
     if (kind === 'review' && input.dueCount <= 0) continue;
     candidates.push({ kind, at });
   }
@@ -143,11 +149,11 @@ export function compose(kind: 'lesson' | 'review', input: SchedulerInput, level:
       tag,
       url: '/?from=push',
       backoffLevel: level,
-      title: 'Bugünkü dersin hazır',
+      title: `${input.nextLesson}. ders hazır`,
       body:
         input.dueCount > 0
-          ? `${input.dueCount} tekrar ve yeni kelimeler. Yaklaşık ${input.lessonMinutes} dakika.`
-          : `Yaklaşık ${input.lessonMinutes} dakika. Hazır olduğunda başla.`,
+          ? `${Math.min(input.dueCount, 40)} tekrar ve yeni kelimeler. Yaklaşık ${input.goalMinutes} dakika.`
+          : `Yeni kelimeler ve okuma. Yaklaşık ${input.goalMinutes} dakika.`,
     };
   }
   return {
@@ -156,6 +162,6 @@ export function compose(kind: 'lesson' | 'review', input: SchedulerInput, level:
     url: '/?from=push',
     backoffLevel: level,
     title: 'Tekrar zamanı',
-    body: `${input.dueCount} kelime tekrar için hazır. Birkaç dakika yeter.`,
+    body: `${Math.min(input.dueCount, 40)} kelime tekrar için hazır. Birkaç dakika yeter.`,
   };
 }

@@ -1,18 +1,21 @@
 // Local-first app state. IndexedDB is the source of truth on the device; every
 // change is marked dirty and pushed by the sync engine when online.
 
-import type { LessonLogEntry, LessonPlan } from '../core/lesson';
+import type { LessonLogEntry } from '../core/progress';
+import type { Exercise, SessionState } from '../core/session';
 import { normalizeSettings, type Settings } from '../core/settings';
 import { introduce, markForReview, newCard, review, type Card, type Grade } from '../core/srs';
 import { strip, type DB, type ReviewLogEntry } from './db';
+import { upgradeLessons, type MediaChoice } from './merge';
 
+/** The lesson in progress on this device (resumable after a reload). */
 export interface LessonProgress {
   lessonId: string;
-  plan: LessonPlan;
-  segmentIndex: number;
+  number: number;
   startedAt: number;
-  reviewed: number;
-  correct: number;
+  session: SessionState;
+  /** The exercise on screen (so a reload shows the same one). */
+  current: Exercise | null;
   tapped: string[];
 }
 
@@ -24,6 +27,8 @@ export interface AppState {
   lessons: readonly LessonLogEntry[];
   settings: Settings;
   progress: LessonProgress | null;
+  /** Picture choices from /admin/review, by word id. */
+  mediaChoices: Readonly<Record<string, MediaChoice>>;
   sync: { status: SyncStatus; lastSyncAt: number | null; error?: string };
 }
 
@@ -45,24 +50,29 @@ export class Store {
       lessons: [],
       settings: normalizeSettings(undefined),
       progress: null,
+      mediaChoices: {},
       sync: { status: 'local', lastSyncAt: null },
     };
   }
 
   async load() {
-    const [cards, lessons, settings, progress, lastSyncAt] = await Promise.all([
+    const [cards, lessons, settings, progress, lastSyncAt, choices] = await Promise.all([
       this.db.getAll('cards'),
       this.db.getAll('lessons'),
       this.db.get('kv', 'settings'),
       this.db.get('kv', 'progress'),
       this.db.get('kv', 'lastSyncAt'),
+      this.db.get('kv', 'mediaChoices'),
     ]);
+    const saved = progress as Partial<LessonProgress> | undefined;
     this.set({
       ready: true,
       cards: new Map(cards.map((c) => [c.wordId, strip(c) as Card])),
-      lessons: sortLessons(lessons.map((l) => strip(l) as LessonLogEntry)),
+      lessons: sortLessons(upgradeLessons(lessons.map((l) => strip(l) as LessonLogEntry))),
       settings: normalizeSettings(settings),
-      progress: (progress as LessonProgress | undefined) ?? null,
+      // A v1 lesson in progress (segment plan) cannot be resumed by the v2 engine.
+      progress: saved?.session ? (saved as LessonProgress) : null,
+      mediaChoices: (choices as Record<string, MediaChoice> | undefined) ?? {},
       sync: { ...this.state.sync, lastSyncAt: (lastSyncAt as number | undefined) ?? null },
     });
   }
@@ -146,6 +156,44 @@ export class Store {
     this.onLocalChange();
   }
 
+  // ---------- media choices ----------
+
+  async setMediaChoice(c: Omit<MediaChoice, 'updatedAt'>) {
+    const choice = { ...c, updatedAt: this.now() };
+    const next = { ...this.state.mediaChoices, [c.wordId]: choice };
+    await this.db.put('kv', next, 'mediaChoices');
+    const dirty = new Set(((await this.db.get('kv', 'mediaChoicesDirty')) as string[] | undefined) ?? []);
+    dirty.add(c.wordId);
+    await this.db.put('kv', [...dirty], 'mediaChoicesDirty');
+    this.set({ mediaChoices: next });
+    this.onLocalChange();
+  }
+
+  dirtyMediaChoices = async () => {
+    const ids = ((await this.db.get('kv', 'mediaChoicesDirty')) as string[] | undefined) ?? [];
+    return ids.map((id) => this.state.mediaChoices[id]).filter(Boolean);
+  };
+
+  async markMediaChoicesClean(items: MediaChoice[]) {
+    const ids = ((await this.db.get('kv', 'mediaChoicesDirty')) as string[] | undefined) ?? [];
+    const left = ids.filter((id) => !items.some((c) => c.wordId === id && this.state.mediaChoices[id]?.updatedAt === c.updatedAt));
+    await this.db.put('kv', left, 'mediaChoicesDirty');
+  }
+
+  async applyRemoteChoices(remote: MediaChoice[]) {
+    const next = { ...this.state.mediaChoices };
+    let changed = false;
+    for (const r of remote) {
+      if (!next[r.wordId] || r.updatedAt > next[r.wordId].updatedAt) {
+        next[r.wordId] = r;
+        changed = true;
+      }
+    }
+    if (!changed) return;
+    await this.db.put('kv', next, 'mediaChoices');
+    this.set({ mediaChoices: next });
+  }
+
   // ---------- used by sync ----------
 
   async applyRemote(cards: Card[], lessons: LessonLogEntry[], settings: Settings | null) {
@@ -176,7 +224,7 @@ export class Store {
         }
       }
       await tx.done;
-      nextLessons = sortLessons([...byId.values()]);
+      nextLessons = sortLessons(upgradeLessons([...byId.values()]));
     }
     let nextSettings = this.state.settings;
     if (settings && settings.updatedAt > this.state.settings.updatedAt) {

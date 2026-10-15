@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { lookup } from '../../content';
+import { useEffect, useMemo } from 'react';
+import { exampleFor, lookup } from '../../content';
 import { speaker } from '../../audio/speaker';
 import { IconClose, IconSpeaker } from './Icons';
 import { Picture } from './Picture';
@@ -7,10 +7,12 @@ import { Picture } from './Picture';
 /** Bottom sheet shown when a word is tapped while reading. */
 export function WordSheet({ form, onClose, added }: { form: string; onClose: () => void; added: boolean }) {
   const hit = lookup(form);
+  const word = hit.word;
+  const example = useMemo(() => (word ? exampleFor(word.id) : null), [word]);
   useEffect(() => {
-    if (hit.word) void speaker.word(hit.word.id);
+    if (word) void speaker.word(word.id);
     else void speaker.text(form);
-  }, [form, hit.word]);
+  }, [form, word]);
 
   return (
     <div className="sheet-backdrop" onClick={onClose} role="presentation">
@@ -18,27 +20,25 @@ export function WordSheet({ form, onClose, added }: { form: string; onClose: () 
         <button className="icon-btn sheet-close" onClick={onClose} aria-label="Kapat">
           <IconClose />
         </button>
-        {hit.word && <Picture wordId={hit.word.id} size="md" />}
+        {word && <Picture wordId={word.id} size="md" credit />}
         <div className="sheet-word">
-          <span className="en">{hit.word?.en ?? form}</span>
-          <button
-            className="icon-btn"
-            aria-label="Dinle"
-            onClick={() => (hit.word ? speaker.word(hit.word.id) : speaker.text(form))}
-          >
+          <span className="en" lang="en">
+            {word?.en ?? form}
+          </span>
+          <button className="icon-btn" aria-label="Dinle" onClick={() => (word ? speaker.word(word.id) : speaker.text(form))}>
             <IconSpeaker />
           </button>
         </div>
-        <p className="sheet-tr">{hit.word?.tr ?? hit.gloss ?? '—'}</p>
-        {hit.word && (
+        <p className="sheet-tr">{word?.tr ?? 'Bu kelime henüz derslerde yok.'}</p>
+        {example && (
           <p className="sheet-example">
-            <button className="link en" lang="en" onClick={() => speaker.example(hit.word!.id)}>
-              {hit.word.example}
+            <button className="link en" lang="en" onClick={() => speaker.courseSentence(example.id)}>
+              {example.en}
             </button>
-            <span className="tr">{hit.word.exampleTr}</span>
+            <span className="tr">{example.tr}</span>
           </p>
         )}
-        {hit.word && added && <p className="note">Tekrar listene eklendi.</p>}
+        {word && added && <p className="note">Tekrar listene eklendi.</p>}
       </div>
     </div>
   );
