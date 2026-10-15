@@ -84,7 +84,7 @@ Giriş yapılmış herhangi bir cihazda **Ayarlar → Başka cihazı bağla** da
 
 - Somut kelimeler için kelime başına 5 aday fotoğraf indirir. Fotoğraflar 4:3 kırpılır, en fazla 800 px olur ve `public/media/img/` klasörüne kaydedilir. Kaynak, yazar ve lisans `content/media/credits.json` dosyasına yazılır.
 - Kaynak sırası:
-  1. Pexels (`PEXELS_API_KEY`, ücretsiz: https://www.pexels.com/api/)
+  1. Pexels (`PEXELS_API_KEY`; isteğe bağlı — Pexels şu an yeni API anahtarı vermiyor)
   2. Pixabay (`PIXABAY_API_KEY`, ücretsiz: https://pixabay.com/api/docs/). Fotoğraflar indirilip kendi sunucumuzda tutulur, arama sonuçları 24 saat önbellekte kalır.
   3. Anahtar gerektirmeyen Openverse ve Wikimedia Commons. ND (türev yasak) lisanslar ve uygunsuz başlıklar elenir.
 - Anahtarlar ortam değişkeni olarak eklenir; bu ortamda **ortamı düzenle → ortam değişkenleri**, GitHub'da **Settings → Secrets and variables → Actions**. Anahtarı sohbete ya da koda yapıştırma.

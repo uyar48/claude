@@ -43,7 +43,7 @@ const HEIGHT = 600;
 
 export const KEY_HELP: Record<string, string> = {
   PEXELS_API_KEY:
-    'PEXELS_API_KEY yok: Pexels atlandı. Ücretsiz anahtar: https://www.pexels.com/api/ → ortam ayarlarına PEXELS_API_KEY olarak ekle.',
+    'PEXELS_API_KEY yok: Pexels atlandı (isteğe bağlı; Pexels şu an yeni anahtar vermiyor).',
   PIXABAY_API_KEY:
     'PIXABAY_API_KEY yok: Pixabay atlandı. Ücretsiz anahtar: https://pixabay.com/api/docs/ → ortam ayarlarına PIXABAY_API_KEY olarak ekle.',
 };

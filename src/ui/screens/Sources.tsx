@@ -11,7 +11,8 @@ const SOURCE_INFO = [
     name: 'Pexels',
     env: 'PEXELS_API_KEY',
     url: 'https://www.pexels.com/api/',
-    note: 'Ücretsiz anahtar. Her fotoğrafta fotoğrafçı ve Pexels bağlantısı gösterilir.',
+    note: 'İsteğe bağlı. Pexels şu an yeni API anahtarı vermiyor; anahtar olmadan Pixabay ve açık kaynaklar yeterli. Kullanılırsa her fotoğrafta fotoğrafçı ve Pexels bağlantısı gösterilir.',
+    optional: true,
   },
   {
     key: 'pixabay',
@@ -19,6 +20,7 @@ const SOURCE_INFO = [
     env: 'PIXABAY_API_KEY',
     url: 'https://pixabay.com/api/docs/',
     note: 'Ücretsiz anahtar. Fotoğraflar indirilip bu sitede barındırılır (doğrudan bağlantı yok), arama sonuçları 24 saat saklanır.',
+    optional: false,
   },
   {
     key: 'wikimedia',
@@ -26,6 +28,7 @@ const SOURCE_INFO = [
     env: null,
     url: 'https://commons.wikimedia.org',
     note: 'Anahtar gerekmez. Her fotoğrafın kendi lisansı ve yazarı Kaynaklar ekranında.',
+    optional: false,
   },
   {
     key: 'openverse',
@@ -33,6 +36,7 @@ const SOURCE_INFO = [
     env: null,
     url: 'https://openverse.org',
     note: 'Anahtar gerekmez. Açık lisanslı (CC) fotoğraflar; lisans ve yazar her fotoğrafta kayıtlı.',
+    optional: false,
   },
 ] as const;
 
@@ -74,10 +78,12 @@ export function ImageSources() {
             <div className="row gap">
               <h2>{src.name}</h2>
               <span className="grow" />
-              <span className={`small ${missing ? 'warn-text' : 'ok-text'}`}>{missing ? 'Anahtar eksik' : 'Kullanılıyor'}</span>
+              <span className={`small ${missing && !src.optional ? 'warn-text' : missing ? 'muted' : 'ok-text'}`}>
+                {missing ? (src.optional ? 'Kullanılmıyor' : 'Anahtar eksik') : 'Kullanılıyor'}
+              </span>
             </div>
             <p className="small">{src.note}</p>
-            {missing && (
+            {missing && !src.optional && (
               <p className="notice small">
                 {src.env} eklenmemiş. {src.name} sitesinden ücretsiz bir anahtar al ({src.url}) ve ortam ayarlarına{' '}
                 <code>{src.env}</code> adıyla ekle (Claude Code: ortamı düzenle → ortam değişkenleri). Anahtarı sohbete

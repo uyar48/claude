@@ -27,8 +27,9 @@ Canlı adres: https://okuma-iota.vercel.app · Dal: `claude/new-session-b5nvn7`
 
 ## Bekleyen
 
-- `PEXELS_API_KEY` / `PIXABAY_API_KEY` henüz yok. Eklenince:
-  1. `npm run fetch-images -- --force`
+- `PIXABAY_API_KEY` ortamda tanımlı (yeni oturumlarda görünür). Pexels yeni anahtar vermediği için `PEXELS_API_KEY` yok; bu bilinçli bir durum.
+- Fotoğrafları yenilemek için:
+  1. `npm run fetch-images -- --force --prune`
   2. Commit, ardından `npm run deploy -- --app-only`
   3. Kullanıcıya `/admin/review` adresini gönder.
 - Ünite 2 ve sonrası: `content/units/unit-02.*.json` ekle, `build-content` ünite listesini okur (UNIT_SIZE = 100).

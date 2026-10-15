@@ -34,7 +34,7 @@ npm run validate-content   # kapsam, cümle sayısı, lisans alanları, eksik me
 npm run deploy -- --update # veritabanı geçişleri + uygulamayı yeniden dağıt
 ```
 
-`PEXELS_API_KEY` ve `PIXABAY_API_KEY` isteğe bağlıdır ve ücretsizdir. Yoksa betik ne eksik olduğunu yazar; Openverse ile Wikimedia Commons kullanılır. Başka bir ücretli servis kullanılmaz.
+`PIXABAY_API_KEY` ücretsizdir ve tanımlıdır. `PEXELS_API_KEY` isteğe bağlıdır; Pexels şu an yeni anahtar vermiyor. Anahtar yoksa betik ne eksik olduğunu yazar ve Openverse ile Wikimedia Commons'u kullanır. Başka bir ücretli servis kullanılmaz.
 
 ## Mimari
 
