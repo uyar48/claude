@@ -5,7 +5,7 @@
 // element is unlocked on the first tap and reused for every clip.
 
 import { getSentence, getText, getWord } from '../content';
-import { sentenceAudio, textSentenceAudio, wordAudio } from '../content/media';
+import { phraseAudio, sentenceAudio, textSentenceAudio, wordAudio } from '../content/media';
 import type { Voice } from '../content/types';
 import { estimateTimings, wordAt } from '../core/timing';
 import { tokenize } from '../core/tokenize';
@@ -64,6 +64,13 @@ class Speaker {
     const clip = sentenceAudio(sentenceId);
     if (clip) return this.playFile(clip.url, clip.timings ?? null, onWord ? { text: s.en, onWord } : null);
     return this.speak(s.en, 'female', onWord);
+  }
+
+  /** A recorded phrase by manifest key (e.g. a grammar example), else the device voice. */
+  async phrase(key: string, text: string) {
+    const clip = phraseAudio(key);
+    if (clip) return this.playFile(clip.url, null, null);
+    return this.speak(text, 'female', null);
   }
 
   async text(text: string, voice: Voice = 'female') {

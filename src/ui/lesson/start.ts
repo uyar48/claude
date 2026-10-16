@@ -17,6 +17,7 @@ export function nextLesson(rt: Runtime, now = Date.now()): NextLesson {
     now,
     tz: s.settings.timezone,
     newPerLesson: s.settings.newPerLesson,
+    grammarSeen: new Set(s.settings.grammarSeen),
   });
 }
 
@@ -38,6 +39,7 @@ export async function startLesson(rt: Runtime, now = Date.now()): Promise<Lesson
     targetMinutes: s.settings.goalMinutes,
     newWords: plan.newWords,
     reviewWords: plan.reviewWords,
+    grammar: plan.grammar,
   });
   const progress: LessonProgress = { lessonId: id, number: plan.number, startedAt: now, session, current: null, tapped: [] };
   await rt.store.setProgress(progress);

@@ -22,6 +22,8 @@ export interface Settings {
   /** "Ara ver": no notifications, no time limit. */
   paused: boolean;
   pausedAt: number | null;
+  /** Grammar cards already shown (ids). */
+  grammarSeen: string[];
   notifications: NotificationSettings;
   updatedAt: number;
 }
@@ -35,6 +37,7 @@ export function defaultSettings(): Settings {
     newPerLesson: NEW_WORDS_DEFAULT,
     paused: false,
     pausedAt: null,
+    grammarSeen: [],
     notifications: {
       lesson: { enabled: true, time: '19:30' },
       review: { enabled: true, time: '12:30' },
@@ -63,6 +66,7 @@ export function normalizeSettings(raw: unknown): Settings {
     newPerLesson: typeof r.newPerLesson === 'number' ? clampNewWords(r.newPerLesson) : d.newPerLesson,
     paused: r.paused === true,
     pausedAt: typeof r.pausedAt === 'number' ? r.pausedAt : null,
+    grammarSeen: Array.isArray(r.grammarSeen) ? r.grammarSeen.filter((x): x is string => typeof x === 'string') : [],
     notifications: {
       lesson: { ...d.notifications.lesson, ...(n.lesson ?? {}) },
       review: { ...d.notifications.review, ...(n.review ?? {}) },

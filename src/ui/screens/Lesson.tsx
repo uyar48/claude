@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { course, getText, getWord } from '../../content';
+import { learnerUnit, readCounts } from '../../core/course';
 import { addActive, goalDays, minutesOn, streakInfo } from '../../core/progress';
 import {
   CLOSE_MS,
@@ -84,10 +85,17 @@ export function LessonScreen() {
   const answering = useRef(false);
   const progress = state.progress;
 
-  const ctx = useCallback(
-    (): SessionContext => ({ course, cards: rt.store.getState().cards, hasVisual: hasPhoto }),
-    [rt, hasPhoto],
-  );
+  const ctx = useCallback((): SessionContext => {
+    const st = rt.store.getState();
+    return {
+      course,
+      cards: st.cards,
+      hasVisual: hasPhoto,
+      unit: learnerUnit(course, st.cards),
+      // Texts read in other lessons (this one's are tracked by the session).
+      readCounts: readCounts(st.lessons.filter((l) => l.id !== st.progress?.lessonId)),
+    };
+  }, [rt, hasPhoto]);
 
   const finish = useCallback(
     async (session: SessionState) => {
@@ -159,6 +167,9 @@ export function LessonScreen() {
       if (ex.type === 'speed-round') ms = Math.max(CLOSE_MS, ms);
       const { state: session, grades } = recordAnswer(p.session, ex, { correct: out.correct, ms, perWord: out.perWord });
       for (const g of grades) await rt.store.grade(g.wordId, g.grade, 'lesson');
+      if (ex.type === 'grammar' && ex.grammarId && !rt.store.getState().settings.grammarSeen.includes(ex.grammarId)) {
+        await rt.store.updateSettings((x) => ({ ...x, grammarSeen: [...x.grammarSeen, ex.grammarId!] }));
+      }
       if (out.questions) {
         questions.current = {
           correct: questions.current.correct + out.questions.correct,

@@ -123,6 +123,11 @@ export function Today() {
         <ul className="plan">
           {reviews > 0 && <li>{reviews} kelime tekrarı</li>}
           {newWords.length > 0 && <li>{newWords.length} yeni kelime</li>}
+          {!inProgress && plan.grammar.length > 0 && (
+            <li>
+              {plan.grammar.length === 1 ? 'Kısa bir dilbilgisi notu' : `${plan.grammar.length} kısa dilbilgisi notu`}
+            </li>
+          )}
           <li>Okuma, dinleme ve kısa alıştırmalar</li>
           <li>Yaklaşık {goal} dakika</li>
         </ul>

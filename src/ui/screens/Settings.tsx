@@ -158,6 +158,10 @@ export function SettingsScreen() {
       {isIOS() && !isStandalone() && <InstallHelp />}
 
       <section className="panel links">
+        <Link to="/settings/dilbilgisi" className="field-row">
+          <span>Dilbilgisi notları</span>
+          <span aria-hidden>›</span>
+        </Link>
         <Link to="/settings/gorseller" className="field-row">
           <span>Görsel kaynakları</span>
           <span aria-hidden>›</span>

@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import courseJson from '../../content/build/course.json';
 import type { Course } from '../content/courseTypes';
-import { nextNewWords } from './course';
+import { learnerUnit, nextNewWords } from './course';
+import { pickGrammar } from './progress';
 import {
   DIFFICULTY,
   createSession,
@@ -34,6 +35,7 @@ const SECONDS: Record<ExerciseType, number> = {
   reading: 240,
   scene: 70,
   'speed-round': 60,
+  grammar: 40,
 };
 
 /** The brief's exercise categories (picture↔word, translate, … ). */
@@ -75,14 +77,25 @@ interface Run {
   exercises: Exercise[];
 }
 
-function simulate(cards: Map<string, Card>, opts: { minutes: number; newWords: number; id?: string; wrongEvery?: number }): Run {
-  const ctx: SessionContext = { course, cards, hasVisual };
+function simulate(
+  cards: Map<string, Card>,
+  opts: {
+    minutes: number;
+    newWords: number;
+    id?: string;
+    wrongEvery?: number;
+    grammar?: Array<{ id: string; word: string }>;
+    readCounts?: Record<string, number>;
+  },
+): Run {
+  const ctx: SessionContext = { course, cards, hasVisual, unit: learnerUnit(course, cards), readCounts: opts.readCounts };
   let state = createSession({
     id: opts.id ?? 'lesson-a',
     number: 1,
     targetMinutes: opts.minutes,
     newWords: nextNewWords(course, cards, opts.newWords),
     reviewWords: dueWords(cards, T0),
+    grammar: opts.grammar,
   });
   const exercises: Exercise[] = [];
   for (let i = 0; i < 1000; i++) {
@@ -196,5 +209,85 @@ describe('lesson session engine', () => {
     s = r1.state;
     const r2 = recordAnswer(s, first.exercise!, { correct: true, ms: 5000 });
     expect(r2.grades).toEqual([]);
+  });
+});
+
+/** A learner who has learned the first `n` words of the course. */
+function learnedCards(n: number): Map<string, Card> {
+  const cards = new Map<string, Card>();
+  for (const w of course.order.slice(0, n)) {
+    let c = introduce(newCard(w, T0 - 30 * DAY), T0 - 30 * DAY);
+    c = review(c, 'good', T0 - 30 * DAY + 20 * MINUTE);
+    c = review(c, 'good', T0 - 29 * DAY);
+    c = review(c, 'good', T0 - 20 * DAY);
+    cards.set(w, c);
+  }
+  return cards;
+}
+
+describe('grammar cards', () => {
+  it('a card comes right after the intro of its word; earlier words get a catch-up card after the warm-up', () => {
+    const cards = startedCards(); // next words: the, be, a, i, have …
+    const grammar = pickGrammar(course, cards, nextNewWords(course, cards, 10), new Set());
+    expect(grammar.map((g) => g.id)).toEqual(['g-the', 'g-be']);
+    const run = simulate(cards, { minutes: 30, newWords: 10, grammar, id: 'g1' });
+    const types = run.exercises.map((e) => e.type + (e.wordId ? `:${e.wordId}` : e.grammarId ? `:${e.grammarId}` : ''));
+    expect(types.indexOf('grammar:g-the')).toBe(types.indexOf('intro:the') + 1);
+    expect(types.indexOf('grammar:g-be')).toBe(types.indexOf('intro:be') + 1);
+    expect(run.exercises.filter((e) => e.type === 'grammar')).toHaveLength(2);
+
+    // Words learned before, cards not seen yet: shown as catch-ups (two at most).
+    const later = learnedCards(40);
+    const seen = new Set(['g-the', 'g-be']);
+    const catchUp = pickGrammar(course, later, nextNewWords(course, later, 10), seen);
+    expect(catchUp).toHaveLength(2);
+    const run2 = simulate(later, { minutes: 20, newWords: 10, grammar: catchUp, id: 'g2' });
+    const g = run2.exercises.filter((e) => e.type === 'grammar').map((e) => e.grammarId);
+    expect(g).toEqual(catchUp.map((c) => c.id));
+  });
+
+  it('new-word cards go first and seen cards never come back', () => {
+    const cards = learnedCards(100); // next words: any, after, day …
+    const seen = new Set((course.grammar ?? []).filter((x) => x.order < 100).map((x) => x.id));
+    const g = pickGrammar(course, cards, nextNewWords(course, cards, 10), seen);
+    expect(g.map((x) => x.id)).toEqual(['g-some-any', 'g-should']);
+    expect(pickGrammar(course, cards, [], new Set([...seen, 'g-some-any', 'g-should']))).toEqual([]);
+  });
+});
+
+describe('graded difficulty', () => {
+  it('a Unit 1 learner only gets Unit 1 sentences and texts', () => {
+    const run = simulate(startedCards(), { minutes: 30, newWords: 10, id: 'u1' });
+    for (const e of run.exercises) {
+      if (e.sentenceId) expect(course.sentences.find((x) => x.id === e.sentenceId)!.unit).toBe(1);
+      if (e.textId) expect(course.texts.find((x) => x.id === e.textId)!.unit).toBe(1);
+    }
+  });
+
+  it('later units use longer sentences, step by step', () => {
+    const avgWords = (unit: number) => {
+      const xs = course.sentences.filter((x) => x.unit === unit).map((x) => x.en.split(/\s+/).length);
+      return xs.reduce((a, b) => a + b, 0) / xs.length;
+    };
+    expect(avgWords(3)).toBeGreaterThan(avgWords(1));
+    expect(avgWords(5)).toBeGreaterThan(avgWords(2));
+    const max = (unit: number) => Math.max(...course.sentences.filter((x) => x.unit === unit).map((x) => x.en.split(/\s+/).length));
+    expect(max(1)).toBeLessThanOrEqual(9);
+    expect(max(2)).toBeLessThanOrEqual(10);
+    expect(max(5)).toBeLessThanOrEqual(16);
+    // A Unit 3 learner may meet Unit 3 sentences but none from later units.
+    const run = simulate(learnedCards(200), { minutes: 30, newWords: 10, id: 'u3' });
+    const units = run.exercises.filter((e) => e.sentenceId).map((e) => course.sentences.find((x) => x.id === e.sentenceId)!.unit);
+    expect(Math.max(...units)).toBeLessThanOrEqual(3);
+  });
+
+  it('texts not read before come first', () => {
+    const cards = learnedCards(60);
+    const first = simulate(cards, { minutes: 30, newWords: 10, id: 'r1' });
+    const read = first.state.usedTexts;
+    expect(read.length).toBeGreaterThan(0);
+    const counts = Object.fromEntries(read.map((t) => [t, 1]));
+    const second = simulate(cards, { minutes: 30, newWords: 10, id: 'r2', readCounts: counts });
+    expect(second.state.usedTexts[0]).not.toBe(read[0]);
   });
 });

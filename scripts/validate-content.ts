@@ -61,7 +61,10 @@ export function validateCourse(
     // Words are taught in lessons of at least NEW_WORDS_MIN new words, and a
     // lesson may use all of its own new words in its sentences.
     const k = known((Math.floor(w.order / NEW_WORDS_MIN) + 1) * NEW_WORDS_MIN - 1);
-    const usable = course.sentences.filter((s) => s.lemmas.includes(id) && s.lemmas.every((l) => k.has(l)));
+    // Longer sentences of later units do not count for a word of an earlier unit.
+    const usable = course.sentences.filter(
+      (s) => s.lemmas.includes(id) && s.lemmas.every((l) => k.has(l)) && (s.unit ?? 1) <= w.unit,
+    );
     if (usable.length < MIN_SENTENCES) err(`${id}: only ${usable.length} sentences usable when it is taught (need ${MIN_SENTENCES})`);
     const pics = credits.words[id]?.candidates ?? [];
     if (pics.length) photo++;
@@ -92,10 +95,21 @@ export function validateCourse(
     const cov = sentenceCoverage(course, text, known(t.maxOrder));
     if (cov < SENTENCE_COVERAGE) err(`text ${t.id}: ${(cov * 100).toFixed(0)} % known words when it unlocks (need 95 %)`);
     if (t.questions.length < 3 || t.questions.length > 5) warn(`text ${t.id}: ${t.questions.length} questions (aim for 3–5)`);
+    if (!t.unit) err(`text ${t.id}: no unit`);
     for (const q of t.questions) {
       if (q.answer < 0 || q.answer >= q.options.length) err(`${q.id}: answer index out of range`);
       for (const o of q.options) if (o.image && !course.words[o.image]) err(`${q.id}: picture option "${o.image}" is not a course word`);
     }
+  }
+
+  // ---------- grammar cards ----------
+  for (const g of course.grammar ?? []) {
+    const k = known((Math.floor(g.order / NEW_WORDS_MIN) + 1) * NEW_WORDS_MIN - 1);
+    for (const e of g.examples) {
+      const unknown = e.lemmas.filter((l) => !k.has(l));
+      if (unknown.length) err(`grammar ${g.id}: example "${e.en}" uses words not known yet (${unknown.join(', ')})`);
+    }
+    if (!g.body.length || !g.examples.length) err(`grammar ${g.id}: explanation or examples missing`);
   }
 
   // ---------- pictures ----------
@@ -140,6 +154,8 @@ export function validateCourse(
       'Tatoeba sentences': tatoeba,
       'own sentences': course.sentences.length - tatoeba,
       texts: course.texts.length,
+      'grammar cards': (course.grammar ?? []).length,
+      'texts per unit': course.units.map((u) => course.texts.filter((t) => t.unit === u.n).length).join(' / '),
       'word clips': `${wordAudio} / ${course.order.length}`,
       'text sentence clips': `${textAudio} / ${textSent.length}`,
       'course sentence clips': `${sentAudio} / ${course.sentences.length}`,

@@ -76,3 +76,17 @@ export function wordOf(course: Course, id: string): CourseWord {
   if (!w) throw new Error(`Unknown word ${id}`);
   return w;
 }
+
+/** The learner's unit: the unit of the next word to learn (the last unit when all are learned). */
+export function learnerUnit(course: Course, cards: ReadonlyMap<string, Card>): number {
+  const next = nextNewWords(course, cards, 1)[0];
+  if (next) return course.words[next].unit;
+  return course.units.at(-1)?.n ?? 1;
+}
+
+/** How often each text was read in finished or started lessons. */
+export function readCounts(log: ReadonlyArray<{ textIds: string[] }>): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const l of log) for (const t of l.textIds ?? []) out[t] = (out[t] ?? 0) + 1;
+  return out;
+}

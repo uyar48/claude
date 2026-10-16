@@ -33,6 +33,8 @@ export interface CourseSentence {
   lemmas: string[];
   /** Highest course position among its lemmas: usable once that word is introduced. */
   maxOrder: number;
+  /** First unit in which it may be used (its words, and its length: longer sentences come later). */
+  unit: number;
 }
 
 export interface CourseQuestion {
@@ -51,6 +53,23 @@ export interface CourseText {
   questions: CourseQuestion[];
   lemmas: string[];
   maxOrder: number;
+  /** The unit it was written for. */
+  unit: number;
+}
+
+/** A short grammar card, shown when its word is introduced (or later, as a catch-up). */
+export interface CourseGrammar {
+  id: string;
+  /** The word that brings the card. */
+  word: string;
+  /** Course position of that word. */
+  order: number;
+  title: string;
+  /** Turkish explanation, one paragraph per item. */
+  body: string[];
+  /** Optional two-column table (English, Turkish). */
+  table?: Array<[string, string]>;
+  examples: Array<{ en: string; tr: string; lemmas: string[]; maxOrder: number }>;
 }
 
 export interface CourseUnit {
@@ -72,5 +91,6 @@ export interface Course {
   forms: Record<string, string>;
   sentences: CourseSentence[];
   texts: CourseText[];
+  grammar: CourseGrammar[];
   sources: Array<{ name: string; url: string; license: string; licenseUrl: string; note?: string }>;
 }

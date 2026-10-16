@@ -1,6 +1,7 @@
 import type { ExerciseType } from '../../core/session';
 import { ChoiceExercise } from './ChoiceExercise';
 import { Dictation } from './Dictation';
+import { GrammarCard } from './GrammarCard';
 import { IntroCard } from './IntroCard';
 import { BuildSentence, FillBlankExercise } from './SentenceExercises';
 import { MatchExercise, ReadingExercise, Scene, SpeedRound } from './SetExercises';
@@ -20,6 +21,7 @@ export const EXERCISE_LABEL: Record<ExerciseType, string> = {
   reading: 'Okuma',
   scene: 'Mini sahne',
   'speed-round': 'Hızlı tur',
+  grammar: 'Dilbilgisi',
 };
 
 export function ExerciseView(props: ExerciseProps) {
@@ -46,5 +48,7 @@ export function ExerciseView(props: ExerciseProps) {
       return <Scene {...props} />;
     case 'speed-round':
       return <SpeedRound {...props} />;
+    case 'grammar':
+      return <GrammarCard {...props} />;
   }
 }

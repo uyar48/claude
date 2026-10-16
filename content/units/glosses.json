@@ -1,0 +1,2692 @@
+{
+ "note": "Glosses for course words beyond Unit 1 (Turkish meaning, part of speech, kind, emoji or photo query). Unit files are made from this pool in course order; words not in a unit yet wait here for later units.",
+ "words": {
+  "over": {
+   "tr": "üzerinde, üstünden; bitmiş",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "any": {
+   "tr": "herhangi; hiç (soru ve olumsuzda)",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "after": {
+   "tr": "-den sonra",
+   "pos": "edat",
+   "kind": "function",
+   "emoji": "⏭️"
+  },
+  "day": {
+   "tr": "gün",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "☀️"
+  },
+  "where": {
+   "tr": "nerede, nereye",
+   "pos": "zarf",
+   "kind": "function",
+   "emoji": "🧭"
+  },
+  "thing": {
+   "tr": "şey",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📦"
+  },
+  "most": {
+   "tr": "en çok; çoğu",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "should": {
+   "tr": "-meli, -malı (tavsiye)",
+   "pos": "yardımcı fiil",
+   "kind": "function"
+  },
+  "need": {
+   "tr": "ihtiyaç duymak, gerekmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "much": {
+   "tr": "çok (sayılamayan şeyler için)",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "right": {
+   "tr": "doğru; sağ",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "✅"
+  },
+  "how": {
+   "tr": "nasıl",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "back": {
+   "tr": "geri; sırt",
+   "pos": "zarf",
+   "kind": "function",
+   "emoji": "🔙"
+  },
+  "mean": {
+   "tr": "anlamına gelmek, demek istemek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "even": {
+   "tr": "bile, hatta",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "may": {
+   "tr": "-ebilir (olasılık, izin)",
+   "pos": "yardımcı fiil",
+   "kind": "function"
+  },
+  "here": {
+   "tr": "burada, buraya",
+   "pos": "zarf",
+   "kind": "function",
+   "emoji": "📌"
+  },
+  "many": {
+   "tr": "çok (sayılabilen şeyler için)",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "such": {
+   "tr": "böyle, öyle",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "last": {
+   "tr": "son; geçen",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🔚"
+  },
+  "child": {
+   "tr": "çocuk",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "child playing outside"
+  },
+  "tell": {
+   "tr": "anlatmak, söylemek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🗣️"
+  },
+  "really": {
+   "tr": "gerçekten",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "call": {
+   "tr": "aramak (telefonla); çağırmak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "phone call"
+  },
+  "before": {
+   "tr": "-den önce",
+   "pos": "edat",
+   "kind": "function",
+   "emoji": "⏮️"
+  },
+  "company": {
+   "tr": "şirket",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🏢"
+  },
+  "through": {
+   "tr": "içinden, boyunca",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "down": {
+   "tr": "aşağı",
+   "pos": "zarf",
+   "kind": "function",
+   "emoji": "⬇️"
+  },
+  "show": {
+   "tr": "göstermek; gösteri",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "life": {
+   "tr": "hayat",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🌱"
+  },
+  "change": {
+   "tr": "değiştirmek; değişiklik",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🔄"
+  },
+  "place": {
+   "tr": "yer",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📍"
+  },
+  "long": {
+   "tr": "uzun",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "📏"
+  },
+  "between": {
+   "tr": "arasında (iki şey)",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "feel": {
+   "tr": "hissetmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "💓"
+  },
+  "too": {
+   "tr": "de, da; fazla",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "still": {
+   "tr": "hâlâ",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "problem": {
+   "tr": "sorun",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "❗"
+  },
+  "write": {
+   "tr": "yazmak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "hand writing in notebook"
+  },
+  "same": {
+   "tr": "aynı",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🟰"
+  },
+  "lot": {
+   "tr": "çok (a lot of)",
+   "pos": "isim",
+   "kind": "function"
+  },
+  "great": {
+   "tr": "harika; büyük",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🌟"
+  },
+  "try": {
+   "tr": "denemek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "leave": {
+   "tr": "ayrılmak, bırakmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "number": {
+   "tr": "sayı, numara",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🔢"
+  },
+  "both": {
+   "tr": "ikisi de",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "own": {
+   "tr": "kendi",
+   "pos": "sıfat",
+   "kind": "function"
+  },
+  "part": {
+   "tr": "parça, bölüm",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🧩"
+  },
+  "point": {
+   "tr": "nokta; göstermek",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "little": {
+   "tr": "küçük; biraz",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🤏"
+  },
+  "help": {
+   "tr": "yardım etmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🆘"
+  },
+  "ask": {
+   "tr": "sormak; istemek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "meet": {
+   "tr": "tanışmak, buluşmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "start": {
+   "tr": "başlamak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "▶️"
+  },
+  "talk": {
+   "tr": "konuşmak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "two friends talking"
+  },
+  "something": {
+   "tr": "bir şey",
+   "pos": "zamir",
+   "kind": "function"
+  },
+  "put": {
+   "tr": "koymak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "another": {
+   "tr": "başka bir",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "become": {
+   "tr": "olmak (dönüşmek)",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🦋"
+  },
+  "interest": {
+   "tr": "ilgi",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🤩"
+  },
+  "country": {
+   "tr": "ülke",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🗺️"
+  },
+  "old": {
+   "tr": "eski; yaşlı",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "👴"
+  },
+  "each": {
+   "tr": "her bir",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "school": {
+   "tr": "okul",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "school building"
+  },
+  "late": {
+   "tr": "geç",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🐢"
+  },
+  "high": {
+   "tr": "yüksek",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🏔️"
+  },
+  "different": {
+   "tr": "farklı",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "off": {
+   "tr": "kapalı; -den uzağa",
+   "pos": "edat",
+   "kind": "function",
+   "emoji": "📴"
+  },
+  "next": {
+   "tr": "sonraki, gelecek",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "end": {
+   "tr": "son; bitmek",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🏁"
+  },
+  "live": {
+   "tr": "yaşamak; oturmak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🏡"
+  },
+  "why": {
+   "tr": "neden",
+   "pos": "zarf",
+   "kind": "function",
+   "emoji": "🤷"
+  },
+  "while": {
+   "tr": "-ken; bir süre",
+   "pos": "bağlaç",
+   "kind": "function"
+  },
+  "world": {
+   "tr": "dünya",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🌍"
+  },
+  "week": {
+   "tr": "hafta",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🗓️"
+  },
+  "play": {
+   "tr": "oynamak; çalmak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "children playing football"
+  },
+  "might": {
+   "tr": "-ebilir (belki)",
+   "pos": "yardımcı fiil",
+   "kind": "function"
+  },
+  "must": {
+   "tr": "-meli (zorunluluk)",
+   "pos": "yardımcı fiil",
+   "kind": "function"
+  },
+  "never": {
+   "tr": "asla, hiç",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "include": {
+   "tr": "içermek, dahil etmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "course": {
+   "tr": "ders, kurs; elbette (of course)",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📚"
+  },
+  "report": {
+   "tr": "rapor; bildirmek",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📄"
+  },
+  "group": {
+   "tr": "grup",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "case": {
+   "tr": "durum; dava",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "💼"
+  },
+  "around": {
+   "tr": "etrafında; civarında",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "book": {
+   "tr": "kitap",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "open book"
+  },
+  "family": {
+   "tr": "aile",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "family together at home"
+  },
+  "seem": {
+   "tr": "gibi görünmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "let": {
+   "tr": "izin vermek; -elim (let's)",
+   "pos": "fiil",
+   "kind": "function"
+  },
+  "again": {
+   "tr": "tekrar",
+   "pos": "zarf",
+   "kind": "function",
+   "emoji": "🔁"
+  },
+  "kind": {
+   "tr": "tür, çeşit; nazik",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "keep": {
+   "tr": "tutmak, saklamak; devam etmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "hear": {
+   "tr": "duymak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "👂"
+  },
+  "system": {
+   "tr": "sistem",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "⚙️"
+  },
+  "every": {
+   "tr": "her",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "question": {
+   "tr": "soru",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "❓"
+  },
+  "during": {
+   "tr": "sırasında, boyunca",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "always": {
+   "tr": "her zaman",
+   "pos": "zarf",
+   "kind": "function",
+   "emoji": "♾️"
+  },
+  "big": {
+   "tr": "büyük",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🐘"
+  },
+  "set": {
+   "tr": "koymak, ayarlamak; takım",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "small": {
+   "tr": "küçük",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🐭"
+  },
+  "study": {
+   "tr": "çalışmak (ders), okumak; çalışma",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "student studying at desk"
+  },
+  "follow": {
+   "tr": "takip etmek, izlemek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "👣"
+  },
+  "begin": {
+   "tr": "başlamak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🚦"
+  },
+  "important": {
+   "tr": "önemli",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "⭐"
+  },
+  "since": {
+   "tr": "-den beri; çünkü",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "run": {
+   "tr": "koşmak; yönetmek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "man running in park"
+  },
+  "under": {
+   "tr": "altında",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "turn": {
+   "tr": "dönmek, çevirmek; sıra",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "↩️"
+  },
+  "few": {
+   "tr": "az, birkaç",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "bring": {
+   "tr": "getirmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "early": {
+   "tr": "erken",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🌅"
+  },
+  "hand": {
+   "tr": "el",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "open hand palm"
+  },
+  "state": {
+   "tr": "eyalet, devlet; durum",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "move": {
+   "tr": "hareket etmek; taşınmak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🚚"
+  },
+  "money": {
+   "tr": "para",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "money banknotes coins"
+  },
+  "fact": {
+   "tr": "gerçek, olgu",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "however": {
+   "tr": "ancak, ama",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "area": {
+   "tr": "alan, bölge",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "provide": {
+   "tr": "sağlamak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "name": {
+   "tr": "ad, isim",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🏷️"
+  },
+  "read": {
+   "tr": "okumak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "woman reading a book"
+  },
+  "friend": {
+   "tr": "arkadaş",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "two friends laughing"
+  },
+  "month": {
+   "tr": "ay (takvim)",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📆"
+  },
+  "large": {
+   "tr": "büyük, geniş",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "business": {
+   "tr": "iş, ticaret",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🏪"
+  },
+  "without": {
+   "tr": "-sız, olmadan",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "information": {
+   "tr": "bilgi",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "ℹ️"
+  },
+  "open": {
+   "tr": "açmak; açık",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🔓"
+  },
+  "order": {
+   "tr": "sipariş; sıra; emir",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "government": {
+   "tr": "hükümet",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🏛️"
+  },
+  "word": {
+   "tr": "kelime",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🔤"
+  },
+  "issue": {
+   "tr": "konu, sorun; sayı",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "market": {
+   "tr": "pazar, piyasa",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "fruit market stalls"
+  },
+  "pay": {
+   "tr": "ödemek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "💳"
+  },
+  "build": {
+   "tr": "inşa etmek, kurmak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "building construction site"
+  },
+  "hold": {
+   "tr": "tutmak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "✊"
+  },
+  "service": {
+   "tr": "hizmet",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🛎️"
+  },
+  "against": {
+   "tr": "karşı",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "believe": {
+   "tr": "inanmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "second": {
+   "tr": "ikinci; saniye",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🥈"
+  },
+  "though": {
+   "tr": "gerçi, yine de",
+   "pos": "bağlaç",
+   "kind": "function"
+  },
+  "yes": {
+   "tr": "evet",
+   "pos": "ünlem",
+   "kind": "function",
+   "emoji": "🙆"
+  },
+  "love": {
+   "tr": "sevmek; aşk",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "💕"
+  },
+  "increase": {
+   "tr": "artmak, artırmak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "📈"
+  },
+  "job": {
+   "tr": "iş (meslek)",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "👷"
+  },
+  "plan": {
+   "tr": "plan",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📝"
+  },
+  "result": {
+   "tr": "sonuç",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "away": {
+   "tr": "uzağa, uzakta",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "example": {
+   "tr": "örnek",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "happen": {
+   "tr": "olmak, meydana gelmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "offer": {
+   "tr": "teklif etmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "young": {
+   "tr": "genç",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🧒"
+  },
+  "close": {
+   "tr": "kapatmak; yakın",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🔒"
+  },
+  "program": {
+   "tr": "program",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "lead": {
+   "tr": "yol göstermek, liderlik etmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "buy": {
+   "tr": "satın almak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "woman shopping with bags"
+  },
+  "understand": {
+   "tr": "anlamak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🧐"
+  },
+  "thank": {
+   "tr": "teşekkür etmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "far": {
+   "tr": "uzak",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🔭"
+  },
+  "today": {
+   "tr": "bugün",
+   "pos": "zarf",
+   "kind": "abstract"
+  },
+  "hour": {
+   "tr": "saat (süre)",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "⌛"
+  },
+  "student": {
+   "tr": "öğrenci",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "student in classroom"
+  },
+  "face": {
+   "tr": "yüz",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "smiling face portrait"
+  },
+  "hope": {
+   "tr": "umut etmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🤞"
+  },
+  "idea": {
+   "tr": "fikir",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "💡"
+  },
+  "cost": {
+   "tr": "mal olmak; maliyet",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "💲"
+  },
+  "less": {
+   "tr": "daha az",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "room": {
+   "tr": "oda",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "bedroom interior"
+  },
+  "until": {
+   "tr": "-e kadar",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "reason": {
+   "tr": "sebep",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "form": {
+   "tr": "form; biçim",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "spend": {
+   "tr": "harcamak; geçirmek (zaman)",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "💸"
+  },
+  "head": {
+   "tr": "baş, kafa",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "head and shoulders portrait"
+  },
+  "learn": {
+   "tr": "öğrenmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🎓"
+  },
+  "level": {
+   "tr": "seviye",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📶"
+  },
+  "person": {
+   "tr": "kişi",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "person portrait"
+  },
+  "experience": {
+   "tr": "deneyim",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "once": {
+   "tr": "bir kez; bir zamanlar",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "member": {
+   "tr": "üye",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "enough": {
+   "tr": "yeterli",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "bad": {
+   "tr": "kötü",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "👎"
+  },
+  "city": {
+   "tr": "şehir",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "city skyline"
+  },
+  "night": {
+   "tr": "gece",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "night sky city lights"
+  },
+  "able": {
+   "tr": "-ebilen (be able to: -ebilmek)",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "support": {
+   "tr": "desteklemek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "whether": {
+   "tr": "-ip -mediği",
+   "pos": "bağlaç",
+   "kind": "function"
+  },
+  "line": {
+   "tr": "çizgi, sıra",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "present": {
+   "tr": "şimdiki; hediye; sunmak",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "side": {
+   "tr": "taraf, yan",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "quite": {
+   "tr": "oldukça",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "although": {
+   "tr": "-e rağmen",
+   "pos": "bağlaç",
+   "kind": "function"
+  },
+  "sure": {
+   "tr": "emin",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "term": {
+   "tr": "dönem; terim",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "least": {
+   "tr": "en az",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "age": {
+   "tr": "yaş; çağ",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🎂"
+  },
+  "low": {
+   "tr": "alçak, düşük",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "speak": {
+   "tr": "konuşmak (bir dili)",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "within": {
+   "tr": "içinde",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "process": {
+   "tr": "süreç",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "public": {
+   "tr": "halk, kamu; herkese açık",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "often": {
+   "tr": "sık sık",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "train": {
+   "tr": "tren; eğitmek",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "train at station"
+  },
+  "possible": {
+   "tr": "mümkün",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "actually": {
+   "tr": "aslında",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "rather": {
+   "tr": "oldukça; tercihen",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "view": {
+   "tr": "manzara; görüş",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🏞️"
+  },
+  "together": {
+   "tr": "birlikte",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "consider": {
+   "tr": "düşünmek, göz önünde bulundurmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "price": {
+   "tr": "fiyat",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "price tag"
+  },
+  "parent": {
+   "tr": "ebeveyn (anne veya baba)",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "parents with child"
+  },
+  "hard": {
+   "tr": "zor; sert",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🪨"
+  },
+  "party": {
+   "tr": "parti, eğlence",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "birthday party"
+  },
+  "local": {
+   "tr": "yerel",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "control": {
+   "tr": "kontrol etmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🎛️"
+  },
+  "already": {
+   "tr": "zaten, çoktan",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "concern": {
+   "tr": "endişe; ilgilendirmek",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "😟"
+  },
+  "product": {
+   "tr": "ürün",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🛍️"
+  },
+  "lose": {
+   "tr": "kaybetmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "story": {
+   "tr": "hikâye",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📖"
+  },
+  "almost": {
+   "tr": "neredeyse",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "continue": {
+   "tr": "devam etmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "⏩"
+  },
+  "stand": {
+   "tr": "ayakta durmak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🧍"
+  },
+  "whole": {
+   "tr": "bütün",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "yet": {
+   "tr": "henüz; ama",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "rate": {
+   "tr": "oran",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "care": {
+   "tr": "önemsemek; bakım",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "expect": {
+   "tr": "beklemek (ummak)",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "effect": {
+   "tr": "etki",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "sort": {
+   "tr": "tür; sıralamak",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "ever": {
+   "tr": "hiç (sorularda), şimdiye kadar",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "anything": {
+   "tr": "herhangi bir şey; hiçbir şey",
+   "pos": "zamir",
+   "kind": "function"
+  },
+  "cause": {
+   "tr": "sebep olmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "fall": {
+   "tr": "düşmek; sonbahar",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🍂"
+  },
+  "deal": {
+   "tr": "anlaşma; ilgilenmek",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "send": {
+   "tr": "göndermek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "📨"
+  },
+  "allow": {
+   "tr": "izin vermek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "soon": {
+   "tr": "yakında",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "watch": {
+   "tr": "izlemek; kol saati",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "family watching tv"
+  },
+  "base": {
+   "tr": "temel; üs",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "probably": {
+   "tr": "muhtemelen",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "suggest": {
+   "tr": "önermek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "past": {
+   "tr": "geçmiş",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "power": {
+   "tr": "güç; elektrik",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "⚡"
+  },
+  "test": {
+   "tr": "sınav, test",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "✍️"
+  },
+  "visit": {
+   "tr": "ziyaret etmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "center": {
+   "tr": "merkez",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "grow": {
+   "tr": "büyümek, yetiştirmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🌿"
+  },
+  "nothing": {
+   "tr": "hiçbir şey",
+   "pos": "zamir",
+   "kind": "function"
+  },
+  "return": {
+   "tr": "geri dönmek; geri vermek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "mother": {
+   "tr": "anne",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "mother hugging child"
+  },
+  "walk": {
+   "tr": "yürümek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "people walking in park"
+  },
+  "matter": {
+   "tr": "önemli olmak; mesele",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "mind": {
+   "tr": "akıl; aldırmak",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "value": {
+   "tr": "değer",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "💎"
+  },
+  "office": {
+   "tr": "ofis, büro",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "office interior desks"
+  },
+  "record": {
+   "tr": "kayıt; kaydetmek",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "stay": {
+   "tr": "kalmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "force": {
+   "tr": "güç; zorlamak",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "stop": {
+   "tr": "durmak, durdurmak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🛑"
+  },
+  "several": {
+   "tr": "birkaç",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "light": {
+   "tr": "ışık; hafif",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "lamp light"
+  },
+  "develop": {
+   "tr": "geliştirmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "remember": {
+   "tr": "hatırlamak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "bit": {
+   "tr": "biraz (a bit), parça",
+   "pos": "isim",
+   "kind": "function"
+  },
+  "share": {
+   "tr": "paylaşmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "real": {
+   "tr": "gerçek",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "answer": {
+   "tr": "cevap; cevaplamak",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "sit": {
+   "tr": "oturmak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "woman sitting on bench"
+  },
+  "figure": {
+   "tr": "rakam; şekil",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "letter": {
+   "tr": "mektup; harf",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "handwritten letter envelope"
+  },
+  "decide": {
+   "tr": "karar vermek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "language": {
+   "tr": "dil (lisan)",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🌐"
+  },
+  "subject": {
+   "tr": "konu; ders",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "class": {
+   "tr": "sınıf, ders",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "classroom with students"
+  },
+  "development": {
+   "tr": "gelişme",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "town": {
+   "tr": "kasaba",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "small town street"
+  },
+  "half": {
+   "tr": "yarım",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🌗"
+  },
+  "minute": {
+   "tr": "dakika",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "food": {
+   "tr": "yiyecek, yemek",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "plate of food"
+  },
+  "break": {
+   "tr": "kırmak; mola",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "clear": {
+   "tr": "açık, net",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "future": {
+   "tr": "gelecek",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🔮"
+  },
+  "either": {
+   "tr": "ikisinden biri; de (olumsuzda)",
+   "pos": "belirleyici",
+   "kind": "function"
+  },
+  "ago": {
+   "tr": "önce (two days ago: iki gün önce)",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "per": {
+   "tr": "başına",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "remain": {
+   "tr": "kalmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "top": {
+   "tr": "tepe, üst",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🔝"
+  },
+  "among": {
+   "tr": "arasında (çok şey)",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "win": {
+   "tr": "kazanmak",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🏆"
+  },
+  "color": {
+   "tr": "renk",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🎨"
+  },
+  "involve": {
+   "tr": "içermek, dahil etmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "reach": {
+   "tr": "ulaşmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "social": {
+   "tr": "sosyal",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "period": {
+   "tr": "dönem",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "across": {
+   "tr": "karşıya, boyunca",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "note": {
+   "tr": "not",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🗒️"
+  },
+  "history": {
+   "tr": "tarih",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🏺"
+  },
+  "create": {
+   "tr": "yaratmak, oluşturmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "drive": {
+   "tr": "araba sürmek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "man driving a car"
+  },
+  "along": {
+   "tr": "boyunca",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "type": {
+   "tr": "tür; yazmak (klavyede)",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "⌨️"
+  },
+  "sound": {
+   "tr": "ses",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🔊"
+  },
+  "eye": {
+   "tr": "göz",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "human eye close up"
+  },
+  "music": {
+   "tr": "müzik",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "playing guitar music"
+  },
+  "game": {
+   "tr": "oyun; maç",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "board game"
+  },
+  "political": {
+   "tr": "siyasi",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "free": {
+   "tr": "özgür; bedava",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🆓"
+  },
+  "receive": {
+   "tr": "almak (gelen bir şeyi)",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "📬"
+  },
+  "moment": {
+   "tr": "an",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "sale": {
+   "tr": "satış; indirim",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "💰"
+  },
+  "policy": {
+   "tr": "politika",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "further": {
+   "tr": "daha ileri",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "body": {
+   "tr": "vücut",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "fitness body exercise"
+  },
+  "require": {
+   "tr": "gerektirmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "wait": {
+   "tr": "beklemek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "person waiting at bus stop"
+  },
+  "general": {
+   "tr": "genel",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "appear": {
+   "tr": "görünmek, ortaya çıkmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "toward": {
+   "tr": "-e doğru",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "team": {
+   "tr": "takım",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "sports team"
+  },
+  "easy": {
+   "tr": "kolay",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "individual": {
+   "tr": "birey; bireysel",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "full": {
+   "tr": "dolu",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🌕"
+  },
+  "black": {
+   "tr": "siyah",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "⚫"
+  },
+  "sense": {
+   "tr": "his, anlam",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "perhaps": {
+   "tr": "belki",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "add": {
+   "tr": "eklemek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "rule": {
+   "tr": "kural",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "pass": {
+   "tr": "geçmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "produce": {
+   "tr": "üretmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🏭"
+  },
+  "sell": {
+   "tr": "satmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "short": {
+   "tr": "kısa",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "agree": {
+   "tr": "katılmak, aynı fikirde olmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "law": {
+   "tr": "yasa, hukuk",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "⚖️"
+  },
+  "everything": {
+   "tr": "her şey",
+   "pos": "zamir",
+   "kind": "function"
+  },
+  "research": {
+   "tr": "araştırma",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🔬"
+  },
+  "cover": {
+   "tr": "örtmek; kapak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "paper": {
+   "tr": "kâğıt; gazete",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "sheet of paper on desk"
+  },
+  "position": {
+   "tr": "konum, pozisyon",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "near": {
+   "tr": "yakın, yakınında",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "human": {
+   "tr": "insan",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🧑"
+  },
+  "computer": {
+   "tr": "bilgisayar",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "laptop computer on desk"
+  },
+  "situation": {
+   "tr": "durum",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "staff": {
+   "tr": "personel",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "activity": {
+   "tr": "etkinlik",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "film": {
+   "tr": "film",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "cinema film reel"
+  },
+  "war": {
+   "tr": "savaş",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "account": {
+   "tr": "hesap",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🏦"
+  },
+  "shop": {
+   "tr": "dükkân; alışveriş yapmak",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "small shop storefront"
+  },
+  "major": {
+   "tr": "büyük, önemli; ana",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "someone": {
+   "tr": "biri",
+   "pos": "zamir",
+   "kind": "function"
+  },
+  "above": {
+   "tr": "yukarıda, üstünde",
+   "pos": "edat",
+   "kind": "function"
+  },
+  "design": {
+   "tr": "tasarım; tasarlamak",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "✏️"
+  },
+  "event": {
+   "tr": "olay, etkinlik",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🎉"
+  },
+  "special": {
+   "tr": "özel",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "✨"
+  },
+  "sometimes": {
+   "tr": "bazen",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "condition": {
+   "tr": "durum, koşul",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "carry": {
+   "tr": "taşımak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "man carrying boxes"
+  },
+  "choose": {
+   "tr": "seçmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "father": {
+   "tr": "baba",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "father with son"
+  },
+  "decision": {
+   "tr": "karar",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "certain": {
+   "tr": "belli; emin",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "forward": {
+   "tr": "ileri",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "main": {
+   "tr": "ana, temel",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "die": {
+   "tr": "ölmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "bear": {
+   "tr": "dayanmak; ayı",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "cut": {
+   "tr": "kesmek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "scissors cutting paper"
+  },
+  "describe": {
+   "tr": "tarif etmek, anlatmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "himself": {
+   "tr": "kendisi (erkek)",
+   "pos": "zamir",
+   "kind": "function"
+  },
+  "available": {
+   "tr": "mevcut, müsait",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "especially": {
+   "tr": "özellikle",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "strong": {
+   "tr": "güçlü",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "rise": {
+   "tr": "yükselmek",
+   "pos": "fiil",
+   "kind": "abstract",
+   "emoji": "🌄"
+  },
+  "girl": {
+   "tr": "kız",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "little girl smiling"
+  },
+  "maybe": {
+   "tr": "belki",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "community": {
+   "tr": "topluluk",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "else": {
+   "tr": "başka",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "particular": {
+   "tr": "belirli, özel",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "role": {
+   "tr": "rol",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "join": {
+   "tr": "katılmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "difficult": {
+   "tr": "zor",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "please": {
+   "tr": "lütfen",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "detail": {
+   "tr": "ayrıntı",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🔎"
+  },
+  "difference": {
+   "tr": "fark",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "action": {
+   "tr": "eylem, hareket",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🎬"
+  },
+  "health": {
+   "tr": "sağlık",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🩺"
+  },
+  "eat": {
+   "tr": "yemek yemek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "family eating dinner"
+  },
+  "step": {
+   "tr": "adım",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "true": {
+   "tr": "doğru, gerçek",
+   "pos": "sıfat",
+   "kind": "abstract"
+  },
+  "themselves": {
+   "tr": "kendileri",
+   "pos": "zamir",
+   "kind": "function"
+  },
+  "draw": {
+   "tr": "çizmek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "child drawing with pencils"
+  },
+  "white": {
+   "tr": "beyaz",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "⚪"
+  },
+  "date": {
+   "tr": "tarih; randevu",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "practice": {
+   "tr": "pratik yapmak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "model": {
+   "tr": "model",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "raise": {
+   "tr": "kaldırmak; yetiştirmek",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "customer": {
+   "tr": "müşteri",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "front": {
+   "tr": "ön",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "explain": {
+   "tr": "açıklamak",
+   "pos": "fiil",
+   "kind": "abstract"
+  },
+  "outside": {
+   "tr": "dışarıda",
+   "pos": "zarf",
+   "kind": "function"
+  },
+  "two": {
+   "tr": "iki",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "2️⃣"
+  },
+  "three": {
+   "tr": "üç",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "3️⃣"
+  },
+  "drink": {
+   "tr": "içmek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "woman drinking water"
+  },
+  "sleep": {
+   "tr": "uyumak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "person sleeping in bed"
+  },
+  "bed": {
+   "tr": "yatak",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "bed with pillows"
+  },
+  "kitchen": {
+   "tr": "mutfak",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "kitchen interior"
+  },
+  "sister": {
+   "tr": "kız kardeş, abla",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "two sisters"
+  },
+  "brother": {
+   "tr": "erkek kardeş, ağabey",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "two brothers"
+  },
+  "son": {
+   "tr": "oğul",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "mother with her son"
+  },
+  "daughter": {
+   "tr": "kız evlat",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "father and daughter"
+  },
+  "wife": {
+   "tr": "eş (kadın), karı",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "💍"
+  },
+  "husband": {
+   "tr": "eş (erkek), koca",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🤵"
+  },
+  "tomorrow": {
+   "tr": "yarın",
+   "pos": "zarf",
+   "kind": "abstract"
+  },
+  "yesterday": {
+   "tr": "dün",
+   "pos": "zarf",
+   "kind": "abstract"
+  },
+  "evening": {
+   "tr": "akşam",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "evening sunset over city"
+  },
+  "happy": {
+   "tr": "mutlu",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "😊"
+  },
+  "tired": {
+   "tr": "yorgun",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "😫"
+  },
+  "hungry": {
+   "tr": "aç (karnı aç)",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🍽️"
+  },
+  "dog": {
+   "tr": "köpek",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "dog"
+  },
+  "cat": {
+   "tr": "kedi",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "cat"
+  },
+  "four": {
+   "tr": "dört",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "4️⃣"
+  },
+  "five": {
+   "tr": "beş",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "5️⃣"
+  },
+  "six": {
+   "tr": "altı",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "6️⃣"
+  },
+  "breakfast": {
+   "tr": "kahvaltı",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "breakfast table"
+  },
+  "lunch": {
+   "tr": "öğle yemeği",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "lunch sandwich salad"
+  },
+  "dinner": {
+   "tr": "akşam yemeği",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "dinner table"
+  },
+  "milk": {
+   "tr": "süt",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "glass of milk"
+  },
+  "sugar": {
+   "tr": "şeker",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "sugar cubes"
+  },
+  "fruit": {
+   "tr": "meyve",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "fruit bowl"
+  },
+  "apple": {
+   "tr": "elma",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "red apple"
+  },
+  "cook": {
+   "tr": "yemek pişirmek",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "man cooking in kitchen"
+  },
+  "wash": {
+   "tr": "yıkamak",
+   "pos": "fiil",
+   "kind": "concrete",
+   "query": "washing hands"
+  },
+  "clean": {
+   "tr": "temiz; temizlemek",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🧽"
+  },
+  "monday": {
+   "tr": "pazartesi",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "tuesday": {
+   "tr": "salı",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "wednesday": {
+   "tr": "çarşamba",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "thursday": {
+   "tr": "perşembe",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "friday": {
+   "tr": "cuma",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "saturday": {
+   "tr": "cumartesi",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "sunday": {
+   "tr": "pazar (gün)",
+   "pos": "isim",
+   "kind": "abstract"
+  },
+  "weekend": {
+   "tr": "hafta sonu",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "🎈"
+  },
+  "tonight": {
+   "tr": "bu gece, bu akşam",
+   "pos": "zarf",
+   "kind": "abstract",
+   "emoji": "🌙"
+  },
+  "seven": {
+   "tr": "yedi",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "7️⃣"
+  },
+  "eight": {
+   "tr": "sekiz",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "8️⃣"
+  },
+  "nine": {
+   "tr": "dokuz",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "9️⃣"
+  },
+  "ten": {
+   "tr": "on",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "🔟"
+  },
+  "hundred": {
+   "tr": "yüz (100)",
+   "pos": "sayı",
+   "kind": "abstract",
+   "emoji": "💯"
+  },
+  "red": {
+   "tr": "kırmızı",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🔴"
+  },
+  "blue": {
+   "tr": "mavi",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🔵"
+  },
+  "green": {
+   "tr": "yeşil",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🟢"
+  },
+  "yellow": {
+   "tr": "sarı",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🟡"
+  },
+  "brown": {
+   "tr": "kahverengi",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🟤"
+  },
+  "sun": {
+   "tr": "güneş",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "sun in blue sky"
+  },
+  "rain": {
+   "tr": "yağmur",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "rain on street umbrella"
+  },
+  "cold": {
+   "tr": "soğuk",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🥶"
+  },
+  "hot": {
+   "tr": "sıcak",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🥵"
+  },
+  "warm": {
+   "tr": "ılık, sıcak",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🌡️"
+  },
+  "tree": {
+   "tr": "ağaç",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "tree in field"
+  },
+  "flower": {
+   "tr": "çiçek",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "flower"
+  },
+  "garden": {
+   "tr": "bahçe",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "garden"
+  },
+  "park": {
+   "tr": "park",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "city park"
+  },
+  "bus": {
+   "tr": "otobüs",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "city bus"
+  },
+  "baby": {
+   "tr": "bebek",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "baby"
+  },
+  "sad": {
+   "tr": "üzgün",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "😢"
+  },
+  "teacher": {
+   "tr": "öğretmen",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "teacher in classroom"
+  },
+  "doctor": {
+   "tr": "doktor",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "doctor"
+  },
+  "hospital": {
+   "tr": "hastane",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "hospital building"
+  },
+  "bank": {
+   "tr": "banka",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "bank building"
+  },
+  "village": {
+   "tr": "köy",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "village houses"
+  },
+  "bird": {
+   "tr": "kuş",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "bird"
+  },
+  "fish": {
+   "tr": "balık",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "fish"
+  },
+  "meat": {
+   "tr": "et",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "raw meat"
+  },
+  "chicken": {
+   "tr": "tavuk",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "chicken"
+  },
+  "rice": {
+   "tr": "pirinç, pilav",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "rice bowl"
+  },
+  "cake": {
+   "tr": "pasta, kek",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "cake"
+  },
+  "email": {
+   "tr": "e-posta",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "📧"
+  },
+  "message": {
+   "tr": "mesaj",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "💬"
+  },
+  "bathroom": {
+   "tr": "banyo",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "bathroom"
+  },
+  "beautiful": {
+   "tr": "güzel",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🌸"
+  },
+  "expensive": {
+   "tr": "pahalı",
+   "pos": "sıfat",
+   "kind": "abstract",
+   "emoji": "🤑"
+  },
+  "weather": {
+   "tr": "hava (durumu)",
+   "pos": "isim",
+   "kind": "abstract",
+   "emoji": "⛅"
+  },
+  "birthday": {
+   "tr": "doğum günü",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "birthday cake candles"
+  },
+  "holiday": {
+   "tr": "tatil",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "beach holiday"
+  },
+  "sea": {
+   "tr": "deniz",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "sea"
+  },
+  "river": {
+   "tr": "nehir",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "river"
+  },
+  "mountain": {
+   "tr": "dağ",
+   "pos": "isim",
+   "kind": "concrete",
+   "query": "mountain"
+  }
+ }
+}

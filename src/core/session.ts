@@ -27,7 +27,8 @@ export type ExerciseType =
   | 'build-sentence'
   | 'reading'
   | 'scene'
-  | 'speed-round';
+  | 'speed-round'
+  | 'grammar';
 
 export const DIFFICULTY: Record<ExerciseType, 1 | 2 | 3> = {
   intro: 1,
@@ -37,6 +38,7 @@ export const DIFFICULTY: Record<ExerciseType, 1 | 2 | 3> = {
   'en-tr': 1,
   scene: 1,
   'speed-round': 1,
+  grammar: 1,
   'listen-picture': 2,
   'tr-en': 2,
   'fill-blank': 2,
@@ -80,6 +82,8 @@ export interface Exercise {
   /** Index into sentenceTokens() of the gap (fill-blank). */
   gapIndex?: number;
   textId?: string;
+  /** Grammar card id. */
+  grammarId?: string;
 }
 
 export interface SessionState {
@@ -101,6 +105,9 @@ export interface SessionState {
   lastReadingMs: number;
   seq: number;
   seed: number;
+  /** Grammar cards planned for this lesson (id + the word that brings it). */
+  grammar?: Array<{ id: string; word: string }>;
+  grammarShown?: string[];
 }
 
 export interface SessionContext {
@@ -108,7 +115,15 @@ export interface SessionContext {
   cards: ReadonlyMap<string, Card>;
   /** The word has a picture or an emoji. */
   hasVisual: (wordId: string) => boolean;
+  /** The learner's unit: longer sentences and texts of later units stay closed. */
+  unit?: number;
+  /** How often each text was read in earlier lessons (unread texts come first). */
+  readCounts?: Readonly<Record<string, number>>;
 }
+
+/** Most tiles in a "build the sentence" exercise, by unit. */
+const BUILD_MAX_TILES = [7, 7, 8, 9, 10];
+const buildMax = (unit = 1) => BUILD_MAX_TILES[Math.min(BUILD_MAX_TILES.length, Math.max(1, unit)) - 1];
 
 export interface AnswerResult {
   /** Single-word exercises. null = not graded (intro, reading summary …). */
@@ -131,6 +146,7 @@ export function createSession(opts: {
   newWords: string[];
   reviewWords: string[];
   seed?: number;
+  grammar?: Array<{ id: string; word: string }>;
 }): SessionState {
   return {
     id: opts.id,
@@ -151,6 +167,8 @@ export function createSession(opts: {
     lastReadingMs: 0,
     seq: 0,
     seed: opts.seed ?? hashString(opts.id),
+    grammar: opts.grammar ?? [],
+    grammarShown: [],
   };
 }
 
@@ -187,11 +205,17 @@ export function nextExercise(s0: SessionState, ctx: SessionContext): { state: Se
     s = { ...s, phase: s.newWords.some((w) => !s.introduced.includes(w)) ? 'learn' : 'practice' };
   }
 
+  // Grammar cards for words learned in earlier lessons come right after the warm-up.
+  const catchUp = (s.grammar ?? []).find((g) => !s.newWords.includes(g.word) && !(s.grammarShown ?? []).includes(g.id));
+  if (catchUp && (s.phase === 'learn' || s.phase === 'practice')) {
+    return emit({ ...s, grammarShown: [...(s.grammarShown ?? []), catchUp.id] }, { type: 'grammar', grammarId: catchUp.id });
+  }
+
   if (s.phase === 'learn') {
     const pending = s.newWords.filter((w) => !s.introduced.includes(w));
     if (pending.length) {
       const batch = pending.slice(0, pending.length - BATCH === 1 ? BATCH + 1 : BATCH);
-      const after = { ...s, introduced: [...s.introduced, ...batch] };
+      const after: SessionState = { ...s, introduced: [...s.introduced, ...batch] };
       // intro A, intro B, check A, intro C, check B, … check last, match —
       // never more than two intro cards in a row.
       const planned: Array<Omit<Exercise, 'key'>> = [];
@@ -200,15 +224,23 @@ export function nextExercise(s0: SessionState, ctx: SessionContext): { state: Se
         const t = pickType(at, ctx, w, ['word-to-picture', 'en-tr', 'picture-to-word'], 1, planned.map((p) => p.type));
         if (t) planned.push(buildSingle(at, ctx, t, w));
       };
+      const shown = [...(s.grammarShown ?? [])];
       batch.forEach((w, i) => {
         planned.push({ type: 'intro', wordId: w });
+        // A grammar card right after the word that brings it.
+        for (const g of s.grammar ?? []) {
+          if (g.word === w && !shown.includes(g.id)) {
+            planned.push({ type: 'grammar', grammarId: g.id });
+            shown.push(g.id);
+          }
+        }
         if (i >= 1) check(batch[i - 1]);
       });
       check(batch[batch.length - 1]);
       if (batch.length >= 3) planned.push({ type: 'match', words: batch });
       const keyed: Exercise[] = planned.map((p, i) => ({ ...p, key: `${s.id}:${s.seq + i}` }));
       const [first, ...rest] = keyed;
-      return { state: { ...after, seq: s.seq + keyed.length, queue: rest }, exercise: first };
+      return { state: { ...after, grammarShown: shown, seq: s.seq + keyed.length, queue: rest }, exercise: first };
     }
     s = { ...s, phase: 'practice' };
   }
@@ -422,11 +454,13 @@ export function findSentence(
   const known = sessionKnown(s, ctx);
   for (const sent of ctx.course.sentences) {
     if (!sent.lemmas.includes(w) || s.usedSentences.includes(sent.id)) continue;
+    // Longer sentences belong to later units.
+    if ((sent.unit ?? 1) > (ctx.unit ?? Infinity)) continue;
     if (!sentenceUsable(ctx.course, sent, known)) continue;
     const toks = sentenceTokens(ctx.course, sent.en);
     const wordToks = toks.filter((t) => t.lemma !== undefined);
     if (mode === 'build') {
-      if (wordToks.length >= 3 && wordToks.length <= 7) return { id: sent.id };
+      if (wordToks.length >= 3 && wordToks.length <= buildMax(ctx.unit)) return { id: sent.id };
       continue;
     }
     const gapIndex = toks.findIndex((t) => t.lemma === w && !/['’]/.test(t.text));
@@ -437,11 +471,16 @@ export function findSentence(
 
 function pickReading(s: SessionState, ctx: SessionContext): string | null {
   const known = sessionKnown(s, ctx);
-  const fresh = ctx.course.texts.filter((t) => !s.usedTexts.includes(t.id) && sentenceUsable(ctx.course, t, known));
+  const fresh = ctx.course.texts.filter(
+    (t) => !s.usedTexts.includes(t.id) && (t.unit ?? 1) <= (ctx.unit ?? Infinity) && sentenceUsable(ctx.course, t, known),
+  );
   if (!fresh.length) return null;
-  // Prefer texts with this lesson's new words.
+  // Texts not read yet first; then texts with this lesson's new words; then the newest unit's.
+  const reads = (t: (typeof fresh)[number]) => ctx.readCounts?.[t.id] ?? 0;
   const score = (t: (typeof fresh)[number]) => t.lemmas.filter((l) => s.introduced.includes(l)).length;
-  return fresh.sort((a, b) => score(b) - score(a) || a.maxOrder - b.maxOrder)[0].id;
+  return fresh.sort(
+    (a, b) => reads(a) - reads(b) || score(b) - score(a) || (b.unit ?? 1) - (a.unit ?? 1) || a.maxOrder - b.maxOrder,
+  )[0].id;
 }
 
 function sceneWords(s: SessionState, ctx: SessionContext): string[] {

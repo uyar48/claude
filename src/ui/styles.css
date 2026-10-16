@@ -1218,3 +1218,53 @@ textarea {
 .lesson-head .icon-btn:disabled {
   opacity: 0.3;
 }
+
+/* ---------- grammar cards ---------- */
+
+.grammar-card {
+  border-left: 4px solid var(--accent);
+}
+.grammar-title {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+}
+.grammar-text {
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+.grammar-table {
+  border-collapse: collapse;
+  margin: 4px 0 10px;
+  width: 100%;
+}
+.grammar-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.grammar-table td:first-child {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  width: 50%;
+}
+.grammar-examples {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: grid;
+  gap: 8px;
+}
+.grammar-examples li {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.grammar-examples .en {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+}
+.grammar-examples .tr {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

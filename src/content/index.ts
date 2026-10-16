@@ -4,7 +4,7 @@
 import courseJson from '../../content/build/course.json';
 import creditsJson from '../../content/media/credits.json';
 import manifestJson from './media-manifest.json';
-import type { Course, CourseSentence, CourseText, CourseWord } from './courseTypes';
+import type { Course, CourseGrammar, CourseSentence, CourseText, CourseWord } from './courseTypes';
 import type { ImageCredits, MediaManifest } from './types';
 
 export const course = courseJson as unknown as Course;
@@ -24,6 +24,12 @@ export function getText(id: string): CourseText {
   const t = textById.get(id);
   if (!t) throw new Error(`Unknown text ${id}`);
   return t;
+}
+
+export function getGrammar(id: string): CourseGrammar {
+  const g = (course.grammar ?? []).find((x) => x.id === id);
+  if (!g) throw new Error(`Unknown grammar card ${id}`);
+  return g;
 }
 
 export function getSentence(id: string): CourseSentence {

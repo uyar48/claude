@@ -1,0 +1,710 @@
+{
+  "note": "Short grammar cards (own, CC0). A card appears right after its word is introduced, or later as a catch-up if the word was learned before; at most 2 per lesson. Examples use only words known at that point (checked by validate-content).",
+  "points": [
+    {
+      "id": "g-the",
+      "word": "the",
+      "title": "the: belirli olan",
+      "body": [
+        "the, konuşanın ve dinleyenin bildiği belirli bir şeyi gösterir: the door = (o) kapı.",
+        "Türkçede çoğu zaman ayrı bir karşılığı yoktur. 'Kapıyı aç' derken kapının belirli olması gibidir."
+      ],
+      "examples": [
+        {
+          "en": "The tea is good.",
+          "tr": "Çay güzel."
+        },
+        {
+          "en": "The water is on the table.",
+          "tr": "Su masanın üstünde."
+        }
+      ]
+    },
+    {
+      "id": "g-be",
+      "word": "be",
+      "title": "am / is / are",
+      "body": [
+        "be fiili Türkçedeki '-im, -sin, -dir' eklerinin işini görür ve özneye göre biçim değiştirir.",
+        "Kısaltmaları da çok kullanılır: I'm, you're, he's, it's, we're, they're."
+      ],
+      "table": [
+        [
+          "I am",
+          "ben …-im"
+        ],
+        [
+          "you are",
+          "sen …-sin"
+        ],
+        [
+          "he / she / it is",
+          "o …-dir"
+        ],
+        [
+          "we are",
+          "biz …-iz"
+        ],
+        [
+          "they are",
+          "onlar …-dir(ler)"
+        ]
+      ],
+      "examples": [
+        {
+          "en": "I am in the house.",
+          "tr": "Evin içindeyim."
+        },
+        {
+          "en": "The woman is at the window.",
+          "tr": "Kadın pencerenin önünde."
+        },
+        {
+          "en": "The man and the woman are at the table.",
+          "tr": "Adam ve kadın masada."
+        }
+      ]
+    },
+    {
+      "id": "g-a-an",
+      "word": "a",
+      "title": "a / an: bir",
+      "body": [
+        "a, tek ve sayılabilen bir şeyden ilk kez söz ederken kullanılır: a car, a key. Türkçedeki 'bir' gibidir ama İngilizcede çok daha sık gerekir.",
+        "Sesli harf sesiyle başlayan kelimeden önce an olur: an egg."
+      ],
+      "examples": [
+        {
+          "en": "I have a car.",
+          "tr": "Bir arabam var."
+        },
+        {
+          "en": "I have an egg.",
+          "tr": "Bir yumurtam var."
+        }
+      ]
+    },
+    {
+      "id": "g-have",
+      "word": "have",
+      "title": "have / has: sahip olmak",
+      "body": [
+        "have 'sahip olmak' demektir. Türkçeye çoğu zaman '…im var' diye çevrilir: I have a key = Bir anahtarım var.",
+        "he, she, it ile has olur: The man has a car."
+      ],
+      "examples": [
+        {
+          "en": "I have a key.",
+          "tr": "Bir anahtarım var."
+        },
+        {
+          "en": "The woman has a bag.",
+          "tr": "Kadının bir çantası var."
+        }
+      ]
+    },
+    {
+      "id": "g-prep",
+      "word": "in",
+      "title": "in / on / at",
+      "body": [
+        "in: içinde → in the bag, in the car.",
+        "on: üstünde → on the table, on the chair.",
+        "at: bir noktada, bir yerde → at the door, at the window, at home, at work."
+      ],
+      "examples": [
+        {
+          "en": "The key is in the bag.",
+          "tr": "Anahtar çantanın içinde."
+        },
+        {
+          "en": "The bag is on the chair.",
+          "tr": "Çanta sandalyenin üstünde."
+        },
+        {
+          "en": "The man is at the door.",
+          "tr": "Adam kapıda."
+        }
+      ]
+    },
+    {
+      "id": "g-pron",
+      "word": "he",
+      "title": "I, you, he, she, it, we, they",
+      "body": [
+        "Kişi zamirleri: I (ben), you (sen / siz), he (o, erkek), she (o, kadın), it (o, eşya ya da hayvan), we (biz), they (onlar).",
+        "İngilizcede özne neredeyse hiç düşmez: 'Evdeyim' bile I am at home olur."
+      ],
+      "examples": [
+        {
+          "en": "He is at work.",
+          "tr": "O işte."
+        },
+        {
+          "en": "It is on the table.",
+          "tr": "O, masanın üstünde."
+        },
+        {
+          "en": "You have a good house.",
+          "tr": "Güzel bir evin var."
+        }
+      ]
+    },
+    {
+      "id": "g-not",
+      "word": "not",
+      "title": "not: olumsuz",
+      "body": [
+        "be ile olumsuz: am not, is not (isn't), are not (aren't). It is not good = İyi değil.",
+        "Diğer fiillerle do not (don't) kullanılır: I do not have a car. Bunu az sonra göreceksin."
+      ],
+      "examples": [
+        {
+          "en": "It is not good.",
+          "tr": "İyi değil."
+        },
+        {
+          "en": "I am not at home.",
+          "tr": "Evde değilim."
+        },
+        {
+          "en": "They are not at work.",
+          "tr": "Onlar işte değil."
+        }
+      ]
+    },
+    {
+      "id": "g-this-that",
+      "word": "this",
+      "title": "this / that",
+      "body": [
+        "this: yakındaki (bu) → this key. that: uzaktaki (şu, o) → that car.",
+        "Birden fazla şey için: these (bunlar), those (şunlar)."
+      ],
+      "examples": [
+        {
+          "en": "This is my house.",
+          "tr": "Bu benim evim."
+        },
+        {
+          "en": "That is my car.",
+          "tr": "Şu benim arabam."
+        },
+        {
+          "en": "This key is for the door.",
+          "tr": "Bu anahtar kapı için."
+        }
+      ]
+    },
+    {
+      "id": "g-do",
+      "word": "do",
+      "title": "do / does: soru ve olumsuz",
+      "body": [
+        "Soru ve olumsuzda yardımcı fiil do kullanılır: Do you have a car? = Arabanız var mı?",
+        "he, she, it ile does olur: Does she have a key? Olumsuzu: I do not (don't) have a car."
+      ],
+      "examples": [
+        {
+          "en": "Do you have a car?",
+          "tr": "Arabanız var mı?"
+        },
+        {
+          "en": "I do not have a car.",
+          "tr": "Arabam yok."
+        },
+        {
+          "en": "She does not have a key.",
+          "tr": "Onun anahtarı yok."
+        }
+      ]
+    },
+    {
+      "id": "g-my",
+      "word": "she",
+      "title": "my, your, his, her …",
+      "body": [
+        "Sahiplik: I → my (benim), you → your (senin), he → his (onun), she → her (onun), it → its, we → our (bizim), they → their (onların).",
+        "Türkçedeki iyelik ekleri gibi: my house = evim, her bag = onun çantası."
+      ],
+      "examples": [
+        {
+          "en": "This is my house.",
+          "tr": "Bu benim evim."
+        },
+        {
+          "en": "His car is in the street.",
+          "tr": "Onun arabası sokakta."
+        },
+        {
+          "en": "Her bag is on the chair.",
+          "tr": "Onun çantası sandalyenin üstünde."
+        }
+      ]
+    },
+    {
+      "id": "g-will",
+      "word": "will",
+      "title": "will: gelecek zaman",
+      "body": [
+        "Gelecek zaman: will + fiil. Herkes için aynıdır: I will go, she will go.",
+        "Kısaltması I'll, you'll; olumsuzu will not (won't)."
+      ],
+      "examples": [
+        {
+          "en": "I will go home.",
+          "tr": "Eve gideceğim."
+        },
+        {
+          "en": "She will have tea.",
+          "tr": "O çay içecek."
+        },
+        {
+          "en": "They will not go to work.",
+          "tr": "Onlar işe gitmeyecek."
+        }
+      ]
+    },
+    {
+      "id": "g-if",
+      "word": "if",
+      "title": "if: eğer",
+      "body": [
+        "if 'eğer, -se/-sa' demektir. Gelecekle ilgili koşulda if'li kısım geniş zamanda, diğer kısım will ile kurulur:",
+        "If you go, I will go. = Sen gidersen ben de giderim."
+      ],
+      "examples": [
+        {
+          "en": "If you go, I will go.",
+          "tr": "Sen gidersen ben de giderim."
+        },
+        {
+          "en": "If it is good, I will have one.",
+          "tr": "Güzelse bir tane alırım."
+        }
+      ]
+    },
+    {
+      "id": "g-can",
+      "word": "can",
+      "title": "can: -ebilmek",
+      "body": [
+        "can '-ebilmek' demektir. Fiil hiç değişmez: I can go, he can go.",
+        "Olumsuzu cannot (can't), sorusu Can you …? biçimindedir."
+      ],
+      "examples": [
+        {
+          "en": "Can you go to work?",
+          "tr": "İşe gidebilir misin?"
+        },
+        {
+          "en": "I can go with you.",
+          "tr": "Seninle gelebilirim."
+        },
+        {
+          "en": "She can not go with you.",
+          "tr": "O seninle gelemez."
+        }
+      ]
+    },
+    {
+      "id": "g-there",
+      "word": "there",
+      "title": "there is / there are: var",
+      "body": [
+        "Bir yerde bir şey olduğunu söylemek için there is kullanılır: There is a car in the street = Sokakta bir araba var.",
+        "Birden fazla şey için there are, soru için Is there …? / Are there …?"
+      ],
+      "examples": [
+        {
+          "en": "There is a car in the street.",
+          "tr": "Sokakta bir araba var."
+        },
+        {
+          "en": "There is water on the table.",
+          "tr": "Masada su var."
+        },
+        {
+          "en": "Is there a key in the bag?",
+          "tr": "Çantada anahtar var mı?"
+        }
+      ]
+    },
+    {
+      "id": "g-s",
+      "word": "like",
+      "title": "he likes, she goes: -s eki",
+      "body": [
+        "Geniş zamanda he, she, it ile fiile -s eklenir: I like → she likes, I go → he goes.",
+        "have düzensizdir: he has. do da does olur."
+      ],
+      "examples": [
+        {
+          "en": "I like coffee.",
+          "tr": "Kahveyi severim."
+        },
+        {
+          "en": "She likes tea.",
+          "tr": "O çayı sever."
+        },
+        {
+          "en": "The man goes to work.",
+          "tr": "Adam işe gider."
+        }
+      ]
+    },
+    {
+      "id": "g-wh",
+      "word": "what",
+      "title": "who, what, when …: soru kelimeleri",
+      "body": [
+        "Soru kelimeleri cümlenin başına gelir: What is it? (Bu ne?), Who is at the door? (Kapıdaki kim?), When do you go to work? (İşe ne zaman gidiyorsun?)",
+        "İleride where (nerede), why (neden) ve how (nasıl) da gelecek."
+      ],
+      "examples": [
+        {
+          "en": "What is it?",
+          "tr": "Bu ne?"
+        },
+        {
+          "en": "Who is at the door?",
+          "tr": "Kapıdaki kim?"
+        },
+        {
+          "en": "When do you go to work?",
+          "tr": "İşe ne zaman gidiyorsun?"
+        }
+      ]
+    },
+    {
+      "id": "g-imp",
+      "word": "take",
+      "title": "Emir cümlesi",
+      "body": [
+        "Emir cümlesinde fiil yalın haliyle en başa gelir: Take the key = Anahtarı al.",
+        "Olumsuzu Do not (Don't) ile kurulur: Do not take my phone. Kibar olmak için please eklenir; onu sonra öğreneceksin."
+      ],
+      "examples": [
+        {
+          "en": "Take the key.",
+          "tr": "Anahtarı al."
+        },
+        {
+          "en": "Take the bag to the car.",
+          "tr": "Çantayı arabaya götür."
+        },
+        {
+          "en": "Do not take my phone.",
+          "tr": "Telefonumu alma."
+        }
+      ]
+    },
+    {
+      "id": "g-because",
+      "word": "because",
+      "title": "because / so: çünkü / bu yüzden",
+      "body": [
+        "because 'çünkü' demektir ve sebebi verir: I have coffee because I am at work.",
+        "so 'bu yüzden' demektir ve sonucu verir: It is good, so I will take it."
+      ],
+      "examples": [
+        {
+          "en": "I have coffee because I am at work.",
+          "tr": "Kahve içiyorum çünkü işteyim."
+        },
+        {
+          "en": "It is good, so I will take it.",
+          "tr": "İyi, bu yüzden onu alacağım."
+        }
+      ]
+    },
+    {
+      "id": "g-er",
+      "word": "than",
+      "title": "more … than: karşılaştırma",
+      "body": [
+        "Karşılaştırmada than 'den/dan' demektir: I like tea more than coffee = Çayı kahveden çok severim.",
+        "Kısa sıfatlar -er alır, bazıları düzensizdir: good → better (daha iyi)."
+      ],
+      "examples": [
+        {
+          "en": "I like tea more than coffee.",
+          "tr": "Çayı kahveden daha çok severim."
+        },
+        {
+          "en": "This house is better than that one.",
+          "tr": "Bu ev şundan daha iyi."
+        }
+      ]
+    },
+    {
+      "id": "g-ing",
+      "word": "now",
+      "title": "am going: şu an yapılan",
+      "body": [
+        "Şu anda olan işler için am / is / are + fiil-ing kullanılır: I am going home now = Şimdi eve gidiyorum.",
+        "Türkçedeki -iyor ekine benzer."
+      ],
+      "examples": [
+        {
+          "en": "I am going home now.",
+          "tr": "Şimdi eve gidiyorum."
+        },
+        {
+          "en": "She is making tea.",
+          "tr": "O çay yapıyor."
+        },
+        {
+          "en": "They are coming now.",
+          "tr": "Onlar şimdi geliyor."
+        }
+      ]
+    },
+    {
+      "id": "g-want-to",
+      "word": "want",
+      "title": "want to: -mek istemek",
+      "body": [
+        "want + to + fiil: bir şeyi yapmak istemek. I want to go home = Eve gitmek istiyorum.",
+        "like to de aynı biçimde kurulur: I like to …"
+      ],
+      "examples": [
+        {
+          "en": "I want to go home.",
+          "tr": "Eve gitmek istiyorum."
+        },
+        {
+          "en": "She wants to take the car.",
+          "tr": "Arabayı almak istiyor."
+        },
+        {
+          "en": "Do you want tea?",
+          "tr": "Çay ister misin?"
+        }
+      ]
+    },
+    {
+      "id": "g-me",
+      "word": "give",
+      "title": "me, him, her, us, them",
+      "body": [
+        "Fiilden sonra gelen zamirler biçim değiştirir: I → me, he → him, she → her, we → us, they → them.",
+        "Give me the bag = Bana çantayı ver. I know him = Onu tanıyorum."
+      ],
+      "examples": [
+        {
+          "en": "Give me the bag.",
+          "tr": "Bana çantayı ver."
+        },
+        {
+          "en": "I know him.",
+          "tr": "Onu tanıyorum."
+        },
+        {
+          "en": "Take them to the car.",
+          "tr": "Onları arabaya götür."
+        }
+      ]
+    },
+    {
+      "id": "g-some-any",
+      "word": "any",
+      "title": "some / any",
+      "body": [
+        "some 'biraz, birkaç' demektir ve olumlu cümlede kullanılır: I have some coffee.",
+        "any soru ve olumsuzda kullanılır: Do you have any tea? I do not have any water."
+      ],
+      "examples": [
+        {
+          "en": "I have some coffee.",
+          "tr": "Biraz kahvem var."
+        },
+        {
+          "en": "Do you have any tea?",
+          "tr": "Hiç çayın var mı?"
+        },
+        {
+          "en": "I do not have any water.",
+          "tr": "Hiç suyum yok."
+        }
+      ]
+    },
+    {
+      "id": "g-should",
+      "word": "should",
+      "title": "should: -meli (tavsiye)",
+      "body": [
+        "should tavsiye bildirir: You should go home = Eve gitmelisin.",
+        "Daha güçlü, zorunlu olan must'tır; onu da yakında göreceksin. Olumsuzu should not."
+      ],
+      "examples": [
+        {
+          "en": "You should go home.",
+          "tr": "Eve gitmelisin."
+        },
+        {
+          "en": "She should take the car.",
+          "tr": "Arabayı almalı."
+        },
+        {
+          "en": "We should not go.",
+          "tr": "Gitmemeliyiz."
+        }
+      ]
+    },
+    {
+      "id": "g-much-many",
+      "word": "many",
+      "title": "much / many: çok",
+      "body": [
+        "many sayılabilen şeyler içindir: many cars, many people.",
+        "much sayılamayan şeyler içindir: much water, much time. Sorular: How many …? How much …?"
+      ],
+      "examples": [
+        {
+          "en": "There are many people in the street.",
+          "tr": "Sokakta çok insan var."
+        },
+        {
+          "en": "I do not have much time.",
+          "tr": "Çok vaktim yok."
+        },
+        {
+          "en": "How much coffee do you want?",
+          "tr": "Ne kadar kahve istersin?"
+        }
+      ]
+    },
+    {
+      "id": "g-was",
+      "word": "last",
+      "title": "was / were: geçmiş",
+      "body": [
+        "be fiilinin geçmişi: I / he / she / it was, you / we / they were.",
+        "It was a good day = Güzel bir gündü. Olumsuzu was not (wasn't), were not (weren't)."
+      ],
+      "examples": [
+        {
+          "en": "It was a good day.",
+          "tr": "Güzel bir gündü."
+        },
+        {
+          "en": "We were at home.",
+          "tr": "Evdeydik."
+        },
+        {
+          "en": "The coffee was not good.",
+          "tr": "Kahve iyi değildi."
+        }
+      ]
+    },
+    {
+      "id": "g-past",
+      "word": "before",
+      "title": "Geçmiş zaman: -ed ve düzensiz fiiller",
+      "body": [
+        "Düzenli fiillere geçmişte -ed eklenir: work → worked, look → looked.",
+        "En sık kullanılanların çoğu düzensizdir: go → went, have → had, see → saw, come → came, take → took, make → made, say → said, get → got.",
+        "Soru ve olumsuzda did kullanılır, fiil yalın kalır: Did you go? I did not go."
+      ],
+      "examples": [
+        {
+          "en": "I went home before the man came.",
+          "tr": "Adam gelmeden önce eve gittim."
+        },
+        {
+          "en": "She looked at the window.",
+          "tr": "Pencereye baktı."
+        },
+        {
+          "en": "Did you see the car?",
+          "tr": "Arabayı gördün mü?"
+        }
+      ]
+    },
+    {
+      "id": "g-often",
+      "word": "never",
+      "title": "always, often, never: ne sıklıkla",
+      "body": [
+        "Sıklık bildiren kelimeler (always, often, never …) genellikle fiilden önce gelir: I never go to work by car.",
+        "be ile ise ondan sonra gelir: He is never late."
+      ],
+      "examples": [
+        {
+          "en": "I never go to work by car.",
+          "tr": "İşe asla arabayla gitmem."
+        },
+        {
+          "en": "He is never late.",
+          "tr": "O asla geç kalmaz."
+        },
+        {
+          "en": "We never play in the street.",
+          "tr": "Sokakta asla oynamayız."
+        }
+      ]
+    },
+    {
+      "id": "g-going-to",
+      "word": "plan",
+      "title": "be going to: plan",
+      "body": [
+        "Önceden karar verilmiş planlar için am / is / are going to + fiil kullanılır: I am going to write a book = Bir kitap yazacağım.",
+        "will ile farkı: going to çoğu zaman önceden düşünülmüş bir planı anlatır."
+      ],
+      "examples": [
+        {
+          "en": "I am going to write a book.",
+          "tr": "Bir kitap yazacağım."
+        },
+        {
+          "en": "We are going to study at home.",
+          "tr": "Evde ders çalışacağız."
+        }
+      ]
+    },
+    {
+      "id": "g-perfect",
+      "word": "ever",
+      "title": "have seen: present perfect",
+      "body": [
+        "Geçmişte olmuş ama şimdiyle bağı olan işler için have / has + fiilin üçüncü hâli kullanılır: I have seen this film.",
+        "ever (hiç) ve already (zaten, çoktan) ile sık kullanılır: Have you ever been here?"
+      ],
+      "examples": [
+        {
+          "en": "I have already seen it.",
+          "tr": "Onu zaten gördüm."
+        },
+        {
+          "en": "Have you ever been here?",
+          "tr": "Hiç burada bulundun mu?"
+        },
+        {
+          "en": "She has lost her key.",
+          "tr": "Anahtarını kaybetti."
+        }
+      ]
+    },
+    {
+      "id": "g-could",
+      "word": "please",
+      "title": "Could you …? Would you like …?",
+      "body": [
+        "Kibar ricalarda could kullanılır: Could you help me, please? = Bana yardım eder misiniz, lütfen?",
+        "Bir şey teklif ederken Would you like …? denir: Would you like some tea?"
+      ],
+      "examples": [
+        {
+          "en": "Could you help me, please?",
+          "tr": "Bana yardım eder misiniz, lütfen?"
+        },
+        {
+          "en": "Would you like some tea?",
+          "tr": "Biraz çay ister misiniz?"
+        }
+      ]
+    }
+  ]
+}

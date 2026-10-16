@@ -56,6 +56,13 @@ export function sentenceAudio(sentenceId: string): Clip | null {
   return clip(media.audio[`s:${sentenceId}`]);
 }
 
+/** Any other recorded phrase by manifest key, e.g. `g:<grammarId>:<i>`. */
+export function phraseAudio(key: string): Clip | null {
+  return clip(media.audio[key]);
+}
+
+export const grammarExampleKey = (id: string, i: number) => `g:${id}:${i}`;
+
 /** Every media URL the given words, texts and sentences need, for the offline cache. */
 export function mediaUrls(
   wordIds: Iterable<string>,
@@ -81,6 +88,12 @@ export function mediaUrls(
   for (const id of sentenceIds) {
     const a = sentenceAudio(id);
     if (a) urls.add(a.url);
+  }
+  for (const g of course.grammar ?? []) {
+    g.examples.forEach((_, i) => {
+      const a = phraseAudio(grammarExampleKey(g.id, i));
+      if (a) urls.add(a.url);
+    });
   }
   return [...urls];
 }

@@ -15,6 +15,8 @@ export const GOAL_OPTIONS = [20, 30, 45] as const;
 export const NEW_WORDS_MIN = 6;
 export const NEW_WORDS_MAX = 15;
 export const NEW_WORDS_DEFAULT = 10;
+/** Grammar cards per lesson at most (new ones first, then catch-ups). */
+export const GRAMMAR_PER_LESSON = 2;
 
 export interface LessonLogEntry {
   id: string;
@@ -118,6 +120,24 @@ export interface NextLesson {
   reviewWords: string[];
   /** Due cards left over for later because of the daily review cap. */
   reviewsDeferred: number;
+  /** Grammar cards for this lesson (at most GRAMMAR_PER_LESSON). */
+  grammar: Array<{ id: string; word: string }>;
+}
+
+/**
+ * Grammar cards not seen yet: first those brought by this lesson's new words,
+ * then those whose word was learned earlier — two at most, in course order.
+ */
+export function pickGrammar(
+  course: Course,
+  cards: ReadonlyMap<string, Card>,
+  newWords: readonly string[],
+  seen: ReadonlySet<string>,
+): Array<{ id: string; word: string }> {
+  const open = (course.grammar ?? []).filter((g) => !seen.has(g.id));
+  const fresh = open.filter((g) => newWords.includes(g.word));
+  const learned = open.filter((g) => !newWords.includes(g.word) && (cards.get(g.word)?.state ?? 'new') !== 'new');
+  return [...fresh, ...learned].slice(0, GRAMMAR_PER_LESSON).map((g) => ({ id: g.id, word: g.word }));
 }
 
 /** Reviews done today: cards reviewed today that were introduced before today. */
@@ -144,16 +164,19 @@ export function planNextLesson(input: {
   now: number;
   tz: string;
   newPerLesson: number;
+  grammarSeen?: ReadonlySet<string>;
 }): NextLesson {
   const open = input.log.find((l) => l.completedAt === null) ?? null;
   const due = [...input.cards.values()]
     .filter((c) => c.state !== 'new' && c.dueAt !== null && c.dueAt <= input.now && input.course.words[c.wordId])
     .sort((a, b) => (a.dueAt ?? 0) - (b.dueAt ?? 0));
   const budget = reviewBudget(reviewsDoneToday(input.cards, input.now, input.tz));
+  const newWords = nextNewWords(input.course, input.cards, clampNewWords(input.newPerLesson));
   return {
     number: nextLessonNumber(input.log),
     resumeId: open?.id ?? null,
-    newWords: nextNewWords(input.course, input.cards, clampNewWords(input.newPerLesson)),
+    newWords,
+    grammar: pickGrammar(input.course, input.cards, newWords, input.grammarSeen ?? new Set()),
     reviewWords: due.slice(0, budget).map((c) => c.wordId),
     reviewsDeferred: Math.max(0, due.length - budget),
   };
