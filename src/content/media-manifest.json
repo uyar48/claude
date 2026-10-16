@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T19:23:49.866Z",
+  "generatedAt": "2026-10-16T19:28:15.114Z",
   "ttsProvider": "kokoro",
   "audio": {
     "g:g-a-an:0": {
@@ -12361,6 +12361,526 @@
       "timingSource": "provider",
       "voice": "iP95p4xoKVk53GoZ742B"
     },
+    "sent:t10:0": {
+      "file": "c03611273c1cb451639c.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "c03611273c1cb451639c",
+      "duration": 2.98
+    },
+    "sent:t10:1": {
+      "file": "735c493c61a75086f80b.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "735c493c61a75086f80b",
+      "duration": 2.4
+    },
+    "sent:t10:2": {
+      "file": "aa86c389c36e3215b172.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "aa86c389c36e3215b172",
+      "duration": 3.53
+    },
+    "sent:t10:3": {
+      "file": "d89f688daf67f8bbbf4a.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "d89f688daf67f8bbbf4a",
+      "duration": 3.73
+    },
+    "sent:t10:4": {
+      "file": "71ce821ec233a39cac88.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "71ce821ec233a39cac88",
+      "duration": 3.13
+    },
+    "sent:t10:5": {
+      "file": "a841b6a042486d271357.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "a841b6a042486d271357",
+      "duration": 2.15
+    },
+    "sent:t10:6": {
+      "file": "93b8aed10f09022788bf.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "93b8aed10f09022788bf",
+      "duration": 2.4
+    },
+    "sent:t10:7": {
+      "file": "00d86ef619965fb51433.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "00d86ef619965fb51433",
+      "duration": 2.15
+    },
+    "sent:t10:8": {
+      "file": "aaf1ea91c1f9b999ff4b.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "aaf1ea91c1f9b999ff4b",
+      "duration": 2.2
+    },
+    "sent:t11:0": {
+      "file": "2a6aaf9b5f5794bdd0b4.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "2a6aaf9b5f5794bdd0b4",
+      "duration": 2.65
+    },
+    "sent:t11:1": {
+      "file": "855393c9c99b1d0799f6.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "855393c9c99b1d0799f6",
+      "duration": 2.13
+    },
+    "sent:t11:2": {
+      "file": "02f24bc47107cff87b81.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "02f24bc47107cff87b81",
+      "duration": 2.05
+    },
+    "sent:t11:3": {
+      "file": "7b35ec005ace9f3ec56a.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "7b35ec005ace9f3ec56a",
+      "duration": 2.58
+    },
+    "sent:t11:4": {
+      "file": "8b70bc8c464dc1ee4959.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "8b70bc8c464dc1ee4959",
+      "duration": 2.17
+    },
+    "sent:t11:5": {
+      "file": "1a128b9ca323275659e0.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "1a128b9ca323275659e0",
+      "duration": 2.15
+    },
+    "sent:t11:6": {
+      "file": "40ecd52538c2181e516c.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "40ecd52538c2181e516c",
+      "duration": 2.17
+    },
+    "sent:t11:7": {
+      "file": "c2038bd545fea287ddbe.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "c2038bd545fea287ddbe",
+      "duration": 2.83
+    },
+    "sent:t11:8": {
+      "file": "c1cf5e89a5d7ed86a047.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "c1cf5e89a5d7ed86a047",
+      "duration": 2.7
+    },
+    "sent:t12:0": {
+      "file": "45dadd7d8c1509edbd17.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "45dadd7d8c1509edbd17",
+      "duration": 3.13
+    },
+    "sent:t12:1": {
+      "file": "4bbb48c4165b5e28e39b.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "4bbb48c4165b5e28e39b",
+      "duration": 3.23
+    },
+    "sent:t12:2": {
+      "file": "0dba433fa0e773e03482.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "0dba433fa0e773e03482",
+      "duration": 2.2
+    },
+    "sent:t12:3": {
+      "file": "6f643f1df50e84e28f2b.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "6f643f1df50e84e28f2b",
+      "duration": 2.5
+    },
+    "sent:t12:4": {
+      "file": "3ba447a5a0f192a6d9bd.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "3ba447a5a0f192a6d9bd",
+      "duration": 2.6
+    },
+    "sent:t12:5": {
+      "file": "8e9e5f85e756a4680905.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "8e9e5f85e756a4680905",
+      "duration": 2.58
+    },
+    "sent:t12:6": {
+      "file": "b9f1a03c364d33cb33e4.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "b9f1a03c364d33cb33e4",
+      "duration": 2.75
+    },
+    "sent:t12:7": {
+      "file": "0f1906c4e1365041c83e.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "0f1906c4e1365041c83e",
+      "duration": 2.73
+    },
+    "sent:t12:8": {
+      "file": "4dc3bee3dbd965015d2e.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "4dc3bee3dbd965015d2e",
+      "duration": 2.28
+    },
+    "sent:t13:0": {
+      "file": "533a818eb24bd9d40c03.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "533a818eb24bd9d40c03",
+      "duration": 3.45
+    },
+    "sent:t13:1": {
+      "file": "b88214a4c0074093ed11.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "b88214a4c0074093ed11",
+      "duration": 1.55
+    },
+    "sent:t13:2": {
+      "file": "6b18a68126a28850cf74.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "6b18a68126a28850cf74",
+      "duration": 3
+    },
+    "sent:t13:3": {
+      "file": "1a77acde3cbdb33dff00.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "1a77acde3cbdb33dff00",
+      "duration": 2.35
+    },
+    "sent:t13:4": {
+      "file": "b225e8d2710a17c84983.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "b225e8d2710a17c84983",
+      "duration": 2.6
+    },
+    "sent:t13:5": {
+      "file": "f84b09c5443320f173b1.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "f84b09c5443320f173b1",
+      "duration": 2.05
+    },
+    "sent:t13:6": {
+      "file": "7c008cb8929225ab9551.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "7c008cb8929225ab9551",
+      "duration": 2.83
+    },
+    "sent:t13:7": {
+      "file": "cb879d0eab42c7a9dc7a.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "cb879d0eab42c7a9dc7a",
+      "duration": 3.13
+    },
+    "sent:t13:8": {
+      "file": "765232a49676c3ec5276.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "765232a49676c3ec5276",
+      "duration": 2.75
+    },
+    "sent:t13:9": {
+      "file": "fdcd08a9eebc30679cd7.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "fdcd08a9eebc30679cd7",
+      "duration": 2.17
+    },
+    "sent:t14:0": {
+      "file": "bf361530f03afc161aaa.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "bf361530f03afc161aaa",
+      "duration": 3.75
+    },
+    "sent:t14:1": {
+      "file": "3fba951a40f97de568d1.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "3fba951a40f97de568d1",
+      "duration": 2.9
+    },
+    "sent:t14:10": {
+      "file": "96c52282ad1938b7fd42.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "96c52282ad1938b7fd42",
+      "duration": 1.85
+    },
+    "sent:t14:2": {
+      "file": "4307159b9aaceb7ecf42.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "4307159b9aaceb7ecf42",
+      "duration": 2.6
+    },
+    "sent:t14:3": {
+      "file": "b202b00ba5f8f7d9b473.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "b202b00ba5f8f7d9b473",
+      "duration": 2.63
+    },
+    "sent:t14:4": {
+      "file": "31973bcf120f8c64544c.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "31973bcf120f8c64544c",
+      "duration": 2.4
+    },
+    "sent:t14:5": {
+      "file": "33c62b97dd7e3af78cdb.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "33c62b97dd7e3af78cdb",
+      "duration": 2.4
+    },
+    "sent:t14:6": {
+      "file": "eaa2ea58659e031704f2.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "eaa2ea58659e031704f2",
+      "duration": 2.05
+    },
+    "sent:t14:7": {
+      "file": "09d67b3b8291fc852861.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "09d67b3b8291fc852861",
+      "duration": 2.8
+    },
+    "sent:t14:8": {
+      "file": "2c37d10e6d95c9af78ee.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "2c37d10e6d95c9af78ee",
+      "duration": 2.45
+    },
+    "sent:t14:9": {
+      "file": "f4912d7793cf64822f09.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "f4912d7793cf64822f09",
+      "duration": 2.33
+    },
+    "sent:t15:0": {
+      "file": "0dcb1a4cf91a87010b82.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "0dcb1a4cf91a87010b82",
+      "duration": 2.93
+    },
+    "sent:t15:1": {
+      "file": "a66914f253e5cee2753c.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "a66914f253e5cee2753c",
+      "duration": 3.4
+    },
+    "sent:t15:10": {
+      "file": "1328b77e814f92ee2c28.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "1328b77e814f92ee2c28",
+      "duration": 3.98
+    },
+    "sent:t15:2": {
+      "file": "f7b43950ed9b112a8149.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "f7b43950ed9b112a8149",
+      "duration": 2.95
+    },
+    "sent:t15:3": {
+      "file": "0e3b7dad16cf33963d8a.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "0e3b7dad16cf33963d8a",
+      "duration": 3.03
+    },
+    "sent:t15:4": {
+      "file": "1d185f4cd605ec99e09a.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "1d185f4cd605ec99e09a",
+      "duration": 3.58
+    },
+    "sent:t15:5": {
+      "file": "f7f14a3791fc193353d2.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "f7f14a3791fc193353d2",
+      "duration": 3.35
+    },
+    "sent:t15:6": {
+      "file": "4a4329c8ee37396642a0.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "4a4329c8ee37396642a0",
+      "duration": 3.13
+    },
+    "sent:t15:7": {
+      "file": "350dd0d886560e9a00c5.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "350dd0d886560e9a00c5",
+      "duration": 3.28
+    },
+    "sent:t15:8": {
+      "file": "91ff48d48b9a9fdd8e3d.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "91ff48d48b9a9fdd8e3d",
+      "duration": 3.43
+    },
+    "sent:t15:9": {
+      "file": "35ecc5c414fcb708c35e.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "am_michael",
+      "hash": "35ecc5c414fcb708c35e",
+      "duration": 3.15
+    },
+    "sent:t16:0": {
+      "file": "8769f9716d314ed14ce1.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "8769f9716d314ed14ce1",
+      "duration": 2.5
+    },
+    "sent:t16:1": {
+      "file": "4f37ca55b5df4cd3b2d9.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "4f37ca55b5df4cd3b2d9",
+      "duration": 3.43
+    },
+    "sent:t16:2": {
+      "file": "f55c1ebf764b01636ffa.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "f55c1ebf764b01636ffa",
+      "duration": 3.15
+    },
+    "sent:t16:3": {
+      "file": "e49cf884c0292e75795b.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "e49cf884c0292e75795b",
+      "duration": 2.9
+    },
+    "sent:t16:4": {
+      "file": "c7e7dea6b9e6e6251750.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "c7e7dea6b9e6e6251750",
+      "duration": 3.13
+    },
+    "sent:t16:5": {
+      "file": "042f91a67968104d08d6.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "042f91a67968104d08d6",
+      "duration": 2.68
+    },
     "sent:t2:0": {
       "duration": 1.76,
       "file": "0ed830671dc3feb99bfa.mp3",
@@ -12948,6 +13468,78 @@
       "voice": "am_michael",
       "hash": "b5fd6e5a4e1a91283662",
       "duration": 2.2
+    },
+    "sent:t9:0": {
+      "file": "d36554f46c6d793fab08.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "d36554f46c6d793fab08",
+      "duration": 2.28
+    },
+    "sent:t9:1": {
+      "file": "e440bec5dfb9bcac7f83.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "e440bec5dfb9bcac7f83",
+      "duration": 3.33
+    },
+    "sent:t9:2": {
+      "file": "0702ebfae7443ff8883e.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "0702ebfae7443ff8883e",
+      "duration": 2.38
+    },
+    "sent:t9:3": {
+      "file": "3b297e337bc3b85c9e33.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "3b297e337bc3b85c9e33",
+      "duration": 2.45
+    },
+    "sent:t9:4": {
+      "file": "44a4399bfbe622af8156.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "44a4399bfbe622af8156",
+      "duration": 2.05
+    },
+    "sent:t9:5": {
+      "file": "b7d0a887105f355524a9.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "b7d0a887105f355524a9",
+      "duration": 2.65
+    },
+    "sent:t9:6": {
+      "file": "5fd0acb14740ecfea228.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "5fd0acb14740ecfea228",
+      "duration": 2.15
+    },
+    "sent:t9:7": {
+      "file": "d0329b8b4a0f3ab394a7.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "d0329b8b4a0f3ab394a7",
+      "duration": 2.65
+    },
+    "sent:t9:8": {
+      "file": "209edbdb14096e70cebb.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "209edbdb14096e70cebb",
+      "duration": 2.1
     },
     "word:a:female": {
       "file": "2cd7d565794677ef710c.mp3",
@@ -14060,6 +14652,14 @@
       "voice": "af_heart",
       "hash": "4d0964c3c1dba1ef84dd",
       "duration": 1.33
+    },
+    "word:father:female": {
+      "file": "10bd192857c8a409abdf.mp3",
+      "provider": "kokoro",
+      "model": "Kokoro-82M (q8)",
+      "voice": "af_heart",
+      "hash": "10bd192857c8a409abdf",
+      "duration": 1.45
     },
     "word:feel:female": {
       "file": "0f5eab6571920590491f.mp3",
