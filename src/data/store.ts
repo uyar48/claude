@@ -150,9 +150,10 @@ export class Store {
 
   async updateSettings(patch: (s: Settings) => Settings) {
     const settings = { ...patch(this.state.settings), updatedAt: this.now() };
+    // Show the change at once (switches must not flick back), then persist.
+    this.set({ settings });
     await this.db.put('kv', settings, 'settings');
     await this.db.put('kv', true, 'settingsDirty');
-    this.set({ settings });
     this.onLocalChange();
   }
 

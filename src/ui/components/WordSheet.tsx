@@ -1,5 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { exampleFor, lookup } from '../../content';
+import { emojiFor, imageFor } from '../../content/media';
+import { useAppState } from '../hooks';
 import { speaker } from '../../audio/speaker';
 import { IconClose, IconSpeaker } from './Icons';
 import { Picture } from './Picture';
@@ -8,6 +10,8 @@ import { Picture } from './Picture';
 export function WordSheet({ form, onClose, added }: { form: string; onClose: () => void; added: boolean }) {
   const hit = lookup(form);
   const word = hit.word;
+  const { mediaChoices } = useAppState();
+  const visual = word ? Boolean(imageFor(word.id, mediaChoices) || emojiFor(word.id)) : false;
   const example = useMemo(() => (word ? exampleFor(word.id) : null), [word]);
   useEffect(() => {
     if (word) void speaker.word(word.id);
@@ -20,7 +24,7 @@ export function WordSheet({ form, onClose, added }: { form: string; onClose: () 
         <button className="icon-btn sheet-close" onClick={onClose} aria-label="Kapat">
           <IconClose />
         </button>
-        {word && <Picture wordId={word.id} size="md" credit />}
+        {word && visual && <Picture wordId={word.id} size="md" credit />}
         <div className="sheet-word">
           <span className="en" lang="en">
             {word?.en ?? form}
