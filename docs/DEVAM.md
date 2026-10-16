@@ -2,7 +2,15 @@
 
 Canlı adres: https://okuma-iota.vercel.app · Dal: `claude/new-session-b5nvn7`
 
-## v2 (BRIEF-v2) — yapılanlar
+## v2 (BRIEF-v2) — canlıda (16 Ekim 2026)
+
+- Geçiş 0003 canlı veritabanına uygulandı. Eski 3 ders 1–3 numarasını ve aktif sürelerini aldı; sıradaki ders 4.
+- 21 somut kelimenin her birine 5 Pixabay adayı indi. Varsayılan fotoğraflar gözle seçildi.
+- 1135 sesin hepsi hazır (Kokoro + korunan ElevenLabs klipleri). `validate-content` hatasız.
+- Testler: 97 birim, 3 uçtan uca. Canlıda kontrol edildi: giriş sayfası, `/admin/review` (105 aday), medya dosyaları, `/api/cron/notify` 200.
+- Pixabay fotoğrafları yardımcı bir oturumda indirildi; anahtar bu oturuma görünmüyordu (`claude/pixabay-images` dalı birleştirildi).
+
+## Ayrıntılar
 
 - **İlerleme bitirilen derslere bağlı.**
   - Kodu: `src/core/progress.ts`, `src/core/session.ts`, `src/ui/screens/Lesson.tsx`.
