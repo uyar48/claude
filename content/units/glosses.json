@@ -2112,7 +2112,7 @@
    "tr": "yemek yemek",
    "pos": "fiil",
    "kind": "concrete",
-   "query": "family eating dinner"
+   "query": "girl eating food"
   },
   "step": {
    "tr": "adım",
@@ -2488,7 +2488,7 @@
    "tr": "güneş",
    "pos": "isim",
    "kind": "concrete",
-   "query": "sun in blue sky"
+   "query": "sun shining blue sky"
   },
   "rain": {
    "tr": "yağmur",
@@ -2542,7 +2542,7 @@
    "tr": "otobüs",
    "pos": "isim",
    "kind": "concrete",
-   "query": "city bus"
+   "query": "bus on road"
   },
   "baby": {
    "tr": "bebek",
@@ -2572,7 +2572,7 @@
    "tr": "hastane",
    "pos": "isim",
    "kind": "concrete",
-   "query": "hospital building"
+   "query": "hospital ambulance"
   },
   "bank": {
    "tr": "banka",

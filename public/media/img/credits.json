@@ -1,6 +1,6 @@
 {
   "note": "Written by scripts/fetch-images.ts. Candidates per word with source, author and license.",
-  "generatedAt": "2026-10-16T19:10:17.242Z",
+  "generatedAt": "2026-10-16T19:19:37.702Z",
   "missingKeys": [
     "PEXELS_API_KEY"
   ],
@@ -1392,73 +1392,73 @@
       "query": "group of people walking"
     },
     "eat": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
-          "file": "eat-pixabay-3788838.jpg",
+          "file": "eat-pixabay-5033006.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/family-dinner-food-dinner-meal-3788838/",
-          "title": "family dinner, food, dinner, meal, lunch, meat, kitchen, eat, table, eating, delicious, gourmet, recipe, homemade, calories, dish, brown meat, brown dinner, family dinner, family dinner, family dinner, family dinner, family dinner",
-          "author": "furry_portraits",
-          "authorUrl": "https://pixabay.com/users/furry_portraits-8508423/",
+          "url": "https://pixabay.com/photos/kid-girl-eating-play-cute-5033006/",
+          "title": "kid, girl, eating, play, cute, adorable, healthy, fruit, smile, nature, food, daughter, garden, green food, green smile, green healthy, green eating",
+          "author": "dilawarali",
+          "authorUrl": "https://pixabay.com/users/dilawarali-15647552/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 4644,
-          "height": 3096
+          "width": 4752,
+          "height": 3168
         },
         {
-          "file": "eat-pixabay-4551293.jpg",
+          "file": "eat-pixabay-7025931.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/wine-white-wine-red-wine-portugal-4551293/",
-          "title": "wine, white wine, red wine, portugal, reserve, drinks, cheers, wine tasting, winemakers, wineyard, wine glass, wine bottles, cellar, vines, rouge, dinner, gastronomy, foodporn, food, eat, meal, family, delicious, diet, wine, red wine, red wine, red wine, portugal, wine tasting, wine tasting, wine tasting, wine tasting, wine tasting, wineyard, wineyard",
-          "author": "mariadasdores",
-          "authorUrl": "https://pixabay.com/users/mariadasdores-13947546/",
-          "license": "Pixabay Content License",
-          "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 4500,
-          "height": 3003
-        },
-        {
-          "file": "eat-pixabay-4551300.jpg",
-          "source": "pixabay",
-          "url": "https://pixabay.com/photos/wine-white-wine-red-wine-portugal-4551300/",
-          "title": "wine, white wine, red wine, portugal, reserve, drinks, cheers, wine tasting, winemakers, wineyard, wine glass, wine bottles, cellar, vines, rouge, dinner, gastronomy, foodporn, food, eat, meal, family, delicious, diet, brown wine, brown bottle, brown dinner, wine, wine tasting, wineyard, wineyard, wineyard, wineyard, wineyard",
-          "author": "mariadasdores",
-          "authorUrl": "https://pixabay.com/users/mariadasdores-13947546/",
-          "license": "Pixabay Content License",
-          "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 4500,
-          "height": 3000
-        },
-        {
-          "file": "eat-pixabay-5143835.jpg",
-          "source": "pixabay",
-          "url": "https://pixabay.com/photos/food-gourmet-sausage-meat-cooking-5143835/",
-          "title": "food, gourmet, sausage, meat, cooking, meal, mustard, dinner, eating, eat, delicious",
-          "author": "takedahrs",
-          "authorUrl": "https://pixabay.com/users/takedahrs-12657/",
+          "url": "https://pixabay.com/photos/popcorn-girl-food-eating-watching-7025931/",
+          "title": "popcorn, girl, food, eating, watching, woman, female, tv, television, snack, entertainment, movie, closeup, popcorn, popcorn, popcorn, popcorn, popcorn",
+          "author": "yousafbhutta",
+          "authorUrl": "https://pixabay.com/users/yousafbhutta-2933897/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
           "width": 6000,
           "height": 4000
         },
         {
-          "file": "eat-pixabay-4656333.jpg",
+          "file": "eat-pixabay-7025937.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/dinner-food-hotel-lunch-delicious-4656333/",
-          "title": "dinner, food, hotel, lunch, delicious, meal, restaurant, cheese, gourmet, eat, italian, eating, healthy, cuisine, fresh, pasta, salad, snack, dish, plate, cooking, table, brown pasta, brown dinner, brown hotel",
-          "author": "bishwas",
-          "authorUrl": "https://pixabay.com/users/bishwas-1284107/",
+          "url": "https://pixabay.com/photos/popcorn-girl-food-eating-watching-7025937/",
+          "title": "popcorn, girl, food, eating, watching, woman, female, tv, television, snack, entertainment, movie, closeup, popcorn, popcorn, popcorn, popcorn, popcorn",
+          "author": "yousafbhutta",
+          "authorUrl": "https://pixabay.com/users/yousafbhutta-2933897/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 6240,
-          "height": 4160
+          "width": 6000,
+          "height": 4000
+        },
+        {
+          "file": "eat-pixabay-7434482.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/girl-eating-noodles-food-meal-7434482/",
+          "title": "girl, eating, noodles, food, meal, child, kid, young, chinese, little girl, primary school student, eating noodles, camping",
+          "author": "洪福生",
+          "authorUrl": "https://pixabay.com/users/%E6%B4%AA%E7%A6%8F%E7%94%9F-14871232/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 5271,
+          "height": 3514
+        },
+        {
+          "file": "eat-pixabay-7499693.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/girls-sitting-terrace-eating-pizza-7499693/",
+          "title": "girls, sitting, terrace, eating, pizza, relaxation, food, lifestyle, outdoor",
+          "author": "Icsilviu",
+          "authorUrl": "https://pixabay.com/users/Icsilviu-12753087/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 3600,
+          "height": 2400
         }
       ],
-      "query": "family eating dinner"
+      "query": "girl eating food"
     },
     "drink": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "drink-pixabay-3528344.jpg",
@@ -1524,7 +1524,7 @@
       "query": "woman drinking water"
     },
     "sleep": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "sleep-pixabay-1358907.jpg",
@@ -1656,7 +1656,7 @@
       "query": "bed with pillows"
     },
     "child": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "child-pixabay-7576461.jpg",
@@ -1722,7 +1722,7 @@
       "query": "child playing outside"
     },
     "kitchen": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "kitchen-pixabay-1867663.jpg",
@@ -1986,7 +1986,7 @@
       "query": "two brothers"
     },
     "son": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "son-pixabay-3357946.jpg",
@@ -2052,7 +2052,7 @@
       "query": "mother with her son"
     },
     "daughter": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "daughter-pixabay-656734.jpg",
@@ -2118,7 +2118,7 @@
       "query": "father and daughter"
     },
     "write": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "write-pixabay-593378.jpg",
@@ -2184,7 +2184,7 @@
       "query": "hand writing in notebook"
     },
     "talk": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "talk-pixabay-4364420.jpg",
@@ -2250,7 +2250,7 @@
       "query": "two friends talking"
     },
     "evening": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "evening-pixabay-7813119.jpg",
@@ -2448,7 +2448,7 @@
       "query": "dog"
     },
     "play": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "play-pixabay-9842596.jpg",
@@ -2580,7 +2580,7 @@
       "query": "cat"
     },
     "book": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "book-pixabay-925589.jpg",
@@ -2712,7 +2712,7 @@
       "query": "family together at home"
     },
     "breakfast": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "breakfast-pixabay-8200753.jpg",
@@ -2778,7 +2778,7 @@
       "query": "breakfast table"
     },
     "lunch": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "lunch-pixabay-926885.jpg",
@@ -2844,7 +2844,7 @@
       "query": "lunch sandwich salad"
     },
     "dinner": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "dinner-pixabay-1433494.jpg",
@@ -3108,7 +3108,7 @@
       "query": "sugar cubes"
     },
     "run": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "run-pixabay-4353824.jpg",
@@ -3240,7 +3240,7 @@
       "query": "fruit bowl"
     },
     "apple": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "apple-pixabay-1873078.jpg",
@@ -3306,7 +3306,7 @@
       "query": "red apple"
     },
     "hand": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "hand-pixabay-4661763.jpg",
@@ -3570,7 +3570,7 @@
       "query": "washing hands"
     },
     "read": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "read-pixabay-5499685.jpg",
@@ -3636,7 +3636,7 @@
       "query": "woman reading a book"
     },
     "friend": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "friend-pixabay-1534506.jpg",
@@ -3768,7 +3768,7 @@
       "query": "fruit market stalls"
     },
     "build": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "build-pixabay-1080592.jpg",
@@ -3834,7 +3834,7 @@
       "query": "building construction site"
     },
     "buy": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "buy-pixabay-3040029.jpg",
@@ -3900,7 +3900,7 @@
       "query": "woman shopping with bags"
     },
     "student": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "student-pixabay-2557396.jpg",
@@ -4032,7 +4032,7 @@
       "query": "smiling face portrait"
     },
     "room": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "room-pixabay-416062.jpg",
@@ -4098,7 +4098,7 @@
       "query": "bedroom interior"
     },
     "head": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "head-pixabay-2462466.jpg",
@@ -4164,7 +4164,7 @@
       "query": "head and shoulders portrait"
     },
     "person": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "person-pixabay-742766.jpg",
@@ -4230,7 +4230,7 @@
       "query": "person portrait"
     },
     "city": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "city-pixabay-8214498.jpg",
@@ -4296,7 +4296,7 @@
       "query": "city skyline"
     },
     "night": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "night-pixabay-8461874.jpg",
@@ -4362,73 +4362,73 @@
       "query": "night sky city lights"
     },
     "sun": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
-          "file": "sun-pixabay-5151710.jpg",
+          "file": "sun-pixabay-4996900.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/lake-west-sun-sky-landscape-water-5151710/",
-          "title": "lake, west, sun, blue sky, sky, landscape, water, summer, reflection, clouds, twilight, nature, in the evening, blue, beautiful, mood, meditation, quiet, color, violet, the background, pink",
-          "author": "DominikaKukulka",
-          "authorUrl": "https://pixabay.com/users/DominikaKukulka-16037370/",
+          "url": "https://pixabay.com/photos/stay-home-clouds-sky-blue-sun-4996900/",
+          "title": "stay home, blue sky, clouds, sky, blue, sun, shining, nasa, nature, blue home",
+          "author": "talipozer",
+          "authorUrl": "https://pixabay.com/users/talipozer-13034296/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 6016,
-          "height": 4000
+          "width": 5616,
+          "height": 3744
         },
         {
-          "file": "sun-pixabay-4621972.jpg",
+          "file": "sun-pixabay-4028542.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/geese-in-flight-sunrise-geese-4621972/",
-          "title": "geese in flight, sunrise, geese, flying geese, birds, nature, orange, sky, scenic, morning, wildlife, flight, outdoors, wild, dawn, animal, sun, twilight, canada geese in flight, blue sunrise, blue morning",
-          "author": "TheOtherKev",
-          "authorUrl": "https://pixabay.com/users/TheOtherKev-9436196/",
+          "url": "https://pixabay.com/photos/sunflower-shine-blue-sky-summer-4028542/",
+          "title": "sunflower, shine, blue sky, summer, nature, sun, blossoms, yellow, blue, bloom",
+          "author": "Hheidi",
+          "authorUrl": "https://pixabay.com/users/Hheidi-6012064/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 3456,
+          "height": 2304
+        },
+        {
+          "file": "sun-pixabay-3081066.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/sunset-sky-clouds-sun-nature-3081066/",
+          "title": "sunset, sky, clouds, sun, nature, outdoor, blue, blue sky, sunlight, light, yellow, bright, color, sunshine, natural, shine, twilight, dusk, horizon, daylight, peaceful, tranquil, evening",
+          "author": "bones64",
+          "authorUrl": "https://pixabay.com/users/bones64-219712/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 4496,
+          "height": 3000
+        },
+        {
+          "file": "sun-pixabay-3456302.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/tree-sun-branch-bark-light-nature-3456302/",
+          "title": "tree, sun, branch, bark, light, nature, blue sky, natural, shine, foliage, environment, travel, scene, look up, dream, sky, blue, orange, outdoor, colorful, shiny",
+          "author": "jolimaison",
+          "authorUrl": "https://pixabay.com/users/jolimaison-4076676/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
           "width": 6000,
           "height": 4000
         },
         {
-          "file": "sun-pixabay-3850768.jpg",
+          "file": "sun-pixabay-62514.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/sunrise-in-the-morning-river-cold-3850768/",
-          "title": "sunrise, blue sky, in the morning, river, cold, nature, landscape, sky, sunset, light, winter, the background, dawn, water, foggy, dark, trees, the horizon, the sun, beautiful, tree, blue, season, the stage, frost, magical",
-          "author": "JerzyGórecki",
-          "authorUrl": "https://pixabay.com/users/JerzyG%C3%B3recki-2233926/",
+          "url": "https://pixabay.com/photos/backlighting-sun-light-reflections-62514/",
+          "title": "backlighting, sun, light reflections, nature, lens reflection, lens optical reflections, reflex, effect, dazzle effect",
+          "author": "Hans",
+          "authorUrl": "https://pixabay.com/users/Hans-2/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 4940,
-          "height": 2734
-        },
-        {
-          "file": "sun-pixabay-5048295.jpg",
-          "source": "pixabay",
-          "url": "https://pixabay.com/photos/island-liguria-sea-italy-water-5048295/",
-          "title": "island, liguria, sea, italy, water, beach, holiday, the coast, sun, in the morning, sky, beautiful, blue sky, blue, lake, landscape, light, nature, palma, mountains",
-          "author": "DominikaKukulka",
-          "authorUrl": "https://pixabay.com/users/DominikaKukulka-16037370/",
-          "license": "Pixabay Content License",
-          "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 6016,
-          "height": 4000
-        },
-        {
-          "file": "sun-pixabay-3724583.jpg",
-          "source": "pixabay",
-          "url": "https://pixabay.com/photos/leaf-in-the-wind-oct-autumn-%C5%BAy%C5%82a-3724583/",
-          "title": "leaf, in the wind, oct, autumn, źyła, the structure of the, orange, yellow, leaves, season, colorful, multi-colored, botany, nature, blue sky, growth, autumn mood, in the park, fall, pattern, seasons, colors of autumn, autumn sun",
-          "author": "pasja1000",
-          "authorUrl": "https://pixabay.com/users/pasja1000-6355831/",
-          "license": "Pixabay Content License",
-          "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 5753,
-          "height": 3835
+          "width": 3264,
+          "height": 2448
         }
       ],
-      "query": "sun in blue sky"
+      "query": "sun shining blue sky"
     },
     "rain": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "rain-pixabay-2014619.jpg",
@@ -4494,7 +4494,7 @@
       "query": "rain on street umbrella"
     },
     "train": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "train-pixabay-4801759.jpg",
@@ -4626,7 +4626,7 @@
       "query": "price tag"
     },
     "parent": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "parent-pixabay-9050396.jpg",
@@ -4692,7 +4692,7 @@
       "query": "parents with child"
     },
     "tree": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "tree-pixabay-3629833.jpg",
@@ -4758,7 +4758,7 @@
       "query": "tree in field"
     },
     "party": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "party-pixabay-1835443.jpg",
@@ -4956,7 +4956,7 @@
       "query": "garden"
     },
     "park": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "park-pixabay-4352072.jpg",
@@ -5022,8 +5022,44 @@
       "query": "city park"
     },
     "bus": {
-      "default": 0,
+      "default": 1,
       "candidates": [
+        {
+          "file": "bus-pixabay-6839732.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/bus-vehicle-road-transport-6839732/",
+          "title": "bus, vehicle, road, transport, the parking spot bus, passenger bus, gmc truck, rent-a-car, yellow bus, william hobby airport, houston, texas, airport parking, driving, on route, traffic, yellow, spots, spotted, marketing, advertising, genious, bright, pick-up, on time",
+          "author": "ArtisticOperations",
+          "authorUrl": "https://pixabay.com/users/ArtisticOperations-4161274/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 6000,
+          "height": 4000
+        },
+        {
+          "file": "bus-pixabay-315833.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/athens-greece-tour-bus-landmark-315833/",
+          "title": "athens, greece, tour bus, landmark, travel, europe, tourism, attraction, view, sightseeing, cityscape, urban, capital, tour bus, tour bus, tour bus, tour bus, tour bus",
+          "author": "PublicDomainPictures",
+          "authorUrl": "https://pixabay.com/users/PublicDomainPictures-14/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 1920,
+          "height": 1277
+        },
+        {
+          "file": "bus-pixabay-2572503.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/urban-city-architecture-building-2572503/",
+          "title": "urban, city, architecture, building, establishment, car, vehicle, transportation, travel, adventure, bus, car wallpapers, black car, black city, black travel, black building, black bus",
+          "author": "StockSnap",
+          "authorUrl": "https://pixabay.com/users/StockSnap-894430/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 4592,
+          "height": 3448
+        },
         {
           "file": "bus-pixabay-4103334.jpg",
           "source": "pixabay",
@@ -5037,58 +5073,22 @@
           "height": 5225
         },
         {
-          "file": "bus-pixabay-8375125.jpg",
+          "file": "bus-pixabay-3176687.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/weary-bus-city-tour-valencia-8375125/",
-          "title": "weary, bus, city, tour, valencia, spain, window, sit, tired, man, transportation, black and white, bus, bus, bus, bus, bus, tired, tired, tired, black and white",
-          "author": "Domihattenberger",
-          "authorUrl": "https://pixabay.com/users/Domihattenberger-40104971/",
+          "url": "https://pixabay.com/photos/stop-bus-stop-road-country-road-3176687/",
+          "title": "stop, bus stop, road, country road, winter, winter landscape, wait, bank, seating, bus stop, bus stop, bus stop, bus stop, bus stop",
+          "author": "Bru-nO",
+          "authorUrl": "https://pixabay.com/users/Bru-nO-1161770/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 4973,
-          "height": 3315
-        },
-        {
-          "file": "bus-pixabay-1868507.jpg",
-          "source": "pixabay",
-          "url": "https://pixabay.com/photos/bus-passengers-people-seats-metro-1868507/",
-          "title": "bus, passengers, people, seats, metro, commute, commuters, commuting, transportation, travel, vehicle, bus, bus, bus, bus, bus",
-          "author": "Pexels",
-          "authorUrl": "https://pixabay.com/users/Pexels-2286921/",
-          "license": "Pixabay Content License",
-          "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 5184,
-          "height": 3456
-        },
-        {
-          "file": "bus-pixabay-2864735.jpg",
-          "source": "pixabay",
-          "url": "https://pixabay.com/photos/woman-model-women-make-up-2864735/",
-          "title": "woman, model, women, make up, indonesian, girl, urban, roofs, bus, city, women, women, women, women, women",
-          "author": "aiilolo",
-          "authorUrl": "https://pixabay.com/users/aiilolo-6104368/",
-          "license": "Pixabay Content License",
-          "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 5184,
-          "height": 3456
-        },
-        {
-          "file": "bus-pixabay-7819801.jpg",
-          "source": "pixabay",
-          "url": "https://pixabay.com/photos/man-bus-transport-urban-vietnam-7819801/",
-          "title": "man, bus, transport, urban, vietnam, saigon, city, travel, green, bus, bus, bus, bus, bus",
-          "author": "Nyatto",
-          "authorUrl": "https://pixabay.com/users/Nyatto-34000213/",
-          "license": "Pixabay Content License",
-          "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 4554,
-          "height": 3055
+          "width": 6000,
+          "height": 4000
         }
       ],
-      "query": "city bus"
+      "query": "bus on road"
     },
     "baby": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "baby-pixabay-6823431.jpg",
@@ -5154,7 +5154,7 @@
       "query": "baby"
     },
     "teacher": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "teacher-pixabay-1782427.jpg",
@@ -5220,7 +5220,7 @@
       "query": "teacher in classroom"
     },
     "watch": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "watch-pixabay-4315966.jpg",
@@ -5286,7 +5286,7 @@
       "query": "family watching tv"
     },
     "doctor": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "doctor-pixabay-2141808.jpg",
@@ -5352,73 +5352,73 @@
       "query": "doctor"
     },
     "hospital": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
-          "file": "hospital-pixabay-7395415.jpg",
+          "file": "hospital-pixabay-9609466.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/slovakia-hospital-forest-trees-7395415/",
-          "title": "slovakia, hospital, forest, trees, park, nature, building, landscape, poprad, slovakia, slovakia, poprad, poprad, poprad, poprad, poprad",
-          "author": "Xtrodinary",
-          "authorUrl": "https://pixabay.com/users/Xtrodinary-14501601/",
-          "license": "Pixabay Content License",
-          "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 5464,
-          "height": 3640
-        },
-        {
-          "file": "hospital-pixabay-6562940.jpg",
-          "source": "pixabay",
-          "url": "https://pixabay.com/photos/abandoned-sanatorium-building-6562940/",
-          "title": "abandoned, sanatorium, building, architecture, hospital, institution, sanatorium, sanatorium, sanatorium, sanatorium, sanatorium",
-          "author": "ahundt",
-          "authorUrl": "https://pixabay.com/users/ahundt-663354/",
+          "url": "https://pixabay.com/photos/doctor-nurse-hospital-physician-9609466/",
+          "title": "doctor, nurse, hospital, physician, surgery, healthcare, medical, medicine, ambulance, health, stethoscope, clinic, operation, surgeon, face, portrait",
+          "author": "Daniil_Kondrashin",
+          "authorUrl": "https://pixabay.com/users/Daniil_Kondrashin-19909203/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
           "width": 6000,
           "height": 4000
         },
         {
-          "file": "hospital-pixabay-3658147.jpg",
+          "file": "hospital-pixabay-5441032.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/lostplace-architecture-expired-3658147/",
-          "title": "lostplace, architecture, expired, to forget, weathered, ailing, hospital, building",
-          "author": "RawmblePics",
-          "authorUrl": "https://pixabay.com/users/RawmblePics-10008102/",
+          "url": "https://pixabay.com/photos/medical-doctor-hospital-ambulance-5441032/",
+          "title": "medical, doctor, hospital, ambulance, healthcare, health, medicine, science, coronavirus, covid-19, doctor, doctor, hospital, ambulance, ambulance, ambulance, ambulance, ambulance, healthcare, healthcare, healthcare, healthcare",
+          "author": "Ray_Shrewsberry",
+          "authorUrl": "https://pixabay.com/users/Ray_Shrewsberry-7673058/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 5588,
-          "height": 3725
+          "width": 6000,
+          "height": 4000
         },
         {
-          "file": "hospital-pixabay-3297236.jpg",
+          "file": "hospital-pixabay-1005433.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/architecture-sky-building-travel-3297236/",
-          "title": "architecture, nature, sky, building, travel, old, hospital, blue hospital",
-          "author": "GregReese",
-          "authorUrl": "https://pixabay.com/users/GregReese-6817251/",
+          "url": "https://pixabay.com/photos/ambulance-the-medicine-hospital-1005433/",
+          "title": "ambulance, the medicine, hospital, health care, urgent care, machine, service, ambulance, ambulance, ambulance, ambulance, ambulance",
+          "author": "AKuptsova",
+          "authorUrl": "https://pixabay.com/users/AKuptsova-1176597/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 5062,
-          "height": 3375
+          "width": 5000,
+          "height": 3324
         },
         {
-          "file": "hospital-pixabay-5450609.jpg",
+          "file": "hospital-pixabay-6968313.jpg",
           "source": "pixabay",
-          "url": "https://pixabay.com/photos/faculty-university-hospital-5450609/",
-          "title": "faculty, university, hospital, building, architecture, faculty, faculty, faculty, faculty, faculty, university",
-          "author": "paulogomez78",
-          "authorUrl": "https://pixabay.com/users/paulogomez78-17709828/",
+          "url": "https://pixabay.com/photos/coronavirus-disease-the-medicine-6968313/",
+          "title": "coronavirus, disease, the medicine, covid-19, epidemic, health care, hospitalization, infection, dr, viruses, omicron, strain, hospital, health, medical gown, medical help, ambulance, omicron, omicron, omicron, omicron, omicron",
+          "author": "Sunriseforever",
+          "authorUrl": "https://pixabay.com/users/Sunriseforever-6314823/",
           "license": "Pixabay Content License",
           "licenseUrl": "https://pixabay.com/service/license-summary/",
-          "width": 4928,
-          "height": 3264
+          "width": 5472,
+          "height": 2910
+        },
+        {
+          "file": "hospital-pixabay-5015537.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/ambulance-covid-19-coronavirus-5015537/",
+          "title": "ambulance, covid-19, coronavirus, sars-cov-2, virus, corona, outbreak, pandemic, worldwide, disease, 2019 - ncov, a notice, signpost, hospital, ambulance, ambulance, ambulance, ambulance, ambulance",
+          "author": "geralt",
+          "authorUrl": "https://pixabay.com/users/geralt-9301/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 4456,
+          "height": 2971
         }
       ],
-      "query": "hospital building"
+      "query": "hospital ambulance"
     },
     "bank": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "bank-pixabay-4481399.jpg",
@@ -5484,7 +5484,7 @@
       "query": "bank building"
     },
     "mother": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "mother-pixabay-4447538.jpg",
@@ -5616,7 +5616,7 @@
       "query": "village houses"
     },
     "walk": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "walk-pixabay-3687187.jpg",
@@ -5748,7 +5748,7 @@
       "query": "bird"
     },
     "office": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "office-pixabay-599475.jpg",
@@ -5814,7 +5814,7 @@
       "query": "office interior desks"
     },
     "fish": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "fish-pixabay-5650174.jpg",
@@ -5880,7 +5880,7 @@
       "query": "fish"
     },
     "light": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "light-pixabay-465350.jpg",
@@ -5946,7 +5946,7 @@
       "query": "lamp light"
     },
     "meat": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "meat-pixabay-1747910.jpg",
@@ -6012,7 +6012,7 @@
       "query": "raw meat"
     },
     "chicken": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "chicken-pixabay-1867562.jpg",
@@ -6144,7 +6144,7 @@
       "query": "woman sitting on bench"
     },
     "rice": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "rice-pixabay-5921491.jpg",
@@ -6276,7 +6276,7 @@
       "query": "handwritten letter envelope"
     },
     "cake": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "cake-pixabay-1227842.jpg",
@@ -6408,7 +6408,7 @@
       "query": "classroom with students"
     },
     "town": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "town-pixabay-3798178.jpg",
@@ -6672,7 +6672,7 @@
       "query": "birthday cake candles"
     },
     "drive": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "drive-pixabay-4016326.jpg",
@@ -6738,7 +6738,7 @@
       "query": "man driving a car"
     },
     "holiday": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "holiday-pixabay-9706056.jpg",
@@ -7068,7 +7068,7 @@
       "query": "board game"
     },
     "river": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "river-pixabay-5765785.jpg",
@@ -7198,6 +7198,72 @@
         }
       ],
       "query": "mountain"
+    },
+    "father": {
+      "default": 4,
+      "candidates": [
+        {
+          "file": "father-pixabay-2258681.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/father-and-son-walking-railway-2258681/",
+          "title": "father and son, walking, nature, railway, railroad, gravel, silhouettes, sunset, family, dusk, twilight, walking together, parent, fatherhood, parenthood, love, child, joy, childhood, father, boy, kid, together, railroad tracks, adventure",
+          "author": "4144132",
+          "authorUrl": "https://pixabay.com/users/4144132-4144132/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 2440,
+          "height": 1440
+        },
+        {
+          "file": "father-pixabay-6475821.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/family-love-parenthood-vacation-6475821/",
+          "title": "family, love, parenthood, vacation, relationship, together, portrait, happiness, joy, mother, father, parents, children, kids, siblings, brother, sister, daughter, son, family, family, family, family, family",
+          "author": "chillla70",
+          "authorUrl": "https://pixabay.com/users/chillla70-22422106/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 5760,
+          "height": 3840
+        },
+        {
+          "file": "father-pixabay-2212101.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/father-son-family-boy-people-2212101/",
+          "title": "father, flower wallpaper, son, family, boy, people, parent, man, together, happy, kid, young, dad, fun, love, childhood, flower background, lifestyle, nature, portrait, spring, trees, bloom, pink, flowers, blossom, gray love, beautiful flowers, gray happy, gray tree, gray portrait, gray happiness, gray fun, gray together",
+          "author": "Olichel",
+          "authorUrl": "https://pixabay.com/users/Olichel-529835/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 6000,
+          "height": 4000
+        },
+        {
+          "file": "father-pixabay-3315817.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/father-and-son-singing-sunset-3315817/",
+          "title": "father and son, singing, sunset, nature, outdoors, dancing, sing, father's day",
+          "author": "DawnyellReese",
+          "authorUrl": "https://pixabay.com/users/DawnyellReese-8556131/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 5184,
+          "height": 3456
+        },
+        {
+          "file": "father-pixabay-1822640.jpg",
+          "source": "pixabay",
+          "url": "https://pixabay.com/photos/bicycle-cambodia-outside-myanmar-1822640/",
+          "title": "bicycle, cambodia, outside, myanmar, burma, family, thailand, vietnamese, father, son, meadow, wetlands, fathers day, cambodia, family, family, family, family, family, thailand, father, father, fathers day",
+          "author": "sasint",
+          "authorUrl": "https://pixabay.com/users/sasint-3639875/",
+          "license": "Pixabay Content License",
+          "licenseUrl": "https://pixabay.com/service/license-summary/",
+          "width": 7360,
+          "height": 4301
+        }
+      ],
+      "query": "father with son"
     }
   }
 }

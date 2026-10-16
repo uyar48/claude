@@ -15,7 +15,7 @@
     {"id": "most", "tr": "en çok; çoğu", "pos": "belirleyici", "kind": "function"},
     {"id": "should", "tr": "-meli, -malı (tavsiye)", "pos": "yardımcı fiil", "kind": "function"},
     {"id": "need", "tr": "ihtiyaç duymak, gerekmek", "pos": "fiil", "kind": "abstract"},
-    {"id": "eat", "tr": "yemek yemek", "pos": "fiil", "kind": "concrete", "query": "family eating dinner"},
+    {"id": "eat", "tr": "yemek yemek", "pos": "fiil", "kind": "concrete", "query": "girl eating food"},
     {"id": "much", "tr": "çok (sayılamayan şeyler için)", "pos": "belirleyici", "kind": "function"},
     {"id": "right", "tr": "doğru; sağ", "pos": "sıfat", "kind": "abstract", "emoji": "✅"},
     {"id": "how", "tr": "nasıl", "pos": "zarf", "kind": "function"},

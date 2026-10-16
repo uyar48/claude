@@ -19,7 +19,7 @@
     {"id": "test", "tr": "sınav, test", "pos": "isim", "kind": "abstract", "emoji": "✍️"},
     {"id": "visit", "tr": "ziyaret etmek", "pos": "fiil", "kind": "abstract"},
     {"id": "center", "tr": "merkez", "pos": "isim", "kind": "abstract"},
-    {"id": "hospital", "tr": "hastane", "pos": "isim", "kind": "concrete", "query": "hospital building"},
+    {"id": "hospital", "tr": "hastane", "pos": "isim", "kind": "concrete", "query": "hospital ambulance"},
     {"id": "grow", "tr": "büyümek, yetiştirmek", "pos": "fiil", "kind": "abstract", "emoji": "🌿"},
     {"id": "nothing", "tr": "hiçbir şey", "pos": "zamir", "kind": "function"},
     {"id": "return", "tr": "geri dönmek; geri vermek", "pos": "fiil", "kind": "abstract"},
