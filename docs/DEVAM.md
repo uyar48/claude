@@ -59,6 +59,7 @@ Canlı adres: https://okuma-iota.vercel.app · Dal: `claude/new-session-b5nvn7`
   - İlk 20 kelimenin ve t1–t5 metinlerinin ElevenLabs klipleri metinleri değişmediği için korunur.
 - **Dağıtım.**
   - `npm run deploy -- --update` önce geçişleri (idempotent), sonra uygulamayı dağıtır.
+  - Vercel ücretsiz planı günde en çok 5000 dosya yüklemeye izin verir; betik bu yüzden `--archive=tgz` ile tek arşiv yükler.
   - Yalnız uygulama için: `--app-only`.
 
 ## Bekleyen

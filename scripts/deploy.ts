@@ -196,10 +196,17 @@ async function productionUrl(token: string, projectId: string, team: string): Pr
 }
 
 function vercelDeploy(token: string, projectId: string, orgId: string) {
-  execFileSync('npx', ['--yes', 'vercel@latest', 'deploy', '--prod', '--yes', '--token', token], {
-    stdio: ['ignore', 'inherit', 'inherit'],
-    env: { ...process.env, VERCEL_ORG_ID: orgId, VERCEL_PROJECT_ID: projectId },
-  });
+  try {
+    // One archive instead of thousands of media files: the free plan allows
+    // at most 5000 file uploads a day.
+    execFileSync('npx', ['--yes', 'vercel@latest', 'deploy', '--prod', '--yes', '--archive=tgz', '--token', token], {
+      stdio: ['ignore', 'inherit', 'inherit'],
+      env: { ...process.env, VERCEL_ORG_ID: orgId, VERCEL_PROJECT_ID: projectId },
+    });
+  } catch (err) {
+    // The failed command line holds the token; never print it.
+    throw new Error(String((err as Error).message).replaceAll(token, '***'));
+  }
 }
 
 // ---------- main ----------
