@@ -199,12 +199,15 @@ test('settings: goal, new words per lesson, break; sources and picture review', 
   await expect(page.getByRole('heading', { name: 'Görsel seçimi' })).toBeVisible();
   await shot(page, '09-admin-review');
   // Pick another candidate for "house", say "no picture" for "door"; both survive a reload.
-  const second = page.getByRole('button', { name: 'house: aday 2 seç' });
+  const second = page.getByRole('button', { name: 'house: aday 3 seç' });
   const file = await second.locator('img').getAttribute('src');
   await second.click();
+  await expect(second).toHaveAttribute('aria-pressed', 'true');
   await page.getByRole('button', { name: 'door: görsel yok' }).click();
+  // The choice shows as picked once it is saved on the device.
+  await expect(page.getByRole('button', { name: 'door: görsel yok' })).toHaveAttribute('aria-pressed', 'true');
   await page.reload();
-  await expect(page.getByRole('button', { name: 'house: aday 2 seç' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('button', { name: 'house: aday 3 seç' })).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByRole('button', { name: 'door: görsel yok' })).toHaveAttribute('aria-pressed', 'true');
   await page.goto('/');
   const house = page.locator('.preview .picture[data-word="house"] img');
