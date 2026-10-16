@@ -10,6 +10,7 @@
 //   word:<id>:female        the word on its own
 //   sent:<textId>:<i>       sentence i of a reading text (the text's voice)
 //   s:<sentenceId>          a course sentence (Tatoeba or own)
+//   g:<grammarId>:<i>       example i of a grammar card
 // A clip is only made again when its text or voice changes (content hash).
 // Clips made earlier by another engine are kept while their text is the same.
 // Without a clip the app reads with the device's voice (speechSynthesis).
@@ -46,6 +47,7 @@ export function clipsFor(course: Course): Clip[] {
     const voice = parseInt(crypto.createHash('md5').update(s.id).digest('hex').slice(0, 2), 16) % 2 ? 'male' : 'female';
     out.push({ key: `s:${s.id}`, text: s.en, voice });
   }
+  for (const g of course.grammar ?? []) g.examples.forEach((e, i) => out.push({ key: `g:${g.id}:${i}`, text: e.en, voice: 'female' }));
   return out;
 }
 
@@ -95,7 +97,7 @@ async function main() {
   fs.mkdirSync(AUDIO_DIR, { recursive: true });
 
   const all = clipsFor(course);
-  const prefix = { words: 'word:', texts: 'sent:', sentences: 's:' }[values.only ?? ''] ?? '';
+  const prefix = { words: 'word:', texts: 'sent:', sentences: 's:', grammar: 'g:' }[values.only ?? ''] ?? '';
   const wanted = all.filter((c) => c.key.startsWith(prefix));
   const todo = wanted.filter((c) => {
     const cur = manifest.audio[c.key];

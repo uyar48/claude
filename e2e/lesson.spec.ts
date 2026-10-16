@@ -28,11 +28,14 @@ async function answer(page: Page, seen: Set<string>, shots: boolean) {
   seen.add(label);
   const handle = await ex.elementHandle();
   // Spend a realistic (fake) time on it: the lesson counts active minutes.
-  const SECONDS: Record<string, number> = { intro: 25, 'choice-ex': 12, match: 45, dictation: 25, blank: 20, build: 35, reading: 240, scene: 70 };
+  const SECONDS: Record<string, number> = { grammar: 40, intro: 25, 'choice-ex': 12, match: 45, dictation: 25, blank: 20, build: 35, reading: 240, scene: 70 };
   await page.clock.fastForward((SECONDS[kind] ?? 15) * 1000);
 
   if (kind === 'intro') {
     await ex.getByRole('button', { name: 'Devam' }).click();
+  } else if (kind === 'grammar') {
+    await expect(ex.locator('.grammar-examples li').first()).toBeVisible();
+    await ex.getByRole('button', { name: 'Anladım' }).click();
   } else if (kind === 'choice-ex' || kind === 'blank') {
     while (!(await ex.locator('.feedback').isVisible())) {
       await ex.locator('.option:not([disabled])').first().click();
@@ -137,6 +140,10 @@ test('lessons follow completion, not the calendar', async ({ page }) => {
   await page.getByRole('button', { name: 'Bir ders daha' }).click();
   await expect(page.locator('.ex-label')).toContainText('2. ders');
   await expect(page.locator('.ex.intro, .ex.choice-ex').first()).toBeVisible();
+  // Lesson 2 brings "the" and "be": their grammar cards follow the new-word cards.
+  for (let i = 0; i < 8 && !(await page.locator('.ex.grammar').isVisible()); i++) await answer(page, new Set(), false);
+  await expect(page.locator('.ex.grammar')).toContainText('the');
+  await shot(page, '02a-grammar-card');
   await answer(page, new Set(), false);
   await answer(page, new Set(), false);
 
@@ -163,14 +170,18 @@ test('lessons follow completion, not the calendar', async ({ page }) => {
   await page.getByRole('button', { name: 'Devam et' }).click();
   await playLesson(page);
   await expect(page.locator('.finish')).toContainText('2. ders tamam');
+  // Part of lesson 2 counted on day 1; one more lesson fills today's goal.
+  await page.getByRole('button', { name: 'Bir ders daha' }).click();
+  await playLesson(page);
+  await expect(page.locator('.finish')).toContainText('3. ders tamam');
   await page.getByRole('button', { name: 'Bugünlük bu kadar' }).click();
 
   await expect(page.getByRole('heading', { name: 'Bugün', exact: true })).toBeVisible();
   await expect(page.getByText('Günlük hedef tamam')).toBeVisible();
-  await expect(card).toContainText('3. ders');
+  await expect(card).toContainText('4. ders');
   const stats = page.locator('.stat .num');
   await expect(stats.nth(0)).toHaveText('2'); // two goal days, the gap does not reset the streak
-  await expect(stats.nth(1)).toHaveText(/^(1[0-9]|2[0-9])$/);
+  await expect(stats.nth(1)).toHaveText(/^([2-3][0-9])$/);
   await expect(page.locator('.freeze')).toBeVisible();
   await shot(page, '04-today-goal-done');
 
@@ -196,6 +207,9 @@ test('settings: goal, new words per lesson, break; sources and picture review', 
   await shot(page, '06-today-paused');
   await page.getByRole('button', { name: 'Aradan dön' }).click();
   await expect(page.locator('.pause-card')).toHaveCount(0);
+
+  await page.goto('/settings/dilbilgisi');
+  await expect(page.getByRole('heading', { name: 'Dilbilgisi notları' })).toBeVisible();
 
   await page.goto('/settings/gorseller');
   await expect(page.getByRole('heading', { name: 'Görsel kaynakları' })).toBeVisible();

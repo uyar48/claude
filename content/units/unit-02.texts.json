@@ -1,0 +1,479 @@
+{
+ "note": "Reading texts for Unit 2 (own, CC0). Written only with words of Units 1–2; a little longer each unit.",
+ "texts": [
+  {
+   "id": "t9",
+   "title": "My Sister",
+   "titleTr": "Kız kardeşim",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "I have a sister and a brother.",
+     "tr": "Bir kız kardeşim ve bir erkek kardeşim var."
+    },
+    {
+     "en": "My sister has two children, a son and a daughter.",
+     "tr": "Kız kardeşimin iki çocuğu var, bir oğlu ve bir kızı."
+    },
+    {
+     "en": "Her husband works for a company.",
+     "tr": "Kocası bir şirkette çalışıyor."
+    },
+    {
+     "en": "My brother lives in the same street.",
+     "tr": "Erkek kardeşim aynı sokakta oturuyor."
+    },
+    {
+     "en": "He has a dog and a cat.",
+     "tr": "Bir köpeği ve bir kedisi var."
+    },
+    {
+     "en": "In the evening, we eat at my house.",
+     "tr": "Akşamları benim evimde yemek yiyoruz."
+    },
+    {
+     "en": "The children play with the dog.",
+     "tr": "Çocuklar köpekle oynuyor."
+    },
+    {
+     "en": "My sister and I drink tea and talk.",
+     "tr": "Kız kardeşim ve ben çay içip konuşuyoruz."
+    },
+    {
+     "en": "I am happy when they are here.",
+     "tr": "Onlar buradayken mutluyum."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t9q1",
+     "prompt": "Kız kardeşin kaç çocuğu var?",
+     "options": [
+      {
+       "en": "two"
+      },
+      {
+       "en": "three"
+      },
+      {
+       "en": "one"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t9q2",
+     "prompt": "Erkek kardeşin hangi hayvanları var?",
+     "options": [
+      {
+       "tr": "Bir köpek ve bir kedi"
+      },
+      {
+       "tr": "İki köpek"
+      },
+      {
+       "tr": "Yalnızca bir kedi"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t9q3",
+     "prompt": "Akşamları nerede yemek yiyorlar?",
+     "options": [
+      {
+       "tr": "Anlatıcının evinde"
+      },
+      {
+       "tr": "Kız kardeşin evinde"
+      },
+      {
+       "tr": "İşte"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t10",
+   "title": "A Long Day",
+   "titleTr": "Uzun bir gün",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "Yesterday was a long day for me.",
+     "tr": "Dün benim için uzun bir gündü."
+    },
+    {
+     "en": "I went to work in the morning.",
+     "tr": "Sabah işe gittim."
+    },
+    {
+     "en": "I did not eat because I had a lot of work.",
+     "tr": "Çok işim olduğu için yemek yemedim."
+    },
+    {
+     "en": "In the evening, I was very hungry and tired.",
+     "tr": "Akşam çok aç ve yorgundum."
+    },
+    {
+     "en": "I went home and ate some bread and eggs.",
+     "tr": "Eve gittim, biraz ekmek ve yumurta yedim."
+    },
+    {
+     "en": "Then I drank some tea.",
+     "tr": "Sonra biraz çay içtim."
+    },
+    {
+     "en": "After that, I went to bed.",
+     "tr": "Ondan sonra yatağa gittim."
+    },
+    {
+     "en": "I slept very well.",
+     "tr": "Çok iyi uyudum."
+    },
+    {
+     "en": "Today I feel good.",
+     "tr": "Bugün kendimi iyi hissediyorum."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t10q1",
+     "prompt": "Dün anlatıcı neden yemek yemedi?",
+     "options": [
+      {
+       "tr": "Çok işi vardı"
+      },
+      {
+       "tr": "Aç değildi"
+      },
+      {
+       "tr": "Evde yemek yoktu"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t10q2",
+     "prompt": "Akşam ne yedi?",
+     "options": [
+      {
+       "tr": "Ekmek ve yumurta"
+      },
+      {
+       "tr": "Hiçbir şey"
+      },
+      {
+       "tr": "Yalnızca çay"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t10q3",
+     "prompt": "Bugün nasıl hissediyor?",
+     "options": [
+      {
+       "en": "good"
+      },
+      {
+       "en": "tired"
+      },
+      {
+       "en": "hungry"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t11",
+   "title": "A New School",
+   "titleTr": "Yeni okul",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "My son starts at a new school this week.",
+     "tr": "Oğlum bu hafta yeni bir okula başlıyor."
+    },
+    {
+     "en": "The school is in the next street.",
+     "tr": "Okul bir sonraki sokakta."
+    },
+    {
+     "en": "He can go there on his own.",
+     "tr": "Oraya kendi başına gidebilir."
+    },
+    {
+     "en": "On the first day, he was a little late.",
+     "tr": "İlk gün biraz geç kaldı."
+    },
+    {
+     "en": "But the school was very good.",
+     "tr": "Ama okul çok iyiydi."
+    },
+    {
+     "en": "He met many other children.",
+     "tr": "Birçok başka çocukla tanıştı."
+    },
+    {
+     "en": "They played and talked all day.",
+     "tr": "Bütün gün oynayıp konuştular."
+    },
+    {
+     "en": "In the evening, he told me about his day.",
+     "tr": "Akşam bana gününü anlattı."
+    },
+    {
+     "en": "\"I want to go back tomorrow,\" he said.",
+     "tr": "\"Yarın yine gitmek istiyorum,\" dedi."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t11q1",
+     "prompt": "Okul nerede?",
+     "options": [
+      {
+       "tr": "Bir sonraki sokakta"
+      },
+      {
+       "tr": "Çok uzakta"
+      },
+      {
+       "tr": "Başka bir şehirde"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t11q2",
+     "prompt": "İlk gün ne oldu?",
+     "options": [
+      {
+       "tr": "Biraz geç kaldı"
+      },
+      {
+       "tr": "Hiç gitmedi"
+      },
+      {
+       "tr": "Çok erken gitti"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t11q3",
+     "prompt": "Oğul yarın ne yapmak istiyor?",
+     "options": [
+      {
+       "tr": "Okula yine gitmek"
+      },
+      {
+       "tr": "Evde kalmak"
+      },
+      {
+       "tr": "Köpekle oynamak"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t12",
+   "title": "A Cat at the Window",
+   "titleTr": "Penceredeki kedi",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "I make coffee in the kitchen in the morning.",
+     "tr": "Sabahları mutfakta kahve yaparım."
+    },
+    {
+     "en": "One day, I saw something at the window.",
+     "tr": "Bir gün pencerede bir şey gördüm."
+    },
+    {
+     "en": "There was a little cat there.",
+     "tr": "Orada küçük bir kedi vardı."
+    },
+    {
+     "en": "It looked hungry and tired.",
+     "tr": "Aç ve yorgun görünüyordu."
+    },
+    {
+     "en": "I gave it some water and bread.",
+     "tr": "Ona biraz su ve ekmek verdim."
+    },
+    {
+     "en": "Then it went to sleep on a chair.",
+     "tr": "Sonra bir sandalyenin üstünde uyudu."
+    },
+    {
+     "en": "Now the cat lives in my house.",
+     "tr": "Şimdi kedi benim evimde yaşıyor."
+    },
+    {
+     "en": "My children play with it all day.",
+     "tr": "Çocuklarım bütün gün onunla oynuyor."
+    },
+    {
+     "en": "I think it is happy here.",
+     "tr": "Bence burada mutlu."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t12q1",
+     "prompt": "Kedi ilk gün neredeydi?",
+     "options": [
+      {
+       "image": "window"
+      },
+      {
+       "image": "car"
+      },
+      {
+       "image": "table"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t12q2",
+     "prompt": "Anlatıcı kediye ne verdi?",
+     "options": [
+      {
+       "tr": "Su ve ekmek"
+      },
+      {
+       "tr": "Kahve"
+      },
+      {
+       "tr": "Hiçbir şey"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t12q3",
+     "prompt": "Kedi şimdi nerede yaşıyor?",
+     "options": [
+      {
+       "tr": "Anlatıcının evinde"
+      },
+      {
+       "tr": "Sokakta"
+      },
+      {
+       "tr": "Okulda"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t13",
+   "title": "A Phone Call",
+   "titleTr": "Bir telefon",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "Last week, a woman from my old school called me.",
+     "tr": "Geçen hafta eski okulumdan bir kadın beni aradı."
+    },
+    {
+     "en": "It was Anna.",
+     "tr": "Arayan Anna'ydı."
+    },
+    {
+     "en": "We were at the same school when we were children.",
+     "tr": "Çocukken aynı okuldaydık."
+    },
+    {
+     "en": "Now she lives in another country.",
+     "tr": "Şimdi başka bir ülkede yaşıyor."
+    },
+    {
+     "en": "She has a husband and three children.",
+     "tr": "Bir kocası ve üç çocuğu var."
+    },
+    {
+     "en": "We talked for a long time.",
+     "tr": "Uzun süre konuştuk."
+    },
+    {
+     "en": "She asked me about my life and my work.",
+     "tr": "Bana hayatımı ve işimi sordu."
+    },
+    {
+     "en": "I told her about my sister and my brother.",
+     "tr": "Ona kız ve erkek kardeşimi anlattım."
+    },
+    {
+     "en": "Next year, she will come here to see me.",
+     "tr": "Gelecek yıl beni görmek için buraya gelecek."
+    },
+    {
+     "en": "I am very happy about that.",
+     "tr": "Buna çok seviniyorum."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t13q1",
+     "prompt": "Anna şimdi nerede yaşıyor?",
+     "options": [
+      {
+       "tr": "Başka bir ülkede"
+      },
+      {
+       "tr": "Aynı sokakta"
+      },
+      {
+       "tr": "Anlatıcının evinde"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t13q2",
+     "prompt": "Anna'nın kaç çocuğu var?",
+     "options": [
+      {
+       "en": "three"
+      },
+      {
+       "en": "two"
+      },
+      {
+       "en": "one"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t13q3",
+     "prompt": "Anna ne zaman gelecek?",
+     "options": [
+      {
+       "tr": "Gelecek yıl"
+      },
+      {
+       "tr": "Yarın"
+      },
+      {
+       "tr": "Geçen hafta"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  }
+ ]
+}

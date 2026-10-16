@@ -1,0 +1,591 @@
+{
+ "note": "Reading texts for Unit 4 (own, CC0). Written only with words of Units 1–4; a little longer each unit.",
+ "texts": [
+  {
+   "id": "t19",
+   "title": "Rain in the City",
+   "titleTr": "Şehirde yağmur",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "It was a cold Monday morning, and it started to rain.",
+     "tr": "Soğuk bir pazartesi sabahıydı ve yağmur başladı."
+    },
+    {
+     "en": "I took the bus to work because I did not want to stand in the rain.",
+     "tr": "Yağmurda kalmak istemediğim için işe otobüsle gittim."
+    },
+    {
+     "en": "There were many people on the bus.",
+     "tr": "Otobüste çok insan vardı."
+    },
+    {
+     "en": "A young student stood next to me with a large book.",
+     "tr": "Yanımda elinde büyük bir kitapla genç bir öğrenci duruyordu."
+    },
+    {
+     "en": "She read her book for the whole hour.",
+     "tr": "Bir saat boyunca kitabını okudu."
+    },
+    {
+     "en": "I looked out of the window at the city.",
+     "tr": "Pencereden şehre baktım."
+    },
+    {
+     "en": "The trees in the park were green, and the flowers were red and yellow.",
+     "tr": "Parktaki ağaçlar yeşil, çiçekler kırmızı ve sarıydı."
+    },
+    {
+     "en": "Even in the rain, the city looked very good.",
+     "tr": "Yağmurda bile şehir çok güzel görünüyordu."
+    },
+    {
+     "en": "When I got off the bus, the sun came out.",
+     "tr": "Otobüsten indiğimde güneş çıktı."
+    },
+    {
+     "en": "It was warm again, and the people in the street looked happy.",
+     "tr": "Hava yine ılıktı ve sokaktaki insanlar mutlu görünüyordu."
+    },
+    {
+     "en": "I bought a hot coffee before work.",
+     "tr": "İşten önce sıcak bir kahve aldım."
+    },
+    {
+     "en": "A bad morning can still become a good day.",
+     "tr": "Kötü bir sabah yine de güzel bir güne dönüşebilir."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t19q1",
+     "prompt": "Anlatıcı neden otobüse bindi?",
+     "options": [
+      {
+       "tr": "Yağmurda kalmak istemedi"
+      },
+      {
+       "tr": "Arabası bozuktu"
+      },
+      {
+       "tr": "Geç kalmıştı"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t19q2",
+     "prompt": "Parktaki çiçekler ne renkti?",
+     "options": [
+      {
+       "en": "red and yellow"
+      },
+      {
+       "en": "blue and green"
+      },
+      {
+       "en": "brown"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t19q3",
+     "prompt": "Otobüsten inince ne oldu?",
+     "options": [
+      {
+       "tr": "Güneş çıktı"
+      },
+      {
+       "tr": "Yağmur arttı"
+      },
+      {
+       "tr": "Hava soğudu"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t19q4",
+     "prompt": "İşten önce ne aldı?",
+     "options": [
+      {
+       "tr": "Sıcak bir kahve"
+      },
+      {
+       "tr": "Bir kitap"
+      },
+      {
+       "tr": "Çiçek"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t20",
+   "title": "The Party in the Garden",
+   "titleTr": "Bahçedeki parti",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "Last Saturday, my sister had a party for her baby.",
+     "tr": "Geçen cumartesi kız kardeşim bebeği için bir parti verdi."
+    },
+    {
+     "en": "The baby was one year old.",
+     "tr": "Bebek bir yaşına girmişti."
+    },
+    {
+     "en": "Many people from our family came to the party.",
+     "tr": "Ailemizden birçok kişi partiye geldi."
+    },
+    {
+     "en": "We had the party in her garden because the day was warm.",
+     "tr": "Gün ılık olduğu için partiyi onun bahçesinde yaptık."
+    },
+    {
+     "en": "My brother brought some flowers and a present for the baby.",
+     "tr": "Erkek kardeşim bebek için çiçek ve bir hediye getirdi."
+    },
+    {
+     "en": "The children played in the garden all day.",
+     "tr": "Çocuklar bütün gün bahçede oynadı."
+    },
+    {
+     "en": "The older people talked and drank tea under the trees.",
+     "tr": "Büyükler ağaçların altında konuşup çay içti."
+    },
+    {
+     "en": "An old woman told stories about our family.",
+     "tr": "Yaşlı bir kadın ailemiz hakkında hikâyeler anlattı."
+    },
+    {
+     "en": "We all liked her stories very much.",
+     "tr": "Hepimiz hikâyelerini çok sevdik."
+    },
+    {
+     "en": "In the evening, it got cold, so we went into the house.",
+     "tr": "Akşam hava soğudu, bu yüzden eve girdik."
+    },
+    {
+     "en": "The baby was tired and went to sleep early.",
+     "tr": "Bebek yorgundu ve erken uyudu."
+    },
+    {
+     "en": "It was a long day, but it was a happy day for all of us.",
+     "tr": "Uzun bir gündü ama hepimiz için mutlu bir gündü."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t20q1",
+     "prompt": "Parti kimin içindi?",
+     "options": [
+      {
+       "tr": "Kız kardeşin bebeği için"
+      },
+      {
+       "tr": "Anlatıcının oğlu için"
+      },
+      {
+       "tr": "Yaşlı bir kadın için"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t20q2",
+     "prompt": "Partiyi nerede yaptılar?",
+     "options": [
+      {
+       "image": "garden"
+      },
+      {
+       "image": "kitchen"
+      },
+      {
+       "image": "school"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t20q3",
+     "prompt": "Akşam neden eve girdiler?",
+     "options": [
+      {
+       "tr": "Hava soğudu"
+      },
+      {
+       "tr": "Yağmur yağdı"
+      },
+      {
+       "tr": "Bebek ağladı"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t20q4",
+     "prompt": "Bebek kaç yaşına girdi?",
+     "options": [
+      {
+       "en": "one"
+      },
+      {
+       "en": "two"
+      },
+      {
+       "en": "three"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t21",
+   "title": "Learning Every Day",
+   "titleTr": "Her gün öğrenmek",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "This year, I started to learn something new.",
+     "tr": "Bu yıl yeni bir şey öğrenmeye başladım."
+    },
+    {
+     "en": "At first, it was very hard for me.",
+     "tr": "Başta benim için çok zordu."
+    },
+    {
+     "en": "I did not understand most of the words.",
+     "tr": "Kelimelerin çoğunu anlamıyordum."
+    },
+    {
+     "en": "Then a friend gave me an idea.",
+     "tr": "Sonra bir arkadaşım bana bir fikir verdi."
+    },
+    {
+     "en": "\"Learn a few words every day,\" she said.",
+     "tr": "\"Her gün birkaç kelime öğren,\" dedi."
+    },
+    {
+     "en": "\"Read small stories and say the words.\"",
+     "tr": "\"Küçük hikâyeler oku ve kelimeleri söyle.\""
+    },
+    {
+     "en": "So now I study for about an hour every evening.",
+     "tr": "Bu yüzden şimdi her akşam yaklaşık bir saat çalışıyorum."
+    },
+    {
+     "en": "I learn ten new words, and I read a story.",
+     "tr": "On yeni kelime öğreniyor ve bir hikâye okuyorum."
+    },
+    {
+     "en": "I also speak with people when I can.",
+     "tr": "Fırsat buldukça insanlarla da konuşuyorum."
+    },
+    {
+     "en": "My level is still low, but I can see the change.",
+     "tr": "Seviyem hâlâ düşük ama değişimi görebiliyorum."
+    },
+    {
+     "en": "Last week, I understood a whole story without help.",
+     "tr": "Geçen hafta bütün bir hikâyeyi yardımsız anladım."
+    },
+    {
+     "en": "That was a great day for me!",
+     "tr": "Bu benim için harika bir gündü!"
+    },
+    {
+     "en": "I hope that one day I will speak well.",
+     "tr": "Umarım bir gün iyi konuşacağım."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t21q1",
+     "prompt": "Arkadaşı ne önerdi?",
+     "options": [
+      {
+       "tr": "Her gün birkaç kelime öğrenmeyi"
+      },
+      {
+       "tr": "Bir kursa gitmeyi"
+      },
+      {
+       "tr": "Bırakmayı"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t21q2",
+     "prompt": "Her akşam ne kadar çalışıyor?",
+     "options": [
+      {
+       "tr": "Yaklaşık bir saat"
+      },
+      {
+       "tr": "On dakika"
+      },
+      {
+       "tr": "Bütün gece"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t21q3",
+     "prompt": "Geçen hafta ne oldu?",
+     "options": [
+      {
+       "tr": "Bütün bir hikâyeyi yardımsız anladı"
+      },
+      {
+       "tr": "Yeni bir iş buldu"
+      },
+      {
+       "tr": "Bir sınavı geçti"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t22",
+   "title": "The Train",
+   "titleTr": "Tren",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "Every year, I take the train to see my parents.",
+     "tr": "Her yıl ailemi görmek için trene binerim."
+    },
+    {
+     "en": "They live in a small house far from the city.",
+     "tr": "Şehirden uzak küçük bir evde yaşıyorlar."
+    },
+    {
+     "en": "It takes about eight hours, but I like it.",
+     "tr": "Yaklaşık sekiz saat sürüyor ama hoşuma gidiyor."
+    },
+    {
+     "en": "I always get a place by the window.",
+     "tr": "Hep pencere kenarında bir yer bulurum."
+    },
+    {
+     "en": "From the train, the view is great.",
+     "tr": "Trenden manzara harikadır."
+    },
+    {
+     "en": "I see trees, flowers and people at work in the sun.",
+     "tr": "Ağaçlar, çiçekler ve güneşte çalışan insanlar görürüm."
+    },
+    {
+     "en": "I also read, sleep and talk to other people.",
+     "tr": "Ayrıca okur, uyur ve başka insanlarla konuşurum."
+    },
+    {
+     "en": "Once, I met an old man on the train.",
+     "tr": "Bir keresinde trende yaşlı bir adamla tanıştım."
+    },
+    {
+     "en": "He told me the story of his whole life.",
+     "tr": "Bana bütün hayatının hikâyesini anlattı."
+    },
+    {
+     "en": "We talked for hours, and the time went by.",
+     "tr": "Saatlerce konuştuk ve zaman geçti."
+    },
+    {
+     "en": "When I get there, my parents are already at the door.",
+     "tr": "Oraya vardığımda ailem çoktan kapıda olur."
+    },
+    {
+     "en": "They are always happy to see me.",
+     "tr": "Beni gördüklerine her zaman sevinirler."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t22q1",
+     "prompt": "Anlatıcının ailesi nerede yaşıyor?",
+     "options": [
+      {
+       "tr": "Şehirden uzak küçük bir evde"
+      },
+      {
+       "tr": "Şehir merkezinde"
+      },
+      {
+       "tr": "Deniz kenarında"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t22q2",
+     "prompt": "Yolculuk kaç saat sürüyor?",
+     "options": [
+      {
+       "en": "eight"
+      },
+      {
+       "en": "ten"
+      },
+      {
+       "en": "seven"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t22q3",
+     "prompt": "Bir keresinde trende kiminle tanıştı?",
+     "options": [
+      {
+       "tr": "Yaşlı bir adamla"
+      },
+      {
+       "tr": "Bir öğrenciyle"
+      },
+      {
+       "tr": "Bir çocukla"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t23",
+   "title": "A Room for Sam",
+   "titleTr": "Sam'e bir oda",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "My friend Sam is a student, and he needs a room.",
+     "tr": "Arkadaşım Sam öğrenci ve bir odaya ihtiyacı var."
+    },
+    {
+     "en": "Rooms in the city cost a lot of money.",
+     "tr": "Şehirde odalar çok pahalı."
+    },
+    {
+     "en": "The price of a small room is very high.",
+     "tr": "Küçük bir odanın fiyatı bile çok yüksek."
+    },
+    {
+     "en": "Sam does not have enough money for that.",
+     "tr": "Sam'in buna yetecek parası yok."
+    },
+    {
+     "en": "Last week, we looked at three rooms together.",
+     "tr": "Geçen hafta birlikte üç odaya baktık."
+    },
+    {
+     "en": "The first room was too small and very cold.",
+     "tr": "İlk oda çok küçük ve çok soğuktu."
+    },
+    {
+     "en": "The second room was good, but it was too far from his school.",
+     "tr": "İkinci oda iyiydi ama okuluna çok uzaktı."
+    },
+    {
+     "en": "The last room was in a house with a garden.",
+     "tr": "Son oda bahçeli bir evdeydi."
+    },
+    {
+     "en": "An old woman lives there, and she needs help with the house.",
+     "tr": "Orada yaşlı bir kadın yaşıyor ve evde yardıma ihtiyacı var."
+    },
+    {
+     "en": "She said Sam can pay less if he helps her.",
+     "tr": "Sam ona yardım ederse daha az ödeyebileceğini söyledi."
+    },
+    {
+     "en": "Sam liked the idea, and he took the room.",
+     "tr": "Sam fikri beğendi ve odayı tuttu."
+    },
+    {
+     "en": "Now he helps in the garden and pays a low price.",
+     "tr": "Şimdi bahçede yardım ediyor ve düşük bir fiyat ödüyor."
+    },
+    {
+     "en": "In the evening, they often drink tea together.",
+     "tr": "Akşamları sık sık birlikte çay içiyorlar."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t23q1",
+     "prompt": "Sam neden oda arıyor?",
+     "options": [
+      {
+       "tr": "Öğrenci ve kalacak yere ihtiyacı var"
+      },
+      {
+       "tr": "Ailesi taşındı"
+      },
+      {
+       "tr": "Yeni bir işe başladı"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t23q2",
+     "prompt": "İkinci oda neden olmadı?",
+     "options": [
+      {
+       "tr": "Okuluna çok uzaktı"
+      },
+      {
+       "tr": "Çok soğuktu"
+      },
+      {
+       "tr": "Çok küçüktü"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t23q3",
+     "prompt": "Sam neden daha az ödüyor?",
+     "options": [
+      {
+       "tr": "Yaşlı kadına evde yardım ediyor"
+      },
+      {
+       "tr": "Oda çok küçük"
+      },
+      {
+       "tr": "Odayı paylaşıyor"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t23q4",
+     "prompt": "Akşamları ne yapıyorlar?",
+     "options": [
+      {
+       "tr": "Birlikte çay içiyorlar"
+      },
+      {
+       "tr": "Ders çalışıyorlar"
+      },
+      {
+       "tr": "Bahçeye gidiyorlar"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  }
+ ]
+}

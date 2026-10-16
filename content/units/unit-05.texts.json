@@ -1,0 +1,667 @@
+{
+ "note": "Reading texts for Unit 5 (own, CC0). Written only with words of Units 1–5; a little longer each unit.",
+ "texts": [
+  {
+   "id": "t24",
+   "title": "A Holiday in the Mountains",
+   "titleTr": "Dağlarda tatil",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "During the holiday, we visited my mother in her village.",
+     "tr": "Tatilde annemi köyünde ziyaret ettik."
+    },
+    {
+     "en": "The village is in the mountains, by a river.",
+     "tr": "Köy dağlarda, bir nehrin kenarında."
+    },
+    {
+     "en": "We drove there in our car, and it took six hours.",
+     "tr": "Oraya arabamızla gittik, altı saat sürdü."
+    },
+    {
+     "en": "My mother was at the door when we got there.",
+     "tr": "Vardığımızda annem kapıdaydı."
+    },
+    {
+     "en": "She had made a big dinner with chicken, rice and bread.",
+     "tr": "Tavuk, pilav ve ekmekle büyük bir akşam yemeği hazırlamıştı."
+    },
+    {
+     "en": "After dinner, she gave the children a beautiful cake.",
+     "tr": "Yemekten sonra çocuklara güzel bir pasta verdi."
+    },
+    {
+     "en": "The next morning, we walked along the river.",
+     "tr": "Ertesi sabah nehir boyunca yürüdük."
+    },
+    {
+     "en": "The children saw fish in the water and birds in the trees.",
+     "tr": "Çocuklar suda balıkları, ağaçlarda kuşları gördü."
+    },
+    {
+     "en": "My son said he wanted to stay there.",
+     "tr": "Oğlum orada kalmak istediğini söyledi."
+    },
+    {
+     "en": "Later, my mother showed us her garden.",
+     "tr": "Sonra annem bize bahçesini gösterdi."
+    },
+    {
+     "en": "She grows her own fruit and some flowers.",
+     "tr": "Kendi meyvelerini ve birkaç çiçek yetiştiriyor."
+    },
+    {
+     "en": "In the evening, we watched the sun go down over the mountains.",
+     "tr": "Akşam güneşin dağların üzerinden batışını izledik."
+    },
+    {
+     "en": "It was warm, and there was no sound at all.",
+     "tr": "Hava ılıktı ve hiç ses yoktu."
+    },
+    {
+     "en": "I will remember that holiday for a long time.",
+     "tr": "O tatili uzun süre hatırlayacağım."
+    },
+    {
+     "en": "We will visit her again soon.",
+     "tr": "Onu yakında yine ziyaret edeceğiz."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t24q1",
+     "prompt": "Köy nerede?",
+     "options": [
+      {
+       "tr": "Dağlarda, bir nehrin kenarında"
+      },
+      {
+       "tr": "Deniz kenarında"
+      },
+      {
+       "tr": "Şehrin merkezinde"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t24q2",
+     "prompt": "Anne akşam yemeğinde ne hazırlamıştı?",
+     "options": [
+      {
+       "tr": "Tavuk, pilav ve ekmek"
+      },
+      {
+       "tr": "Balık ve pilav"
+      },
+      {
+       "tr": "Et ve meyve"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t24q3",
+     "prompt": "Çocuklar nehir kenarında ne gördü?",
+     "options": [
+      {
+       "tr": "Suda balıkları, ağaçlarda kuşları"
+      },
+      {
+       "tr": "Bir tekneyi"
+      },
+      {
+       "tr": "Bir köpeği"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t24q4",
+     "prompt": "Annenin bahçesinde ne var?",
+     "options": [
+      {
+       "tr": "Meyve ve çiçekler"
+      },
+      {
+       "tr": "Yalnızca ağaçlar"
+      },
+      {
+       "tr": "Hayvanlar"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t25",
+   "title": "At the Doctor",
+   "titleTr": "Doktorda",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "Last week, I did not feel well for several days.",
+     "tr": "Geçen hafta birkaç gün kendimi iyi hissetmedim."
+    },
+    {
+     "en": "My head was hot, and I could not eat.",
+     "tr": "Başım ateş gibiydi ve yemek yiyemiyordum."
+    },
+    {
+     "en": "My wife said I should see a doctor.",
+     "tr": "Eşim doktora gitmem gerektiğini söyledi."
+    },
+    {
+     "en": "So I called the hospital and got a time for the next morning.",
+     "tr": "Ben de hastaneyi arayıp ertesi sabaha randevu aldım."
+    },
+    {
+     "en": "The doctor was a young woman with a kind face.",
+     "tr": "Doktor nazik yüzlü genç bir kadındı."
+    },
+    {
+     "en": "She asked me many questions and did a few tests.",
+     "tr": "Bana birçok soru sordu ve birkaç test yaptı."
+    },
+    {
+     "en": "\"It is nothing bad,\" she said.",
+     "tr": "\"Kötü bir şey değil,\" dedi."
+    },
+    {
+     "en": "\"You need to stay at home and sleep a lot.\"",
+     "tr": "\"Evde kalıp çok uyuman gerek.\""
+    },
+    {
+     "en": "She also told me to drink more water and eat fruit.",
+     "tr": "Ayrıca daha çok su içmemi ve meyve yememi söyledi."
+    },
+    {
+     "en": "I stayed in bed for three days.",
+     "tr": "Üç gün yatakta kaldım."
+    },
+    {
+     "en": "My daughter brought me tea and read stories to me.",
+     "tr": "Kızım bana çay getirdi ve hikâyeler okudu."
+    },
+    {
+     "en": "Now I feel much better, and I am back at work.",
+     "tr": "Şimdi çok daha iyiyim ve işe döndüm."
+    },
+    {
+     "en": "I learned that sleep is more important than work.",
+     "tr": "Uykunun işten daha önemli olduğunu öğrendim."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t25q1",
+     "prompt": "Doktora gitmesini kim söyledi?",
+     "options": [
+      {
+       "tr": "Eşi"
+      },
+      {
+       "tr": "Kızı"
+      },
+      {
+       "tr": "Annesi"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t25q2",
+     "prompt": "Doktor nasıl biriydi?",
+     "options": [
+      {
+       "tr": "Nazik yüzlü genç bir kadın"
+      },
+      {
+       "tr": "Yaşlı bir adam"
+      },
+      {
+       "tr": "Bir öğrenci"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t25q3",
+     "prompt": "Doktor ne yapmasını söyledi?",
+     "options": [
+      {
+       "tr": "Evde kalıp çok uyumasını"
+      },
+      {
+       "tr": "Hemen işe dönmesini"
+      },
+      {
+       "tr": "Hastanede kalmasını"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t25q4",
+     "prompt": "Kaç gün yatakta kaldı?",
+     "options": [
+      {
+       "en": "three"
+      },
+      {
+       "en": "five"
+      },
+      {
+       "en": "seven"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t26",
+   "title": "An Email from Anna",
+   "titleTr": "Anna'dan bir e-posta",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "Yesterday, I got an email from my friend Anna.",
+     "tr": "Dün arkadaşım Anna'dan bir e-posta aldım."
+    },
+    {
+     "en": "She lives by the sea now, in a small town.",
+     "tr": "Şimdi deniz kenarında, küçük bir kasabada yaşıyor."
+    },
+    {
+     "en": "She works at a bank in the town center.",
+     "tr": "Kasaba merkezindeki bir bankada çalışıyor."
+    },
+    {
+     "en": "In her message, she told me about her new life.",
+     "tr": "Mesajında bana yeni hayatını anlattı."
+    },
+    {
+     "en": "\"Every morning, I walk to work along the sea,\" she wrote.",
+     "tr": "\"Her sabah deniz boyunca yürüyerek işe gidiyorum,\" diye yazdı."
+    },
+    {
+     "en": "\"The weather is warm, even in the cold months.\"",
+     "tr": "\"Soğuk aylarda bile hava ılık.\""
+    },
+    {
+     "en": "On the weekend, she goes to the mountains with friends.",
+     "tr": "Hafta sonları arkadaşlarıyla dağlara gidiyor."
+    },
+    {
+     "en": "She also started to learn music.",
+     "tr": "Müzik öğrenmeye de başlamış."
+    },
+    {
+     "en": "Now she plays music every evening.",
+     "tr": "Şimdi her akşam müzik çalıyor."
+    },
+    {
+     "en": "At the end of her email, she asked me to visit her.",
+     "tr": "E-postasının sonunda onu ziyaret etmemi istedi."
+    },
+    {
+     "en": "\"Come for your birthday,\" she wrote.",
+     "tr": "\"Doğum gününde gel,\" diye yazdı."
+    },
+    {
+     "en": "\"We will have a party by the sea.\"",
+     "tr": "\"Deniz kenarında bir parti yaparız.\""
+    },
+    {
+     "en": "I want to go, but the train is expensive.",
+     "tr": "Gitmek istiyorum ama tren pahalı."
+    },
+    {
+     "en": "I think I will drive there with my sister.",
+     "tr": "Sanırım kız kardeşimle arabayla gideceğim."
+    },
+    {
+     "en": "I will write back to her tonight and tell her my plans.",
+     "tr": "Bu akşam ona cevap yazıp planlarımı anlatacağım."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t26q1",
+     "prompt": "Anna şimdi nerede yaşıyor?",
+     "options": [
+      {
+       "tr": "Deniz kenarındaki küçük bir kasabada"
+      },
+      {
+       "tr": "Dağlarda"
+      },
+      {
+       "tr": "Büyük bir şehirde"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t26q2",
+     "prompt": "Anna nerede çalışıyor?",
+     "options": [
+      {
+       "image": "bank"
+      },
+      {
+       "image": "hospital"
+      },
+      {
+       "image": "school"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t26q3",
+     "prompt": "Anna onu ne zaman çağırıyor?",
+     "options": [
+      {
+       "tr": "Doğum gününde"
+      },
+      {
+       "tr": "Hafta sonu"
+      },
+      {
+       "tr": "Gelecek yıl"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t26q4",
+     "prompt": "Anlatıcı oraya nasıl gitmeyi düşünüyor?",
+     "options": [
+      {
+       "tr": "Kız kardeşiyle arabayla"
+      },
+      {
+       "tr": "Trenle"
+      },
+      {
+       "tr": "Otobüsle"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t27",
+   "title": "The Story of Our Town",
+   "titleTr": "Kasabamızın hikâyesi",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "Our town is very old, and it has a long history.",
+     "tr": "Kasabamız çok eski ve uzun bir tarihi var."
+    },
+    {
+     "en": "Hundreds of years ago, it was a small village by a river.",
+     "tr": "Yüzlerce yıl önce nehir kenarında küçük bir köydü."
+    },
+    {
+     "en": "The people there lived from the river and their gardens.",
+     "tr": "Oradaki insanlar nehir ve bahçeleriyle geçinirdi."
+    },
+    {
+     "en": "Then the train came, and many things changed.",
+     "tr": "Sonra tren geldi ve birçok şey değişti."
+    },
+    {
+     "en": "New people came to live and work in the village.",
+     "tr": "Köye yaşamak ve çalışmak için yeni insanlar geldi."
+    },
+    {
+     "en": "They built houses and a school.",
+     "tr": "Evler ve bir okul yaptılar."
+    },
+    {
+     "en": "Over the years, the village grew into a town.",
+     "tr": "Yıllar içinde köy bir kasabaya dönüştü."
+    },
+    {
+     "en": "Today, the town has a hospital, two banks and a large park.",
+     "tr": "Bugün kasabanın bir hastanesi, iki bankası ve büyük bir parkı var."
+    },
+    {
+     "en": "But some old houses are still here.",
+     "tr": "Ama bazı eski evler hâlâ burada."
+    },
+    {
+     "en": "In the center, you can still see the first school.",
+     "tr": "Merkezde ilk okulu hâlâ görebilirsiniz."
+    },
+    {
+     "en": "My father went to that school when he was a child.",
+     "tr": "Babam çocukken o okula gitmiş."
+    },
+    {
+     "en": "He often tells me stories from the past.",
+     "tr": "Bana sık sık geçmişten hikâyeler anlatır."
+    },
+    {
+     "en": "He says life was harder then, but people had more time.",
+     "tr": "O zaman hayatın daha zor olduğunu ama insanların daha çok vakti olduğunu söyler."
+    },
+    {
+     "en": "I think it is important to remember the past.",
+     "tr": "Bence geçmişi hatırlamak önemli."
+    },
+    {
+     "en": "It helps us understand who we are.",
+     "tr": "Kim olduğumuzu anlamamıza yardım eder."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t27q1",
+     "prompt": "Yüzlerce yıl önce kasaba neydi?",
+     "options": [
+      {
+       "tr": "Nehir kenarında küçük bir köy"
+      },
+      {
+       "tr": "Büyük bir şehir"
+      },
+      {
+       "tr": "Bir dağ köyü"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t27q2",
+     "prompt": "Ne gelince birçok şey değişti?",
+     "options": [
+      {
+       "image": "train"
+      },
+      {
+       "image": "bus"
+      },
+      {
+       "image": "car"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t27q3",
+     "prompt": "Babası çocukken nereye gitti?",
+     "options": [
+      {
+       "tr": "O ilk okula"
+      },
+      {
+       "tr": "Hastaneye"
+      },
+      {
+       "tr": "Bankaya"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t27q4",
+     "prompt": "Anlatıcıya göre geçmişi hatırlamak neden önemli?",
+     "options": [
+      {
+       "tr": "Kim olduğumuzu anlamamıza yardım ediyor"
+      },
+      {
+       "tr": "Para kazandırıyor"
+      },
+      {
+       "tr": "Kasabayı büyütüyor"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t28",
+   "title": "The Big Game",
+   "titleTr": "Büyük maç",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "Every Sunday, my son plays a game in the park with his friends.",
+     "tr": "Her pazar oğlum parkta arkadaşlarıyla maç yapar."
+    },
+    {
+     "en": "There are ten children on each side.",
+     "tr": "Her tarafta on çocuk var."
+    },
+    {
+     "en": "Last Sunday was a very important game.",
+     "tr": "Geçen pazar çok önemli bir maç vardı."
+    },
+    {
+     "en": "Many parents came to watch, and some brought food.",
+     "tr": "Birçok veli izlemeye geldi, bazıları yiyecek getirdi."
+    },
+    {
+     "en": "It was a cold morning, but the sun was out.",
+     "tr": "Soğuk bir sabahtı ama güneş vardı."
+    },
+    {
+     "en": "At first, the other side was much better.",
+     "tr": "Başta öbür taraf çok daha iyiydi."
+    },
+    {
+     "en": "After a few minutes, they had two points, and we had nothing.",
+     "tr": "Birkaç dakika sonra onların iki sayısı vardı, bizim hiç yoktu."
+    },
+    {
+     "en": "My son looked sad, but he did not stop.",
+     "tr": "Oğlum üzgün görünüyordu ama durmadı."
+    },
+    {
+     "en": "In the second half of the game, things changed.",
+     "tr": "Maçın ikinci yarısında işler değişti."
+    },
+    {
+     "en": "His side played well together and got three points.",
+     "tr": "Onun tarafı birlikte iyi oynadı ve üç sayı aldı."
+    },
+    {
+     "en": "In the end, they were the best side on the day.",
+     "tr": "Sonunda o gün en iyi taraf onlardı."
+    },
+    {
+     "en": "The children were very happy, and the parents were too.",
+     "tr": "Çocuklar çok mutluydu, veliler de öyle."
+    },
+    {
+     "en": "After the game, we all had cake in the park.",
+     "tr": "Maçtan sonra hep birlikte parkta pasta yedik."
+    },
+    {
+     "en": "My son said it was the best day of his life.",
+     "tr": "Oğlum hayatının en güzel günü olduğunu söyledi."
+    },
+    {
+     "en": "I think he will remember that game for a long time.",
+     "tr": "Bence o maçı uzun süre hatırlayacak."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t28q1",
+     "prompt": "Oğul pazar günleri ne yapıyor?",
+     "options": [
+      {
+       "tr": "Parkta arkadaşlarıyla maç yapıyor"
+      },
+      {
+       "tr": "Ders çalışıyor"
+      },
+      {
+       "tr": "Köye gidiyor"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t28q2",
+     "prompt": "Her tarafta kaç çocuk var?",
+     "options": [
+      {
+       "en": "ten"
+      },
+      {
+       "en": "eight"
+      },
+      {
+       "en": "nine"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t28q3",
+     "prompt": "Maçın ikinci yarısında ne oldu?",
+     "options": [
+      {
+       "tr": "Oğlunun tarafı iyi oynayıp üç sayı aldı"
+      },
+      {
+       "tr": "Oyun durdu"
+      },
+      {
+       "tr": "Oğlu eve gitti"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t28q4",
+     "prompt": "Maçtan sonra ne yaptılar?",
+     "options": [
+      {
+       "tr": "Parkta pasta yediler"
+      },
+      {
+       "tr": "Eve gittiler"
+      },
+      {
+       "tr": "Okula döndüler"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  }
+ ]
+}

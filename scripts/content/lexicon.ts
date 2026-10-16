@@ -20,7 +20,7 @@ export const EVERYDAY: Record<number, string[]> = {
   2: ['two', 'three', 'eat', 'drink', 'sleep', 'bed', 'kitchen', 'sister', 'brother', 'son', 'daughter', 'wife', 'husband', 'today', 'tomorrow', 'yesterday', 'evening', 'happy', 'tired', 'hungry', 'dog', 'cat'],
   3: ['four', 'five', 'six', 'breakfast', 'lunch', 'dinner', 'milk', 'sugar', 'fruit', 'apple', 'cook', 'wash', 'clean', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'weekend', 'tonight'],
   4: ['seven', 'eight', 'nine', 'ten', 'hundred', 'red', 'blue', 'green', 'yellow', 'brown', 'sun', 'rain', 'cold', 'hot', 'warm', 'tree', 'flower', 'garden', 'park', 'bus', 'baby', 'sad'],
-  5: ['teacher', 'doctor', 'hospital', 'bank', 'village', 'bird', 'fish', 'meat', 'chicken', 'rice', 'cake', 'email', 'message', 'bathroom', 'beautiful', 'expensive', 'weather', 'birthday', 'holiday', 'sea', 'river', 'mountain'],
+  5: ['father', 'teacher', 'doctor', 'hospital', 'bank', 'village', 'bird', 'fish', 'meat', 'chicken', 'rice', 'cake', 'email', 'message', 'bathroom', 'beautiful', 'expensive', 'weather', 'birthday', 'holiday', 'sea', 'river', 'mountain'],
 };
 
 /**

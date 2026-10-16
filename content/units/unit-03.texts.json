@@ -1,0 +1,515 @@
+{
+ "note": "Reading texts for Unit 3 (own, CC0). Written only with words of Units 1–3; a little longer each unit.",
+ "texts": [
+  {
+   "id": "t14",
+   "title": "Saturday at the Market",
+   "titleTr": "Cumartesi pazarda",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "On Saturday morning, I go to the market with my son.",
+     "tr": "Cumartesi sabahı oğlumla pazara giderim."
+    },
+    {
+     "en": "The market is open from early in the morning.",
+     "tr": "Pazar sabahın erken saatinden itibaren açıktır."
+    },
+    {
+     "en": "We get fruit, apples and some milk.",
+     "tr": "Meyve, elma ve biraz süt alırız."
+    },
+    {
+     "en": "My son likes the small apples best.",
+     "tr": "Oğlum en çok küçük elmaları sever."
+    },
+    {
+     "en": "A young man there knows our names.",
+     "tr": "Oradaki genç bir adam isimlerimizi bilir."
+    },
+    {
+     "en": "He always gives my son an apple.",
+     "tr": "Oğluma hep bir elma verir."
+    },
+    {
+     "en": "Then we pay and go home.",
+     "tr": "Sonra öder ve eve gideriz."
+    },
+    {
+     "en": "At home, we wash the fruit in the kitchen.",
+     "tr": "Evde meyveleri mutfakta yıkarız."
+    },
+    {
+     "en": "Then my son and I have breakfast.",
+     "tr": "Sonra oğlumla kahvaltı yaparız."
+    },
+    {
+     "en": "Saturday is a good day for us.",
+     "tr": "Cumartesi bizim için güzel bir gündür."
+    },
+    {
+     "en": "I love the weekend.",
+     "tr": "Hafta sonunu çok severim."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t14q1",
+     "prompt": "Cumartesi sabahı nereye gidiyorlar?",
+     "options": [
+      {
+       "image": "market"
+      },
+      {
+       "image": "school"
+      },
+      {
+       "image": "car"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t14q2",
+     "prompt": "Genç adam oğluna ne veriyor?",
+     "options": [
+      {
+       "en": "an apple"
+      },
+      {
+       "en": "some milk"
+      },
+      {
+       "en": "money"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t14q3",
+     "prompt": "Evde meyveleri nerede yıkıyorlar?",
+     "options": [
+      {
+       "tr": "Mutfakta"
+      },
+      {
+       "tr": "Pazarda"
+      },
+      {
+       "tr": "Sokakta"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t15",
+   "title": "A New Job",
+   "titleTr": "Yeni bir iş",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "My friend Mark has a new job.",
+     "tr": "Arkadaşım Mark'ın yeni bir işi var."
+    },
+    {
+     "en": "He works for a large business in our area.",
+     "tr": "Bizim bölgemizde büyük bir şirkette çalışıyor."
+    },
+    {
+     "en": "The job is very important to him.",
+     "tr": "Bu iş onun için çok önemli."
+    },
+    {
+     "en": "He begins work at six every morning.",
+     "tr": "Her sabah altıda işe başlıyor."
+    },
+    {
+     "en": "Before work, he has breakfast and reads a little.",
+     "tr": "İşten önce kahvaltı yapıp biraz okuyor."
+    },
+    {
+     "en": "At lunch, he eats with people from his group.",
+     "tr": "Öğle yemeğini grubundaki insanlarla yiyor."
+    },
+    {
+     "en": "They talk about the job and their plans.",
+     "tr": "İş ve planları hakkında konuşuyorlar."
+    },
+    {
+     "en": "Mark says the job is a lot of work.",
+     "tr": "Mark işin çok yorucu olduğunu söylüyor."
+    },
+    {
+     "en": "But he likes it, and he believes in the company.",
+     "tr": "Ama işini seviyor ve şirkete inanıyor."
+    },
+    {
+     "en": "At the end of the month, they pay him well.",
+     "tr": "Ay sonunda ona iyi para ödüyorlar."
+    },
+    {
+     "en": "Tonight, we will have dinner and talk about his new life.",
+     "tr": "Bu akşam yemek yiyip yeni hayatı hakkında konuşacağız."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t15q1",
+     "prompt": "Mark işe kaçta başlıyor?",
+     "options": [
+      {
+       "en": "at six"
+      },
+      {
+       "en": "at five"
+      },
+      {
+       "en": "at four"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t15q2",
+     "prompt": "Öğle yemeğini kiminle yiyor?",
+     "options": [
+      {
+       "tr": "Grubundaki insanlarla"
+      },
+      {
+       "tr": "Ailesiyle"
+      },
+      {
+       "tr": "Tek başına"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t15q3",
+     "prompt": "Bu akşam ne yapacaklar?",
+     "options": [
+      {
+       "tr": "Birlikte yemek yiyip konuşacaklar"
+      },
+      {
+       "tr": "Pazara gidecekler"
+      },
+      {
+       "tr": "Kitap okuyacaklar"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t16",
+   "title": "My Week",
+   "titleTr": "Haftam",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "On Monday, I start work early.",
+     "tr": "Pazartesi işe erken başlarım."
+    },
+    {
+     "en": "On Tuesday and Wednesday, I study in the evening.",
+     "tr": "Salı ve çarşamba akşamları ders çalışırım."
+    },
+    {
+     "en": "On Thursday, I cook dinner for my family.",
+     "tr": "Perşembe ailem için akşam yemeği pişiririm."
+    },
+    {
+     "en": "My family says my dinner is very good.",
+     "tr": "Ailem yemeğimin çok güzel olduğunu söyler."
+    },
+    {
+     "en": "On Friday, I go to the market after work.",
+     "tr": "Cuma işten sonra pazara giderim."
+    },
+    {
+     "en": "I get fruit, milk and sugar there.",
+     "tr": "Orada meyve, süt ve şeker alırım."
+    },
+    {
+     "en": "On Saturday, I clean the house and wash the car.",
+     "tr": "Cumartesi evi temizler, arabayı yıkarım."
+    },
+    {
+     "en": "On Sunday, I do not work at all.",
+     "tr": "Pazar günü hiç çalışmam."
+    },
+    {
+     "en": "I read a book or sleep a lot.",
+     "tr": "Kitap okurum ya da çok uyurum."
+    },
+    {
+     "en": "The weekend is never long.",
+     "tr": "Hafta sonu hiç uzun sürmez."
+    },
+    {
+     "en": "Then on Monday, the week begins again.",
+     "tr": "Sonra pazartesi hafta yeniden başlar."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t16q1",
+     "prompt": "Perşembe günü ne yapıyor?",
+     "options": [
+      {
+       "tr": "Ailesine akşam yemeği pişiriyor"
+      },
+      {
+       "tr": "Pazara gidiyor"
+      },
+      {
+       "tr": "Evi temizliyor"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t16q2",
+     "prompt": "Cumartesi ne yapıyor?",
+     "options": [
+      {
+       "tr": "Evi temizleyip arabayı yıkıyor"
+      },
+      {
+       "tr": "Ders çalışıyor"
+      },
+      {
+       "tr": "İşe erken başlıyor"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t16q3",
+     "prompt": "Pazar günü ne yapıyor?",
+     "options": [
+      {
+       "tr": "Kitap okuyor ya da uyuyor"
+      },
+      {
+       "tr": "Çalışıyor"
+      },
+      {
+       "tr": "Yemek pişiriyor"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t17",
+   "title": "Many Questions",
+   "titleTr": "Bir sürü soru",
+   "voice": "male",
+   "sentences": [
+    {
+     "en": "My daughter is six, and she has many questions.",
+     "tr": "Kızım altı yaşında ve bir sürü sorusu var."
+    },
+    {
+     "en": "Every day, she asks me about the world.",
+     "tr": "Her gün bana dünyayla ilgili sorular soruyor."
+    },
+    {
+     "en": "\"Why do people work?\" she asks.",
+     "tr": "\"İnsanlar neden çalışır?\" diye soruyor."
+    },
+    {
+     "en": "\"Where does money come from?\"",
+     "tr": "\"Para nereden gelir?\""
+    },
+    {
+     "en": "I do not always know what to say.",
+     "tr": "Ne diyeceğimi her zaman bilemiyorum."
+    },
+    {
+     "en": "So we read books and look for information.",
+     "tr": "Bu yüzden kitap okuyup bilgi arıyoruz."
+    },
+    {
+     "en": "She is young, but she is very interested.",
+     "tr": "Küçük ama çok meraklı."
+    },
+    {
+     "en": "Yesterday she asked me what a government is.",
+     "tr": "Dün bana hükümetin ne olduğunu sordu."
+    },
+    {
+     "en": "That was a big question for a small child.",
+     "tr": "Küçük bir çocuk için büyük bir soruydu."
+    },
+    {
+     "en": "I gave her a few examples from our life.",
+     "tr": "Ona hayatımızdan birkaç örnek verdim."
+    },
+    {
+     "en": "Then she said, \"I want to work for the government!\"",
+     "tr": "Sonra \"Hükümette çalışmak istiyorum!\" dedi."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t17q1",
+     "prompt": "Kızı kaç yaşında?",
+     "options": [
+      {
+       "en": "six"
+      },
+      {
+       "en": "five"
+      },
+      {
+       "en": "four"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t17q2",
+     "prompt": "Cevabı bilmediğinde ne yapıyorlar?",
+     "options": [
+      {
+       "tr": "Kitap okuyup bilgi arıyorlar"
+      },
+      {
+       "tr": "Annesine soruyorlar"
+      },
+      {
+       "tr": "Hiçbir şey"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t17q3",
+     "prompt": "Dün hangi soruyu sordu?",
+     "options": [
+      {
+       "en": "What is a government?"
+      },
+      {
+       "en": "Where does money come from?"
+      },
+      {
+       "en": "Why do people work?"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "t18",
+   "title": "Dinner for Friends",
+   "titleTr": "Arkadaşlara akşam yemeği",
+   "voice": "female",
+   "sentences": [
+    {
+     "en": "Tonight, some friends will come to our house for dinner.",
+     "tr": "Bu akşam bazı arkadaşlar yemeğe bize gelecek."
+    },
+    {
+     "en": "My husband and I started to cook early in the day.",
+     "tr": "Kocam ve ben güne erken başlayıp yemek pişirdik."
+    },
+    {
+     "en": "He cooked, and I cleaned the kitchen.",
+     "tr": "O yemek yaptı, ben mutfağı temizledim."
+    },
+    {
+     "en": "Our son helped us in the kitchen.",
+     "tr": "Oğlumuz mutfakta bize yardım etti."
+    },
+    {
+     "en": "In the evening, five friends came.",
+     "tr": "Akşam beş arkadaş geldi."
+    },
+    {
+     "en": "They brought fruit and a good book for our son.",
+     "tr": "Meyve ve oğlumuz için güzel bir kitap getirdiler."
+    },
+    {
+     "en": "We ate and talked for a long time.",
+     "tr": "Uzun süre yemek yiyip konuştuk."
+    },
+    {
+     "en": "One friend told us about his new job.",
+     "tr": "Bir arkadaş bize yeni işini anlattı."
+    },
+    {
+     "en": "Another friend talked about her plans for next year.",
+     "tr": "Başka bir arkadaş gelecek yıl için planlarından bahsetti."
+    },
+    {
+     "en": "It was a very good evening.",
+     "tr": "Çok güzel bir akşamdı."
+    },
+    {
+     "en": "We want to do it again next month.",
+     "tr": "Gelecek ay yine yapmak istiyoruz."
+    }
+   ],
+   "questions": [
+    {
+     "id": "t18q1",
+     "prompt": "Kaç arkadaş geldi?",
+     "options": [
+      {
+       "en": "five"
+      },
+      {
+       "en": "four"
+      },
+      {
+       "en": "six"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t18q2",
+     "prompt": "Arkadaşlar ne getirdi?",
+     "options": [
+      {
+       "tr": "Meyve ve oğul için bir kitap"
+      },
+      {
+       "tr": "Süt ve şeker"
+      },
+      {
+       "tr": "Hiçbir şey"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "id": "t18q3",
+     "prompt": "Bir arkadaş ne anlattı?",
+     "options": [
+      {
+       "tr": "Yeni işini"
+      },
+      {
+       "tr": "Ailesini"
+      },
+      {
+       "tr": "Tatilini"
+      }
+     ],
+     "answer": 0
+    }
+   ]
+  }
+ ]
+}

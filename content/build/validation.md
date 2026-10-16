@@ -1,10 +1,10 @@
 # Content validation
 
-**88 errors**
+**89 errors**
 
 | | |
 |---|---|
-| course | 6adaaa04a028 |
+| course | 275314a81691 |
 | words | 500 |
 | words with photo | 21 |
 | words with emoji only | 204 |
@@ -12,11 +12,11 @@
 | sentences | 5675 |
 | Tatoeba sentences | 5535 |
 | own sentences | 140 |
-| texts | 8 |
+| texts | 28 |
 | grammar cards | 30 |
-| texts per unit | 8 / 0 / 0 / 0 / 0 |
-| word clips | 100 / 500 |
-| text sentence clips | 38 / 38 |
+| texts per unit | 8 / 5 / 5 / 5 / 5 |
+| word clips | 450 / 500 |
+| text sentence clips | 38 / 274 |
 | course sentence clips | 997 / 5675 |
 
 ## Errors
@@ -78,16 +78,17 @@
 - park: concrete word without a photo (run npm run fetch-images)
 - bus: concrete word without a photo (run npm run fetch-images)
 - baby: concrete word without a photo (run npm run fetch-images)
-- teacher: concrete word without a photo (run npm run fetch-images)
+- father: concrete word without a photo (run npm run fetch-images)
 - watch: concrete word without a photo (run npm run fetch-images)
+- teacher: concrete word without a photo (run npm run fetch-images)
 - doctor: concrete word without a photo (run npm run fetch-images)
 - hospital: concrete word without a photo (run npm run fetch-images)
 - bank: concrete word without a photo (run npm run fetch-images)
 - mother: concrete word without a photo (run npm run fetch-images)
-- village: concrete word without a photo (run npm run fetch-images)
 - walk: concrete word without a photo (run npm run fetch-images)
-- bird: concrete word without a photo (run npm run fetch-images)
+- village: concrete word without a photo (run npm run fetch-images)
 - office: concrete word without a photo (run npm run fetch-images)
+- bird: concrete word without a photo (run npm run fetch-images)
 - fish: concrete word without a photo (run npm run fetch-images)
 - light: concrete word without a photo (run npm run fetch-images)
 - meat: concrete word without a photo (run npm run fetch-images)
@@ -112,7 +113,7 @@
 
 ## Warnings
 
-- 400 words without a recorded clip (device voice is used)
+- 50 words without a recorded clip (device voice is used)
 - 4678 sentences without a recorded clip (device voice is used)
 
 ## Tatoeba sample for a human check
@@ -137,5 +138,5 @@
 | t:6079124 | Do you like gardening? | Bahçıvanlığı sever misin? | CK / duran |
 | t:2248988 | It'll rain soon. | Yakında yağmur yağacak. | CK / duran |
 | t:285787 | He has a good school record. | Onun iyi bir okul kaydı var. | CK / duran |
-| t:3643166 | How is your new class? | Yeni sınıfın nasıl? | boukensha / duran |
-| t:1766684 | The weather is cold. | Hava soğuk. | AlanF_US / deyta |
+| t:2315152 | Can I eat this cake? | Bu pastayı yiyebilir miyim? | CK / duran |
+| t:2892360 | Tom reached for his drink. | Tom içkisine uzandı. | CK / duran |
