@@ -10,6 +10,12 @@ Canlı adres: https://okuma-iota.vercel.app · Dal: `claude/new-session-b5nvn7`
 - Testler: 97 birim, 3 uçtan uca. Canlıda kontrol edildi: giriş sayfası, `/admin/review` (105 aday), medya dosyaları, `/api/cron/notify` 200.
 - Pixabay fotoğrafları yardımcı bir oturumda indirildi; anahtar bu oturuma görünmüyordu (`claude/pixabay-images` dalı birleştirildi).
 
+- 16 Ekim akşamı:
+  - Telefondaki ders kaydı senkronu düzeltildi: kesirli milisaniye `bigint` alanına giremiyordu, sunucu artık yuvarlıyor (0005).
+  - Senkron hataları `client_log` tablosuna düşüyor (0004).
+  - Geçişler artık `schema_migrations` tablosunda izleniyor.
+  - Derse "Önceki soru" oku eklendi.
+
 ## Ayrıntılar
 
 - **İlerleme bitirilen derslere bağlı.**
