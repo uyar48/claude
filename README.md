@@ -1,6 +1,6 @@
-# Okuma — kişisel İngilizce okuma uygulaması (v2)
+# Okuma — kişisel İngilizce okuma uygulaması (v3)
 
-Tek kullanıcılı, mobil öncelikli bir PWA. Hedef, kolaylaştırılmış İngilizce metinleri sözlüksüz okuyabilmek. Arayüz Türkçe, içerik İngilizce. v2'de ilerleme takvime değil **bitirilen derslere** bağlıdır; içerik NGSL 1.2 kelime listesi ve Tatoeba cümleleriyle kurulur; görseller ve sesler yalnızca ücretsiz ve açık kaynaklardan gelir.
+Tek kullanıcılı, mobil öncelikli bir PWA. Hedef, kolaylaştırılmış İngilizce metinleri sözlüksüz okuyabilmek. Arayüz Türkçe, içerik İngilizce. İlerleme takvime değil **bitirilen derslere** bağlıdır; içerik NGSL 1.2 kelime listesi ve Tatoeba cümleleriyle kurulur; görseller ve sesler yalnızca ücretsiz ve açık kaynaklardan gelir.
 
 Canlı adres: **https://okuma-iota.vercel.app** · Kurulum: **[docs/KURULUM.md](docs/KURULUM.md)**
 
@@ -13,9 +13,11 @@ Canlı adres: **https://okuma-iota.vercel.app** · Kurulum: **[docs/KURULUM.md](
 | **Ara ver**: süre sınırı yok, bildirim gitmez. Dönüşte tekrarlar günde en fazla 40 kart. | `src/core/scheduler.ts`, `src/core/progress.ts` |
 | Ders başına 10 yeni kelime (6–15 ayarlanabilir), NGSL sırasıyla. | `src/core/course.ts` |
 | Süreye göre ders motoru: ısınma tekrarı → 4'lü yeni kelime grupları → zorlaşan alıştırmalar → 60 sn hızlı tur. Aynı tür üst üste en fazla 2 kez. | `src/core/session.ts` |
-| Alıştırmalar: resim↔kelime, sürükle-bırak eşleştirme, dinle→seç, dikte (toleranslı), boşluk doldurma, cümle kurma (Türkçesi görünür), okuma + 3 soru, İng→Tr / Tr→İng, mini sahne, 60 sn hızlı tur | `src/ui/exercises/` |
+| Alıştırmalar: dilbilgisi kartı, resim↔kelime, sürükle-bırak eşleştirme, dinle→seç, dikte (toleranslı), boşluk doldurma, cümle kurma (Türkçesi görünür), okuma + 3 soru, İng→Tr / Tr→İng, mini sahne, 60 sn hızlı tur | `src/ui/exercises/` |
 | Dokunarak okuma, sesli okuma ve okunan kelimenin vurgulanması | `src/ui/components/Reader.tsx`, `src/audio/speaker.ts` |
-| İçerik: NGSL 1.2 Ünite 1 (100 kelime), 863 Tatoeba EN–TR çifti (anadili konuşanlar, sahip bilgisiyle), 134 özgün cümle, 8 kısa metin. Her kelimeye öğretildiği derste en az 3 cümle; cümlelerdeki kelimelerin ≥%95'i bilinir. | `content/`, `scripts/build-content.ts` |
+| İçerik: 5 ünite, 500 kelime. NGSL 1.2 sırası; Ünite 2'den itibaren her üniteye NGSL'nin ilk 500'ünde olmayan 22–23 günlük kelime (sayılar, aile, günler, yemekler, renkler…) serpiştirilir. 5535 Tatoeba EN–TR çifti (anadili konuşanlar, sahip bilgisiyle), 140 özgün cümle, 28 kısa metin. Her kelimeye öğretildiği derste en az 3 cümle; cümlelerdeki kelimelerin ≥%95'i bilinir. | `content/`, `scripts/content/lexicon.ts`, `scripts/build-content.ts` |
+| Kademeli okuma: Ünite 1 olduğu gibi kalır; Ünite 2'den itibaren cümleler ünite ünite uzar (en çok 9 → 10 → 12 → 14 → 16 kelime), metinler 9–10 cümleden ~15 cümleye çıkar, cümle kurma taşları artar. Bir cümle ya da metin, öğrencinin ünitesine gelmeden çıkmaz; okunmamış metinler önce gelir. | `scripts/build-content.ts`, `src/core/session.ts` |
+| Kısa dilbilgisi kartları (30 konu: am/is/are, a/an, olumsuz, soru, geçmiş zaman…). Kart, konunun kelimesi öğretildiği derste o kelimenin hemen ardından gelir; ders başına en fazla 2. Atlanan konular sonraki derslerde ısınmadan sonra telafi edilir. Hepsi Ayarlar → **Dilbilgisi notları** ekranında. | `content/grammar.json`, `src/core/progress.ts`, `src/ui/exercises/GrammarCard.tsx` |
 | Görseller: Pexels, Pixabay (ücretsiz anahtarla), anahtarsız Openverse ve Wikimedia Commons. Kelime başına 5 aday, 4:3, ≤800 px, kendi sunucumuzda. Soyut kelimeler emoji ya da cümle + sesle öğretilir. | `scripts/fetch-images.ts`, `scripts/media/stock.ts` |
 | `/admin/review`: 5 adaydan birini seç ya da "görsel yok" de. Seçim hesaba kaydedilir, iki cihazda aynı resim görünür. | `src/ui/screens/AdminReview.tsx`, `media_choices` tablosu |
 | Ayarlar → **Görsel kaynakları** ve **Kaynaklar** (NGSL, Tatoeba sahipleri, fotoğrafçılar, lisanslar) | `src/ui/screens/Sources.tsx` |
@@ -29,7 +31,7 @@ Canlı adres: **https://okuma-iota.vercel.app** · Kurulum: **[docs/KURULUM.md](
 npm run import-tatoeba     # Tatoeba dökümlerinden EN–TR alt kümesi (TATOEBA_DIR)
 npm run build-content      # NGSL + cümleler + metinler → content/build/course.json
 npm run fetch-images       # ücretsiz stok fotoğraflar → public/media/img + content/media/credits.json
-npm run generate-audio     # Kokoro-82M ile sesler → public/media/audio + media-manifest.json
+npm run generate-audio     # Kokoro-82M ile sesler (kelime, cümle, metin, dilbilgisi örnekleri) → public/media/audio
 npm run validate-content   # kapsam, cümle sayısı, lisans alanları, eksik medya → content/build/validation.md
 npm run deploy -- --update # veritabanı geçişleri + uygulamayı yeniden dağıt
 ```
@@ -60,6 +62,6 @@ npm run e2e   # Playwright, iPhone 13 görünümü
 ```
 
 - Ders sırası: "bir ders daha" zinciri, gün atlama, yarım dersin sürdürülmesi, gece yarısı geçişi, ara verme ve dönüş, günlük 40 tekrar sınırı, seri dondurma.
-- Ders motoru: 30 dakikalık simülasyonda ≥8 alıştırma kategorisi, aynı tür en fazla 2 kez üst üste, zorluk artışı, hızlı turla bitiş; 20/45 dk ve 6/15 kelime.
+- Ders motoru: 30 dakikalık simülasyonda ≥8 alıştırma kategorisi, aynı tür en fazla 2 kez üst üste, zorluk artışı, hızlı turla bitiş; 20/45 dk ve 6/15 kelime; ünitesine gelmemiş cümle ve metnin çıkmaması; dilbilgisi kartı ve telafi sırası.
 - İçerik doğrulama, stok fotoğraf adaptörleri (lisans süzme, Pixabay 24 saat önbellek), senkron, SQL geçişleri (PGlite), bildirim zamanlayıcı.
-- Uçtan uca: iki ders üst üste, gün atlayıp yarım dersi sürdürme, ayarlar, kaynak ekranları, çevrimdışı açılış.
+- Uçtan uca: üç ders üst üste (dilbilgisi kartıyla), gün atlayıp yarım dersi sürdürme, ayarlar, dilbilgisi notları ve kaynak ekranları, çevrimdışı açılış.

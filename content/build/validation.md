@@ -1,120 +1,28 @@
 # Content validation
 
-**89 errors**
+**No errors.**
 
 | | |
 |---|---|
-| course | 275314a81691 |
+| course | c630ac77d0aa |
 | words | 500 |
-| words with photo | 21 |
+| words with photo | 110 |
 | words with emoji only | 204 |
-| words taught with sentence + audio only | 275 |
+| words taught with sentence + audio only | 186 |
 | sentences | 5675 |
 | Tatoeba sentences | 5535 |
 | own sentences | 140 |
 | texts | 28 |
 | grammar cards | 30 |
 | texts per unit | 8 / 5 / 5 / 5 / 5 |
-| word clips | 450 / 500 |
+| word clips | 499 / 500 |
 | text sentence clips | 38 / 274 |
-| course sentence clips | 997 / 5675 |
-
-## Errors
-
-- eat: concrete word without a photo (run npm run fetch-images)
-- drink: concrete word without a photo (run npm run fetch-images)
-- sleep: concrete word without a photo (run npm run fetch-images)
-- bed: concrete word without a photo (run npm run fetch-images)
-- child: concrete word without a photo (run npm run fetch-images)
-- kitchen: concrete word without a photo (run npm run fetch-images)
-- call: concrete word without a photo (run npm run fetch-images)
-- sister: concrete word without a photo (run npm run fetch-images)
-- brother: concrete word without a photo (run npm run fetch-images)
-- son: concrete word without a photo (run npm run fetch-images)
-- daughter: concrete word without a photo (run npm run fetch-images)
-- write: concrete word without a photo (run npm run fetch-images)
-- talk: concrete word without a photo (run npm run fetch-images)
-- evening: concrete word without a photo (run npm run fetch-images)
-- school: concrete word without a photo (run npm run fetch-images)
-- dog: concrete word without a photo (run npm run fetch-images)
-- play: concrete word without a photo (run npm run fetch-images)
-- cat: concrete word without a photo (run npm run fetch-images)
-- book: concrete word without a photo (run npm run fetch-images)
-- family: concrete word without a photo (run npm run fetch-images)
-- breakfast: concrete word without a photo (run npm run fetch-images)
-- lunch: concrete word without a photo (run npm run fetch-images)
-- dinner: concrete word without a photo (run npm run fetch-images)
-- milk: concrete word without a photo (run npm run fetch-images)
-- study: concrete word without a photo (run npm run fetch-images)
-- sugar: concrete word without a photo (run npm run fetch-images)
-- run: concrete word without a photo (run npm run fetch-images)
-- fruit: concrete word without a photo (run npm run fetch-images)
-- apple: concrete word without a photo (run npm run fetch-images)
-- hand: concrete word without a photo (run npm run fetch-images)
-- cook: concrete word without a photo (run npm run fetch-images)
-- money: concrete word without a photo (run npm run fetch-images)
-- wash: concrete word without a photo (run npm run fetch-images)
-- read: concrete word without a photo (run npm run fetch-images)
-- friend: concrete word without a photo (run npm run fetch-images)
-- market: concrete word without a photo (run npm run fetch-images)
-- build: concrete word without a photo (run npm run fetch-images)
-- buy: concrete word without a photo (run npm run fetch-images)
-- student: concrete word without a photo (run npm run fetch-images)
-- face: concrete word without a photo (run npm run fetch-images)
-- room: concrete word without a photo (run npm run fetch-images)
-- head: concrete word without a photo (run npm run fetch-images)
-- person: concrete word without a photo (run npm run fetch-images)
-- city: concrete word without a photo (run npm run fetch-images)
-- night: concrete word without a photo (run npm run fetch-images)
-- sun: concrete word without a photo (run npm run fetch-images)
-- rain: concrete word without a photo (run npm run fetch-images)
-- train: concrete word without a photo (run npm run fetch-images)
-- price: concrete word without a photo (run npm run fetch-images)
-- parent: concrete word without a photo (run npm run fetch-images)
-- tree: concrete word without a photo (run npm run fetch-images)
-- party: concrete word without a photo (run npm run fetch-images)
-- flower: concrete word without a photo (run npm run fetch-images)
-- garden: concrete word without a photo (run npm run fetch-images)
-- park: concrete word without a photo (run npm run fetch-images)
-- bus: concrete word without a photo (run npm run fetch-images)
-- baby: concrete word without a photo (run npm run fetch-images)
-- father: concrete word without a photo (run npm run fetch-images)
-- watch: concrete word without a photo (run npm run fetch-images)
-- teacher: concrete word without a photo (run npm run fetch-images)
-- doctor: concrete word without a photo (run npm run fetch-images)
-- hospital: concrete word without a photo (run npm run fetch-images)
-- bank: concrete word without a photo (run npm run fetch-images)
-- mother: concrete word without a photo (run npm run fetch-images)
-- walk: concrete word without a photo (run npm run fetch-images)
-- village: concrete word without a photo (run npm run fetch-images)
-- office: concrete word without a photo (run npm run fetch-images)
-- bird: concrete word without a photo (run npm run fetch-images)
-- fish: concrete word without a photo (run npm run fetch-images)
-- light: concrete word without a photo (run npm run fetch-images)
-- meat: concrete word without a photo (run npm run fetch-images)
-- chicken: concrete word without a photo (run npm run fetch-images)
-- sit: concrete word without a photo (run npm run fetch-images)
-- rice: concrete word without a photo (run npm run fetch-images)
-- letter: concrete word without a photo (run npm run fetch-images)
-- cake: concrete word without a photo (run npm run fetch-images)
-- class: concrete word without a photo (run npm run fetch-images)
-- town: concrete word without a photo (run npm run fetch-images)
-- food: concrete word without a photo (run npm run fetch-images)
-- bathroom: concrete word without a photo (run npm run fetch-images)
-- birthday: concrete word without a photo (run npm run fetch-images)
-- drive: concrete word without a photo (run npm run fetch-images)
-- holiday: concrete word without a photo (run npm run fetch-images)
-- eye: concrete word without a photo (run npm run fetch-images)
-- sea: concrete word without a photo (run npm run fetch-images)
-- music: concrete word without a photo (run npm run fetch-images)
-- game: concrete word without a photo (run npm run fetch-images)
-- river: concrete word without a photo (run npm run fetch-images)
-- mountain: concrete word without a photo (run npm run fetch-images)
+| course sentence clips | 1422 / 5675 |
 
 ## Warnings
 
-- 50 words without a recorded clip (device voice is used)
-- 4678 sentences without a recorded clip (device voice is used)
+- 1 words without a recorded clip (device voice is used)
+- 4253 sentences without a recorded clip (device voice is used)
 
 ## Tatoeba sample for a human check
 
