@@ -14,7 +14,7 @@ import {
 } from '../../core/session';
 import { localDate } from '../../core/time';
 import { speaker } from '../../audio/speaker';
-import { IconClose } from '../components/Icons';
+import { IconBack, IconClose } from '../components/Icons';
 import { Picture, useHasPhoto } from '../components/Picture';
 import { EXERCISE_LABEL, ExerciseView } from '../exercises/ExerciseView';
 import type { ExerciseOutcome } from '../exercises/types';
@@ -30,6 +30,8 @@ const CAP_MS: Partial<Record<ExerciseType, number>> = {
   'speed-round': 90_000,
 };
 const DEFAULT_CAP_MS = 90_000;
+/** How many answered exercises the back arrow can go through. */
+const RECENT = 5;
 
 /** Visible time since start() — the clock stops while the app is in the background. */
 function useActiveClock() {
@@ -75,6 +77,8 @@ export function LessonScreen() {
   const hasPhoto = useHasPhoto();
   const clock = useActiveClock();
   const [finished, setFinished] = useState<Finished | null>(null);
+  /** Index into progress.recent while looking back at an earlier exercise. */
+  const [review, setReview] = useState<number | null>(null);
   const questions = useRef({ correct: 0, total: 0 });
   const advancing = useRef(false);
   const answering = useRef(false);
@@ -150,7 +154,7 @@ export function LessonScreen() {
     answering.current = true;
     try {
       const ex = p.current;
-      let ms = Math.min(CAP_MS[ex.type] ?? DEFAULT_CAP_MS, clock.read());
+      let ms = Math.round(Math.min(CAP_MS[ex.type] ?? DEFAULT_CAP_MS, clock.read()));
       // The speed round is time-boxed: finishing it means a full minute.
       if (ex.type === 'speed-round') ms = Math.max(CLOSE_MS, ms);
       const { state: session, grades } = recordAnswer(p.session, ex, { correct: out.correct, ms, perWord: out.perWord });
@@ -181,6 +185,7 @@ export function LessonScreen() {
         session,
         current: null,
         tapped: [...new Set([...p.tapped, ...(out.tapped ?? [])])],
+        recent: ex.type === 'speed-round' ? p.recent : [...(p.recent ?? []), ex].slice(-RECENT),
       });
     } finally {
       answering.current = false;
@@ -201,24 +206,59 @@ export function LessonScreen() {
 
   const { session } = progress;
   const left = Math.max(0, session.targetMs - session.activeMs);
+  const recent = progress.recent ?? [];
+  const looking = review !== null && recent[review] ? recent[review] : null;
+  const back = () => {
+    speaker.stop();
+    setReview((r) => (r === null ? recent.length - 1 : Math.max(0, r - 1)));
+    window.scrollTo(0, 0);
+  };
+  const resume = () => {
+    speaker.stop();
+    setReview(null);
+    window.scrollTo(0, 0);
+  };
   return (
     <div className="screen lesson">
       <header className="lesson-head">
         <button className="icon-btn" aria-label="Dersi duraklat" onClick={() => navigate('/')}>
           <IconClose />
         </button>
+        <button
+          className="icon-btn"
+          aria-label="Önceki soru"
+          onClick={back}
+          disabled={recent.length === 0 || review === 0}
+        >
+          <IconBack />
+        </button>
         <div className="time-bar" aria-label="Ders ilerlemesi">
           <span style={{ width: `${Math.min(100, (session.activeMs / session.targetMs) * 100)}%` }} />
         </div>
         <span className="muted small time-left">~{Math.max(1, Math.round(left / 60_000))} dk</span>
       </header>
-      {progress.current && (
+      {looking ? (
         <>
-          <p className="ex-label muted small">
-            {progress.number}. ders · {EXERCISE_LABEL[progress.current.type]}
-          </p>
-          <ExerciseView key={progress.current.key} ex={progress.current} onDone={(o) => void onDone(o)} />
+          <div className="review-bar" role="status">
+            <span>
+              Önceki soru ({recent.length - review!} geri) · {EXERCISE_LABEL[looking.type]} · puanlanmaz
+            </span>
+            <button className="btn btn-secondary" onClick={resume}>
+              Derse dön
+            </button>
+          </div>
+          {/* A fresh copy of the exercise: answer it again or just look; nothing is graded. */}
+          <ExerciseView key={`review:${looking.key}:${review}`} ex={looking} onDone={resume} />
         </>
+      ) : (
+        progress.current && (
+          <>
+            <p className="ex-label muted small">
+              {progress.number}. ders · {EXERCISE_LABEL[progress.current.type]}
+            </p>
+            <ExerciseView key={progress.current.key} ex={progress.current} onDone={(o) => void onDone(o)} />
+          </>
+        )
       )}
     </div>
   );

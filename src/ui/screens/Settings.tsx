@@ -153,7 +153,7 @@ export function SettingsScreen() {
         </p>
       </section>
 
-      <AccountSection syncStatus={sync.status} lastSyncAt={sync.lastSyncAt} />
+      <AccountSection syncStatus={sync.status} lastSyncAt={sync.lastSyncAt} syncError={sync.error} />
       <SetupSection />
       {isIOS() && !isStandalone() && <InstallHelp />}
 
@@ -287,7 +287,15 @@ function PushControls() {
   );
 }
 
-function AccountSection({ syncStatus, lastSyncAt }: { syncStatus: string; lastSyncAt: number | null }) {
+function AccountSection({
+  syncStatus,
+  lastSyncAt,
+  syncError,
+}: {
+  syncStatus: string;
+  lastSyncAt: number | null;
+  syncError?: string;
+}) {
   const rt = useRuntime();
   if (!rt.supabase) {
     return (
@@ -305,6 +313,11 @@ function AccountSection({ syncStatus, lastSyncAt }: { syncStatus: string; lastSy
         Durum: {syncStatus === 'error' ? 'hata, yeniden denenecek' : syncStatus === 'offline' ? 'çevrimdışı' : syncStatus === 'syncing' ? 'senkronlanıyor' : 'güncel'}
         {lastSyncAt && ` · son senkron ${clock(lastSyncAt)}`}
       </p>
+      {syncStatus === 'error' && syncError && (
+        <p className="tiny muted sync-error">
+          Hata ayrıntısı: <code>{syncError}</code>. Bir sonraki başarılı senkronda geliştiriciye otomatik iletilir.
+        </p>
+      )}
       <div className="row gap wrap">
         <button className="btn btn-secondary" onClick={() => rt.sync?.sync()}>
           Şimdi senkronla

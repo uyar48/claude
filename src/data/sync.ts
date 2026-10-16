@@ -17,6 +17,26 @@ import {
 import type { Store } from './store';
 
 const CURSOR = { cards: 'cursor:cards', lessons: 'cursor:lessons' } as const;
+
+interface ClientLogEntry {
+  id: string;
+  at: string;
+  kind: string;
+  message: string;
+}
+
+/** Message with the Postgres/PostgREST code when there is one. */
+export function describeError(err: unknown): string {
+  if (!err || typeof err !== 'object') return String(err);
+  const e = err as { message?: string; code?: string; details?: string; hint?: string; status?: number };
+  const parts = [e.code, e.message, e.details, e.hint].filter(Boolean);
+  return parts.length ? parts.join(' · ') : String(err);
+}
+
+/** Network failures as reported by Safari, Chrome and Firefox. */
+export function isNetworkError(message: string): boolean {
+  return /load failed|failed to fetch|networkerror|network connection was lost|timed out|aborted|fetch/i.test(message);
+}
 const PAGE = 500;
 
 export class SyncEngine {
@@ -53,20 +73,64 @@ export class SyncEngine {
     return this.running;
   }
 
+  private failures = 0;
+  private retry: ReturnType<typeof setTimeout> | null = null;
+
   private async run() {
     if (typeof navigator !== 'undefined' && navigator.onLine === false) {
       this.store.setSync({ status: 'offline' });
       return;
     }
-    this.store.setSync({ status: 'syncing', error: undefined });
+    if (this.retry) clearTimeout(this.retry);
+    this.retry = null;
+    this.store.setSync({ status: 'syncing' });
     try {
       await this.push();
       await this.pull();
-      this.store.setSync({ status: 'idle', lastSyncAt: Date.now() });
+      this.failures = 0;
+      this.store.setSync({ status: 'idle', lastSyncAt: Date.now(), error: undefined });
+      await this.reportErrors();
     } catch (err) {
       console.warn('sync failed', err);
+      this.failures++;
+      const message = describeError(err);
+      await this.logError(message);
       const offline = typeof navigator !== 'undefined' && navigator.onLine === false;
-      this.store.setSync({ status: offline ? 'offline' : 'error', error: (err as Error).message });
+      // A dropped connection (common right after an iPhone app comes back to
+      // the foreground) is retried quietly a few times before it is shown.
+      const transient = isNetworkError(message);
+      if (offline) this.store.setSync({ status: 'offline' });
+      else if (transient && this.failures < 3) this.store.setSync({ status: 'syncing' });
+      else this.store.setSync({ status: 'error', error: message });
+      const delay = Math.min(60_000, 3000 * 2 ** (this.failures - 1));
+      this.retry = setTimeout(() => void this.sync(), delay);
+    }
+  }
+
+  /** Keeps the last sync errors on the device until they can be sent. */
+  private async logError(message: string) {
+    try {
+      const list = ((await this.store.kvGet('syncErrors')) as ClientLogEntry[] | undefined) ?? [];
+      const entry: ClientLogEntry = { id: crypto.randomUUID(), at: new Date().toISOString(), kind: 'sync', message };
+      await this.store.kvSet('syncErrors', [...list, entry].slice(-20));
+    } catch {
+      /* never let logging break sync */
+    }
+  }
+
+  /** Sends stored errors to the server (client_log) after a good sync, for diagnosis. */
+  private async reportErrors() {
+    try {
+      const list = ((await this.store.kvGet('syncErrors')) as ClientLogEntry[] | undefined) ?? [];
+      if (!list.length) return;
+      const ua = typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 200) : null;
+      const { error } = await this.sb.from('client_log').upsert(
+        list.map((e) => ({ ...e, message: e.message.slice(0, 500), user_id: this.userId, user_agent: ua })),
+        { onConflict: 'id', ignoreDuplicates: true },
+      );
+      if (!error) await this.store.kvSet('syncErrors', []);
+    } catch {
+      /* best effort */
     }
   }
 

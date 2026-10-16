@@ -126,6 +126,42 @@ describe('migration', () => {
     expect(after.rows).toEqual([{ choice: null, rejected: true }]);
   });
 
+  it('fractions of a millisecond do not break syncing (they are rounded)', async () => {
+    const lesson = {
+      id: 'LF',
+      number: 7,
+      date: '2026-10-16',
+      started_at: 1792158843315.4,
+      completed_at: null,
+      active_ms: 363040.5,
+      day_ms: { '2026-10-16': 363040.5 },
+      text_ids: [],
+      new_word_ids: [],
+      reviewed: 2,
+      correct: 1,
+      updated_at: 1792158843999.7,
+    };
+    await as(ME, () => db.query('select public.sync_lessons($1)', [JSON.stringify([lesson])]));
+    const l = await db.query<{ active_ms: string; day_ms: Record<string, number>; updated_at: string }>(
+      `select active_ms, day_ms, updated_at from lesson_log where id = 'LF'`,
+    );
+    expect(l.rows[0]).toEqual({ active_ms: 363041, day_ms: { '2026-10-16': 363041 }, updated_at: 1792158844000 });
+    await as(ME, () => db.query('select public.sync_cards($1)', [JSON.stringify([{ ...card('fx', 300.6), due_at: 1000.4 }])]));
+    const c = await db.query<{ due_at: string; updated_at: string }>(`select due_at, updated_at from cards where word_id = 'fx'`);
+    expect(c.rows[0]).toEqual({ due_at: 1000, updated_at: 301 });
+    await as(ME, () => db.query('select public.sync_settings($1, $2)', [JSON.stringify({ goalMinutes: 30 }), 99.5]));
+  });
+
+  it('client_log: the app adds and reads only its own error reports', async () => {
+    const row = (id: string, user: string) =>
+      `insert into client_log (id, user_id, at, kind, message) values ('${id}', '${user}', now(), 'sync', 'Load failed')`;
+    await as(ME, () => db.query(row('e1', ME)));
+    await expect(as(ME, () => db.query(row('e2', OTHER)))).rejects.toThrow(/row-level security/);
+    await expect(as(ME, () => db.query(`update client_log set message = 'x' where id = 'e1'`))).resolves.toBeDefined();
+    const after = await db.query<{ message: string }>(`select message from client_log where id = 'e1'`);
+    expect(after.rows[0].message).toBe('Load failed'); // no update policy: nothing changed
+  });
+
   it('device link codes are invisible to app users (server only)', async () => {
     await db.query(`insert into device_links (code_hash, user_id, expires_at) values ('h1', '${ME}', now() + interval '10 minutes')`);
     const r = await as(ME, () => db.query('select * from device_links'));

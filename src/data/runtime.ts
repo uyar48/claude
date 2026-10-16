@@ -69,8 +69,9 @@ function startSyncLoop(sync: SyncEngine) {
     void sync.touchActive();
   };
   kick();
+  // iOS needs a moment to bring the network back after the app returns to the foreground.
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') kick();
+    if (document.visibilityState === 'visible') setTimeout(kick, 1000);
   });
   window.addEventListener('online', () => void sync.sync());
   setInterval(() => {

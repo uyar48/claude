@@ -21,6 +21,9 @@ export interface CardRow {
   updated_at: number;
 }
 
+/** Clock values go to bigint columns: never send a fraction. */
+const ms = <T extends number | null>(v: T): T => (v === null ? v : (Math.round(v) as T));
+
 export const cardToRow = (c: Card): CardRow => ({
   word_id: c.wordId,
   state: c.state,
@@ -29,10 +32,10 @@ export const cardToRow = (c: Card): CardRow => ({
   interval_days: c.intervalDays,
   reps: c.reps,
   lapses: c.lapses,
-  due_at: c.dueAt,
-  introduced_at: c.introducedAt,
-  last_reviewed_at: c.lastReviewedAt,
-  updated_at: c.updatedAt,
+  due_at: ms(c.dueAt),
+  introduced_at: ms(c.introducedAt),
+  last_reviewed_at: ms(c.lastReviewedAt),
+  updated_at: ms(c.updatedAt),
 });
 
 const num = (v: unknown) => (v === null || v === undefined ? null : Number(v));
@@ -70,15 +73,15 @@ export const lessonToRow = (l: LessonLogEntry): LessonRow => ({
   id: l.id,
   number: l.number,
   date: l.date,
-  started_at: l.startedAt,
-  completed_at: l.completedAt,
-  active_ms: l.activeMs,
-  day_ms: l.dayMs,
+  started_at: ms(l.startedAt),
+  completed_at: ms(l.completedAt),
+  active_ms: ms(l.activeMs ?? 0),
+  day_ms: Object.fromEntries(Object.entries(l.dayMs ?? {}).map(([d, v]) => [d, Math.round(v)])),
   text_ids: l.textIds,
   new_word_ids: l.newWordIds,
   reviewed: l.reviewed,
   correct: l.correct,
-  updated_at: l.updatedAt,
+  updated_at: ms(l.updatedAt),
 });
 
 export const rowToLesson = (r: LessonRow): LessonLogEntry => ({
@@ -118,7 +121,7 @@ export const choiceToRow = (c: MediaChoice): MediaChoiceRow => ({
   word_id: c.wordId,
   choice: c.choice,
   rejected: c.rejected,
-  updated_at: c.updatedAt,
+  updated_at: ms(c.updatedAt),
 });
 
 export const rowToChoice = (r: MediaChoiceRow): MediaChoice => ({

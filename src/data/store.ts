@@ -16,6 +16,8 @@ export interface LessonProgress {
   session: SessionState;
   /** The exercise on screen (so a reload shows the same one). */
   current: Exercise | null;
+  /** The last answered exercises, newest last, to look back at (not graded again). */
+  recent?: Exercise[];
   tapped: string[];
 }
 

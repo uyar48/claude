@@ -4,7 +4,8 @@ import { describe, expect, it } from 'vitest';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { openStore } from './db';
 import { Store } from './store';
-import { SyncEngine } from './sync';
+import { lessonToRow } from './merge';
+import { SyncEngine, describeError, isNetworkError } from './sync';
 import { DAY } from '../core/time';
 
 type Row = Record<string, unknown>;
@@ -17,6 +18,7 @@ function fakeSupabase() {
     review_log: new Map(),
     profiles: new Map(),
     media_choices: new Map(),
+    client_log: new Map(),
   };
   let clock = Date.UTC(2026, 0, 1);
   const tick = () => new Date((clock += 1)).toISOString().replace('Z', '+00:00');
@@ -201,5 +203,60 @@ describe('sync between two devices', () => {
     expect(reopened.getState().cards.get('egg')?.state).toBe('learning');
     await new SyncEngine(reopened, server.client, 'user-1').sync();
     expect(server.tables.cards.has('egg')).toBe(true);
+  });
+});
+
+describe('sync errors', () => {
+  it('rows never carry fractions of a millisecond (bigint columns)', () => {
+    const row = lessonToRow({
+      id: 'L',
+      number: 5,
+      date: '2026-10-16',
+      startedAt: 1792158843315.4,
+      completedAt: null,
+      activeMs: 363040.5,
+      dayMs: { '2026-10-16': 363040.5 },
+      textIds: [],
+      newWordIds: [],
+      reviewed: 1,
+      correct: 1,
+      updatedAt: 1792158843999.7,
+    });
+    expect(row).toMatchObject({ started_at: 1792158843315, active_ms: 363041, day_ms: { '2026-10-16': 363041 }, updated_at: 1792158844000 });
+  });
+
+  it('a dropped connection is retried quietly; a real error is shown with its message', async () => {
+    const server = fakeSupabase();
+    const t = Date.UTC(2026, 9, 14, 16, 0);
+    const a = await device(server, () => t);
+    await a.store.introduceWords(['tea']);
+    const realRpc = server.client.rpc.bind(server.client);
+    let fail: Error | { code: string; message: string } | null = new TypeError('Load failed');
+    (server.client as unknown as { rpc: unknown }).rpc = async (...args: Parameters<typeof realRpc>) => {
+      if (fail) return { data: null, error: fail };
+      return realRpc(...args);
+    };
+    await a.sync.sync();
+    expect(a.store.getState().sync.status).toBe('syncing'); // not shown as an error yet
+    fail = { code: '22P02', message: 'invalid input syntax for type bigint: "1.5"' };
+    await a.sync.sync();
+    await a.sync.sync();
+    const s = a.store.getState().sync;
+    expect(s.status).toBe('error');
+    expect(s.error).toContain('22P02');
+    // The errors are kept on the device and sent to client_log after a good sync.
+    expect(((await a.store.kvGet('syncErrors')) as unknown[]).length).toBe(3);
+    fail = null;
+    await a.sync.sync();
+    expect(a.store.getState().sync.status).toBe('idle');
+    expect(server.tables.client_log.size).toBe(3);
+    expect(await a.store.kvGet('syncErrors')).toEqual([]);
+  });
+
+  it('recognises network errors from Safari, Chrome and Firefox', () => {
+    for (const m of ['TypeError: Load failed', 'Failed to fetch', 'NetworkError when attempting to fetch resource.']) {
+      expect(isNetworkError(m)).toBe(true);
+    }
+    expect(isNetworkError(describeError({ code: '42501', message: 'permission denied' }))).toBe(false);
   });
 });

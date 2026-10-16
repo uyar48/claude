@@ -138,6 +138,18 @@ test('lessons follow completion, not the calendar', async ({ page }) => {
   await expect(page.locator('.ex-label')).toContainText('2. ders');
   await expect(page.locator('.ex.intro, .ex.choice-ex').first()).toBeVisible();
   await answer(page, new Set(), false);
+  await answer(page, new Set(), false);
+
+  // The back arrow shows the previous exercises again (not graded), then returns.
+  const label = await page.locator('.ex-label').textContent();
+  await page.getByRole('button', { name: 'Önceki soru' }).click();
+  await expect(page.locator('.review-bar')).toContainText('1 geri');
+  await page.getByRole('button', { name: 'Önceki soru' }).click();
+  await expect(page.locator('.review-bar')).toContainText('2 geri');
+  await shot(page, '02b-look-back');
+  await page.getByRole('button', { name: 'Derse dön' }).click();
+  await expect(page.locator('.review-bar')).toHaveCount(0);
+  await expect(page.locator('.ex-label')).toHaveText(label!);
 
   // Leave mid-lesson; come back days later: nothing is locked or skipped.
   await page.getByRole('button', { name: 'Dersi duraklat' }).click();

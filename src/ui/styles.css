@@ -1197,3 +1197,24 @@ textarea {
   border-color: var(--accent);
   background: var(--accent-soft);
 }
+
+/* ---------- looking back at an earlier exercise ---------- */
+
+.review-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 0.9rem;
+}
+.review-bar .btn {
+  flex: none;
+}
+.lesson-head .icon-btn:disabled {
+  opacity: 0.3;
+}

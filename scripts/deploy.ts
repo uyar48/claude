@@ -109,6 +109,28 @@ async function sql(token: string, ref: string, query: string) {
   await api(SB, token, 'POST', `/projects/${ref}/database/query`, { query });
 }
 
+/**
+ * Applies the migrations not applied yet, in order, and records them in
+ * public.schema_migrations. (Every migration is also safe to run twice.)
+ */
+async function migrate(token: string, ref: string) {
+  await sql(token, ref, 'create table if not exists public.schema_migrations (name text primary key, applied_at timestamptz not null default now()); alter table public.schema_migrations enable row level security;');
+  const done = new Set(
+    (await api<Array<{ name: string }>>(SB, token, 'POST', `/projects/${ref}/database/query`, {
+      query: 'select name from public.schema_migrations',
+    })).map((r) => r.name),
+  );
+  for (const f of fs.readdirSync('supabase/migrations').filter((x) => x.endsWith('.sql')).sort()) {
+    if (done.has(f)) {
+      console.log(`  ${f} (önceden uygulanmış)`);
+      continue;
+    }
+    await sql(token, ref, fs.readFileSync(path.join('supabase/migrations', f), 'utf8'));
+    await sql(token, ref, `insert into public.schema_migrations (name) values ('${f.replace(/'/g, "''")}') on conflict do nothing`);
+    console.log(`  ${f} ✓`);
+  }
+}
+
 async function supabaseKeys(token: string, ref: string) {
   const keys = await api<Array<{ name: string; api_key: string }>>(SB, token, 'GET', `/projects/${ref}/api-keys?reveal=true`);
   const anon = keys.find((k) => k.name === 'anon')?.api_key;
@@ -196,10 +218,7 @@ async function update() {
   const sbToken = need('SUPABASE_ACCESS_TOKEN');
   step('Veritabanı şeması');
   const ref = await supabaseProject(sbToken);
-  for (const f of fs.readdirSync('supabase/migrations').filter((x) => x.endsWith('.sql')).sort()) {
-    await sql(sbToken, ref, fs.readFileSync(path.join('supabase/migrations', f), 'utf8'));
-    console.log(`  ${f} ✓`);
-  }
+  await migrate(sbToken, ref);
   await appOnly();
 }
 
@@ -219,10 +238,7 @@ async function main() {
   console.log(`  hazır: ${ref}`);
 
   step('Veritabanı şeması');
-  for (const f of fs.readdirSync('supabase/migrations').filter((x) => x.endsWith('.sql')).sort()) {
-    await sql(sbToken, ref, fs.readFileSync(path.join('supabase/migrations', f), 'utf8'));
-    console.log(`  ${f} ✓`);
-  }
+  await migrate(sbToken, ref);
 
   const keys = await supabaseKeys(sbToken, ref);
 
