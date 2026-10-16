@@ -15,14 +15,9 @@
 | texts | 28 |
 | grammar cards | 30 |
 | texts per unit | 8 / 5 / 5 / 5 / 5 |
-| word clips | 499 / 500 |
-| text sentence clips | 38 / 274 |
-| course sentence clips | 1422 / 5675 |
-
-## Warnings
-
-- 1 words without a recorded clip (device voice is used)
-- 4253 sentences without a recorded clip (device voice is used)
+| word clips | 500 / 500 |
+| text sentence clips | 274 / 274 |
+| course sentence clips | 5675 / 5675 |
 
 ## Tatoeba sample for a human check
 
