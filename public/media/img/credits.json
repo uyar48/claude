@@ -6,7 +6,7 @@
   ],
   "words": {
     "tea": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "tea-pixabay-6405249.jpg",
@@ -72,7 +72,7 @@
       "query": "cup of tea"
     },
     "house": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "house-pixabay-6566412.jpg",
@@ -138,7 +138,7 @@
       "query": "house exterior"
     },
     "door": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "door-pixabay-2606818.jpg",
@@ -204,7 +204,7 @@
       "query": "front door"
     },
     "window": {
-      "default": 0,
+      "default": 2,
       "candidates": [
         {
           "file": "window-pixabay-6544618.jpg",
@@ -270,7 +270,7 @@
       "query": "window"
     },
     "table": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "table-pixabay-2264811.jpg",
@@ -336,7 +336,7 @@
       "query": "wooden table"
     },
     "water": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "water-pixabay-6544618.jpg",
@@ -402,7 +402,7 @@
       "query": "glass of water"
     },
     "woman": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "woman-pixabay-6494471.jpg",
@@ -534,7 +534,7 @@
       "query": "man portrait"
     },
     "egg": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "egg-pixabay-7345934.jpg",
@@ -600,7 +600,7 @@
       "query": "chicken eggs"
     },
     "bread": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "bread-pixabay-4642686.jpg",
@@ -666,7 +666,7 @@
       "query": "sliced bread"
     },
     "key": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "key-pixabay-5105878.jpg",
@@ -996,7 +996,7 @@
       "query": "wooden chair"
     },
     "morning": {
-      "default": 0,
+      "default": 4,
       "candidates": [
         {
           "file": "morning-pixabay-7122247.jpg",
@@ -1062,7 +1062,7 @@
       "query": "morning sunrise"
     },
     "home": {
-      "default": 0,
+      "default": 1,
       "candidates": [
         {
           "file": "home-pixabay-1867751.jpg",
@@ -1194,7 +1194,7 @@
       "query": "cup of coffee"
     },
     "phone": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "phone-pixabay-1851218.jpg",
@@ -1260,7 +1260,7 @@
       "query": "smartphone"
     },
     "work": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "work-pixabay-1207834.jpg",
@@ -1326,7 +1326,7 @@
       "query": "office desk"
     },
     "people": {
-      "default": 0,
+      "default": 3,
       "candidates": [
         {
           "file": "people-pixabay-2698078.jpg",
