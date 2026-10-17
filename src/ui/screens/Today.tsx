@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { course, getWord } from '../../content';
+import { unitTestOpen } from '../../core/course';
 import { goalDays, minutesOn, streakInfo } from '../../core/progress';
 import { localDate } from '../../core/time';
 import { speaker } from '../../audio/speaker';
@@ -56,6 +57,8 @@ export function Today() {
   }
 
   const askPush = !paused && pushAvailability(rt).ok && permission() === 'default';
+  // A finished unit whose test has not been taken yet.
+  const testUnit = course.units.find((u) => !state.settings.unitTests[String(u.n)] && unitTestOpen(course, state.cards, u.n));
   const goalDone = todayMin >= goal;
 
   return (
@@ -114,6 +117,9 @@ export function Today() {
       {streak.frozen > 0 && (
         <p className="muted small freeze">Ara verdiğin günler seriyi bozmaz; seri, çalıştığın günleri sayar.</p>
       )}
+      <Link to="/ilerleme" className="link small stats-link">
+        İlerlemeni gör ›
+      </Link>
 
       <section className="panel lesson-card">
         <p className="eyebrow">
@@ -149,6 +155,22 @@ export function Today() {
       <button className="btn btn-primary start" onClick={begin}>
         {inProgress ? 'Devam et' : 'Başla'}
       </button>
+
+      {testUnit && !inProgress && (
+        <section className="panel test-card" aria-label="Ünite testi">
+          <p className="eyebrow">{testUnit.titleTr.split(':')[0]} bitti</p>
+          <p>Kısa bir testle ünitenin ne kadar oturduğunu gör: 20 soru, yaklaşık 5 dakika.</p>
+          <button
+            className="btn btn-secondary"
+            onClick={() => {
+              speaker.unlock();
+              navigate(`/test/${testUnit.n}`);
+            }}
+          >
+            Teste başla
+          </button>
+        </section>
+      )}
 
       {askPush && (
         <Link to="/settings#bildirimler" className="notice">

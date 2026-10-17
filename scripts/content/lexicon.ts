@@ -77,6 +77,12 @@ export function loadNgsl(): Lemma[] {
   return out;
 }
 
+/** NGSL adjusted frequency per million running words (U), by lemma. */
+export function loadFrequencies(): Map<string, number> {
+  const stats = fs.readFileSync(path.join(DIR, 'NGSL_1.2_stats.csv'), 'utf8').trim().split(/\r?\n/).slice(1);
+  return new Map(stats.map((line) => line.split(',')).map(([lemma, , , u]) => [lemma.trim().toLowerCase(), Number(u)]));
+}
+
 function loadNgslOnly(): Lemma[] {
   const stats = fs.readFileSync(path.join(DIR, 'NGSL_1.2_stats.csv'), 'utf8').trim().split(/\r?\n/).slice(1);
   const rank = new Map<string, number>();

@@ -12,7 +12,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import type { Course, CourseGrammar, CourseSentence, CourseText, CourseWord, WordKind } from '../src/content/courseTypes';
-import { courseOrder, DISPLAY, formIndex, lemmatize, loadNgsl, STARTER_KNOWN, UNIT_SIZE } from './content/lexicon';
+import { courseOrder, DISPLAY, formIndex, lemmatize, loadFrequencies, loadNgsl, STARTER_KNOWN, UNIT_SIZE } from './content/lexicon';
 
 /** At most this many Tatoeba sentences per word (the newest word in the sentence). */
 const TATOEBA_PER_WORD = 12;
@@ -212,7 +212,12 @@ export function buildCourse(): { course: Course; report: string[] } {
     grammar.sort((a, b) => a.order - b.order);
   }
 
-  const body = { units, order, words, starterKnown: STARTER_KNOWN, forms, sentences, texts, grammar };
+  // How often each known word appears in ordinary English (progress: text coverage).
+  const u = loadFrequencies();
+  const freq: Record<string, number> = {};
+  for (const w of [...STARTER_KNOWN, ...order]) if (u.get(w)) freq[w] = u.get(w)!;
+
+  const body = { units, order, words, starterKnown: STARTER_KNOWN, forms, sentences, texts, grammar, freq };
   const version = crypto.createHash('sha256').update(JSON.stringify(body)).digest('hex').slice(0, 12);
   const course: Course = {
     version,

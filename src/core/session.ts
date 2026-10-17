@@ -9,6 +9,12 @@
 //
 // Rules: at most 2 exercises of the same type in a row; types are rotated so
 // a lesson uses many of them. Pure and deterministic (seeded) for testing.
+//
+// The pace follows the learner: when the last answers were mostly right the
+// harder exercises come sooner and the easiest ones drop out; when many were
+// wrong the lesson stays with easier ones (see pace()). Writing exercises
+// (typed gaps, sentence dictation, Turkish → English) use only words learned
+// in earlier lessons and short sentences; writing from Turkish opens in Unit 2.
 
 import type { Course } from '../content/courseTypes.js';
 import { knownLemmas, sentenceTokens, sentenceUsable } from './course.js';
@@ -28,7 +34,10 @@ export type ExerciseType =
   | 'reading'
   | 'scene'
   | 'speed-round'
-  | 'grammar';
+  | 'grammar'
+  | 'type-blank'
+  | 'dictate-sentence'
+  | 'write-sentence';
 
 export const DIFFICULTY: Record<ExerciseType, 1 | 2 | 3> = {
   intro: 1,
@@ -45,6 +54,9 @@ export const DIFFICULTY: Record<ExerciseType, 1 | 2 | 3> = {
   reading: 2,
   dictation: 3,
   'build-sentence': 3,
+  'type-blank': 3,
+  'dictate-sentence': 3,
+  'write-sentence': 3,
 };
 
 const SINGLE_WORD: ExerciseType[] = [
@@ -56,8 +68,15 @@ const SINGLE_WORD: ExerciseType[] = [
   'dictation',
   'fill-blank',
   'build-sentence',
+  'type-blank',
+  'dictate-sentence',
+  'write-sentence',
 ];
 const VISUAL_ONLY: ExerciseType[] = ['word-to-picture', 'picture-to-word'];
+/** Exercises where the learner writes English (not chooses it). */
+export const WRITING: ExerciseType[] = ['type-blank', 'dictate-sentence', 'write-sentence'];
+/** The easiest ones, dropped when the learner is doing very well. */
+const EASIEST: ExerciseType[] = ['word-to-picture', 'picture-to-word', 'en-tr'];
 
 /** The closing speed round lasts this long; it starts when this much time is left. */
 export const CLOSE_MS = 60_000;
@@ -108,7 +127,11 @@ export interface SessionState {
   /** Grammar cards planned for this lesson (id + the word that brings it). */
   grammar?: Array<{ id: string; word: string }>;
   grammarShown?: string[];
+  /** How often each pace was used when choosing practice exercises. */
+  paces?: Partial<Record<Pace, number>>;
 }
+
+export type Pace = 'easier' | 'normal' | 'harder';
 
 export interface SessionContext {
   course: Course;
@@ -119,11 +142,26 @@ export interface SessionContext {
   unit?: number;
   /** How often each text was read in earlier lessons (unread texts come first). */
   readCounts?: Readonly<Record<string, number>>;
+  /** Share of right answers in the last lessons (sets the pace until this one has enough answers). */
+  priorAccuracy?: number | null;
 }
 
 /** Most tiles in a "build the sentence" exercise, by unit. */
 const BUILD_MAX_TILES = [7, 7, 8, 9, 10];
-const buildMax = (unit = 1) => BUILD_MAX_TILES[Math.min(BUILD_MAX_TILES.length, Math.max(1, unit)) - 1];
+/** Longest sentence (words) to write from listening, by unit. */
+const DICTATE_MAX_WORDS = [5, 6, 7, 8, 9];
+/** Longest sentence (words) to write from Turkish, by unit (none in Unit 1). */
+const WRITE_MAX_WORDS = [0, 6, 7, 8, 9];
+const byUnit = (table: number[], unit = 1) => table[Math.min(table.length, Math.max(1, unit)) - 1];
+const buildMax = (unit = 1) => byUnit(BUILD_MAX_TILES, unit);
+
+/** Answers that set the pace. */
+const PACE_WINDOW = 10;
+const PACE_MIN_ANSWERS = 5;
+const PACE_HARDER = 0.85;
+const PACE_EASIER = 0.6;
+/** Once hard exercises are open: a writing exercise after this many others (by pace). */
+const WRITING_EVERY: Record<Pace, number> = { easier: Infinity, normal: 3, harder: 2 };
 
 export interface AnswerResult {
   /** Single-word exercises. null = not graded (intro, reading summary …). */
@@ -197,7 +235,12 @@ export function nextExercise(s0: SessionState, ctx: SessionContext): { state: Se
     const todo = s.reviewWords.filter((w) => !s.reviewed.includes(w));
     if (todo.length && s.activeMs < s.targetMs * WARMUP_SHARE) {
       const w = todo[0];
-      const type = pickType(s, ctx, w, ['word-to-picture', 'en-tr', 'picture-to-word', 'listen-picture'], 2);
+      // Going well: the warm-up asks the other way round (English from Turkish, from sound).
+      const types: ExerciseType[] =
+        pace(s, ctx) === 'harder'
+          ? ['listen-picture', 'tr-en', 'picture-to-word', 'en-tr']
+          : ['word-to-picture', 'en-tr', 'picture-to-word', 'listen-picture'];
+      const type = pickType(s, ctx, w, types, 2);
       if (type) return emit({ ...s, reviewed: [...s.reviewed, w] }, buildSingle(s, ctx, type, w));
       s = { ...s, reviewed: [...s.reviewed, w] };
       return nextExercise(s, ctx);
@@ -247,7 +290,10 @@ export function nextExercise(s0: SessionState, ctx: SessionContext): { state: Se
 
   // practice
   const f = s.activeMs / s.targetMs;
-  const cap: 1 | 2 | 3 = f < 0.45 ? 2 : 3;
+  const p = pace(s, ctx);
+  // Hard exercises (writing, dictation, building) open earlier or later with the pace.
+  const hardFrom = p === 'harder' ? 0.2 : p === 'easier' ? 0.7 : 0.45;
+  const cap: 1 | 2 | 3 = f < hardFrom ? 2 : 3;
 
   const reading = pickReading(s, ctx);
   const firstReading = s.usedTexts.length === 0;
@@ -263,12 +309,24 @@ export function nextExercise(s0: SessionState, ctx: SessionContext): { state: Se
     if (scene.length >= 4 && !lastTwoSame(s, 'scene')) return emit(s, { type: 'scene', words: scene });
   }
 
-  for (const w of practiceOrder(s, ctx)) {
-    const types = SINGLE_WORD.filter((t) => DIFFICULTY[t] <= cap);
-    // Later in the lesson prefer the harder exercises.
-    const preferHard = f >= 0.45;
-    const t = pickType(s, ctx, w, types, cap, [], preferHard);
-    if (t) return emit(s, buildSingle(s, ctx, t, w));
+  // Later in the lesson prefer the harder exercises (never when it is going badly);
+  // when it goes very well, leave out the easiest ones.
+  const preferHard = p === 'easier' ? 0 : f >= hardFrom ? (p === 'harder' ? 1.2 : 0.75) : 0;
+  const all = SINGLE_WORD.filter((t) => DIFFICULTY[t] <= cap);
+  const lists = p === 'harder' && f >= hardFrom ? [all.filter((t) => !EASIEST.includes(t)), all] : [all];
+  const paced = { ...s, paces: { ...s.paces, [p]: (s.paces?.[p] ?? 0) + 1 } };
+  // Writing works with words from earlier lessons, so it gets its own turn.
+  if (cap === 3 && sinceWriting(s) >= WRITING_EVERY[p]) {
+    for (const w of writingCandidates(s, ctx)) {
+      const t = pickType(s, ctx, w, WRITING, cap, [], preferHard);
+      if (t) return emit(paced, buildSingle(s, ctx, t, w));
+    }
+  }
+  for (const types of lists) {
+    for (const w of practiceOrder(s, ctx)) {
+      const t = pickType(s, ctx, w, types, cap, [], preferHard);
+      if (t) return emit(paced, buildSingle(s, ctx, t, w));
+    }
   }
   return nextExercise({ ...s, phase: 'close' }, ctx);
 }
@@ -276,9 +334,7 @@ export function nextExercise(s0: SessionState, ctx: SessionContext): { state: Se
 function emit(s: SessionState, ex: Omit<Exercise, 'key'>): { state: SessionState; exercise: Exercise } {
   const exercise = { ...ex, key: `${s.id}:${s.seq}` } as Exercise;
   let next = { ...s, seq: s.seq + 1 };
-  if (ex.type === 'fill-blank' || ex.type === 'build-sentence') {
-    next = { ...next, usedSentences: [...next.usedSentences, ex.sentenceId!] };
-  }
+  if (ex.sentenceId) next = { ...next, usedSentences: [...next.usedSentences, ex.sentenceId] };
   return { state: next, exercise };
 }
 
@@ -335,6 +391,74 @@ export function distinctTypes(s: SessionState): ExerciseType[] {
   return [...new Set(s.history.map((h) => h.type))];
 }
 
+/**
+ * The pace from the last answers of this lesson. Until there are enough, the
+ * earlier lessons fill in (priorAccuracy); with nothing to go on: normal.
+ */
+export function pace(s: SessionState, ctx: SessionContext): Pace {
+  const recent = s.history.filter((h) => h.correct !== null && h.type !== 'speed-round').slice(-PACE_WINDOW);
+  const right = recent.filter((h) => h.correct).length;
+  let acc: number;
+  if (recent.length >= PACE_MIN_ANSWERS) acc = right / recent.length;
+  else if (typeof ctx.priorAccuracy === 'number') {
+    const missing = PACE_MIN_ANSWERS - recent.length;
+    acc = (right + ctx.priorAccuracy * missing) / PACE_MIN_ANSWERS;
+  } else return 'normal';
+  return acc >= PACE_HARDER ? 'harder' : acc < PACE_EASIER ? 'easier' : 'normal';
+}
+
+/** The pace used most in this lesson's practice (for the finish screen). */
+export function lessonPace(s: SessionState): Pace {
+  const c = s.paces ?? {};
+  const total = (c.easier ?? 0) + (c.normal ?? 0) + (c.harder ?? 0);
+  if (!total) return 'normal';
+  if ((c.harder ?? 0) / total >= 0.5) return 'harder';
+  if ((c.easier ?? 0) / total >= 0.3) return 'easier';
+  return 'normal';
+}
+
+// ---------- unit test ----------
+
+export const UNIT_TEST_SIZE = 20;
+const TEST_TYPES: ExerciseType[] = [
+  'en-tr',
+  'picture-to-word',
+  'listen-picture',
+  'tr-en',
+  'fill-blank',
+  'dictation',
+  'type-blank',
+  'dictate-sentence',
+];
+
+/**
+ * A short test over a unit's words (all introduced): one question per word,
+ * types rotated, easy ones first. Deterministic for a seed.
+ */
+export function unitTestExercises(ctx: SessionContext, unit: number, seed: number, n = UNIT_TEST_SIZE): Exercise[] {
+  const learned = (ctx.course.units.find((u) => u.n === unit)?.words ?? []).filter(
+    (w) => (ctx.cards.get(w)?.state ?? 'new') !== 'new',
+  );
+  const rand = rng(seed);
+  const words = learned
+    .map((w) => ({ w, k: rand() }))
+    .sort((a, b) => a.k - b.k)
+    .map((x) => x.w);
+  let s = createSession({ id: `test-${unit}-${seed}`, number: 0, targetMinutes: 30, newWords: [], reviewWords: [], seed });
+  const out: Exercise[] = [];
+  for (const w of words) {
+    if (out.length >= n) break;
+    // About a third of the questions are written answers.
+    const cap = out.filter((e) => DIFFICULTY[e.type] === 3).length >= Math.round(n * 0.3) ? 2 : 3;
+    const t = pickType(s, ctx, w, TEST_TYPES, cap);
+    if (!t) continue;
+    const step = emit(s, buildSingle(s, ctx, t, w));
+    out.push(step.exercise);
+    s = { ...step.state, history: [...step.state.history, { type: t, wordId: w, correct: true }] };
+  }
+  return out.sort((a, b) => DIFFICULTY[a.type] - DIFFICULTY[b.type]);
+}
+
 // ---------- choosing words and types ----------
 
 function sessionKnown(s: SessionState, ctx: SessionContext): Set<string> {
@@ -366,6 +490,29 @@ function practiceOrder(s: SessionState, ctx: SessionContext): string[] {
     .map((x) => x.w);
 }
 
+/** Exercises since the last writing one (all of them if none yet). */
+function sinceWriting(s: SessionState): number {
+  let n = 0;
+  for (let i = s.history.length - 1; i >= 0 && !WRITING.includes(s.history[i].type); i--) n++;
+  return n;
+}
+
+/** Words from earlier lessons to write: this lesson's reviews, then recently learned words. */
+function writingCandidates(s: SessionState, ctx: SessionContext): string[] {
+  const recent = [...ctx.cards.values()]
+    .filter((c) => c.state !== 'new' && ctx.course.words[c.wordId] && !s.newWords.includes(c.wordId))
+    .sort((a, b) => (b.introducedAt ?? 0) - (a.introducedAt ?? 0))
+    .slice(0, 20)
+    .map((c) => c.wordId);
+  const used = new Set(s.history.slice(-6).map((h) => h.wordId));
+  const rand = rng(s.seed + s.seq * 6151);
+  return [...new Set([...s.reviewWords, ...recent])]
+    .filter((w) => !used.has(w))
+    .map((w) => ({ w, k: rand() + (s.reviewWords.includes(w) ? 0 : 0.5) }))
+    .sort((a, b) => a.k - b.k)
+    .map((x) => x.w);
+}
+
 function lastTwoSame(s: SessionState, t: ExerciseType, planned: ExerciseType[] = []): boolean {
   const recent = [...s.history.map((h) => h.type), ...s.queue.map((q) => q.type), ...planned].slice(-MAX_SAME_IN_ROW);
   return recent.length === MAX_SAME_IN_ROW && recent.every((x) => x === t);
@@ -378,7 +525,8 @@ function pickType(
   types: ExerciseType[],
   cap: number,
   planned: ExerciseType[] = [],
-  preferHard = false,
+  /** Weight towards harder types (0 = none). */
+  preferHard = 0,
 ): ExerciseType | null {
   const usage = new Map<ExerciseType, number>();
   for (const t of [...s.history.map((h) => h.type), ...planned]) usage.set(t, (usage.get(t) ?? 0) + 1);
@@ -386,7 +534,7 @@ function pickType(
   if (!ok.length) return null;
   const rand = rng(s.seed + s.seq * 104729 + w.length);
   return ok
-    .map((t) => ({ t, k: (usage.get(t) ?? 0) - (preferHard ? DIFFICULTY[t] * 0.75 : 0) + rand() * 0.5 }))
+    .map((t) => ({ t, k: (usage.get(t) ?? 0) - DIFFICULTY[t] * preferHard + rand() * 0.5 }))
     .sort((a, b) => a.k - b.k)[0].t;
 }
 
@@ -407,14 +555,34 @@ function available(s: SessionState, ctx: SessionContext, t: ExerciseType, w: str
       return findSentence(s, ctx, w, 'blank') !== null;
     case 'build-sentence':
       return findSentence(s, ctx, w, 'build') !== null;
+    case 'type-blank':
+      return writingOk(s, ctx, w) && findSentence(s, ctx, w, 'type') !== null;
+    case 'dictate-sentence':
+      return writingOk(s, ctx, w) && findSentence(s, ctx, w, 'dictate') !== null;
+    case 'write-sentence':
+      return byUnit(WRITE_MAX_WORDS, ctx.unit) > 0 && writingOk(s, ctx, w) && findSentence(s, ctx, w, 'write') !== null;
     default:
       return false;
   }
 }
 
+/** Writing uses words from earlier lessons only, and not while the lesson is going badly. */
+function writingOk(s: SessionState, ctx: SessionContext, w: string): boolean {
+  return !s.newWords.includes(w) && (ctx.cards.get(w)?.state ?? 'new') !== 'new' && pace(s, ctx) !== 'easier';
+}
+
+const SENTENCE_MODE: Partial<Record<ExerciseType, SentenceMode>> = {
+  'fill-blank': 'blank',
+  'build-sentence': 'build',
+  'type-blank': 'type',
+  'dictate-sentence': 'dictate',
+  'write-sentence': 'write',
+};
+
 function buildSingle(s: SessionState, ctx: SessionContext, type: ExerciseType, w: string): Omit<Exercise, 'key'> {
-  if (type === 'fill-blank' || type === 'build-sentence') {
-    const found = findSentence(s, ctx, w, type === 'fill-blank' ? 'blank' : 'build')!;
+  const mode = SENTENCE_MODE[type];
+  if (mode) {
+    const found = findSentence(s, ctx, w, mode)!;
     return { type, wordId: w, sentenceId: found.id, gapIndex: found.gapIndex };
   }
   if (type === 'dictation') return { type, wordId: w };
@@ -444,12 +612,17 @@ function visualWords(ctx: SessionContext): string[] {
   return ctx.course.order.filter((id) => ctx.hasVisual(id));
 }
 
-/** A usable sentence for this word: all its words known (or ≥95 % coverage). */
+type SentenceMode = 'blank' | 'build' | 'type' | 'dictate' | 'write';
+
+/**
+ * A usable sentence for this word: all its words known (or ≥95 % coverage).
+ * Sentences the learner writes must be short and use known words only.
+ */
 export function findSentence(
   s: SessionState,
   ctx: SessionContext,
   w: string,
-  mode: 'blank' | 'build',
+  mode: SentenceMode,
 ): { id: string; gapIndex?: number } | null {
   const known = sessionKnown(s, ctx);
   for (const sent of ctx.course.sentences) {
@@ -463,8 +636,17 @@ export function findSentence(
       if (wordToks.length >= 3 && wordToks.length <= buildMax(ctx.unit)) return { id: sent.id };
       continue;
     }
+    if (mode === 'dictate' || mode === 'write') {
+      const max = byUnit(mode === 'dictate' ? DICTATE_MAX_WORDS : WRITE_MAX_WORDS, ctx.unit);
+      const allKnown = sent.lemmas.every((l) => known.has(l));
+      if (allKnown && wordToks.length >= 3 && wordToks.length <= max) return { id: sent.id };
+      continue;
+    }
     const gapIndex = toks.findIndex((t) => t.lemma === w && !/['’]/.test(t.text));
-    if (gapIndex >= 0 && wordToks.length >= 2) return { id: sent.id, gapIndex };
+    if (gapIndex < 0 || wordToks.length < 2) continue;
+    // A typed gap: a short sentence and a word worth typing.
+    if (mode === 'type' && (wordToks.length > buildMax(ctx.unit) || toks[gapIndex].text.length < 2)) continue;
+    return { id: sent.id, gapIndex };
   }
   return null;
 }

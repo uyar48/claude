@@ -127,6 +127,13 @@ export class Store {
     return card;
   }
 
+  /** Brings words back in the next lesson's reviews (e.g. missed in a unit test). */
+  async reviewSoon(ids: string[]) {
+    const now = this.now();
+    const changed = ids.map((id) => markForReview(this.card(id), now)).filter((c, i) => c !== this.card(ids[i]));
+    if (changed.length) await this.putCards(changed);
+  }
+
   async tapWord(wordId: string) {
     const before = this.card(wordId);
     const after = markForReview(before, this.now());

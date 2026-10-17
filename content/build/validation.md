@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| course | c630ac77d0aa |
+| course | ddb3752b805d |
 | words | 500 |
 | words with photo | 110 |
 | words with emoji only | 204 |

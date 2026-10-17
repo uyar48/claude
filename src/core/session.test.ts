@@ -1,14 +1,19 @@
 import { describe, expect, it } from 'vitest';
 import courseJson from '../../content/build/course.json';
 import type { Course } from '../content/courseTypes';
-import { learnerUnit, nextNewWords } from './course';
+import { knownLemmas, learnerUnit, nextNewWords, textCoverage, unitTestOpen } from './course';
 import { pickGrammar } from './progress';
 import {
   DIFFICULTY,
+  UNIT_TEST_SIZE,
+  WRITING,
   createSession,
   finalGrades,
+  lessonPace,
   nextExercise,
+  pace,
   recordAnswer,
+  unitTestExercises,
   type Exercise,
   type ExerciseType,
   type SessionContext,
@@ -36,6 +41,9 @@ const SECONDS: Record<ExerciseType, number> = {
   scene: 70,
   'speed-round': 60,
   grammar: 40,
+  'type-blank': 25,
+  'dictate-sentence': 40,
+  'write-sentence': 50,
 };
 
 /** The brief's exercise categories (picture↔word, translate, … ). */
@@ -52,6 +60,9 @@ const CATEGORY: Partial<Record<ExerciseType, string>> = {
   reading: 'reading',
   scene: 'scene',
   'speed-round': 'speed-round',
+  'type-blank': 'fill-blank',
+  'dictate-sentence': 'dictation',
+  'write-sentence': 'translate',
 };
 
 const hasVisual = (w: string) => course.words[w]?.kind === 'concrete';
@@ -86,9 +97,17 @@ function simulate(
     wrongEvery?: number;
     grammar?: Array<{ id: string; word: string }>;
     readCounts?: Record<string, number>;
+    priorAccuracy?: number;
   },
 ): Run {
-  const ctx: SessionContext = { course, cards, hasVisual, unit: learnerUnit(course, cards), readCounts: opts.readCounts };
+  const ctx: SessionContext = {
+    course,
+    cards,
+    hasVisual,
+    unit: learnerUnit(course, cards),
+    readCounts: opts.readCounts,
+    priorAccuracy: opts.priorAccuracy,
+  };
   let state = createSession({
     id: opts.id ?? 'lesson-a',
     number: 1,
@@ -289,5 +308,102 @@ describe('graded difficulty', () => {
     const counts = Object.fromEntries(read.map((t) => [t, 1]));
     const second = simulate(cards, { minutes: 30, newWords: 10, id: 'r2', readCounts: counts });
     expect(second.state.usedTexts[0]).not.toBe(read[0]);
+  });
+});
+
+describe('writing exercises', () => {
+  const words = (id: string) => course.sentences.find((x) => x.id === id)!.en.split(/\s+/).length;
+
+  it('Unit 1: typed gaps and short dictations with words from earlier lessons; no writing from Turkish yet', () => {
+    const run = simulate(learnedCards(60), { minutes: 30, newWords: 10, id: 'w1' });
+    const writing = run.exercises.filter((e) => WRITING.includes(e.type));
+    expect(writing.length).toBeGreaterThanOrEqual(3);
+    for (const e of writing) {
+      expect(run.state.newWords).not.toContain(e.wordId);
+      expect(course.sentences.find((x) => x.id === e.sentenceId)!.lemmas).toContain(e.wordId);
+    }
+    expect(writing.some((e) => e.type === 'write-sentence')).toBe(false);
+    for (const e of writing.filter((x) => x.type === 'dictate-sentence')) expect(words(e.sentenceId!)).toBeLessThanOrEqual(5);
+    // Never two writing exercises in a row at the normal pace … nor before the hard part opens.
+    const first = run.exercises.findIndex((e) => WRITING.includes(e.type));
+    expect(first).toBeGreaterThan(run.exercises.findIndex((e) => e.type === 'match'));
+  });
+
+  it('Unit 2 opens writing from Turkish, with short sentences', () => {
+    const run = simulate(learnedCards(150), { minutes: 30, newWords: 10, id: 'w2', wrongEvery: 4 });
+    const write = run.exercises.filter((e) => e.type === 'write-sentence');
+    expect(write.length).toBeGreaterThan(0);
+    for (const e of write) expect(words(e.sentenceId!)).toBeLessThanOrEqual(6);
+  });
+});
+
+describe('pace follows the answers', () => {
+  const cards = learnedCards(60);
+  const ctx = (priorAccuracy?: number | null): SessionContext => ({ course, cards, hasVisual, unit: 1, priorAccuracy });
+  const fresh = () => createSession({ id: 'p', number: 1, targetMinutes: 30, newWords: [], reviewWords: [] });
+
+  it('starts from the last lessons until this one has answers', () => {
+    expect(pace(fresh(), ctx())).toBe('normal');
+    expect(pace(fresh(), ctx(0.95))).toBe('harder');
+    expect(pace(fresh(), ctx(0.4))).toBe('easier');
+    const s = { ...fresh(), history: Array.from({ length: 6 }, () => ({ type: 'en-tr' as const, correct: false })) };
+    expect(pace(s, ctx(0.95))).toBe('easier');
+  });
+
+  it('many mistakes: an easier lesson with less writing', () => {
+    const writing = (r: Run) => r.exercises.filter((e) => WRITING.includes(e.type)).length;
+    const hard = simulate(learnedCards(60), { minutes: 30, newWords: 10, id: 'p1', wrongEvery: 2 });
+    const ok = simulate(learnedCards(60), { minutes: 30, newWords: 10, id: 'p1', wrongEvery: 4 });
+    expect(lessonPace(hard.state)).toBe('easier');
+    expect(writing(hard)).toBeLessThan(writing(ok));
+    // Writing only when the answers just before it were going well enough.
+    hard.exercises.forEach((e, i) => {
+      if (!WRITING.includes(e.type)) return;
+      const before = hard.state.history.slice(0, i).filter((h) => h.correct !== null && h.type !== 'speed-round').slice(-10);
+      expect(before.filter((h) => h.correct).length / before.length).toBeGreaterThanOrEqual(0.6);
+    });
+  });
+
+  it('all right: hard exercises come sooner and the easiest ones drop out', () => {
+    const good = simulate(learnedCards(60), { minutes: 30, newWords: 10, id: 'p2' });
+    const ok = simulate(learnedCards(60), { minutes: 30, newWords: 10, id: 'p2', wrongEvery: 4 });
+    expect(lessonPace(good.state)).toBe('harder');
+    expect(lessonPace(ok.state)).toBe('normal');
+    const firstHard = (r: Run) => r.state.history.findIndex((h, i) => i > 15 && DIFFICULTY[h.type] === 3);
+    expect(firstHard(good)).toBeLessThan(firstHard(ok));
+    const easyLate = (r: Run) => {
+      const late = r.exercises.slice(Math.floor(r.exercises.length / 2), -1);
+      return late.filter((e) => ['word-to-picture', 'picture-to-word', 'en-tr'].includes(e.type)).length / late.length;
+    };
+    expect(easyLate(good)).toBeLessThan(easyLate(ok));
+  });
+});
+
+describe('unit test and progress', () => {
+  it('a unit test opens when all its words are learned: 20 questions, easy first, about a third written', () => {
+    expect(unitTestOpen(course, learnedCards(99), 1)).toBe(false);
+    const cards = learnedCards(100);
+    expect(unitTestOpen(course, cards, 1)).toBe(true);
+    expect(unitTestOpen(course, cards, 2)).toBe(false);
+    const ctx: SessionContext = { course, cards, hasVisual, unit: learnerUnit(course, cards) };
+    const ex = unitTestExercises(ctx, 1, 7);
+    expect(ex).toHaveLength(UNIT_TEST_SIZE);
+    expect(new Set(ex.map((e) => e.wordId)).size).toBe(UNIT_TEST_SIZE);
+    for (const e of ex) expect(course.words[e.wordId!].unit).toBe(1);
+    const d = ex.map((e) => DIFFICULTY[e.type]);
+    expect(d).toEqual([...d].sort((a, b) => a - b));
+    const written = ex.filter((e) => DIFFICULTY[e.type] === 3).length;
+    expect(written).toBeGreaterThanOrEqual(4);
+    expect(written).toBeLessThanOrEqual(6);
+    expect(new Set(ex.map((e) => e.key)).size).toBe(ex.length);
+    expect(unitTestExercises(ctx, 1, 7).map((e) => e.key + e.type)).toEqual(ex.map((e) => e.key + e.type));
+  });
+
+  it('text coverage grows with known words (NGSL frequencies)', () => {
+    const at = (n: number) => textCoverage(course, knownLemmas(course, learnedCards(n)));
+    expect(at(0)).toBeGreaterThan(0.2); // starter words: the, be, a, …
+    expect(at(100)).toBeGreaterThan(at(50));
+    expect(at(500)).toBeGreaterThan(0.6);
+    expect(at(500)).toBeLessThan(0.8);
   });
 });

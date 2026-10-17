@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 
 const SHOTS = process.env.SHOTS_DIR;
@@ -28,7 +29,20 @@ async function answer(page: Page, seen: Set<string>, shots: boolean) {
   seen.add(label);
   const handle = await ex.elementHandle();
   // Spend a realistic (fake) time on it: the lesson counts active minutes.
-  const SECONDS: Record<string, number> = { grammar: 40, intro: 25, 'choice-ex': 12, match: 45, dictation: 25, blank: 20, build: 35, reading: 240, scene: 70 };
+  const SECONDS: Record<string, number> = {
+    grammar: 40,
+    intro: 25,
+    'choice-ex': 12,
+    match: 45,
+    dictation: 25,
+    blank: 20,
+    build: 35,
+    reading: 240,
+    scene: 70,
+    'type-blank': 25,
+    dictate: 40,
+    write: 50,
+  };
   await page.clock.fastForward((SECONDS[kind] ?? 15) * 1000);
 
   if (kind === 'intro') {
@@ -45,6 +59,13 @@ async function answer(page: Page, seen: Set<string>, shots: boolean) {
     await ex.getByRole('textbox').fill('xyz');
     await ex.getByRole('button', { name: 'Kontrol et' }).click();
     await ex.getByRole('button', { name: 'Bilmiyorum, göster' }).click();
+    await next(page);
+  } else if (kind === 'type-blank' || kind === 'dictate' || kind === 'write') {
+    await ex.getByRole('textbox').fill('xyz');
+    await ex.getByRole('button', { name: 'Kontrol et' }).click();
+    const giveUp = ex.getByRole('button', { name: 'Bilmiyorum, göster' });
+    if (await giveUp.isVisible().catch(() => false)) await giveUp.click();
+    await expect(ex.locator('.feedback')).toBeVisible();
     await next(page);
   } else if (kind === 'build') {
     const tiles = ex.locator('.tiles .tile:not([disabled])');
@@ -239,6 +260,150 @@ test('settings: goal, new words per lesson, break; sources and picture review', 
   const house = page.locator('.preview .picture[data-word="house"] img');
   await expect(house).toHaveAttribute('src', file!);
   await expect(page.locator('.preview .picture[data-word="door"] img')).toHaveCount(0);
+});
+
+test('progress screen and a unit test once a unit is learned', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.clock.install({ time: day(1) });
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: 'Bugün', exact: true })).toBeVisible();
+  await expect(page.locator('.test-card')).toHaveCount(0);
+  await page.goto('/test/1');
+  await expect(page.getByText('bütün kelimelerini öğrenince açılır')).toBeVisible();
+
+  // A learner who knows every word of Unit 1.
+  const course = JSON.parse(fs.readFileSync('content/build/course.json', 'utf8')) as { units: Array<{ words: string[] }> };
+  const words = course.units[0].words;
+  await page.evaluate(async (ids) => {
+    const now = Date.now();
+    await new Promise<void>((resolve, reject) => {
+      const req = indexedDB.open('okuma');
+      req.onerror = () => reject(req.error);
+      req.onsuccess = () => {
+        const db = req.result;
+        const tx = db.transaction('cards', 'readwrite');
+        for (const wordId of ids) {
+          tx.objectStore('cards').put({
+            wordId,
+            state: 'known',
+            step: 0,
+            ease: 2.5,
+            intervalDays: 10,
+            reps: 3,
+            lapses: 0,
+            dueAt: now + 10 * 86_400_000,
+            introducedAt: now - 20 * 86_400_000,
+            lastReviewedAt: now - 86_400_000,
+            updatedAt: now,
+            dirty: 0,
+          });
+        }
+        tx.oncomplete = () => (db.close(), resolve());
+        tx.onerror = () => reject(tx.error);
+      };
+    });
+  }, words);
+  await page.goto('/');
+  await expect(page.locator('.test-card')).toContainText('Ünite 1 bitti');
+  await shot(page, '10a-today-unit-test');
+
+  await page.getByRole('link', { name: /İlerlemeni gör/ }).click();
+  await expect(page.getByRole('heading', { name: 'İlerleme' })).toBeVisible();
+  await expect(page.locator('.coverage')).toContainText(/her 100 kelimenin yaklaşık 5\d tanesini/);
+  await expect(page.locator('.unit-row').first()).toContainText('100 / 100');
+  await shot(page, '10-progress');
+
+  await page.getByRole('button', { name: /Ünite testini çöz/ }).click();
+  const done = page.locator('.unit-test-done');
+  const seen = new Set<string>();
+  for (let i = 0; i < 25; i++) {
+    await expect(page.locator('.ex').or(done)).toBeVisible();
+    if (await done.isVisible()) break;
+    await expect(page.locator('.ex-label')).toContainText('Ünite 1 testi');
+    await answer(page, seen, true);
+  }
+  await expect(done).toContainText('Ünite 1: Temel kelimeler testi');
+  await expect(done).toContainText('/ 20');
+  await shot(page, '11-unit-test-result');
+  await page.getByRole('button', { name: 'İlerlemeye dön' }).click();
+  await expect(page.locator('.unit-row').first()).toContainText('Test: %');
+  await expect(page.locator('.unit-row').first()).toContainText('Yeniden çöz');
+  // The test was taken: Today no longer offers it.
+  await page.goto('/');
+  await expect(page.locator('.test-card')).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+/** Puts a lesson with this exercise on screen (straight into the device store). */
+async function showExercise(page: Page, exercise: Record<string, unknown>) {
+  await page.evaluate(async (current) => {
+    const session = {
+      id: 'e2e',
+      number: 1,
+      targetMs: 20 * 60_000,
+      activeMs: 0,
+      newWords: [],
+      reviewWords: [],
+      introduced: [],
+      reviewed: [],
+      phase: 'practice',
+      queue: [],
+      history: [],
+      word: {},
+      graded: [],
+      usedSentences: [],
+      usedTexts: [],
+      lastReadingMs: 0,
+      seq: 1,
+      seed: 1,
+    };
+    const progress = { lessonId: 'e2e', number: 1, startedAt: Date.now(), session, current, tapped: [] };
+    await new Promise<void>((resolve, reject) => {
+      const req = indexedDB.open('okuma');
+      req.onerror = () => reject(req.error);
+      req.onsuccess = () => {
+        const db = req.result;
+        const tx = db.transaction('kv', 'readwrite');
+        tx.objectStore('kv').put(progress, 'progress');
+        tx.oncomplete = () => (db.close(), resolve());
+        tx.onerror = () => reject(tx.error);
+      };
+    });
+  }, exercise);
+  await page.goto('/lesson');
+}
+
+test('writing answers are checked kindly', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: 'Bugün', exact: true })).toBeVisible();
+  const course = JSON.parse(fs.readFileSync('content/build/course.json', 'utf8')) as {
+    sentences: Array<{ id: string; en: string; tr: string; lemmas: string[]; unit: number }>;
+  };
+  const sent = course.sentences.find((x) => x.unit === 2 && /^I'm [a-z]+ [a-z]+ [a-z]+\.$/.test(x.en))!;
+  const words = sent.en.replace('.', '').split(' ');
+
+  // Contraction written out, lower case, no full stop, one typo in a long word: right.
+  await showExercise(page, { key: 'e2e:1', type: 'write-sentence', wordId: sent.lemmas[0], sentenceId: sent.id });
+  const ex = page.locator('.ex.write');
+  await expect(ex.locator('.prompt-tr')).toHaveText(sent.tr);
+  await ex.getByRole('button', { name: 'İpucu' }).click();
+  await expect(ex.locator('.hint-words .tile')).toHaveCount(words.length);
+  const long = words.slice(1).reduce((a, b) => (b.length > a.length ? b : a));
+  const typed = ['i am', ...words.slice(1).map((w) => (w === long ? w.slice(0, -1) : w))].join(' ').toLowerCase();
+  await ex.getByRole('textbox').fill(typed);
+  await shot(page, '12-write-sentence');
+  await ex.getByRole('button', { name: 'Kontrol et' }).click();
+  await expect(ex.locator('.feedback')).toContainText(long.length >= 4 ? 'Küçük yazım hatası' : 'Doğru');
+
+  // A different answer: the differing words are marked; the learner may count it as right.
+  await showExercise(page, { key: 'e2e:2', type: 'write-sentence', wordId: sent.lemmas[0], sentenceId: sent.id });
+  await ex.getByRole('textbox').fill('I was here');
+  await ex.getByRole('button', { name: 'Kontrol et' }).click();
+  await expect(ex.locator('.marked .mk.miss').first()).toBeVisible();
+  await shot(page, '13-write-marked');
+  await ex.getByRole('button', { name: 'Benimki de doğru' }).click();
+  await expect(ex.locator('.feedback')).toContainText('Tamam, doğru sayıldı.');
 });
 
 test('works offline after the first visit (app shell + lesson media cached)', async ({ page, context }) => {

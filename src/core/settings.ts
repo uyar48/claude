@@ -13,6 +13,15 @@ export interface NotificationSettings {
   quietHours: { start: string; end: string };
 }
 
+/** Result of a unit test (scores are right answers). */
+export interface UnitTestResult {
+  score: number;
+  total: number;
+  best: number;
+  tries: number;
+  at: number;
+}
+
 export interface Settings {
   timezone: string;
   /** Daily goal in active minutes (20 / 30 / 45); also the length of one lesson. */
@@ -24,6 +33,8 @@ export interface Settings {
   pausedAt: number | null;
   /** Grammar cards already shown (ids). */
   grammarSeen: string[];
+  /** Unit test results by unit number. */
+  unitTests: Record<string, UnitTestResult>;
   notifications: NotificationSettings;
   updatedAt: number;
 }
@@ -38,6 +49,7 @@ export function defaultSettings(): Settings {
     paused: false,
     pausedAt: null,
     grammarSeen: [],
+    unitTests: {},
     notifications: {
       lesson: { enabled: true, time: '19:30' },
       review: { enabled: true, time: '12:30' },
@@ -67,6 +79,7 @@ export function normalizeSettings(raw: unknown): Settings {
     paused: r.paused === true,
     pausedAt: typeof r.pausedAt === 'number' ? r.pausedAt : null,
     grammarSeen: Array.isArray(r.grammarSeen) ? r.grammarSeen.filter((x): x is string => typeof x === 'string') : [],
+    unitTests: normalizeUnitTests(r.unitTests),
     notifications: {
       lesson: { ...d.notifications.lesson, ...(n.lesson ?? {}) },
       review: { ...d.notifications.review, ...(n.review ?? {}) },
@@ -74,4 +87,15 @@ export function normalizeSettings(raw: unknown): Settings {
     },
     updatedAt: typeof r.updatedAt === 'number' ? r.updatedAt : 0,
   };
+}
+
+function normalizeUnitTests(raw: unknown): Record<string, UnitTestResult> {
+  if (!raw || typeof raw !== 'object') return {};
+  const out: Record<string, UnitTestResult> = {};
+  for (const [unit, v] of Object.entries(raw as Record<string, Partial<UnitTestResult>>)) {
+    const num = (x: unknown) => (typeof x === 'number' && Number.isFinite(x) ? x : 0);
+    if (!v || typeof v !== 'object' || !(num(v.total) > 0)) continue;
+    out[unit] = { score: num(v.score), total: num(v.total), best: Math.max(num(v.best), num(v.score)), tries: num(v.tries), at: num(v.at) };
+  }
+  return out;
 }

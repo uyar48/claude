@@ -2,11 +2,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { course, getText, getWord } from '../../content';
 import { learnerUnit, readCounts } from '../../core/course';
-import { addActive, goalDays, minutesOn, streakInfo } from '../../core/progress';
+import { addActive, goalDays, minutesOn, recentAccuracy, streakInfo } from '../../core/progress';
 import {
   CLOSE_MS,
   distinctTypes,
   finalGrades,
+  lessonPace,
   nextExercise,
   recordAnswer,
   type ExerciseType,
@@ -28,6 +29,8 @@ const CAP_MS: Partial<Record<ExerciseType, number>> = {
   scene: 3 * 60_000,
   match: 3 * 60_000,
   'build-sentence': 2 * 60_000,
+  'dictate-sentence': 2 * 60_000,
+  'write-sentence': 2 * 60_000,
   'speed-round': 90_000,
 };
 const DEFAULT_CAP_MS = 90_000;
@@ -94,6 +97,7 @@ export function LessonScreen() {
       unit: learnerUnit(course, st.cards),
       // Texts read in other lessons (this one's are tracked by the session).
       readCounts: readCounts(st.lessons.filter((l) => l.id !== st.progress?.lessonId)),
+      priorAccuracy: recentAccuracy(st.lessons),
     };
   }, [rt, hasPhoto]);
 
@@ -287,6 +291,7 @@ function FinishScreen({ info, onMore, onEnough }: { info: Finished; onMore: () =
   const graded = session.history.filter((h) => h.correct !== null);
   const right = graded.filter((h) => h.correct).length;
   const types = distinctTypes(session).filter((t) => t !== 'intro');
+  const pace = lessonPace(session);
 
   return (
     <div className="screen finish">
@@ -320,6 +325,8 @@ function FinishScreen({ info, onMore, onEnough }: { info: Finished; onMore: () =
               Okuma soruları: <strong>{info.questions.correct} / {info.questions.total}</strong>
             </li>
           )}
+          {pace === 'harder' && <li>İyi gidiyordun: zor alıştırmalar erken başladı, en kolayları azaldı.</li>}
+          {pace === 'easier' && <li>Zorlandığın yerlerde alıştırmalar kolaylaştı; yanlış yaptığın kelimeler tekrar gelecek.</li>}
           <li>
             Bugün: <strong>{Math.round(todayMin)} / {goal} dk</strong>
             {todayMin >= goal ? ' · günlük hedef tamam' : ''}

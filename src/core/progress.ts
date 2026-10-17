@@ -37,6 +37,20 @@ export interface LessonLogEntry {
   updatedAt: number;
 }
 
+/**
+ * Share of right answers in the last finished lessons (null with too few
+ * answers). It sets the pace at the start of the next lesson.
+ */
+export function recentAccuracy(log: readonly LessonLogEntry[], lessons = 3, minAnswers = 15): number | null {
+  const done = log
+    .filter((l) => l.completedAt !== null && l.reviewed > 0)
+    .sort((a, b) => b.number - a.number)
+    .slice(0, lessons);
+  const answers = done.reduce((a, l) => a + l.reviewed, 0);
+  if (answers < minAnswers) return null;
+  return done.reduce((a, l) => a + l.correct, 0) / answers;
+}
+
 export function completedLessons(log: readonly LessonLogEntry[]): number {
   return log.filter((l) => l.completedAt !== null).length;
 }

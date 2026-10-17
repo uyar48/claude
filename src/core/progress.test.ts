@@ -11,6 +11,7 @@ import {
   minutesOn,
   nextLessonNumber,
   planNextLesson,
+  recentAccuracy,
   streakInfo,
   type LessonLogEntry,
 } from './progress';
@@ -193,5 +194,36 @@ describe('break (Ara ver) and coming back', () => {
     expect(s.newPerLesson).toBe(10);
     expect(s.paused).toBe(false);
     expect(normalizeSettings({ goalMinutes: 45, newPerLesson: 12 })).toMatchObject({ goalMinutes: 45, newPerLesson: 12 });
+  });
+});
+
+describe('recent accuracy (sets the pace of the next lesson)', () => {
+  const done = (n: number, reviewed: number, correct: number): LessonLogEntry => ({
+    ...entry(`l${n}`, n, T0 + n * HOUR),
+    completedAt: T0 + n * HOUR + 30 * MINUTE,
+    reviewed,
+    correct,
+  });
+
+  it('uses the last three finished lessons', () => {
+    const log = [done(1, 40, 10), done(2, 40, 36), done(3, 40, 34), done(4, 40, 38)];
+    expect(recentAccuracy(log)).toBeCloseTo(108 / 120);
+    // A lesson in progress does not count.
+    expect(recentAccuracy([...log, { ...entry('open', 5, T0 + 9 * HOUR), reviewed: 10, correct: 0 }])).toBeCloseTo(108 / 120);
+  });
+
+  it('needs enough answers', () => {
+    expect(recentAccuracy([])).toBeNull();
+    expect(recentAccuracy([done(1, 10, 10)])).toBeNull();
+  });
+});
+
+describe('unit test results in settings', () => {
+  it('are kept and cleaned', () => {
+    const s = normalizeSettings({
+      unitTests: { '1': { score: 17, total: 20, best: 15, tries: 2, at: 5 }, '2': { score: 1, total: 0 }, x: null },
+    });
+    expect(s.unitTests).toEqual({ '1': { score: 17, total: 20, best: 17, tries: 2, at: 5 } });
+    expect(defaultSettings().unitTests).toEqual({});
   });
 });

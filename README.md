@@ -1,4 +1,4 @@
-# Okuma — kişisel İngilizce okuma uygulaması (v3)
+# Okuma — kişisel İngilizce okuma uygulaması (v4)
 
 Tek kullanıcılı, mobil öncelikli bir PWA. Hedef, kolaylaştırılmış İngilizce metinleri sözlüksüz okuyabilmek. Arayüz Türkçe, içerik İngilizce. İlerleme takvime değil **bitirilen derslere** bağlıdır; içerik NGSL 1.2 kelime listesi ve Tatoeba cümleleriyle kurulur; görseller ve sesler yalnızca ücretsiz ve açık kaynaklardan gelir.
 
@@ -13,6 +13,9 @@ Canlı adres: **https://okuma-iota.vercel.app** · Kurulum: **[docs/KURULUM.md](
 | **Ara ver**: süre sınırı yok, bildirim gitmez. Dönüşte tekrarlar günde en fazla 40 kart. | `src/core/scheduler.ts`, `src/core/progress.ts` |
 | Ders başına 10 yeni kelime (6–15 ayarlanabilir), NGSL sırasıyla. | `src/core/course.ts` |
 | Süreye göre ders motoru: ısınma tekrarı → 4'lü yeni kelime grupları → zorlaşan alıştırmalar → 60 sn hızlı tur. Aynı tür üst üste en fazla 2 kez. | `src/core/session.ts` |
+| Yazarak cevaplama: **Boşluğu yaz** (seçeneksiz), **Cümle dikte** (kısa cümleyi dinleyip yazma), **Türkçe → İngilizce yaz** (Ünite 2'den). Yalnız önceki derslerde öğrenilen kelimelerle ve kısa cümlelerle. Hoşgörülü kontrol: büyük/küçük harf, noktalama, kısaltmalar (I'm = I am) önemsiz; küçük yazım hatası "neredeyse doğru"; Türkçeden yazarken he/she/it aynı sayılır; farklı kelimeler işaretlenir, "Benimki de doğru" ile kabul edilebilir. | `src/core/answer.ts`, `src/ui/exercises/WritingExercises.tsx` |
+| Performansa göre zorluk: son 10 cevabın doğru oranı (ders başında önceki 3 ders) %85 ve üstündeyse zor alıştırmalar erken başlar ve en kolaylar azalır; %60'ın altındaysa ders kolay alıştırmalarla sürer ve yazma alıştırması gelmez. Ders sonu ekranı bunu söyler. | `src/core/session.ts` (`pace`) |
+| **İlerleme** ekranı: sıradan İngilizce metinlerdeki kelimelerin kaçta kaçını tanıdığın (NGSL sıklıklarıyla), okunabilir kurs metinleri, ünite ünite kelimeler, son derslerin doğru oranı. Bir ünitenin kelimeleri bitince 20 soruluk **ünite testi** açılır; sonuç senkronlanır, yanlış kelimeler sıradaki tekrarlara eklenir. | `src/ui/screens/Progress.tsx`, `src/ui/screens/UnitTest.tsx` |
 | Alıştırmalar: dilbilgisi kartı, resim↔kelime, sürükle-bırak eşleştirme, dinle→seç, dikte (toleranslı), boşluk doldurma, cümle kurma (Türkçesi görünür), okuma + 3 soru, İng→Tr / Tr→İng, mini sahne, 60 sn hızlı tur | `src/ui/exercises/` |
 | Dokunarak okuma, sesli okuma ve okunan kelimenin vurgulanması | `src/ui/components/Reader.tsx`, `src/audio/speaker.ts` |
 | İçerik: 5 ünite, 500 kelime. NGSL 1.2 sırası; Ünite 2'den itibaren her üniteye NGSL'nin ilk 500'ünde olmayan 22–23 günlük kelime (sayılar, aile, günler, yemekler, renkler…) serpiştirilir. 5535 Tatoeba EN–TR çifti (anadili konuşanlar, sahip bilgisiyle), 140 özgün cümle, 28 kısa metin. Her kelimeye öğretildiği derste en az 3 cümle; cümlelerdeki kelimelerin ≥%95'i bilinir. | `content/`, `scripts/content/lexicon.ts`, `scripts/build-content.ts` |
@@ -62,6 +65,7 @@ npm run e2e   # Playwright, iPhone 13 görünümü
 ```
 
 - Ders sırası: "bir ders daha" zinciri, gün atlama, yarım dersin sürdürülmesi, gece yarısı geçişi, ara verme ve dönüş, günlük 40 tekrar sınırı, seri dondurma.
-- Ders motoru: 30 dakikalık simülasyonda ≥8 alıştırma kategorisi, aynı tür en fazla 2 kez üst üste, zorluk artışı, hızlı turla bitiş; 20/45 dk ve 6/15 kelime; ünitesine gelmemiş cümle ve metnin çıkmaması; dilbilgisi kartı ve telafi sırası.
+- Ders motoru: 30 dakikalık simülasyonda ≥8 alıştırma kategorisi, aynı tür en fazla 2 kez üst üste, zorluk artışı, hızlı turla bitiş; 20/45 dk ve 6/15 kelime; ünitesine gelmemiş cümle ve metnin çıkmaması; dilbilgisi kartı ve telafi sırası; yazma alıştırmalarının kuralları; cevaplara göre hız; ünite testi.
 - İçerik doğrulama, stok fotoğraf adaptörleri (lisans süzme, Pixabay 24 saat önbellek), senkron, SQL geçişleri (PGlite), bildirim zamanlayıcı.
-- Uçtan uca: üç ders üst üste (dilbilgisi kartıyla), gün atlayıp yarım dersi sürdürme, ayarlar, dilbilgisi notları ve kaynak ekranları, çevrimdışı açılış.
+- Yazılı cevap kontrolü: kısaltmalar, yazım hataları, eksik/fazla kelime işaretleri, he/she/it.
+- Uçtan uca: üç ders üst üste (dilbilgisi kartıyla), gün atlayıp yarım dersi sürdürme, ayarlar, dilbilgisi notları ve kaynak ekranları, ilerleme ekranı ve ünite testi, yazılı cevap kontrolü, çevrimdışı açılış.

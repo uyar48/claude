@@ -6,6 +6,7 @@ import { IntroCard } from './IntroCard';
 import { BuildSentence, FillBlankExercise } from './SentenceExercises';
 import { MatchExercise, ReadingExercise, Scene, SpeedRound } from './SetExercises';
 import type { ExerciseProps } from './types';
+import { SentenceDictation, TypeBlank, WriteSentence } from './WritingExercises';
 
 export const EXERCISE_LABEL: Record<ExerciseType, string> = {
   intro: 'Yeni kelime',
@@ -22,6 +23,9 @@ export const EXERCISE_LABEL: Record<ExerciseType, string> = {
   scene: 'Mini sahne',
   'speed-round': 'Hızlı tur',
   grammar: 'Dilbilgisi',
+  'type-blank': 'Boşluğu yaz',
+  'dictate-sentence': 'Cümle dikte',
+  'write-sentence': 'Türkçe → İngilizce yaz',
 };
 
 export function ExerciseView(props: ExerciseProps) {
@@ -50,5 +54,11 @@ export function ExerciseView(props: ExerciseProps) {
       return <SpeedRound {...props} />;
     case 'grammar':
       return <GrammarCard {...props} />;
+    case 'type-blank':
+      return <TypeBlank {...props} />;
+    case 'dictate-sentence':
+      return <SentenceDictation {...props} />;
+    case 'write-sentence':
+      return <WriteSentence {...props} />;
   }
 }

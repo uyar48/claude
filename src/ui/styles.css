@@ -545,13 +545,13 @@ textarea {
   text-align: center;
   margin: 16px 0;
 }
-.gap {
+.blank-sentence .gap {
   display: inline-block;
   min-width: 4em;
   border-bottom: 2px solid var(--accent);
   text-align: center;
 }
-.gap.filled {
+.blank-sentence .gap.filled {
   color: var(--ok);
   font-weight: 700;
 }
@@ -1267,4 +1267,114 @@ textarea {
   display: block;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+/* writing: typed gap, sentence dictation, Turkish → English */
+.sentence-input {
+  font-size: 1.15rem !important;
+  text-align: left;
+  letter-spacing: 0;
+}
+.marked .mk.miss {
+  color: var(--no);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.marked .mk.typo {
+  color: var(--warn);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+.hint-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 4px 0 8px;
+}
+.hint-words .tile {
+  cursor: default;
+}
+.feedback:has(.btn-secondary) {
+  flex-wrap: wrap;
+}
+.feedback .btn-secondary {
+  min-width: 0;
+}
+
+/* progress */
+.progress .panel {
+  margin-bottom: 14px;
+}
+.big-num {
+  font-family: var(--serif);
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.1;
+}
+.meter {
+  position: relative;
+  display: block;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--line);
+  margin: 8px 0;
+}
+.meter.thin {
+  height: 6px;
+  margin: 6px 0;
+}
+.meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+.meter i {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background: var(--ink);
+  opacity: 0.5;
+}
+.units,
+.bars {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.unit-row {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.unit-row:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.unit-row p {
+  margin: 4px 0 0;
+}
+.unit-row .btn {
+  margin-top: 6px;
+  width: 100%;
+}
+.bars li {
+  display: grid;
+  grid-template-columns: 4.5em 1fr 3em;
+  align-items: center;
+  gap: 8px;
+}
+.bars li .small:last-child {
+  text-align: right;
+}
+.stats-link {
+  display: block;
+  text-align: center;
+  margin: -8px 0 14px;
+}
+.test-card .btn {
+  width: 100%;
 }

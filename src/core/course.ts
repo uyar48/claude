@@ -90,3 +90,25 @@ export function readCounts(log: ReadonlyArray<{ textIds: string[] }>): Record<st
   for (const l of log) for (const t of l.textIds ?? []) out[t] = (out[t] ?? 0) + 1;
   return out;
 }
+
+/**
+ * Share of running words in ordinary English that are known words (0–1),
+ * from the NGSL frequencies (adjusted frequency per million words).
+ */
+export function textCoverage(course: Course, known: ReadonlySet<string>): number {
+  let perMillion = 0;
+  for (const w of known) perMillion += course.freq?.[w] ?? 0;
+  return Math.min(1, perMillion / 1_000_000);
+}
+
+/** Words of a unit introduced so far. */
+export function unitLearned(course: Course, cards: ReadonlyMap<string, Card>, unit: number): { learned: number; total: number } {
+  const words = course.units.find((u) => u.n === unit)?.words ?? [];
+  return { learned: words.filter((w) => (cards.get(w)?.state ?? 'new') !== 'new').length, total: words.length };
+}
+
+/** A unit's test opens once every word of the unit has been introduced. */
+export function unitTestOpen(course: Course, cards: ReadonlyMap<string, Card>, unit: number): boolean {
+  const { learned, total } = unitLearned(course, cards, unit);
+  return total > 0 && learned === total;
+}

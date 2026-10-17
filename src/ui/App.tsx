@@ -7,10 +7,12 @@ import { AdminReview } from './screens/AdminReview';
 import { DeviceLinkScreen } from './screens/DeviceLink';
 import { LessonScreen } from './screens/Lesson';
 import { Login } from './screens/Login';
+import { ProgressScreen } from './screens/Progress';
 import { SettingsScreen } from './screens/Settings';
 import { Credits, ImageSources } from './screens/Sources';
 import { GrammarNotes } from './screens/GrammarNotes';
 import { Today } from './screens/Today';
+import { UnitTestScreen } from './screens/UnitTest';
 
 export function App({ runtime }: { runtime: Runtime }) {
   return (
@@ -31,6 +33,8 @@ export function App({ runtime }: { runtime: Runtime }) {
                   <Route path="/settings/gorseller" element={<ImageSources />} />
                   <Route path="/kaynaklar" element={<Credits />} />
                   <Route path="/settings/dilbilgisi" element={<GrammarNotes />} />
+                  <Route path="/ilerleme" element={<ProgressScreen />} />
+                  <Route path="/test/:unit" element={<UnitTestScreen />} />
                   <Route path="/baglan" element={<DeviceLinkScreen />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>

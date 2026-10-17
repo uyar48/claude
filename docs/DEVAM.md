@@ -2,6 +2,26 @@
 
 Canlı adres: https://okuma-iota.vercel.app · Dal: `claude/new-session-b5nvn7`
 
+## v4 — yazarak cevaplama, performansa göre zorluk, ilerleme ve ünite testi (17 Ekim 2026)
+
+- **Yazma alıştırmaları** (`type-blank`, `dictate-sentence`, `write-sentence`; zorluk 3):
+  - Yalnız önceki derslerde öğrenilmiş kelimelerle (`writingOk`). Ders kötü gidiyorsa (`pace` = easier) hiç gelmez.
+  - Zor kısım açıldığında her 3 alıştırmada bir yazma sırası var (iyi giderken 2'de bir), aday kelimeler `writingCandidates`.
+  - Cümle uzunluğu sınırları: dikte `[5, 6, 7, 8, 9]`, Türkçeden yazma `[0, 6, 7, 8, 9]` kelime (Ünite 1'de Türkçeden yazma yok).
+  - Kontrol `src/core/answer.ts`: kelime düzeyinde düzenleme mesafesi, kısaltma açma, 4+ harfte 1, 8+ harfte 2 yazım hatası, Türkçeden yazarken he/she/it eşdeğer.
+- **Hız (`pace`)**:
+  - Son 10 puanlı cevap; 5'ten azsa önceki 3 dersin oranı (`recentAccuracy`, `lesson_log.reviewed/correct`) tamamlar.
+  - ≥%85 `harder`: zor kısım %20'de açılır, ısınma Türkçe→İngilizce ve dinlemeyle olur, en kolay türler (resim seçme, İng→Tr) uygulamada düşer.
+  - <%60 `easier`: zor kısım %70'te açılır, zor tür tercihi yok, yazma yok.
+- **İlerleme ekranı** `/ilerleme`:
+  - Metin kapsamı = bilinen kelimelerin NGSL U değerleri toplamı / 1.000.000 (`course.freq`, `build-content` NGSL_1.2_stats.csv'den yazar). 100 kelimede ~%54, 500'de ~%69.
+  - Ayrıca okunabilir kurs metinleri, ünite ilerlemesi ve son 8 dersin doğru oranı.
+- **Ünite testi** `/test/:unit`:
+  - Ünitenin bütün kelimeleri tanıtılınca açılır; Bugün ekranı bir kez önerir.
+  - 20 soru, kolaydan zora, en fazla ~%30 yazılı (`unitTestExercises`).
+  - Sonuç `settings.unitTests` içinde (senkronlanan jsonb, geçiş gerekmedi). Yanlışlar `reviewSoon` ile tekrara alınır (SRS cezası yok).
+  - Test süresi günlük hedefe sayılmaz.
+
 ## v3 — Ünite 2–5, kademeli okuma, dilbilgisi kartları (16 Ekim 2026)
 
 - **Kelimeler.** 500 kelime, 5 ünite (`UNIT_SIZE = 100`). Ünite 1 hiç değişmedi.

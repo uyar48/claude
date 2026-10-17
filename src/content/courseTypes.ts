@@ -92,5 +92,7 @@ export interface Course {
   sentences: CourseSentence[];
   texts: CourseText[];
   grammar: CourseGrammar[];
+  /** NGSL frequency per million running words (U) of the course words and starter words. */
+  freq?: Record<string, number>;
   sources: Array<{ name: string; url: string; license: string; licenseUrl: string; note?: string }>;
 }
